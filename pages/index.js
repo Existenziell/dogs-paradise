@@ -27,7 +27,7 @@ const Home = ({ i18n }) => {
         <p>{i18n.T4}</p>
         <div className='my-8 flex flex-col sm:flex-row items-center justify-center gap-2'>
           <Link href='/services'><a className='button inline-block'>{i18n.B1}</a></Link>
-          <Link href='/visit'><a className='button inline-block'>{i18n.B2}</a></Link>
+          <Link href='/map'><a className='button inline-block'>{i18n.B2}</a></Link>
         </div>
 
         <AddToHomeScreen />
@@ -37,7 +37,7 @@ const Home = ({ i18n }) => {
       <section className='flex items-center justify-center h-screen mb-12 sm:bg-fixed bg-center bg-cover bg-parallax-2-m md:bg-parallax-2'>
         <p className='w-full px-6 py-8 text-white bg-brand-dark/80 rounded flex flex-col sm:flex-row items-center justify-center gap-2'>
           <Link href='/services'><a className='button inline-block'>{i18n.B1}</a></Link>
-          <Link href='/visit'><a className='button inline-block'>{i18n.B2}</a></Link>
+          <Link href='/map'><a className='button inline-block'>{i18n.B2}</a></Link>
         </p>
       </section>
 
