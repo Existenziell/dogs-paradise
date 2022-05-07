@@ -19,10 +19,12 @@ module.exports = {
       },
       backgroundImage: {
         'cloth-pattern': 'url(/icons/cloth.jpg)',
-        'parallax-1': 'url(/parallax/walk.jpg)',
-        'parallax-1-m': 'url(/parallax/walk-m.jpg)',
-        'parallax-2': 'url(/parallax/sergio.jpg)',
-        'parallax-2-m': 'url(/parallax/sergio-m.jpg)',
+        'parallax-1': 'url(/img/walk.jpg)',
+        'parallax-1-m': 'url(/img/walk-m.jpg)',
+        'parallax-2': 'url(/img/cozumel-dogs.jpg)',
+        'parallax-2-m': 'url(/img/cozumel-dogs.jpg)',
+        // 'parallax-2': 'url(/img/sergio.jpg)',
+        // 'parallax-2-m': 'url(/img/sergio-m.jpg)',
         poly: 'url(/icons/poly.svg)',
       },
       minWidth: {
