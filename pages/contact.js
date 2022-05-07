@@ -71,7 +71,7 @@ const Contact = ({ i18n }) => {
           <div className='md:w-2/3'>
             <p className='text-lg mx-auto leading-relaxed mb-8 max-w-sm'>{i18n.T2}</p>
           </div>
-          <img src='/parallax/sergio.jpg' alt={i18n.T1} className='md:w-1/2 shadow rounded' />
+          <img src='/img/sergio.jpg' alt={i18n.T1} className='md:w-1/2 shadow rounded' />
         </div>
 
         <Social />
