@@ -1,0 +1,53 @@
+{
+  "navigation": {
+    "N1": "Paradise",
+    "N2": "Services",
+    "N3": "Visit",
+    "N4": "Contact"
+  },
+
+  "home": {
+    "title": "Dog's Paradise | The best place for dogs in Cozumel",
+    "desc": "We are a French family restaurant with a wide repertoire of desserts and delicious dishes",
+    "T1": "Dog's Paradise",
+    "T2": "The best place for dogs in Cozumel!",
+    "T3": "Welcome!",
+    "T4": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "B1": "Services",
+    "B2": "Visit",
+    "T5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "T6": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "T7": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+
+  "services": {
+    "title": "Services | Dog's Paradise | The best place for dogs in Cozumel",
+    "desc": "We offer Pickup and Deliver Service and many more! ",
+    "T1": "Services"
+  },
+
+  "map": {
+    "title": "Map | Dog's Paradise | The best place for dogs in Cozumel",
+    "desc": "Where and how to find us | Dog's Paradise",
+    "T1": "The best place for dogs in Cozumel"
+  },
+
+  "contact": {
+    "title": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
+    "desc": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
+    "T1": "Contact",
+    "T2": "Please leave any suggestions or feedback, it is always very welcome. We are excited to hear from you!",
+    "T4": "Name",
+    "T5": "Email",
+    "T6": "Message",
+    "T7": "Submit"
+  },
+
+  "success": {
+    "title": "Success | Dog's Paradise | The best place for dogs in Cozumel",
+    "desc": "Successfully sent | Dog's Paradise | The best place for dogs in Cozumel",
+    "T1": "Thank you!",
+    "B1": "Back Home",
+    "B2": "More Services"
+  }
+}

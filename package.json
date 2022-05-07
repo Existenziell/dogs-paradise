@@ -1,0 +1,28 @@
+{
+  "name": "dogs-paradise",
+  "author": "Christof Bauer <bauer.christof@gmail.com> (http://christof.digital/)",
+  "version": "0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
+    "framer-motion": "^6.3.3",
+    "mapbox-gl": "^2.8.2",
+    "next": "^12.1.6",
+    "next-pwa": "^5.5.2",
+    "nextjs-progressbar": "^0.0.14",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-intersection-observer": "^9.1.0",
+    "react-spinners": "^0.11.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^3.0.1"
+  }
+}

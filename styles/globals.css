@@ -1,0 +1,183 @@
+/* --------------------------------------------------------
+Style Sheet for Dog's Paradise Cozumel
+
+version: 0.9
+last modified: 3.11.2021 by Christof Bauer
+author: Christof Bauer
+email: bauer.christof@gmail.com
+----------------------------------------------------------*/
+
+:root {
+  --color-brand: #C90076;
+  --color-brand-dark: #200530;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+/* Counter bug in nextjs Image component - images are rendered with whitespace below
+https://github.com/vercel/next.js/issues/21914 */
+.image-wrapper {
+  display: relative;
+  text-align: bottom;
+  font-size: 0;
+}
+
+/* ==========================================================================
+	General overrides and utilities
+	========================================================================== */
+
+html, body {
+	scroll-behavior: smooth;
+}
+
+::selection {
+  @apply text-brand bg-brand-dark;
+}
+
+::-moz-selection {
+  @apply text-blue-800;
+}
+
+h1, h2 {
+  @apply font-serif;
+}
+
+
+.link {
+  @apply underline underline-offset-2 outline-none transition-all duration-300;
+}
+
+.link:hover {
+  @apply no-underline bg-brand rounded transition-all duration-500 text-white px-1;
+}
+
+/* ==========================================================================
+	Navigation
+	========================================================================== */
+
+.active-nav {
+  @apply font-bold border-b-2 border-brand dark:bg-brand;
+}
+
+.mobile-menu .active-nav {
+  @apply font-bold bg-brand text-white border-b-0;
+}
+
+
+/* ==========================================================================
+	Forms 
+	========================================================================== */
+
+.button {
+  @apply w-48 px-8 py-4 
+  bg-brand text-white rounded shadow-lg
+    hover:shadow hover:cursor-pointer
+    transition-all
+}
+
+input[type="radio"] {
+  @apply focus:outline-none hover:cursor-pointer mr-2 align-text-bottom mb-0.5; 
+}
+
+input[type='radio']:after, input[type='radio']:checked:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background-color: white;
+  display: inline-block;
+  border: 2px solid white;
+  outline: 2px solid #666; 
+}
+
+input[type='radio']:checked:after {
+  background-color: var(--color-brand);
+  border-color: white;
+  outline: 2px solid #666;
+}
+
+
+/* ==========================================================================
+	Mapbox overrides
+	========================================================================== */
+
+.mapboxgl-canvas {
+  @apply absolute top-0 bottom-0 left-0 w-full h-full;
+}
+
+.mapboxgl-popup {
+  @apply text-left min-w-max overflow-hidden; 
+}
+
+div.mapboxgl-popup-content {
+  @apply p-2 bg-white/20 backdrop-blur-md;
+}
+
+.mapboxgl-popup-content div {
+  @apply text-sm px-10 py-12 shadow font-sans bg-white/60 backdrop-blur-md dark:bg-brand-dark/80 dark:text-white;
+}
+
+.mapboxgl-popup-content span {
+  @apply text-xs;
+}
+
+.mapboxgl-popup-content h1 {
+  @apply text-6xl mb-1 text-brand;
+}
+
+.mapboxgl-popup-content h2 {
+  @apply mb-6 text-lg font-normal;
+}
+
+.mapboxgl-popup-content strong {
+  @apply mt-4 block text-lg;
+}
+
+.mapboxgl-popup-tip {
+  @apply opacity-20;
+}
+
+.mapboxgl-popup-close-button {
+  @apply text-3xl px-4 py-1 hover:text-brand hover:scale-105 transition-all dark:text-white focus:outline-none;
+}
+
+
+
+/* ==========================================================================
+	Sticky header
+	========================================================================== */
+
+.trigger-menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* transition: transform 0.4s; */
+}
+
+.trigger-menu-wrapper {
+  /* transition: transform 0.4s; */
+}
+
+.scroll-up .trigger-menu-wrapper {
+  @apply shadow bg-white transition-all duration-300;
+}
+
+.scroll-up:not(.menu-open) .trigger-menu-wrapper {
+  @apply shadow-none bg-transparent;
+}
+
+.scroll-down .trigger-menu-wrapper {
+  @apply shadow-lg bg-brand-dark/80 transition-all duration-700;
+}

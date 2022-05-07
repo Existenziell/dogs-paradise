@@ -1,0 +1,53 @@
+{
+  "navigation": {
+    "N1": "Paraíso",
+    "N2": "Servicios",
+    "N3": "Visitar",
+    "N4": "Contacto"
+  },
+
+  "home": {
+    "title": "Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "desc": "Somos un restaurante familiar francés con un amplio repertorio de postres y deliciosos platillos",
+    "T1": "Dog's Paradise",
+    "T2": "¡El mejor lugar para perros en Cozumel!",
+    "T3": "¡Bienvenido!",
+    "T4": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "B1": "Servicios",
+    "B2": "Visitar",
+    "T5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "T6": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "T7": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+
+  "services": {
+    "title": "Servicios | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "desc": "Degusta nuestro amplio repertorio de postres franceses y mexicanos y deliciosos platillos",
+    "T1": "Servicios"
+  },
+
+  "map": {
+    "title": "Mapa | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "desc": "Dónde y cómo encontrarnos.",
+    "T1": "El mejor lugar para perros en Cozumel"
+  },
+
+  "contact": {
+    "title": "Contacto | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "desc": "Contacto | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "T1": "Contacto",
+    "T2": "Deje sugerencias o comentarios, es muy bienvenido. ¡Estamos muy contentos de saber de ti!",
+    "T4": "Nombre",
+    "T5": "Correo electrónico",
+    "T6": "Messaje",
+    "T7": "Enviar"
+  },
+
+  "success": {
+    "title": "Éxito | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "desc": "Éxito | Dog's Paradise | El mejor lugar para perros en Cozumel",
+    "T1": "Muchas gracias!",
+    "B1": "Retorno",
+    "B2": "Más Servicios"
+  }
+}
