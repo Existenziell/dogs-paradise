@@ -104,11 +104,11 @@ input[type='radio']:checked:after {
 }
 
 div.mapboxgl-popup-content {
-  @apply p-2 bg-white/20 backdrop-blur-md;
+  @apply p-2 bg-brand-dark/40 backdrop-blur-md;
 }
 
 .mapboxgl-popup-content div {
-  @apply text-sm px-10 py-12 shadow font-sans bg-white/60 backdrop-blur-md dark:bg-brand-dark/80 dark:text-white;
+  @apply text-sm px-10 py-12 shadow font-sans bg-white/80 backdrop-blur-md dark:bg-brand-dark/80 dark:text-white;
 }
 
 .mapboxgl-popup-content span {

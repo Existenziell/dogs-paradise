@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <StickyHeader wrapped={
+      <StickyHeader wrappedContent={
         <>
           <NextNprogress
             height={3}

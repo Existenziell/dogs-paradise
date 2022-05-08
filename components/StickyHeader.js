@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const StickyHeader = ({ wrapped }) => {
+const StickyHeader = ({ wrappedContent }) => {
 
   useEffect(() => {
     const body = document.body
@@ -32,8 +32,8 @@ const StickyHeader = ({ wrapped }) => {
   }, [])
 
   return (
-    <div className="sticky-header pb-3">
-      {wrapped}
+    <div className="sticky-header pb-3 z-10">
+      {wrappedContent}
     </div>
   )
 }
