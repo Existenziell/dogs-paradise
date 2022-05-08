@@ -1,10 +1,12 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import Head from 'next/head'
 import Link from 'next/link'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import AddToHomeScreen from '../components/AddToHomeScreen'
 
-const Home = ({ i18n }) => {
+const Paradise = ({ i18n }) => {
+  const { user } = useUser()
 
   return (
     <>
@@ -24,7 +26,11 @@ const Home = ({ i18n }) => {
       <div className='max-w-xl m-auto px-4 leading-relaxed my-16' id='anchor'>
         <p>{i18n.T2}</p>
         <h2 className='text-6xl my-8'>{i18n.T3}</h2>
-        <p>{i18n.T4}</p>
+        {user
+          ? <p>Hello {user.name} &rarr; <a href='/profile' className='link'>Go to your Profile</a></p>
+          : <p>New to the App? &rarr; <a href='/api/auth/login' className='link'>Become a member</a></p>
+        }
+        <p className='mt-8'>{i18n.T4}</p>
         <div className='my-8 flex flex-col sm:flex-row items-center justify-center gap-2'>
           <Link href='/services'><a className='button inline-block'>{i18n.B1}</a></Link>
           <Link href='/map'><a className='button inline-block'>{i18n.B2}</a></Link>
@@ -60,4 +66,4 @@ export async function getStaticProps(context) {
   }
 }
 
-export default Home
+export default Paradise

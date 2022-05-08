@@ -1,6 +1,17 @@
-import { handleAuth } from '@auth0/nextjs-auth0';
+import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
 
-export default handleAuth();
+// Standard with no config
+// export default handleAuth();
+
+// redirect user to profile after login
+export default handleAuth({
+  async login(req, res) {
+    await handleLogin(req, res, {
+      returnTo: "/profile",
+    })
+  },
+})
+
 
 // https://github.com/auth0/nextjs-auth0
 
