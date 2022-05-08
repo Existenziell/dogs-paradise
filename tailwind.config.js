@@ -11,16 +11,16 @@ module.exports = {
         ]
       },
       colors: {
-        brand: '#C90076',
+        'brand': '#C90076',
         'brand-dark': '#200530',
       },
       backgroundImage: {
         'cloth-pattern': 'url(/icons/cloth.jpg)',
+        'poly': 'url(/icons/poly.svg)',
         'parallax-1': 'url(/img/walk.jpg)',
         'parallax-1-m': 'url(/img/walk-m.jpg)',
         'parallax-2': 'url(/img/cozumel-dogs.jpg)',
         'parallax-2-m': 'url(/img/cozumel-dogs.jpg)',
-        poly: 'url(/icons/poly.svg)',
       },
       animation: {
         blob: 'blob 7s infinite',
@@ -43,17 +43,8 @@ module.exports = {
       },
     },
     gradientColorStops: theme => ({
-      // start: 'rgb(156 163 175)',
-      // middle: 'rgb(75 85 99)',
-      // end: 'rgb(30 64 175)',
       primary: '#C90076',
       secondary: '#200530',
-      // primary: '#F4D03F',
-      // secondary: '#16A085',
-      // primary: '#36D1DC',
-      // secondary: '#5B86E5',
-      // primary: '#007991',
-      // secondary: '#78ffd6',
     }),
   },
   variants: {
