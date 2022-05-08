@@ -22,7 +22,7 @@ const Profile = ({ i18n }) => {
         <div className='pt-24 px-8'>
           <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
           <h2 className='text-left mb-2'>Your Membership Card:</h2>
-          <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow overflow-hidden'>
+          <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
             <div className='flex flex-row justify-between gap-4'>
               <div className='w-1/3'>
                 <img src={user.picture} className='rounded-xl border-4  border-white ' />

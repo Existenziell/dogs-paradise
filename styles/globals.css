@@ -128,15 +128,15 @@ div.mapboxgl-popup-content {
 }
 
 .mapboxgl-popup-content span {
-  @apply text-xs;
+  @apply text-xs mb-2 block;
 }
 
 .mapboxgl-popup-content h1 {
-  @apply text-6xl mb-1 text-brand;
+  @apply text-3xl md:text-6xl mb-1 text-brand;
 }
 
 .mapboxgl-popup-content h2 {
-  @apply mb-6 text-lg font-normal;
+  @apply text-base md:text-lg font-normal mb-6;
 }
 
 .mapboxgl-popup-content strong {
