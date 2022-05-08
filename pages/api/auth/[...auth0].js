@@ -1,7 +1,7 @@
-import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import { handleAuth, handleLogin } from '@auth0/nextjs-auth0'
 
 // Standard with no config
-// export default handleAuth();
+// export default handleAuth()
 
 // redirect user to profile after login
 export default handleAuth({

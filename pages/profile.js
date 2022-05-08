@@ -1,15 +1,15 @@
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0'
+import { LogoutBtn } from '../components/LogoutBtn'
 import Head from 'next/head'
-import Link from 'next/link';
-import { LogoutBtn } from '../components/LogoutBtn';
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
+import PacmanLoader from 'react-spinners/PacmanLoader'
 
 const Profile = ({ i18n }) => {
   const { user, error, isLoading } = useUser()
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>{error.message}</div>
+  if (isLoading) return <div className='pt-32'><PacmanLoader color={'white'} size={30} /></div>
+  if (error) return <div className='pt-32'><div>{error.message}</div></div>
 
   if (user) {
     return (

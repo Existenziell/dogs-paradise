@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0'
+import { useEffect } from 'react'
+import { sticky } from '../lib/StickyHeader'
+import { LoginBtn } from './LoginBtn'
 import NextNprogress from 'nextjs-progressbar'
 import Footer from './Footer'
 import Nav from './Nav'
 import DarkModeToggle from './DarkModeToggle'
-import { useEffect } from 'react'
-import { sticky } from '../lib/StickyHeader'
-import { LoginBtn } from './LoginBtn';
+
 
 const Layout = ({ children }) => {
 

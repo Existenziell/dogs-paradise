@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react'
-import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
-import Social from '../components/Social'
-import PacmanLoader from 'react-spinners/PacmanLoader'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Blob from '../components/Blob'

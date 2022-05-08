@@ -1,4 +1,4 @@
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0'
 import Head from 'next/head'
 import Link from 'next/link'
 import langEN from '../i18n/en.json'

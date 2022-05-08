@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
-import { UserProvider } from '@auth0/nextjs-auth0';
+import { UserProvider } from '@auth0/nextjs-auth0'
 import Layout from '../components/_Layout'
 import Head from 'next/head'
 
