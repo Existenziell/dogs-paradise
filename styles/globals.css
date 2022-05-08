@@ -16,27 +16,6 @@ email: bauer.christof@gmail.com
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-}
-
-/* Counter bug in nextjs Image component - images are rendered with whitespace below
-https://github.com/vercel/next.js/issues/21914 */
-.image-wrapper {
-  display: relative;
-  text-align: bottom;
-  font-size: 0;
-}
-
-/* ==========================================================================
-	General overrides and utilities
-	========================================================================== */
-
 html, body {
 	scroll-behavior: smooth;
 }
@@ -49,10 +28,6 @@ html, body {
   @apply text-blue-800;
 }
 
-/* h1, h2 {
-  @apply font-serif;
-} */
-
 .link {
   @apply underline underline-offset-2 outline-none transition-all duration-300;
 }
@@ -60,6 +35,15 @@ html, body {
 .link:hover {
   @apply no-underline bg-brand rounded transition-all duration-500 text-white px-1;
 }
+
+/* Counter bug in nextjs Image component - images are rendered with whitespace below
+https://github.com/vercel/next.js/issues/21914 */
+.image-wrapper {
+  display: relative;
+  text-align: bottom;
+  font-size: 0;
+}
+
 
 /* ==========================================================================
 	Navigation
@@ -152,31 +136,36 @@ div.mapboxgl-popup-content {
 }
 
 
+/* ==========================================================================
+	Blob
+	========================================================================== */
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
 
 /* ==========================================================================
 	Sticky header
 	========================================================================== */
 
-.trigger-menu-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* transition: transform 0.4s; */
+.sticky-header {
+  @apply fixed top-0 left-0 right-0;
 }
 
-.trigger-menu-wrapper {
-  /* transition: transform 0.4s; */
-}
-
-.scroll-up .trigger-menu-wrapper {
+.scroll-up .sticky-header {
   @apply shadow bg-white transition-all duration-300;
 }
 
-.scroll-up:not(.menu-open) .trigger-menu-wrapper {
+.scroll-up:not(.menu-open) .sticky-header {
   @apply shadow-none bg-transparent;
 }
 
-.scroll-down .trigger-menu-wrapper {
+.scroll-down .sticky-header {
   @apply shadow-lg bg-brand-dark/80 transition-all duration-700;
 }

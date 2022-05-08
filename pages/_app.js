@@ -21,7 +21,6 @@ function App({ Component, pageProps }) {
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin="true" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Gotu&display=swap' />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap' />
       </Head>
       <Layout>
         <Component {...pageProps} />

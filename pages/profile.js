@@ -25,7 +25,7 @@ const Profile = ({ i18n }) => {
           <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
             <div className='flex flex-row justify-between gap-4'>
               <div className='w-1/3'>
-                <img src={user.picture} className='rounded-xl border-4  border-white ' />
+                <img src={user.picture} className='rounded-xl border-4 border-white ' />
               </div>
               <div className='flex flex-col h-full gap-4'>
                 <div className='text-right  bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-max self-end'>
