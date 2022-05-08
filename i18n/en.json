@@ -31,7 +31,8 @@
   "services": {
     "title": "Services | Dog's Paradise | The best place for dogs in Cozumel",
     "desc": "We offer Pickup and Deliver Service and many more! ",
-    "T1": "Services"
+    "T1": "Services",
+    "Q1": "Services that make your dog happy!"
   },
 
   "map": {

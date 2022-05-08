@@ -17,12 +17,16 @@ const Services = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24 lg:w-2/3 lg:mx-auto'>
+      <div className='flex flex-col items-center justify-center  py-24 lg:w-2/3 lg:mx-auto'>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
 
-        <Blob classes='my-24' node={
-          <Quote text='Let us find the right service for you' />
-        } />
+        <Quote text={i18n.Q1} classes={'block md:hidden'} />
+
+        <div className='hidden md:block'>
+          <Blob classes='md:m-24' node={
+            <Quote text={i18n.Q1} />
+          } />
+        </div>
       </div>
     </>
   )
