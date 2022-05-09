@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
+import { supabase } from '../lib/supabase'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 
 const Nav = () => {
-    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
-    const { user } = useUser()
     const { locale } = useRouter()
+    const router = useRouter()
+    const user = supabase.auth.user()
 
     let i18n
     locale === 'es' ?
@@ -20,14 +20,8 @@ const Nav = () => {
         { name: i18n.N2, url: '/services', title: i18n.N2 },
         { name: i18n.N3, url: '/map', title: i18n.N3 },
         { name: i18n.N4, url: '/contact', title: i18n.N4 },
+        { name: user ? i18n.N5 : i18n.N6, url: '/profile', title: user ? i18n.N5 : i18n.N6 },
     ]
-
-    {
-        user ?
-            urls.push({ name: i18n.N5, url: '/profile', title: i18n.N5 })
-            :
-            urls.push({ name: i18n.N6, url: '/api/auth/login', title: i18n.N6 })
-    }
 
     const intercept = (e) => {
         e.preventDefault()

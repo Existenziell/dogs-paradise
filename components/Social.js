@@ -23,7 +23,7 @@ const Social = () => {
     },
     {
       name: 'Instagram',
-      link: 'https://www.instagram.com/dogsparadise',
+      link: 'https://instagram.com/dogparadise.mx',
       icon:
         <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' viewBox="0 0 24 24">
           <title>Instagram</title>

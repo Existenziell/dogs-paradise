@@ -1,12 +1,12 @@
-import { useUser } from '@auth0/nextjs-auth0'
 import Head from 'next/head'
 import Link from 'next/link'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import AddToHomeScreen from '../components/AddToHomeScreen'
+import { supabase } from '../lib/supabase'
 
 const Paradise = ({ i18n }) => {
-  const { user } = useUser()
+  const user = supabase.auth.user()
 
   return (
     <>
@@ -27,8 +27,8 @@ const Paradise = ({ i18n }) => {
         <p>{i18n.T2}</p>
         <h2 className='text-6xl my-8'>{i18n.T3}</h2>
         {user
-          ? <p>Hello {user.name} &rarr; <a href='/profile' className='link'>Go to your Profile</a></p>
-          : <p>New to the App? &rarr; <a href='/api/auth/login' className='link'>Become a member</a></p>
+          ? <p>Hello {user?.email} &rarr; <a href='/profile' className='link'>Go to your Profile</a></p>
+          : <p>New to the App? &rarr; <a href='/profile' className='link'>Become a member</a></p>
         }
         <p className='mt-8'>{i18n.T4}</p>
         <div className='my-8 flex flex-col sm:flex-row items-center justify-center gap-2'>
