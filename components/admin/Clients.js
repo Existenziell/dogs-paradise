@@ -107,7 +107,7 @@ const Clients = ({ clients }) => {
               <td>{client.name}</td>
               <td>{client.address}</td>
               <td>{client.is_premium ? `Yes` : `No`}</td>
-              <td>{client.dogs.map(d => (<span className='mr-2'>{d.name}</span>))}</td>
+              <td>{client.dogs.map(d => (<span key={`${d.name}-${client.id}`} className='mr-2'>{d.name}</span>))}</td>
               <td>
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={() => toggleEditClient(client)} className="h-5 w-5 text-brand-dark hover:text-slate-500 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
