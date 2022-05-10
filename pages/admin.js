@@ -1,9 +1,23 @@
+import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
+import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    auth()
+  }, [])
+
+  const auth = async () => {
+    const user = await supabase.auth.user()
+    setUser(user)
+  }
+
+  if (!user) return <Auth />
 
   return (
     <>

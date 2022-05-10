@@ -9,7 +9,7 @@ export const LogoutBtn = () => {
   }
 
   return (
-    <div className="absolute top-20 right-4">
+    <div className="absolute top-24 right-4">
       <button className="link" onClick={logout}>
         Sign Out
       </button>
