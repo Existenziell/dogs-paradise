@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
 import Auth from '../components/Auth'
+import { LogoutBtn } from '../components/LogoutBtn'
 
 const Admin = ({ users, dogs, roles }) => {
   const [user, setUser] = useState()
@@ -25,6 +26,9 @@ const Admin = ({ users, dogs, roles }) => {
         <title>Admin | Dog's Paradise</title>
         <meta name='description' content="Admin | Dog's Paradise" />
       </Head>
+
+      <LogoutBtn />
+
       <div className='py-16'>
         <h1 className='text-4xl mt-8'>Admin Control</h1>
         <p className='py-4'>Always remember, with great power comes great responsibility.</p>

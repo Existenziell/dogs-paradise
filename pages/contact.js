@@ -89,21 +89,21 @@ const Contact = ({ i18n }) => {
               </div>
             }
             <div className='relative mb-8'>
-              <input id='name' name='name' type='text' onChange={setData} required disabled={sending} className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4' placeholder={i18n.T4} />
+              <input id='name' name='name' type='text' onChange={setData} required disabled={sending} className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T4} />
               <label htmlFor='name'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
                             peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-300 peer-focus:text-sm'>{i18n.T4}</label>
             </div>
             <div className='relative mb-8'>
-              <input id='email' type='email' name='email' onChange={setData} required disabled={sending} className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4' placeholder={i18n.T5} />
+              <input id='email' type='email' name='email' onChange={setData} required disabled={sending} className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T5} />
               <label htmlFor='email'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
                             peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-300 peer-focus:text-sm'>{i18n.T5}</label>
             </div>
             <div className='relative'>
-              <textarea id='message' name='message' onChange={setData} rows='10' required disabled={sending} className='peer h-full w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 py-4' placeholder={i18n.T6}></textarea>
+              <textarea id='message' name='message' onChange={setData} rows='10' required disabled={sending} className='peer h-full w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none py-4' placeholder={i18n.T6}></textarea>
               <label htmlFor='message'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
