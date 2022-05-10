@@ -19,8 +19,9 @@ const Nav = () => {
         { name: i18n.N1, url: '/', title: i18n.N1 },
         { name: i18n.N2, url: '/services', title: i18n.N2 },
         { name: i18n.N3, url: '/map', title: i18n.N3 },
-        { name: i18n.N4, url: '/contact', title: i18n.N4 },
-        { name: user ? i18n.N5 : i18n.N6, url: '/profile', title: user ? i18n.N5 : i18n.N6 },
+        { name: i18n.N4, url: '/venue', title: i18n.N4 },
+        { name: i18n.N5, url: '/contact', title: i18n.N5 },
+        { name: user ? i18n.N6 : i18n.N7, url: '/profile', title: user ? i18n.N6 : i18n.N7 },
     ]
 
     const intercept = (e) => {

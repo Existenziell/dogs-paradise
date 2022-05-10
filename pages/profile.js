@@ -128,8 +128,8 @@ const Profile = ({ i18n }) => {
               </div>
 
               <div className='flex justify-end gap-4'>
-                <img src='/img/dogs/dog1.jpg' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer' />
-                <img src='/img/dogs/dog2.jpg' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer' />
+                <img src='/img/dogs/dog1.jpg' alt='Dog1' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer' />
+                <img src='/img/dogs/dog2.jpg' alt='Dog2' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer' />
               </div>
             </div>
           </div>

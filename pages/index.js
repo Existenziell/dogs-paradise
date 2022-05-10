@@ -37,6 +37,7 @@ const Paradise = ({ i18n }) => {
         </div>
 
         <AddToHomeScreen />
+        <img src='/img/sweet.jpg' alt='Sweet' className='rounded-xl shadow-md w-1/2 mx-auto my-8' />
         <p className='mt-8 leading-loose'>{i18n.T5}</p>
       </div>
 
@@ -51,7 +52,6 @@ const Paradise = ({ i18n }) => {
         <p className='text-lg my-8 max-w-xl mx-auto leading-loose'>{i18n.T6}</p>
         <p className='mt-8 pb-16'>{i18n.T7}</p>
       </div>
-
     </>
   )
 }

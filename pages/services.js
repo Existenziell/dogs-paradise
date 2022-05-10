@@ -24,6 +24,7 @@ const Services = ({ i18n }) => {
           } />
         </div>
       </div>
+      <img src='/img/pool.jpg' alt='Pool' />
     </>
   )
 }

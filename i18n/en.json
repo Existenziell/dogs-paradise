@@ -3,9 +3,10 @@
     "N1": "Paradise",
     "N2": "Services",
     "N3": "Visit",
-    "N4": "Contact",
-    "N5": "Profile",
-    "N6": "Login"
+    "N4": "Venue",
+    "N5": "Contact",
+    "N6": "Profile",
+    "N7": "Login"
   },
 
   "home": {
