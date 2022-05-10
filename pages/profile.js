@@ -102,7 +102,7 @@ const Profile = ({ i18n }) => {
 
       <LogoutBtn />
 
-      <div className='pt-24 px-8'>
+      <div className='pt-24 px-8 profile'>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
         <h2 className='text-left mb-2'>Your Membership Card:</h2>
 
