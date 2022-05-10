@@ -75,9 +75,14 @@ https://github.com/vercel/next.js/issues/21914 */
     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand;
 }
 
-input[type='text'], input[type='email'], input[type='website'] {
+input[type='text'], input[type='number'], input[type='email'], input[type='website'] {
   @apply border px-3 py-2 text-brand-dark;
 }
+
+input[type='text']:disabled {
+  @apply border-none bg-transparent;
+}
+
 
 /* ==========================================================================
 	Mapbox overrides
@@ -155,5 +160,5 @@ div.mapboxgl-popup-content {
 }
 
 .scroll-down .sticky-header {
-  @apply shadow-lg bg-brand-dark/80 transition-all duration-700;
+  @apply shadow-lg bg-white/80 transition-all duration-700;
 }

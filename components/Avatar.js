@@ -18,7 +18,7 @@ export default function Avatar({ url, onUpload }) {
       const url = URL.createObjectURL(data)
       setAvatarUrl(url)
     } catch (error) {
-      console.warn('Error downloading image: ', error.message)
+      console.log('Error downloading image: ', error.message)
     }
   }
 

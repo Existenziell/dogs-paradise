@@ -57,7 +57,7 @@ const Profile = ({ i18n }) => {
         setCreatedAt(data.created_at)
       }
     } catch (error) {
-      console.warn(error.message)
+      console.log(error.message)
     } finally {
       setLoading(false)
     }
