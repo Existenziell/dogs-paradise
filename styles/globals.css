@@ -77,10 +77,17 @@ https://github.com/vercel/next.js/issues/21914 */
 }
 
 input[type='text'], input[type='number'], input[type='email'], input[type='website'] {
-  @apply border px-3 py-2 text-brand-dark;
+  @apply border px-3 py-2;
 }
 
-input[type='text']:disabled {
+.admin input[type='text'], 
+.admin input[type='number'], 
+.admin input[type='email'], 
+.admin input[type='website'] {
+  @apply border px-3 py-2;
+}
+
+.admin input[type='text']:disabled {
   @apply border-none bg-transparent;
 }
 

@@ -29,7 +29,7 @@ const Admin = ({ users, dogs, roles }) => {
 
       <LogoutBtn />
 
-      <div className='py-16'>
+      <div className='py-16 admin'>
         <h1 className='text-4xl mt-8'>Admin Control</h1>
         <p className='py-4'>Always remember, with great power comes great responsibility.</p>
         <Users users={users} roles={roles} />

@@ -224,9 +224,9 @@ const Dogs = ({ dogs, users }) => {
       </button>
 
       <form onSubmit={addDog} className='shadow max-w-max bg-slate-300 p-4 hidden' id='addDogForm' >
-        <input type='text' name='name' id='name' placeholder='Name' onChange={setData} required className='block mb-2' />
-        <input type='text' name='status' id='status' placeholder='Status' onChange={setData} className='block mb-2' />
-        <Select options={ownerOptions} onChange={setSelectData} instanceId />
+        Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2' />
+        Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2' />
+        Owner <Select options={ownerOptions} onChange={setSelectData} instanceId />
 
         <input type='submit' className='link cursor-pointer block mt-6' value='Save' />
       </form>
