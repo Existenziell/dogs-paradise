@@ -1,61 +1,36 @@
-import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { useEffect, useContext } from 'react'
+import { AppContext } from '../context/AppContext'
 
-export default function Avatar({ url, onUpload }) {
-  const [avatarUrl, setAvatarUrl] = useState(null)
-  const [uploading, setUploading] = useState(false)
+export default function Avatar({ url }) {
+  const ctx = useContext(AppContext)
+  const userCtx = ctx.user
+  const appCtx = ctx.appState
+  const bucket = 'avatars'
 
+  // On load if user image exists
   useEffect(() => {
-    if (url) downloadImage(url)
+    if (url) {
+      userCtx.downloadImage(bucket, url)
+    }
   }, [url])
 
-  async function downloadImage(path) {
-    try {
-      const { data, error } = await supabase.storage.from('avatars').download(path)
-      if (error) {
-        throw error
-      }
-      const url = URL.createObjectURL(data)
-      setAvatarUrl(url)
-    } catch (error) {
-      console.log('Error downloading image: ', error.message)
+  // After upload
+  useEffect(() => {
+    if (userCtx.avatarUrl) {
+      userCtx.downloadImage(bucket, userCtx.avatarUrl)
     }
-  }
+  }, [userCtx.avatarUrl])
 
-  async function uploadAvatar(event) {
-    try {
-      setUploading(true)
-
-      if (!event.target.files || event.target.files.length === 0) {
-        throw new Error('You must select an image to upload.')
-      }
-
-      const file = event.target.files[0]
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${Math.random()}.${fileExt}`
-      const filePath = `${fileName}`
-
-      let { error: uploadError } = await supabase.storage
-        .from('avatars')
-        .upload(filePath, file)
-
-      if (uploadError) {
-        throw uploadError
-      }
-
-      onUpload(filePath)
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setUploading(false)
-    }
+  const uploadAvatar = async (e) => {
+    userCtx.uploadImage(e, bucket)
+    userCtx.updateProfile({ avatar_url: userCtx.setAvatarUrl })
   }
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {avatarUrl ?
+      {userCtx.finalAvatarUrl ?
         <img
-          src={avatarUrl}
+          src={userCtx.finalAvatarUrl}
           alt="Avatar"
           className="rounded-xl border-4 border-white"
         />
@@ -64,20 +39,19 @@ export default function Avatar({ url, onUpload }) {
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       }
-      <div className=''>
+      <div>
         <label className="text-xs" htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Change Avatar'}
+          {appCtx.uploading ? 'Uploading ...' : <span className='cursor-pointer'>Change Avatar</span>}
         </label>
         <input
           style={{
             visibility: 'hidden',
-            // position: 'absolute',
           }}
           type="file"
           id="single"
           accept="image/*"
           onChange={uploadAvatar}
-          disabled={uploading}
+          disabled={appCtx.uploading}
         />
       </div>
     </div>

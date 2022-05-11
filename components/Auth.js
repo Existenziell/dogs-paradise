@@ -31,8 +31,8 @@ const Auth = ({ i18n }) => {
   return (
     <>
       {linkSent ?
-        <div className='absolute top-0 bottom-0 left-0 right-0 mx-8 my-32 rounded-lg bg-black bg-opacity-60 '>
-          <div className='text-white text-center flex flex-col items-center justify-center h-full'>
+        <div className='absolute top-0 bottom-0 left-0 right-0 mx-8 my-32 rounded-lg bg-green-400'>
+          <div className='text-white dark:text-brand-dark text-center flex flex-col items-center justify-center h-full'>
             <h1 className='text-2xl'>Success</h1>
             <p>Check your email for the login link!</p>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mt-4" viewBox="0 0 20 20" fill="currentColor">

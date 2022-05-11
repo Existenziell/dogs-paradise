@@ -68,8 +68,16 @@ https://github.com/vercel/next.js/issues/21914 */
     hover:shadow hover:cursor-pointer
     transition-all
 }
+.button:disabled {
+  @apply bg-slate-500 text-white shadow-none hover:cursor-not-allowed;
+}
+
+input {
+  @apply text-black;
+}
 
 .login-form input[type='text'], 
+.login-form input[type='number'], 
 .login-form input[type='email'], 
 .login-form input[type='website'] {
   @apply border px-4 py-3 text-brand-dark text-center rounded-lg

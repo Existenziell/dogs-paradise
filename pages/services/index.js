@@ -41,7 +41,7 @@ const Services = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='flex flex-col items-center justify-center py-24 px-8 lg:w-2/3 lg:mx-auto'>
+      <div className='flex flex-col items-center justify-center py-24 px-8 lg:w-2/3 lg:mx-auto text-brand-dark'>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
 
         <Quote text={i18n.Q1} classes={'block md:hidden'} />
@@ -54,7 +54,7 @@ const Services = ({ i18n }) => {
 
         <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center my-20 gap-6' >
           {services.map(s => (
-            <Link href={s.link}>
+            <Link href={s.link} key={s.title}>
               <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative'>
                 <div className=' absolute -top-2 -left-2 rounded-lg bg-brand text-white px-2 py-1'>New</div>
                 <h2 className='bg-white p-4 text-xl rounded-t-lg w-full'>{s.title}</h2>
@@ -67,7 +67,6 @@ const Services = ({ i18n }) => {
 
       </div>
       <img src='/img/pool.jpg' alt='Pool' className='shadow' />
-
     </>
   )
 }

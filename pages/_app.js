@@ -2,11 +2,12 @@ import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import Layout from '../components/_Layout'
 import Head from 'next/head'
+import { AppWrapper } from '../context/AppContext'
 
 function App({ Component, pageProps }) {
 
   return (
-    <>
+    <AppWrapper>
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -24,7 +25,7 @@ function App({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </AppWrapper>
   )
 }
 
