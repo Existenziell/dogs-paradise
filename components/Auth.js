@@ -7,14 +7,6 @@ const Auth = ({ i18n }) => {
   const [linkSent, setLinkSent] = useState(false)
   const [email, setEmail] = useState('')
 
-  useEffect(() => {
-    setSession(supabase.auth.session())
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
-
   const handleLogin = async (email) => {
     try {
       setLoading(true)
