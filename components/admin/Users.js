@@ -135,7 +135,7 @@ const Users = ({ users, roles }) => {
           {fetchedUsers?.map((user, idx) => (
             <tr key={user.id + user.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
               <td>{`${user.id.slice(0, 4)}...${user.id.slice(-4)}`}</td>
-              <td>{user.email}</td>
+              <td>{user.email ? `${user.email?.slice(0, 14)}...` : ``}</td>
               <td>
                 <input
                   type='text' name='name' id='name'
