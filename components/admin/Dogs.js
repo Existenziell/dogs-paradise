@@ -30,8 +30,9 @@ const Dogs = ({ dogs, users }) => {
   const addDog = async (e) => {
     e.preventDefault()
     let query
+
     formData.user ?
-      query = { name: formData.name, status: formData.status, user: parseInt(formData.user) }
+      query = { name: formData.name, status: formData.status, user: formData.user }
       :
       query = { name: formData.name, status: formData.status, }
 
@@ -119,7 +120,7 @@ const Dogs = ({ dogs, users }) => {
 
   let ownerOptions = []
   users.forEach(u => {
-    ownerOptions.push({ value: u.id, label: u.name })
+    ownerOptions.push({ value: u.id, label: u.name ? u.name : u.username })
   })
 
   const notify = (msg) => {
@@ -142,7 +143,7 @@ const Dogs = ({ dogs, users }) => {
 
       <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Dogs</h1>
 
-      <table cellPadding={12} className='shadow-lg bg-white text-brand-dark table-auto w-full'>
+      <table className='shadow-lg bg-white text-brand-darkv text-sm table-auto w-full'>
         <thead>
           <tr className='bg-slate-700 text-white font-bold'>
             <th>ID</th>
@@ -159,15 +160,15 @@ const Dogs = ({ dogs, users }) => {
             <tr className='p-4'><td>No dogs found.</td></tr>
           }
 
-          {fetchedDogs?.map((dog) => (
-            <tr key={dog.id + dog.name} className='relative anchor'>
+          {fetchedDogs?.map((dog, idx) => (
+            <tr key={dog.id + dog.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
               <td>{dog.id}</td>
               <td>
                 <input
-                  type='text' name='name' id='name' placeholder='Name'
+                  type='text' name='name' id='name'
                   onChange={setData} disabled required
                   defaultValue={dog.name}
-                  className={`mr-2 w-36 ${dog.id}-inputDog`}
+                  className={`mr-2 ${dog.id}-inputDog`}
                 />
               </td>
               <td>
@@ -175,12 +176,12 @@ const Dogs = ({ dogs, users }) => {
                   type='text' name='status' id='status'
                   onChange={setData} disabled
                   defaultValue={dog.status}
-                  className={`mr-2 w-36 ${dog.id}-inputDog`}
+                  className={`mr-2 ${dog.id}-inputDog`}
                 />
               </td>
-              <td>{dog.users?.name}</td>
+              <td>{dog.user?.name ? dog.user?.name : dog.user?.username}</td>
 
-              <td className='flex items-center justify-center gap-2 mt-3'>
+              <td className='flex items-center justify-center gap-2 mt-2'>
 
                 <div id={`${dog.id}-closeBtnDog`} className='hidden'>
                   <button onClick={() => editDog(dog.id)}>

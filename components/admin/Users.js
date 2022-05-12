@@ -166,11 +166,13 @@ const Users = ({ users, roles }) => {
 
       <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Users</h1>
 
-      <table cellPadding={12} className='shadow-lg bg-white text-brand-dark table-auto w-full'>
+      <table className='shadow-lg bg-white text-brand-dark text-sm table-auto w-full' cellPadding={0} cellSpacing={0}>
         <thead>
           <tr className='bg-slate-700 text-white font-bold'>
             <th>ID</th>
+            <th>Email</th>
             <th>Name</th>
+            <th>Username</th>
             <th>Address</th>
             <th>Premium?</th>
             <th>Dogs</th>
@@ -185,23 +187,32 @@ const Users = ({ users, roles }) => {
             <tr className='p-4'><td>No users found.</td></tr>
           }
 
-          {fetchedUsers?.map((user) => (
-            <tr key={user.id + user.name} className='relative anchor'>
-              <td>{user.id}</td>
+          {fetchedUsers?.map((user, idx) => (
+            <tr key={user.id + user.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
+              <td>{`${user.id.slice(0, 4)}...${user.id.slice(-4)}`}</td>
+              <td>{user.email}</td>
               <td>
                 <input
-                  type='text' name='name' id='name' placeholder='Name'
+                  type='text' name='name' id='name'
                   onChange={setData} disabled required
                   defaultValue={user.name}
-                  className={`mr-2 w-36 ${user.id}-input`}
+                  className={`mr-2 ${user.id}-input`}
                 />
               </td>
               <td>
                 <input
-                  type='text' name='address' id='address' placeholder='Address'
+                  type='text' name='username' id='username'
+                  onChange={setData} disabled required
+                  defaultValue={user.username}
+                  className={`mr-2 ${user.id}-input`}
+                />
+              </td>
+              <td>
+                <input
+                  type='text' name='address' id='address'
                   onChange={setData} disabled required
                   defaultValue={user.address}
-                  className={`mr-2 w-36 ${user.id}-input`}
+                  className={`mr-2 ${user.id}-input`}
                 />
               </td>
               <td>
@@ -234,7 +245,7 @@ const Users = ({ users, roles }) => {
               <td>
                 {user?.roles?.name}
               </td>
-              <td className='flex items-center justify-center gap-2 mt-3'>
+              <td className='flex items-center justify-center gap-2 mt-2'>
 
                 <div id={`${user.id}-closeBtn`} className='hidden'>
                   <button onClick={() => editUser(user.id)}>

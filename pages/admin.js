@@ -38,7 +38,7 @@ const Admin = ({ users, dogs, roles }) => {
 
 export async function getServerSideProps({ req, res }) {
   const { data: users } = await supabase.from('users').select(`*, dogs(name), roles(name)`).order('id', { ascending: true })
-  const { data: dogs } = await supabase.from('dogs').select(`*, users(name)`).order('id', { ascending: true })
+  const { data: dogs } = await supabase.from('dogs').select(`*, user(*)`).order('id', { ascending: true })
   const { data: roles } = await supabase.from('roles').select(`id, name`).order('id', { ascending: true })
 
   return {

@@ -22,7 +22,7 @@ const Auth = ({ i18n }) => {
       if (error) throw error
       setLinkSent(true)
     } catch (error) {
-      alert(error.error_description || error.message)
+      console.log(error.error_description || error.message)
     } finally {
       setLoading(false)
     }

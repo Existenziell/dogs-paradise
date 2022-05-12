@@ -178,3 +178,18 @@ div.mapboxgl-popup-content {
 .scroll-down .sticky-header {
   @apply shadow-lg bg-white/80 transition-all duration-700;
 }
+
+
+
+/* ==========================================================================
+	Admin
+	========================================================================== */
+
+
+.admin th {
+  @apply px-2 py-6;
+}
+
+.admin tr, td {
+  @apply px-2 py-4;
+}
