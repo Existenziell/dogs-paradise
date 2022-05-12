@@ -33,15 +33,12 @@ export default function PickupImage({ url, size, onUpload, setPicture }) {
           }
         </label>
         <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
           type="file"
           id="single"
           accept="image/*"
           onChange={(e) => uploadImage(e, bucket, setUploading, onUpload)}
           disabled={uploading}
+          className='hidden'
         />
       </div>
     </div>

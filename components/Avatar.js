@@ -28,15 +28,12 @@ export default function Avatar({ url, size, onUpload }) {
           {uploading ? 'Uploading ...' : <span className='cursor-pointer hover:text-slate-300'>Change Avatar</span>}
         </label>
         <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
           type="file"
           id="single"
           accept="image/*"
           onChange={(e) => uploadImage(e, bucket, setUploading, onUpload)}
           disabled={uploading}
+          className='hidden'
         />
       </div>
     </div>
