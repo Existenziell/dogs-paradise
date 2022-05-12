@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { supabase } from '../../lib/supabase'
 import Select from 'react-select'
 
@@ -8,6 +9,8 @@ const Users = ({ users, roles }) => {
   const [showDelete, setShowDelete] = useState(false)
   const [userToDelete, setUserToDelete] = useState()
   const [notificationMsg, setNotificationMsg] = useState('')
+
+  const router = useRouter()
 
   useEffect(() => {
     setFetchedUsers(users)
@@ -22,33 +25,6 @@ const Users = ({ users, roles }) => {
     setFormData({ ...formData, ...{ role: e.value } })
   }
 
-  const openAdd = () => {
-    const panel = document.getElementById('addUserForm')
-    panel.classList.toggle('hidden')
-  }
-
-  const addUser = async (e) => {
-    e.preventDefault()
-    let query
-    formData.role ?
-      query = { name: formData.name, address: formData.address, is_premium: formData.is_premium, role: formData.role }
-      :
-      query = { name: formData.name, address: formData.address, is_premium: formData.is_premium }
-
-    const { data, error } = await supabase
-      .from('users')
-      .insert([query])
-
-    if (!error) {
-      notify("User added successfully!")
-      const panel = document.getElementById('addUserForm')
-      panel.classList.toggle('hidden')
-      setFormData({})
-      const newEntry = data[0]
-      setFetchedUsers([...fetchedUsers, newEntry])
-    }
-  }
-
   const openEdit = (id) => {
     const openBtn = document.getElementById(`${id}-openBtn`)
     const closeBtn = document.getElementById(`${id}-closeBtn`)
@@ -60,49 +36,18 @@ const Users = ({ users, roles }) => {
     Array.from(inputs).forEach(el => (el.disabled = false))
   }
 
-  const closeEdit = (user) => {
-    const openBtn = document.getElementById(`${user.id}-openBtn`)
-    const closeBtn = document.getElementById(`${user.id}-closeBtn`)
-    const inputs = document.getElementsByClassName(`${user.id}-input`)
-    const openEditBtns = document.getElementsByClassName('openBtn')
-
-    openBtn.style.display = "block"
-    closeBtn.style.display = "none"
-    Array.from(openEditBtns).forEach(el => (el.disabled = false))
-
-    // We need to reset the values if canceled
-    let cleanUser = { ...user }
-    delete cleanUser.id
-    delete cleanUser.created_at
-    const userArray = Object.values(cleanUser)
-    userArray.pop()
-    const lastEl = userArray.pop()
-
-    if (lastEl === true) {
-      userArray[2] = false
-      userArray[3] = true
-    } else {
-      userArray[2] = true
-      userArray[3] = false
-    }
-    Array.from(inputs).forEach((el, i) => {
-      el.disabled = true
-      i === 0 || i === 1 ?
-        el.value = userArray[i]
-        :
-        el.checked = userArray[i]
-    })
-    setFormData({})
-  }
-
   const editUser = async (id) => {
     const user = fetchedUsers.filter(c => c.id === id)[0]
-    const { data, error } = await supabase
+    const { name, username, address, role } = formData
+
+    const { error } = await supabase
       .from('users')
       .update({
-        name: formData.name ? formData.name : user.name,
-        address: formData.address ? formData.address : user.address,
+        name: name ? name : user.name,
+        username: username ? username : user.username,
+        address: address ? address : user.address,
         is_premium: formData[`${id}-isPremium`] ? formData[`${id}-isPremium`] : user.is_premium,
+        role: formData.role ? role : user.role,
       })
       .eq('id', id)
 
@@ -243,7 +188,8 @@ const Users = ({ users, roles }) => {
                 ))}
               </td>
               <td>
-                {user?.roles?.name}
+                {/* {user?.roles?.name} */}
+                <Select options={roleOptions} onChange={setSelectData} instanceId defaultValue={roleOptions.filter(o => o.value === user.role)} />
               </td>
               <td className='flex items-center justify-center gap-2 mt-2'>
 
@@ -253,7 +199,7 @@ const Users = ({ users, roles }) => {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </button>
-                  <button onClick={() => closeEdit(user)}>
+                  <button onClick={() => router.reload(window.location.pathname)}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:text-red-700 pointer-events-auto" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
@@ -280,34 +226,10 @@ const Users = ({ users, roles }) => {
         </tbody>
       </table>
 
-      {/* Add user */}
-      <button onClick={openAdd} className='my-4 link flex items-center'>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
-        Add user
-      </button>
-
-      <form onSubmit={addUser} className='shadow max-w-max bg-slate-300 p-4 hidden' id='addUserForm' >
-        <input type='text' name='name' id='name' placeholder='Name' onChange={setData} required className='block mb-2' />
-        <input type='text' name='address' id='address' placeholder='Address' onChange={setData} required className='block mb-2' />
-        <div className='flex items-center  justify-between bg-white p-4 rounded whitespace-nowrap mb-2 w-full'>
-          <span className='mr-4 inline-block'>Is Premium?</span>
-          <div onChange={setData} className='inline-block'>
-            <label htmlFor='isPremiumNo' className='cursor-pointer block'>
-              <input type="radio" value="false" name="is_premium" id='isPremiumNo' required defaultChecked={true} /> No
-            </label>
-            <label htmlFor='isPremiumYes' className='cursor-pointer block'>
-              <input type="radio" value="true" name="is_premium" id='isPremiumYes' /> Yes
-            </label>
-          </div>
-        </div>
-        <div>
-          <Select options={roleOptions} onChange={setSelectData} instanceId />
-        </div>
-        <input type='submit' className='link cursor-pointer block mt-6 dark:text-brand-dark' value='Save' />
-      </form>
-
+      <p className='text-xs mt-2 text-right'>
+        New users can only be added via valid Auth flow, aka they need to create a new account.<br />
+        The email is connected to auth.user and cannot be changed.
+      </p>
 
       {/* Delete user */}
       {showDelete &&
