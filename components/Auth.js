@@ -3,7 +3,6 @@ import { supabase } from '../lib/supabase'
 
 const Auth = ({ i18n }) => {
   const [loading, setLoading] = useState(false)
-  const [session, setSession] = useState(null)
   const [linkSent, setLinkSent] = useState(false)
   const [email, setEmail] = useState('')
 
