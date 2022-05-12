@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { AppContext } from '../../context/AppContext'
 import { supabase } from '../../lib/supabase'
 import Head from 'next/head'
 import langEN from '../../i18n/en.json'
@@ -14,6 +13,7 @@ const Pickup = ({ i18n }) => {
   const [phoneNumber, setPhoneNumber] = useState()
   const [coordinates, setCoordinates] = useState()
   const [picture, setPicture] = useState()
+  const [pickupImageUrl, setPickupImageUrl] = useState(null)
 
   let authUser = supabase.auth.user()
   useEffect(() => {
@@ -31,7 +31,7 @@ const Pickup = ({ i18n }) => {
   }
 
   const saveRequest = () => {
-    alert('Coming soon :)')
+    console.log("Send Request: ", picture, phoneNumber, coordinates);
   }
 
   if (!user) return <div><Auth /></div>
@@ -45,7 +45,8 @@ const Pickup = ({ i18n }) => {
 
       <div className='flex flex-col items-center justify-center py-24 px-8 dark:text-brand-dark text-left'>
         <h1 className='text-6xl mb-12'>Pickup Service</h1>
-
+        <p className=' text-xl'>For our members we offer a pickup service for your dog(s)!</p>
+        <p className='mb-16'>Just follow the steps:</p>
         <div className={`bg-white p-4 rounded w-full mb-8  relative ${picture && `border-4 border-green-400`}`}>
           {picture &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -56,7 +57,14 @@ const Pickup = ({ i18n }) => {
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded whitespace-nowrap'>Step 1</p>
             <p className='text-xl inline-block'>Take a picture of your house / current location.</p>
           </div>
-          <PickupUpload setPicture={setPicture} />
+          <PickupUpload
+            url={pickupImageUrl}
+            size={150}
+            onUpload={(url) => {
+              setPickupImageUrl(url)
+            }}
+            setPicture={setPicture}
+          />
         </div>
 
         <div className={`bg-white p-4 rounded w-full mb-8 relative ${phoneNumber && `border-4 border-green-400`}`}>
@@ -108,11 +116,38 @@ const Pickup = ({ i18n }) => {
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 4</p>
             <p className='text-xl inline-block'>Send Request</p>
           </div>
-          <div className='my-4'>Picture: {picture ? <img src={picture} className='w-36' /> : <span className='text-brand'>Not set yet</span>}</div>
-          <div className='mb-2'>Phone Number: {phoneNumber ? <span className='text-green-400'>{phoneNumber}</span> : <span className='text-brand'>Not set yet</span>}</div>
-          <div>Location: {coordinates ? <span className='text-green-400'>{coordinates}</span> : <span className='text-brand'>Not set yet</span>}</div>
+
+          <div className='p-4'>
+            <div className='my-4'>
+              Picture:{` `}
+              {picture ?
+                <span className='text-green-400'> {pickupImageUrl}</span>
+                :
+                <span className='text-brand'>Not set yet</span>
+              }
+            </div>
+            <div className='mb-4'>
+              Phone Number:{` `}
+              {phoneNumber ?
+                <span className='text-green-400'>{phoneNumber}</span>
+                :
+                <span className='text-brand'>Not set yet</span>
+              }
+            </div>
+            <div>
+              Location:{` `}
+              {coordinates ?
+                <span className='text-green-400'>{coordinates}</span>
+                :
+                <span className='text-brand'>Not set yet</span>
+              }
+            </div>
+          </div>
+
           <button onClick={saveRequest} className='mt-8 button' disabled={!picture && !phoneNumber && !coordinates}>Send Request</button>
-          {!picture && !phoneNumber && !coordinates && <p className='text-xs mt-2'>Please follow the above steps to enable the Pickup service</p>}
+          {!picture && !phoneNumber && !coordinates &&
+            <p className='text-xs mt-2'>Please follow the above steps to enable the Pickup service</p>
+          }
         </div>
       </div>
     </>

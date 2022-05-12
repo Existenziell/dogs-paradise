@@ -1,9 +1,9 @@
+import { supabase } from '../lib/supabase'
 import Head from 'next/head'
 import Link from 'next/link'
+import AddToHomeScreen from '../components/AddToHomeScreen'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
-import AddToHomeScreen from '../components/AddToHomeScreen'
-import { supabase } from '../lib/supabase'
 
 const Paradise = ({ i18n }) => {
   const user = supabase.auth.user()

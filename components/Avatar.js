@@ -1,57 +1,42 @@
-import { useEffect, useContext } from 'react'
-import { AppContext } from '../context/AppContext'
+import { useEffect, useState } from 'react'
+import downloadImage from '../lib/downloadImage'
+import uploadImage from '../lib/uploadImage'
 
-export default function Avatar({ url }) {
-  const ctx = useContext(AppContext)
-  const userCtx = ctx.user
-  const appCtx = ctx.appState
+export default function Avatar({ url, size, onUpload }) {
+  const [avatarUrl, setAvatarUrl] = useState(null)
+  const [uploading, setUploading] = useState(false)
   const bucket = 'avatars'
 
-  // On load if user image exists
   useEffect(() => {
-    if (url) {
-      userCtx.downloadImage(bucket, url)
-    }
+    if (url) downloadImage(bucket, url, setAvatarUrl)
   }, [url])
 
-  // After upload
-  useEffect(() => {
-    if (userCtx.avatarUrl) {
-      userCtx.downloadImage(bucket, userCtx.avatarUrl)
-    }
-  }, [userCtx.avatarUrl])
-
-  const uploadAvatar = async (e) => {
-    userCtx.uploadImage(e, bucket)
-    userCtx.updateProfile({ avatar_url: userCtx.setAvatarUrl })
-  }
-
   return (
-    <div className='flex flex-col items-center justify-center'>
-      {userCtx.finalAvatarUrl ?
+    <div>
+      {avatarUrl ? (
         <img
-          src={userCtx.finalAvatarUrl}
+          src={avatarUrl}
           alt="Avatar"
-          className="rounded-xl border-4 border-white"
+          className="rounded-xl border-2 border-white"
+          style={{ height: size, width: size }}
         />
-        :
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      }
-      <div>
+      ) : (
+        <div className="avatar no-image" style={{ height: size, width: size }} />
+      )}
+      <div style={{ width: size }}>
         <label className="text-xs" htmlFor="single">
-          {appCtx.uploading ? 'Uploading ...' : <span className='cursor-pointer'>Change Avatar</span>}
+          {uploading ? 'Uploading ...' : <span className='cursor-pointer'>Change Avatar</span>}
         </label>
         <input
           style={{
             visibility: 'hidden',
+            position: 'absolute',
           }}
           type="file"
           id="single"
           accept="image/*"
-          onChange={uploadAvatar}
-          disabled={appCtx.uploading}
+          onChange={(e) => uploadImage(e, bucket, setUploading, onUpload)}
+          disabled={uploading}
         />
       </div>
     </div>

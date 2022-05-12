@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
 import Auth from '../components/Auth'
-import { LogoutBtn } from '../components/LogoutBtn'
+import LogoutBtn from '../components/LogoutBtn'
 
 const Admin = ({ users, dogs, roles }) => {
   const [user, setUser] = useState()

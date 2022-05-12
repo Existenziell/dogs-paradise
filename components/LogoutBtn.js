@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabase'
 
-export const LogoutBtn = () => {
+const LogoutBtn = () => {
   const router = useRouter()
   const logout = () => {
     supabase.auth.signOut()
@@ -16,3 +16,5 @@ export const LogoutBtn = () => {
     </div>
   )
 }
+
+export default LogoutBtn
