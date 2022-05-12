@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { supabase } from '../lib/supabase'
 import LoginBtn from './LoginBtn'
 import LogoutBtn from './LogoutBtn'
 
@@ -11,6 +12,14 @@ import StickyHeader from './StickyHeader'
 
 const Layout = ({ children }) => {
   const router = useRouter()
+
+  const [session, setSession] = useState(null)
+  useEffect(() => {
+    setSession(supabase.auth.session())
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
 
   const [showControlPanel, setShowControlPanel] = useState(false)
 
@@ -43,7 +52,7 @@ const Layout = ({ children }) => {
             <Nav />
             <div className='flex'>
               <div className='controlPanel flex items-center gap-4 -translate-y-16 transition-all duration-300' >
-                <LogoutBtn />
+                {session && <LogoutBtn />}
                 <DarkModeToggle />
                 <LoginBtn />
               </div>
