@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { createContext, useContext } from 'react'
-import { supabase } from '../lib/supabase'
 
 const AppContext = createContext({})
 
@@ -13,6 +12,20 @@ const AppWrapper = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false)
   const [profileCreated, setProfileCreated] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+  const [showControlPanel, setShowControlPanel] = useState(false)
+
+  const toggleControlPanel = (e) => {
+    e.preventDefault()
+    const trigger = document.getElementsByClassName('controlPanelTrigger')[0]
+    const panel = document.getElementsByClassName('controlPanel')[0]
+
+    panel.classList.toggle('-translate-y-16')
+    trigger.classList.add('animate-ping')
+    setTimeout(() => {
+      trigger.classList.remove('animate-ping')
+    }, 400)
+    setShowControlPanel(!showControlPanel)
+  }
 
   let user = {
     currentUser,
@@ -25,15 +38,18 @@ const AppWrapper = ({ children }) => {
     setShowOnboarding,
   }
 
-  let appState = {
+  let app = {
     loading,
     theme,
+    showControlPanel,
     setLoading,
     setTheme,
+    setShowControlPanel,
+    toggleControlPanel,
   }
 
   return (
-    <AppContext.Provider value={{ user, appState }}>
+    <AppContext.Provider value={{ user, app }}>
       {children}
     </AppContext.Provider>
   )
