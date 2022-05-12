@@ -1,14 +1,21 @@
 import { useRouter } from 'next/router'
-import { LoginBtn } from './LoginBtn'
-import NextNprogress from 'nextjs-progressbar'
+import LoginBtn from './LoginBtn'
+import LogoutBtn from './LogoutBtn'
+
 import Footer from './Footer'
 import Nav from './Nav'
+import NextNprogress from 'nextjs-progressbar'
 import DarkModeToggle from './DarkModeToggle'
 import StickyHeader from './StickyHeader'
 
 const Layout = ({ children }) => {
-
   const router = useRouter()
+
+  const toggleControlPanel = (e) => {
+    e.preventDefault()
+    const panel = document.getElementsByClassName('controlPanel')[0]
+    panel.classList.toggle('-translate-y-16')
+  }
 
   return (
     <>
@@ -24,9 +31,14 @@ const Layout = ({ children }) => {
           />
           <div className='flex justify-between z-20'>
             <Nav />
-            <div className='flex items-center justify-center'>
-              <DarkModeToggle />
-              <LoginBtn />
+            <div className='flex'>
+              <div className='controlPanel flex items-center gap-4 -translate-y-16  transition-all duration-300'>
+                <LogoutBtn />
+                <DarkModeToggle />
+              </div>
+              <div onClick={toggleControlPanel}>
+                <LoginBtn />
+              </div>
             </div>
           </div>
         </>

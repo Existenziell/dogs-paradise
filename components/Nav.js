@@ -53,7 +53,7 @@ const Nav = () => {
             {/* Mobile Hamburger Button */}
             <button className='mobile-menu-button outline-none mt-4 ml-4' onClick={() => setIsOpen(!isOpen)} aria-label='Open Mobile Navigation'>
                 {!isOpen ?
-                    <svg xmlns='http://www.w3.org/2000/svg' className='h-14 w-14 text-brand hover:text-gray-500' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                    <svg xmlns='http://www.w3.org/2000/svg' className='h-14 w-14 text-brand hover:text-slate-400' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                         <path d='M4 6h16M4 12h16M4 18h16'></path>
                     </svg>
                     :

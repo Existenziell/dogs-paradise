@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import Head from 'next/head'
 import Avatar from './Avatar'
-import LogoutBtn from './LogoutBtn'
 import getProfile from '../lib/getProfile'
 import updateProfile from '../lib/updateProfile'
 import Onboarding from './Onboarding'
@@ -39,8 +38,6 @@ export default function Profile({ session, i18n }) {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-
-      <LogoutBtn />
 
       <div className='pt-24 px-8 profile'>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
