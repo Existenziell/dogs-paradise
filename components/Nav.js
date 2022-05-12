@@ -53,11 +53,11 @@ const Nav = () => {
             {/* Mobile Hamburger Button */}
             <button className='mobile-menu-button outline-none mt-4 ml-4' onClick={() => setIsOpen(!isOpen)} aria-label='Open Mobile Navigation'>
                 {!isOpen ?
-                    <svg xmlns='http://www.w3.org/2000/svg' className='h-14 w-14 text-brand hover:text-slate-400' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
+                    <svg xmlns='http://www.w3.org/2000/svg' className='h-14 w-14 text-brand hover:text-slate-400 hover:scale-105' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
                         <path d='M4 6h16M4 12h16M4 18h16'></path>
                     </svg>
                     :
-                    <svg xmlns='http://www.w3.org/2000/svg' className='absolute top-4 left-4 h-14 w-14 z-20 text-gray-500 hover:text-brand dark:text-gray-300' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <svg xmlns='http://www.w3.org/2000/svg' className='absolute top-4 left-4 h-14 w-14 z-20 text-gray-500 hover:text-brand dark:text-gray-300 hover:scale-105' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
                         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
                     </svg>
                 }
