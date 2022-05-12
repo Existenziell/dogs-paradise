@@ -45,7 +45,7 @@ const Contact = ({ i18n }) => {
       </Head>
 
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24 lg:w-2/3 lg:mx-auto'>
-        <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
+        <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
         <div className='md:flex items-center gap-8 md:text-right'>
           <div className='md:w-2/3'>
             <p className='text-lg mx-auto leading-relaxed mb-8 max-w-sm'>{i18n.T2}</p>

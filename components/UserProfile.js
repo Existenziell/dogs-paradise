@@ -65,7 +65,7 @@ export default function Profile({ session, i18n }) {
             {notificationMsg}
           </div>
         </div>
-        <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
+        <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
         <h2 className='text-left mb-2'>Your Membership Card</h2>
 
         <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>

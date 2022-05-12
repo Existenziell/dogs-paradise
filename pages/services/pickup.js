@@ -44,9 +44,9 @@ const Pickup = ({ i18n }) => {
       </Head>
 
       <div className='flex flex-col items-center justify-center py-24 px-8 dark:text-brand-dark text-left'>
-        <h1 className='text-6xl mb-12'>Pickup Service</h1>
-        <p className=' text-xl'>For our members we offer a pickup service for your dog(s)!</p>
-        <p className='mb-16'>Just follow the steps:</p>
+        <h1 className='text-4xl md:text-6xl mb-8 md:mb-12 mt-4'>Pickup Service</h1>
+        <p className='text-xl text-center'>For our members we offer a pickup service for your dog(s)!</p>
+        <p className='mb-16 text-center'>Just follow the steps:</p>
         <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-green-400`}`}>
           {picture &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -54,8 +54,8 @@ const Pickup = ({ i18n }) => {
             </svg>
           }
           <div className='flex items-center justify-start gap-3'>
-            <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded whitespace-nowrap'>Step 1</p>
-            <p className='text-xl inline-block'>Take a picture of your house / current location.</p>
+            <p className='border bg-brand-dark text-white text-base md:text-xl px-3 py-2 max-w-max rounded whitespace-nowrap'>Step 1</p>
+            <p className='text-base md:text-xl inline-block'>Take a picture of your house / current location.</p>
           </div>
           <PickupUpload
             url={pickupImageUrl}

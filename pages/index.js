@@ -17,7 +17,7 @@ const Paradise = ({ i18n }) => {
 
       <header className='flex items-center justify-center h-screen sm:bg-fixed bg-center bg-cover bg-parallax-1-m md:bg-parallax-1'>
         <a href='#anchor' aria-label='Scroll down'>
-          <h1 className='px-6 py-4 text-6xl text-white bg-brand/80 dark:text-brand dark:bg-brand-dark/80 rounded'>
+          <h1 className='px-6 py-4 text-4xl md:text-6xl text-white bg-brand/80 dark:text-brand dark:bg-brand-dark/80 rounded'>
             {i18n.T1}
           </h1>
         </a>

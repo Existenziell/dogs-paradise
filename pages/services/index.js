@@ -42,7 +42,7 @@ const Services = ({ i18n }) => {
       </Head>
 
       <div className='flex flex-col items-center justify-center py-24 px-8 lg:w-2/3 lg:mx-auto text-brand-dark'>
-        <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
+        <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
 
         <Quote text={i18n.Q1} classes={'block md:hidden'} />
 
