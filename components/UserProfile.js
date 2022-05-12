@@ -77,7 +77,7 @@ export default function Profile({ session, i18n }) {
               <div className='w-1/3'>
                 <Avatar
                   url={avatar_url}
-                  size={150}
+                  // size={150}
                   onUpload={(url) => {
                     setAvatarUrl(url)
                     updateProfile({ name, username, email, address, is_premium, role, quote, avatar_url: url, setLoading })
@@ -85,7 +85,7 @@ export default function Profile({ session, i18n }) {
                 />
               </div>
 
-              <div className='flex text-brand-dark w-1/2 gap-2 items-end justify-center'>
+              <div className='hidden md:flex text-brand-dark w-2/3 gap-2 items-end justify-center'>
                 <Link href='/services/pickup'>
                   <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
                     <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Pickup</h2>
