@@ -4,7 +4,7 @@ import Head from 'next/head'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import Auth from '../../components/Auth'
-import LocationPicker from '../../components/services/locationPicker'
+import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
 
 const Pickup = ({ i18n }) => {
