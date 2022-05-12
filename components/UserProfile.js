@@ -170,7 +170,7 @@ export default function Profile({ session, i18n }) {
 
           <div>
             <button
-              className="link mt-2"
+              className="link mt-6 text-xl"
               onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
               disabled={loading}
             >
