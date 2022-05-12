@@ -47,7 +47,7 @@ const Pickup = ({ i18n }) => {
         <h1 className='text-6xl mb-12'>Pickup Service</h1>
         <p className=' text-xl'>For our members we offer a pickup service for your dog(s)!</p>
         <p className='mb-16'>Just follow the steps:</p>
-        <div className={`bg-white p-4 rounded w-full mb-8  relative ${picture && `border-4 border-green-400`}`}>
+        <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-green-400`}`}>
           {picture &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -67,7 +67,7 @@ const Pickup = ({ i18n }) => {
           />
         </div>
 
-        <div className={`bg-white p-4 rounded w-full mb-8 relative ${phoneNumber && `border-4 border-green-400`}`}>
+        <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${phoneNumber && `border-4 border-green-400`}`}>
           {phoneNumber &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -87,7 +87,7 @@ const Pickup = ({ i18n }) => {
           </div>
         </div>
 
-        <div className={`bg-white p-4 rounded w-full mb-8 relative ${coordinates && `border-4 border-green-400`}`}>
+        <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${coordinates && `border-4 border-green-400`}`}>
           {coordinates &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -111,7 +111,7 @@ const Pickup = ({ i18n }) => {
           }
         </div>
 
-        <div className={`bg-white p-4 rounded w-full mb-8 ${picture && phoneNumber && coordinates && `border-4 border-green-400`}`}>
+        <div className={`bg-white p-4 rounded w-full mb-8 transition-all ${picture && phoneNumber && coordinates && `border-4 border-green-400`}`}>
           <div className='flex items-center justify-start gap-3'>
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 4</p>
             <p className='text-xl inline-block'>Send Request</p>

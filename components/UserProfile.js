@@ -12,10 +12,15 @@ export default function Profile({ session, i18n }) {
   const userCtx = ctx.user
 
   const [loading, setLoading] = useState(true)
+  const [name, setName] = useState(null)
   const [username, setUsername] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [isPremium, setIsPremium] = useState(null)
+  const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
-  const [createdAt, setCreatedAt] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const [createdAt, setCreatedAt] = useState(null)
+  const [notificationMsg, setNotificationMsg] = useState('')
 
   useEffect(() => {
     getData()
@@ -25,13 +30,26 @@ export default function Profile({ session, i18n }) {
     const data = await getProfile(setLoading)
 
     if (data) {
+      setName(data.name)
       setUsername(data.username)
+      setEmail(data.email)
+      setIsPremium(data.is_premium)
+      setRole(data.role)
       setQuote(data.quote)
-      setCreatedAt(data.created_at)
       setAvatarUrl(data.avatar_url)
+      setCreatedAt(data.created_at)
     } else {
       userCtx.setShowOnboarding(true)
     }
+  }
+
+  const notify = (msg) => {
+    const notification = document.querySelector('.notification-dog')
+    notification.classList.remove('-translate-y-20')
+    setNotificationMsg(msg)
+    setTimeout(() => {
+      notification.classList.add('-translate-y-20')
+    }, 3000)
   }
 
   return (
@@ -41,7 +59,12 @@ export default function Profile({ session, i18n }) {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='pt-24 px-8 profile'>
+      <div className='py-24 px-8 profile'>
+        <div className="fixed top-0 left-0 right-0 w-full notification-dog -translate-y-20 transition-all duration-500 z-30">
+          <div className='bg-brand-dark text-white flex items-center justify-center py-6 '>
+            {notificationMsg}
+          </div>
+        </div>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
         <h2 className='text-left mb-2'>Your Membership Card</h2>
 
@@ -57,7 +80,7 @@ export default function Profile({ session, i18n }) {
                   size={150}
                   onUpload={(url) => {
                     setAvatarUrl(url)
-                    updateProfile({ username, quote, avatar_url: url, setLoading })
+                    updateProfile({ name, username, email, address, is_premium, role, quote, avatar_url: url, setLoading })
                   }}
                 />
               </div>
@@ -84,10 +107,8 @@ export default function Profile({ session, i18n }) {
                 </div>
                 <div className='text-right text-sm'>
                   <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
-                  <p>Member status: Free</p>
+                  <p>Member status: {isPremium ? `Premium` : `Free`}</p>
                 </div>
-
-
 
                 <div className='flex justify-end gap-4'>
                   <img src='/img/dogs/dog1.jpg' alt='Dog1' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer hover:scale-105 transition-all' />
@@ -98,10 +119,19 @@ export default function Profile({ session, i18n }) {
           }
         </div>
 
-        <div className="py-16 text-left">
-          <h2 className='font-bold mb-4'>Edit:</h2>
+        <div className="mt-8 text-left shadow max-w-max bg-slate-300 p-4">
+          <h2 className='font-bold text-xl mb-4'>Edit:</h2>
           <div>
-            <label htmlFor="username" className='block text-xs'>Name</label>
+            <label htmlFor="name" className='block text-xs mt-2'>Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name || ''}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="username" className='block text-xs mt-2'>Username</label>
             <input
               id="username"
               type="text"
@@ -109,8 +139,27 @@ export default function Profile({ session, i18n }) {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
+          <div>
+            <label htmlFor="email" className='block text-xs mt-2'>Email</label>
+            <input
+              disabled
+              id="email"
+              type="text"
+              value={email || ''}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="isPremium" className='block text-xs mt-2'>isPremium?</label>
+            <input
+              id="isPremium"
+              type="text"
+              value={isPremium || ''}
+              onChange={(e) => setIsPremium(e.target.value)}
+            />
+          </div>
           <div className='mt-2'>
-            <label htmlFor="quote" className='block text-xs'>Quote</label>
+            <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
             <input
               id="quote"
               type="text"
@@ -122,7 +171,7 @@ export default function Profile({ session, i18n }) {
           <div>
             <button
               className="link mt-2"
-              onClick={() => updateProfile({ username, quote, avatar_url, setLoading })}
+              onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
               disabled={loading}
             >
               {loading ? 'Loading ...' : 'Save'}
