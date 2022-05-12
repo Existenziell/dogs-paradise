@@ -24,8 +24,8 @@ export default function Avatar({ url, size, onUpload }) {
         <div className="avatar no-image" style={{ height: size, width: size }} />
       )}
       <div style={{ width: size }}>
-        <label className="text-xs" htmlFor="single">
-          {uploading ? 'Uploading ...' : <span className='cursor-pointer'>Change Avatar</span>}
+        <label className="text-sm" htmlFor="single">
+          {uploading ? 'Uploading ...' : <span className='cursor-pointer hover:text-slate-300'>Change Avatar</span>}
         </label>
         <input
           style={{

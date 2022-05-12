@@ -5,6 +5,7 @@ import Avatar from './Avatar'
 import getProfile from '../lib/getProfile'
 import updateProfile from '../lib/updateProfile'
 import Onboarding from './Onboarding'
+import Link from 'next/link'
 
 export default function Profile({ session, i18n }) {
   const ctx = useContext(AppContext)
@@ -42,7 +43,7 @@ export default function Profile({ session, i18n }) {
 
       <div className='pt-24 px-8 profile'>
         <h1 className='text-6xl mb-12'>{i18n.T1}</h1>
-        <h2 className='text-left mb-2'>Your Membership Card:</h2>
+        <h2 className='text-left mb-2'>Your Membership Card</h2>
 
         <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
 
@@ -60,6 +61,22 @@ export default function Profile({ session, i18n }) {
                   }}
                 />
               </div>
+
+              <div className='flex text-brand-dark w-1/2 gap-2 items-end justify-center'>
+                <Link href='/services/pickup'>
+                  <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
+                    <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Pickup</h2>
+                    <img src='/icons/services/pickup.png' alt='Pickup Service' width={60} height={60} className='my-4' />
+                  </a>
+                </Link>
+                <Link href='/services/delivery'>
+                  <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
+                    <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Delivery</h2>
+                    <img src='/icons/services/delivery.svg' alt='Pickup Service' width={60} height={60} className='my-4' />
+                  </a>
+                </Link>
+              </div>
+
               <div className='flex flex-col h-full gap-4'>
                 <div className='text-right  bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-max self-end'>
                   <p className='text-2xl md:text-4xl'>{username}</p>
@@ -69,6 +86,8 @@ export default function Profile({ session, i18n }) {
                   <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
                   <p>Member status: Free</p>
                 </div>
+
+
 
                 <div className='flex justify-end gap-4'>
                   <img src='/img/dogs/dog1.jpg' alt='Dog1' className='rounded-full w-16 shadow-lg border-2 border-white cursor-pointer hover:scale-105 transition-all' />
