@@ -6,6 +6,7 @@ import Select from 'react-select'
 const Users = ({ users, roles }) => {
   const [fetchedUsers, setFetchedUsers] = useState()
   const [formData, setFormData] = useState({})
+  const [showEdit, setShowEdit] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
   const [userToDelete, setUserToDelete] = useState()
   const [notificationMsg, setNotificationMsg] = useState('')
@@ -26,6 +27,7 @@ const Users = ({ users, roles }) => {
   }
 
   const openEdit = (id) => {
+    setShowEdit(true)
     const openBtn = document.getElementById(`${id}-openBtn`)
     const closeBtn = document.getElementById(`${id}-closeBtn`)
     const inputs = document.getElementsByClassName(`${id}-input`)
@@ -189,7 +191,13 @@ const Users = ({ users, roles }) => {
               </td>
               <td>
                 {/* {user?.roles?.name} */}
-                <Select options={roleOptions} onChange={setSelectData} instanceId defaultValue={roleOptions.filter(o => o.value === user.role)} />
+                <Select
+                  options={roleOptions}
+                  onChange={setSelectData}
+                  instanceId // Needed to prevent errors being thrown
+                  defaultValue={roleOptions.filter(o => o.value === user.role)}
+                  isDisabled={!showEdit}
+                />
               </td>
               <td className='flex items-center justify-center gap-2 mt-2'>
 
