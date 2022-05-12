@@ -202,19 +202,19 @@ const Users = ({ users, roles }) => {
               <td className='flex items-center justify-center gap-2 mt-2'>
 
                 <div id={`${user.id}-closeBtn`} className='hidden'>
-                  <button onClick={() => editUser(user.id)}>
+                  <button onClick={() => editUser(user.id)} aria-label='Edit User'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:text-green-700 hover:scale-110 pointer-events-auto" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </button>
-                  <button onClick={() => router.reload(window.location.pathname)}>
+                  <button onClick={() => router.reload(window.location.pathname)} aria-label='Cancel'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer hover:text-red-700 pointer-events-auto" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </button>
                 </div>
 
-                <button onClick={() => openEdit(user.id)} id={`${user.id}-openBtn`} className='openBtn'>
+                <button onClick={() => openEdit(user.id)} id={`${user.id}-openBtn`} className='openBtn' aria-label='Open Edit Dialog'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                     <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
@@ -223,7 +223,7 @@ const Users = ({ users, roles }) => {
 
               </td>
               <td className='text-center align-middle'>
-                <button onClick={() => toggleDeleteModal(user.id)}>
+                <button onClick={() => toggleDeleteModal(user.id)} aria-label='Toggle Delete Modal'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>
@@ -244,14 +244,14 @@ const Users = ({ users, roles }) => {
         <div className='fixed top-0 bottom-0 left-0 right-0 z-20 text-lg '>
           <div className='w-full h-full bg-black/80 flex items-center justify-center'>
             <div className='flex flex-col items-center justify-center backdrop-blur-lg bg-white text-brand-dark rounded p-12'>
-              <button onClick={() => setShowDelete(false)} className='absolute top-0 right-0 px-2 py-0 rounded-sm hover:text-brand text-2xl hover:bg-gray-100'>
+              <button onClick={() => setShowDelete(false)} className='absolute top-0 right-0 px-2 py-0 rounded-sm hover:text-brand text-2xl hover:bg-gray-100' aria-label='Close Delete Dialog'>
                 &times;
               </button>
               <p className='text-sm'>Deleting user with ID {userToDelete}</p>
               <p className='text-2xl mt-2'>Are you sure?</p>
               <div className='flex items-center gap-4 mt-6'>
-                <button onClick={() => setShowDelete(false)} className='hover:text-brand hover:underline'>Cancel</button>
-                <button onClick={deleteUser} className='hover:text-brand hover:underline'>Yes</button>
+                <button onClick={() => setShowDelete(false)} className='hover:text-brand hover:underline' aria-label='Cancel'>Cancel</button>
+                <button onClick={deleteUser} className='hover:text-brand hover:underline' aria-label='Yes'>Yes</button>
               </div>
             </div>
           </div>

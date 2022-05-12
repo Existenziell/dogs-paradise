@@ -57,6 +57,7 @@ const Auth = ({ i18n }) => {
                   }}
                   className="button mt-4"
                   disabled={loading}
+                  aria-label='Login'
                 >
                   <span>{loading ? 'Loading' : 'Send magic link'}</span>
                 </button>

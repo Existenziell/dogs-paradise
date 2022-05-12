@@ -60,6 +60,7 @@ const Onboarding = () => {
           className="link mt-2"
           onClick={createProfile}
           disabled={loading}
+          aria-label='Create Profile'
         >
           {loading ? 'Loading ...' : 'Save'}
         </button>

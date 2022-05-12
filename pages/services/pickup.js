@@ -81,7 +81,7 @@ const Pickup = ({ i18n }) => {
             {!phoneNumber &&
               <>
                 <input type="phone" placeholder='Phone Number' id='phone' name='phone' className='border px-4 py-3 text-brand-dark text-center rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand my-8' />
-                <button onClick={savePhone} className='link'>Save</button>
+                <button onClick={savePhone} className='link' aria-label='Save Phone Number'>Save</button>
               </>
             }
           </div>
@@ -104,7 +104,7 @@ const Pickup = ({ i18n }) => {
                 <div className='my-4'>
                   <p className='text-xl'>Current location:</p>
                   <p className='text-sm'>{currentLocation.join(', ')}</p>
-                  <button onClick={saveLocation} className='link mt-2'>Save</button>
+                  <button onClick={saveLocation} className='link mt-2' aria-label='Save'>Save</button>
                 </div>
               }
             </div>
@@ -144,7 +144,14 @@ const Pickup = ({ i18n }) => {
             </div>
           </div>
 
-          <button onClick={saveRequest} className='mt-8 button' disabled={!picture && !phoneNumber && !coordinates}>Send Request</button>
+          <button
+            onClick={saveRequest}
+            className='mt-8 button'
+            disabled={!picture && !phoneNumber && !coordinates}
+            aria-label='Send Request'
+          >
+            Send Request
+          </button>
           {!picture && !phoneNumber && !coordinates &&
             <p className='text-xs mt-2'>Please follow the above steps to enable the Pickup service</p>
           }

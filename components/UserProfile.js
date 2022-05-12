@@ -173,6 +173,7 @@ export default function Profile({ session, i18n }) {
               className="link mt-6 text-xl"
               onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
               disabled={loading}
+              aria-label='Update Profile'
             >
               {loading ? 'Loading ...' : 'Save'}
             </button>
