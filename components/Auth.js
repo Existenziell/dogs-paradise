@@ -28,6 +28,26 @@ const Auth = ({ i18n }) => {
     }
   }
 
+  const handleGithubLogin = async (e) => {
+    e.preventDefault()
+
+    try {
+      setLoading(true)
+
+      const { user, session, error } = await supabase.auth.signIn(
+        { provider: 'github' },
+        { redirectTo: window.location.href }
+      )
+
+      if (error) throw error
+      setLinkSent(true)
+    } catch (error) {
+      appCtx.notify(error.error_description || error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <>
       <Head>

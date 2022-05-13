@@ -26,7 +26,7 @@ const Nav = () => {
         { name: currentUser ? i18n.N6 : i18n.N7, url: '/profile', title: currentUser ? i18n.N6 : i18n.N7 },
     ]
 
-    if (currentUser) urls.push({ name: 'Admin', url: '/admin', title: 'Admin' },)
+    if (currentUser?.roles?.name === 'Admin') urls.push({ name: 'Admin', url: '/admin', title: 'Admin' },)
 
     const intercept = (e) => {
         e.preventDefault()

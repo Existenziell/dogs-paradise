@@ -146,6 +146,23 @@ div.mapboxgl-popup-content {
 
 
 /* ==========================================================================
+	Supabase UI overrides
+	========================================================================== */
+
+.sbui-btn-primary { 
+  @apply bg-brand !important;
+}
+
+.sbui-typography-link {
+  @apply text-brand !important;
+}
+
+.sbui-checkbox:checked {
+  @apply bg-brand !important; 
+}
+
+
+/* ==========================================================================
 	Blob
 	========================================================================== */
 

@@ -12,6 +12,7 @@
     "@auth0/nextjs-auth0": "^1.8.0",
     "@sendgrid/mail": "^7.6.2",
     "@supabase/supabase-js": "^1.35.2",
+    "@supabase/ui": "^0.36.5",
     "count-lines-of-code": "^1.0.6",
     "framer-motion": "^6.3.3",
     "jsonwebtoken": "^8.5.1",

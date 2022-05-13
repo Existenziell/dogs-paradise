@@ -1,18 +1,17 @@
 import { useContext } from 'react'
 import { supabase } from '../lib/supabase'
 import { AppContext } from '../context/AppContext'
-
 import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
-import Auth from '../components/Auth'
+import SupaAuth from '../components/SupaAuth'
 
 const Admin = ({ users, dogs, roles }) => {
   const appCtx = useContext(AppContext)
   const { session, currentUser } = appCtx
 
-  if (!session) return <Auth />
-  if (currentUser.roles.name !== 'Admin') return <Auth />
+  if (!session || !currentUser) return <SupaAuth />
+  if (currentUser?.roles?.name !== 'Admin') return <SupaAuth />
 
   return (
     <>

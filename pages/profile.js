@@ -2,35 +2,30 @@ import { useEffect, useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import Head from 'next/head'
 import Link from 'next/link'
-import Auth from '../components/Auth'
 import Avatar from '../components/Avatar'
 import Onboarding from '../components/Onboarding'
 import updateProfile from '../lib/updateProfile'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
+import SupaAuth from '../components/SupaAuth'
 
 const Profile = ({ i18n }) => {
   const appCtx = useContext(AppContext)
   const { session, notify, currentUser } = appCtx
 
   const [loading, setLoading] = useState(true)
-  const [name, setName] = useState(null)
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState(null)
-  const [address, setAddress] = useState(null)
-  const [is_premium, setIsPremium] = useState(null)
   const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
+  const [is_premium, setIsPremium] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
 
   useEffect(() => {
     if (currentUser) {
-      setName(currentUser.name)
       setUsername(currentUser.username)
       setEmail(currentUser.email)
-      setAddress(currentUser.address)
-      setIsPremium(currentUser.is_premium)
       setRole(currentUser.role)
       setQuote(currentUser.quote)
       setAvatarUrl(currentUser.avatar_url)
@@ -38,7 +33,7 @@ const Profile = ({ i18n }) => {
     }
   }, [currentUser])
 
-  if (!session) return <Auth />
+  if (!session) return <SupaAuth />
 
   return (
     <>
@@ -63,7 +58,7 @@ const Profile = ({ i18n }) => {
                   // size={150}
                   onUpload={(url) => {
                     setAvatarUrl(url)
-                    updateProfile({ name, username, email, address, is_premium, role, quote, avatar_url: url, setLoading, notify })
+                    updateProfile({ username, email, role, quote, avatar_url: url, setLoading, notify })
                   }}
                 />
               </div>
@@ -85,7 +80,7 @@ const Profile = ({ i18n }) => {
 
               <div className='flex flex-col h-full gap-4'>
                 <div className='text-right  bg-white/10 backdrop-blur-md p-4 rounded-xl max-w-max self-end'>
-                  <p className='text-2xl md:text-4xl'>{username}</p>
+                  <p className='text-2xl md:text-4xl whitespace-nowrap'>{username}</p>
                   <p className='text-xs'>{quote}</p>
                 </div>
                 <div className='text-right text-sm'>
@@ -105,15 +100,6 @@ const Profile = ({ i18n }) => {
         <div className="mt-8 text-left shadow max-w-max bg-slate-300 p-4">
           <h2 className='font-bold text-xl mb-4'>Edit:</h2>
           <div>
-            <label htmlFor="name" className='block text-xs mt-2'>Name</label>
-            <input
-              id="name"
-              type="text"
-              value={name || ''}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
             <label htmlFor="username" className='block text-xs mt-2'>Username</label>
             <input
               id="username"
@@ -130,15 +116,6 @@ const Profile = ({ i18n }) => {
               type="text"
               value={email || ''}
               onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="is_premium" className='block text-xs mt-2'>Premium?</label>
-            <input
-              id="is_premium"
-              type="text"
-              value={is_premium || ''}
-              onChange={(e) => setIsPremium(e.target.value)}
             />
           </div>
           <div className='mt-2'>

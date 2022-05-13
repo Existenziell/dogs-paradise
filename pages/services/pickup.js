@@ -3,9 +3,9 @@ import { supabase } from '../../lib/supabase'
 import Head from 'next/head'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
-import Auth from '../../components/Auth'
 import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
+import SupaAuth from '../../components/SupaAuth'
 
 const Pickup = ({ i18n }) => {
   const [user, setUser] = useState(null)
@@ -34,7 +34,7 @@ const Pickup = ({ i18n }) => {
     console.log("Send Request: ", picture, phoneNumber, coordinates);
   }
 
-  if (!user) return <Auth />
+  if (!user) return <SupaAuth />
 
   return (
     <>

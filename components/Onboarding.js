@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useState, useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import updateProfile from '../lib/updateProfile'
@@ -8,20 +7,10 @@ const Onboarding = () => {
   const appCtx = useContext(AppContext)
   const { notify } = appCtx
 
-  const router = useRouter()
-
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
-
-  const createProfile = async () => {
-    const success = await updateProfile({ username, quote, avatar_url, setLoading, notify })
-    if (success === true) {
-      appCtx.setShowOnboarding(false)
-      router.reload(window.location.pathname)
-    }
-  }
 
   return (
     <div className="py-8 text-left">
@@ -59,7 +48,7 @@ const Onboarding = () => {
       <div>
         <button
           className="link mt-2"
-          onClick={createProfile}
+          onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
           disabled={loading}
           aria-label='Create Profile'
         >

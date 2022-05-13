@@ -43,14 +43,12 @@ const Users = ({ users, roles }) => {
 
   const editUser = async (id) => {
     const user = fetchedUsers.filter(c => c.id === id)[0]
-    const { name, username, address, role } = formData
+    const { username, role } = formData
 
     const { error } = await supabase
       .from('users')
       .update({
-        name: name ? name : user.name,
         username: username ? username : user.username,
-        address: address ? address : user.address,
         is_premium: formData[`${id}-is_premium`] ? formData[`${id}-is_premium`] : user.is_premium,
         role: formData.role ? role : user.role,
       })
@@ -105,10 +103,8 @@ const Users = ({ users, roles }) => {
         <thead>
           <tr className='bg-slate-700 text-white font-bold'>
             <th>ID</th>
-            <th>Email</th>
-            <th>Name</th>
             <th>Username</th>
-            <th>Address</th>
+            <th>Email</th>
             <th>Premium?</th>
             <th>Dogs</th>
             <th>Role</th>
@@ -123,17 +119,8 @@ const Users = ({ users, roles }) => {
           }
 
           {fetchedUsers?.map((user, idx) => (
-            <tr key={user.id + user.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
+            <tr key={user.id + user.username} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
               <td>{`${user.id.slice(0, 4)}...${user.id.slice(-4)}`}</td>
-              <td>{user.email ? `${user.email?.slice(0, 14)}...` : ``}</td>
-              <td>
-                <input
-                  type='text' name='name' id='name'
-                  onChange={setData} disabled required
-                  defaultValue={user.name}
-                  className={`mr-2 ${user.id}-input`}
-                />
-              </td>
               <td>
                 <input
                   type='text' name='username' id='username'
@@ -142,14 +129,7 @@ const Users = ({ users, roles }) => {
                   className={`mr-2 ${user.id}-input`}
                 />
               </td>
-              <td>
-                <input
-                  type='text' name='address' id='address'
-                  onChange={setData} disabled required
-                  defaultValue={user.address}
-                  className={`mr-2 ${user.id}-input`}
-                />
-              </td>
+              <td>{user.email ? `${user.email?.slice(0, 14)}...` : ``}</td>
               <td>
                 <div onChange={setData} className='block'>
                   <label htmlFor={`${user.id}-isPremiumNo`} className='cursor-pointer block'>
@@ -178,7 +158,6 @@ const Users = ({ users, roles }) => {
                 ))}
               </td>
               <td>
-                {/* {user?.roles?.name} */}
                 <Select
                   options={roleOptions}
                   onChange={setSelectData}
