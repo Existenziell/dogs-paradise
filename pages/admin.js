@@ -9,9 +9,10 @@ import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
   const appCtx = useContext(AppContext)
-  const { session } = appCtx
+  const { session, currentUser } = appCtx
 
   if (!session) return <Auth />
+  if (currentUser.roles.name !== 'Admin') return <Auth />
 
   return (
     <>

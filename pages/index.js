@@ -26,10 +26,6 @@ const Paradise = ({ i18n }) => {
       <div className='max-w-xl m-auto px-4 leading-relaxed my-16' id='anchor'>
         <p>{i18n.T2}</p>
         <h2 className='text-6xl my-8'>{i18n.T3}</h2>
-        {/* {user
-          ? <p>Hello {user?.email} &rarr; <a href='/profile' className='link'>Go to your Profile</a></p>
-          : <p>New to the App? &rarr; <a href='/profile' className='link'>Become a member</a></p>
-        } */}
         <p className='mt-8'>{i18n.T4}</p>
         <div className='my-8 flex flex-col sm:flex-row items-center justify-center gap-2'>
           <Link href='/services'><a className='button inline-block'>{i18n.B1}</a></Link>
