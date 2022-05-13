@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { supabase } from '../../lib/supabase'
+import { AppContext } from '../../context/AppContext'
 import Select from 'react-select'
 
 const Dogs = ({ dogs, users }) => {
+  const ctx = useContext(AppContext)
+  const appCtx = ctx.app
+  const { notify } = appCtx
+
   const [fetchedDogs, setFetchedDogs] = useState()
   const [formData, setFormData] = useState({})
   const [showDelete, setShowDelete] = useState(false)
   const [DogToDelete, setDogToDelete] = useState()
-  const [notificationMsg, setNotificationMsg] = useState('')
 
   useEffect(() => {
     setFetchedDogs(dogs)
@@ -123,24 +127,8 @@ const Dogs = ({ dogs, users }) => {
     ownerOptions.push({ value: u.id, label: u.name ? u.name : u.username })
   })
 
-  const notify = (msg) => {
-    const notification = document.querySelector('.notification-dog')
-    notification.classList.remove('-translate-y-20')
-    setNotificationMsg(msg)
-    setTimeout(() => {
-      notification.classList.add('-translate-y-20')
-    }, 3000)
-  }
-
   return (
     <div className='py-8 px-8 text-left'>
-
-      <div className="fixed top-0 left-0 right-0 w-full notification-dog -translate-y-20 transition-all duration-500 z-30">
-        <div className='bg-brand-dark text-white flex items-center justify-center py-6 '>
-          {notificationMsg}
-        </div>
-      </div>
-
       <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Dogs</h1>
 
       <table className='shadow-lg bg-white text-brand-darkv text-sm table-auto w-full'>

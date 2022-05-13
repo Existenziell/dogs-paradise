@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../../lib/supabase'
+import { AppContext } from '../../context/AppContext'
 import Select from 'react-select'
 
 const Users = ({ users, roles }) => {
+  const ctx = useContext(AppContext)
+  const appCtx = ctx.app
+  const { notify } = appCtx
+
   const [fetchedUsers, setFetchedUsers] = useState()
   const [formData, setFormData] = useState({})
   const [showEdit, setShowEdit] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
   const [userToDelete, setUserToDelete] = useState()
-  const [notificationMsg, setNotificationMsg] = useState('')
 
   const router = useRouter()
 
@@ -94,23 +98,8 @@ const Users = ({ users, roles }) => {
     roleOptions.push({ value: r.id, label: r.name })
   })
 
-  const notify = (msg) => {
-    const notification = document.querySelector('.notification')
-    notification.classList.remove('-translate-y-20')
-    setNotificationMsg(msg)
-    setTimeout(() => {
-      notification.classList.add('-translate-y-20')
-    }, 3000)
-  }
-
   return (
     <div className='py-8 px-8 text-left'>
-      <div className="fixed top-0 left-0 right-0 w-full notification -translate-y-20 transition-all duration-500 z-30">
-        <div className='bg-brand-dark text-white flex items-center justify-center py-6 '>
-          {notificationMsg}
-        </div>
-      </div>
-
       <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Users</h1>
 
       <table className='shadow-lg bg-white text-brand-dark text-sm table-auto w-full' cellPadding={0} cellSpacing={0}>

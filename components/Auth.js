@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { supabase } from '../lib/supabase'
+import { AppContext } from '../context/AppContext'
 import Head from 'next/head'
 
 const Auth = ({ i18n }) => {
+  const ctx = useContext(AppContext)
+  const appCtx = ctx.app
+
   const [loading, setLoading] = useState(false)
   const [linkSent, setLinkSent] = useState(false)
   const [email, setEmail] = useState('')
@@ -19,7 +23,7 @@ const Auth = ({ i18n }) => {
       if (error) throw error
       setLinkSent(true)
     } catch (error) {
-      console.log(error.error_description || error.message)
+      appCtx.notify(error.error_description || error.message)
     } finally {
       setLoading(false)
     }

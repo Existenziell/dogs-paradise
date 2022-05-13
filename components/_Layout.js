@@ -4,12 +4,13 @@ import { supabase } from '../lib/supabase'
 import LoginBtn from './LoginBtn'
 import LogoutBtn from './LogoutBtn'
 
-import Footer from './Footer'
 import Nav from './Nav'
+import Footer from './Footer'
 import NextNprogress from 'nextjs-progressbar'
 import DarkModeToggle from './DarkModeToggle'
 import StickyHeader from './StickyHeader'
 import ControlPanel from './ControlPanel'
+import Notification from './Notification'
 
 const Layout = ({ children }) => {
   const router = useRouter()
@@ -24,6 +25,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Notification />
       <StickyHeader wrappedContent={
         <>
           <NextNprogress

@@ -10,6 +10,8 @@ import Link from 'next/link'
 export default function Profile({ session, i18n }) {
   const ctx = useContext(AppContext)
   const userCtx = ctx.user
+  const appCtx = ctx.app
+  const { notify } = appCtx
 
   const [loading, setLoading] = useState(true)
   const [name, setName] = useState(null)
@@ -20,7 +22,6 @@ export default function Profile({ session, i18n }) {
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
-  const [notificationMsg, setNotificationMsg] = useState('')
 
   useEffect(() => {
     getData()
@@ -43,15 +44,6 @@ export default function Profile({ session, i18n }) {
     }
   }
 
-  const notify = (msg) => {
-    const notification = document.querySelector('.notification-dog')
-    notification.classList.remove('-translate-y-20')
-    setNotificationMsg(msg)
-    setTimeout(() => {
-      notification.classList.add('-translate-y-20')
-    }, 3000)
-  }
-
   return (
     <>
       <Head>
@@ -60,11 +52,6 @@ export default function Profile({ session, i18n }) {
       </Head>
 
       <div className='py-24 px-8 profile'>
-        <div className="fixed top-0 left-0 right-0 w-full notification-dog -translate-y-20 transition-all duration-500 z-30">
-          <div className='bg-brand-dark text-white flex items-center justify-center py-6 '>
-            {notificationMsg}
-          </div>
-        </div>
         <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
         <h2 className='text-left mb-2'>Your Membership Card</h2>
 
