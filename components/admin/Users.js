@@ -52,7 +52,7 @@ const Users = ({ users, roles }) => {
         name: name ? name : user.name,
         username: username ? username : user.username,
         address: address ? address : user.address,
-        is_premium: formData[`${id}-isPremium`] ? formData[`${id}-isPremium`] : user.is_premium,
+        is_premium: formData[`${id}-is_premium`] ? formData[`${id}-is_premium`] : user.is_premium,
         role: formData.role ? role : user.role,
       })
       .eq('id', id)
@@ -156,7 +156,7 @@ const Users = ({ users, roles }) => {
                   <label htmlFor={`${user.id}-isPremiumNo`} className='cursor-pointer block'>
                     <input
                       type="radio" value="false" disabled required
-                      name={`${user.id}-isPremium`}
+                      name={`${user.id}-is_premium`}
                       id={`${user.id}-isPremiumNo`}
                       defaultChecked={!user.is_premium}
                       className={`${user.id}-input`}
@@ -165,7 +165,7 @@ const Users = ({ users, roles }) => {
                   <label htmlFor={`${user.id}-isPremiumYes`} className='cursor-pointer'>
                     <input
                       type="radio" value="true" disabled
-                      name={`${user.id}-isPremium`}
+                      name={`${user.id}-is_premium`}
                       id={`${user.id}-isPremiumYes`}
                       defaultChecked={user.is_premium}
                       className={`${user.id}-input`}

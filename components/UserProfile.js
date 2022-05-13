@@ -17,7 +17,8 @@ export default function Profile({ session, i18n }) {
   const [name, setName] = useState(null)
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState(null)
-  const [isPremium, setIsPremium] = useState(null)
+  const [address, setAddress] = useState(null)
+  const [is_premium, setIsPremium] = useState(null)
   const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
@@ -34,6 +35,7 @@ export default function Profile({ session, i18n }) {
       setName(data.name)
       setUsername(data.username)
       setEmail(data.email)
+      setAddress(data.address)
       setIsPremium(data.is_premium)
       setRole(data.role)
       setQuote(data.quote)
@@ -67,7 +69,7 @@ export default function Profile({ session, i18n }) {
                   // size={150}
                   onUpload={(url) => {
                     setAvatarUrl(url)
-                    updateProfile({ name, username, email, address, is_premium, role, quote, avatar_url: url, setLoading })
+                    updateProfile({ name, username, email, address, is_premium, role, quote, avatar_url: url, setLoading, notify })
                   }}
                 />
               </div>
@@ -94,7 +96,7 @@ export default function Profile({ session, i18n }) {
                 </div>
                 <div className='text-right text-sm'>
                   <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
-                  <p>Member status: {isPremium ? `Premium` : `Free`}</p>
+                  <p>Member status: {is_premium ? `Premium` : `Free`}</p>
                 </div>
 
                 <div className='flex justify-end gap-4'>
@@ -137,11 +139,11 @@ export default function Profile({ session, i18n }) {
             />
           </div>
           <div>
-            <label htmlFor="isPremium" className='block text-xs mt-2'>isPremium?</label>
+            <label htmlFor="is_premium" className='block text-xs mt-2'>Premium?</label>
             <input
-              id="isPremium"
+              id="is_premium"
               type="text"
-              value={isPremium || ''}
+              value={is_premium || ''}
               onChange={(e) => setIsPremium(e.target.value)}
             />
           </div>
