@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { supabase } from '../lib/supabase'
+import Head from 'next/head'
 
 const Auth = ({ i18n }) => {
   const [loading, setLoading] = useState(false)
@@ -21,6 +22,11 @@ const Auth = ({ i18n }) => {
 
   return (
     <>
+      <Head>
+        <title>Authentication | Dog's Paradise</title>
+        <meta name='description' content="Authentication | Dog's Paradise" />
+      </Head>
+
       {linkSent ?
         <div className='absolute top-0 bottom-0 left-0 right-0 mx-8 my-32 rounded-lg bg-green-400'>
           <div className='text-white dark:text-brand-dark text-center flex flex-col items-center justify-center h-full'>
