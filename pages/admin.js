@@ -6,18 +6,16 @@ import Dogs from '../components/admin/Dogs'
 import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
-  const [user, setUser] = useState()
 
+  const [session, setSession] = useState(null)
   useEffect(() => {
-    auth()
+    setSession(supabase.auth.session())
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
   }, [])
 
-  const auth = async () => {
-    const user = await supabase.auth.user()
-    setUser(user)
-  }
-
-  if (!user) return <Auth />
+  if (!session) return <Auth />
 
   return (
     <>

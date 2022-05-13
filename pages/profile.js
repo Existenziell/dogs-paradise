@@ -15,14 +15,10 @@ const Profile = ({ i18n }) => {
     })
   }, [])
 
+  if (!session) return <Auth />
+
   return (
-    <>
-      {!session ?
-        <Auth />
-        :
-        <UserProfile key={session.user.id} session={session} i18n={i18n} />
-      }
-    </>
+    <UserProfile key={session.user.id} session={session} i18n={i18n} />
   )
 }
 
