@@ -4,8 +4,7 @@ import { AppContext } from '../../context/AppContext'
 import Select from 'react-select'
 
 const Dogs = ({ dogs, users }) => {
-  const ctx = useContext(AppContext)
-  const appCtx = ctx.app
+  const appCtx = useContext(AppContext)
   const { notify } = appCtx
 
   const [fetchedDogs, setFetchedDogs] = useState()

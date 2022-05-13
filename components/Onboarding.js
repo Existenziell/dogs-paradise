@@ -5,9 +5,7 @@ import updateProfile from '../lib/updateProfile'
 import Avatar from './Avatar'
 
 const Onboarding = () => {
-  const ctx = useContext(AppContext)
-  const userCtx = ctx.user
-  const appCtx = ctx.app
+  const appCtx = useContext(AppContext)
   const { notify } = appCtx
 
   const router = useRouter()
@@ -20,7 +18,7 @@ const Onboarding = () => {
   const createProfile = async () => {
     const success = await updateProfile({ username, quote, avatar_url, setLoading, notify })
     if (success === true) {
-      userCtx.setShowOnboarding(false)
+      appCtx.setShowOnboarding(false)
       router.reload(window.location.pathname)
     }
   }

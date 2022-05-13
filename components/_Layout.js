@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { AppContext } from '../context/AppContext'
 import { useRouter } from 'next/router'
-import { supabase } from '../lib/supabase'
 import LoginBtn from './LoginBtn'
 import LogoutBtn from './LogoutBtn'
 
@@ -13,15 +13,10 @@ import ControlPanel from './ControlPanel'
 import Notification from './Notification'
 
 const Layout = ({ children }) => {
-  const router = useRouter()
+  const appCtx = useContext(AppContext)
+  const { session } = appCtx
 
-  const [session, setSession] = useState(null)
-  useEffect(() => {
-    setSession(supabase.auth.session())
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+  const router = useRouter()
 
   return (
     <>

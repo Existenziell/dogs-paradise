@@ -2,8 +2,7 @@ import { useContext } from "react"
 import { AppContext } from '../context/AppContext'
 
 const ControlPanel = ({ contents }) => {
-  const ctx = useContext(AppContext)
-  const appCtx = ctx.app
+  const appCtx = useContext(AppContext)
 
   return (
     <div className='flex'>

@@ -4,8 +4,7 @@ import { AppContext } from '../context/AppContext'
 import Head from 'next/head'
 
 const Auth = ({ i18n }) => {
-  const ctx = useContext(AppContext)
-  const appCtx = ctx.app
+  const appCtx = useContext(AppContext)
 
   const [loading, setLoading] = useState(false)
   const [linkSent, setLinkSent] = useState(false)

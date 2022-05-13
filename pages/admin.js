@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { supabase } from '../lib/supabase'
+import { AppContext } from '../context/AppContext'
+
 import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
 import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
-
-  const [session, setSession] = useState(null)
-  useEffect(() => {
-    setSession(supabase.auth.session())
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+  const appCtx = useContext(AppContext)
+  const { session } = appCtx
 
   if (!session) return <Auth />
 
@@ -35,7 +31,7 @@ const Admin = ({ users, dogs, roles }) => {
 }
 
 export async function getServerSideProps({ req, res }) {
-  const { data: users } = await supabase.from('users').select(`*, dogs(name), roles(name)`).order('id', { ascending: true })
+  const { data: users } = await supabase.from('users').select(`*, dogs(name), roles(*)`).order('id', { ascending: true })
   const { data: dogs } = await supabase.from('dogs').select(`*, user(*)`).order('id', { ascending: true })
   const { data: roles } = await supabase.from('roles').select(`id, name`).order('id', { ascending: true })
 

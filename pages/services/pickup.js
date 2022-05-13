@@ -34,7 +34,7 @@ const Pickup = ({ i18n }) => {
     console.log("Send Request: ", picture, phoneNumber, coordinates);
   }
 
-  if (!user) return <div><Auth /></div>
+  if (!user) return <Auth />
 
   return (
     <>

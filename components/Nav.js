@@ -1,14 +1,16 @@
+import { useState, useContext } from 'react'
+import { AppContext } from '../context/AppContext'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { supabase } from '../lib/supabase'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 
 const Nav = () => {
+    const appCtx = useContext(AppContext)
+    const { currentUser } = appCtx
+
     const [isOpen, setIsOpen] = useState(false)
     const { locale } = useRouter()
     const router = useRouter()
-    const user = supabase.auth.user()
 
     let i18n
     locale === 'es' ?
@@ -21,8 +23,10 @@ const Nav = () => {
         { name: i18n.N3, url: '/map', title: i18n.N3 },
         { name: i18n.N4, url: '/venue', title: i18n.N4 },
         { name: i18n.N5, url: '/contact', title: i18n.N5 },
-        { name: user ? i18n.N6 : i18n.N7, url: '/profile', title: user ? i18n.N6 : i18n.N7 },
+        { name: currentUser ? i18n.N6 : i18n.N7, url: '/profile', title: currentUser ? i18n.N6 : i18n.N7 },
     ]
+
+    if (currentUser) urls.push({ name: 'Admin', url: '/admin', title: 'Admin' },)
 
     const intercept = (e) => {
         e.preventDefault()

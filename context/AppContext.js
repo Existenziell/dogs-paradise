@@ -1,18 +1,37 @@
 import React, { useState } from "react"
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect } from 'react'
+import { supabase } from '../lib/supabase'
+import getProfile from "../lib/getProfile"
 
 const AppContext = createContext({})
 
 const AppWrapper = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(false)
   const [theme, setTheme] = useState(null)
-  const [showControlPanel, setShowControlPanel] = useState(false)
   const [notificationMsg, setNotificationMsg] = useState('')
-
-  const [currentUser, setCurrentUser] = useState(null)
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [profileCreated, setProfileCreated] = useState(false)
+  const [showControlPanel, setShowControlPanel] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+
+  useEffect(() => {
+    setSession(supabase.auth.session())
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  const setUser = async () => {
+    const authUser = supabase.auth.user()
+    if (!authUser) return
+
+    const user = await getProfile(() => { })
+    setCurrentUser(user)
+  }
+
+  useEffect(() => {
+    setUser()
+  }, [session])
 
   const toggleControlPanel = (e) => {
     e.preventDefault()
@@ -37,32 +56,27 @@ const AppWrapper = ({ children }) => {
   }
 
   let app = {
+    currentUser,
+    session,
     loading,
     theme,
     notificationMsg,
     showControlPanel,
+    showOnboarding,
+    setCurrentUser,
+    setSession,
     setLoading,
     setTheme,
-    setShowControlPanel,
     setNotificationMsg,
+    setShowControlPanel,
+    setShowOnboarding,
 
     toggleControlPanel,
     notify
   }
 
-  let user = {
-    currentUser,
-    loggedIn,
-    profileCreated,
-    showOnboarding,
-    setCurrentUser,
-    setLoggedIn,
-    setProfileCreated,
-    setShowOnboarding,
-  }
-
   return (
-    <AppContext.Provider value={{ user, app }}>
+    <AppContext.Provider value={app}>
       {children}
     </AppContext.Provider>
   )
