@@ -38,9 +38,11 @@ const AddToHomeScreen = () => {
   }
 
   return (
-    <div className='a2hs-button w-32 mx-auto rounded px-4 py-2 bg-white cursor-pointer flex flex-col items-center space-y-2'>
-      <img src='/img/logo.png' />cdscscdcjn
-      <button className="text-sm" aria-label='Tap to add to home screen'>Tap to add to home screen</button>
+    <div className='button a2hs-button mx-auto'>
+      <div className='flex items-center space-x-3'>
+        <img src='/icons/paw-white.png' className='w-10 inline-block' />
+        <button className="text-xs inline-block w-max" aria-label='Tap to add to home screen'>Add to home screen</button>
+      </div>
     </div>
   )
 

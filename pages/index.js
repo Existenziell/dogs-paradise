@@ -43,7 +43,7 @@ const Home = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='px-8 profile'>
+      <div className='px-8 profile pb-24'>
         <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
 
           {appCtx.showOnboarding ?
@@ -81,7 +81,7 @@ const Home = ({ i18n }) => {
         </div>
 
         <h2 className='mb-2 mt-8 text-xl'>Available Services:</h2>
-        <div className='text-brand-dark gap-2 flex items-center justify-center'>
+        <div className='text-brand-dark gap-2 flex items-center justify-center mb-8'>
           <Link href='/services/pickup'>
             <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
               <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Pickup</h2>

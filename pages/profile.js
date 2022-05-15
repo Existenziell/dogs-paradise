@@ -41,20 +41,19 @@ const Profile = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-      <AddToHomeScreen />
 
-      <div className='px-8 profile flex flex-col items-center justify-center'>
+      <div className='px-8 pb-16 mb-16 profile flex flex-col items-center justify-center'>
 
         <Avatar
           url={avatar_url}
-          size={150}
+          size={300}
           onUpload={(url) => {
             setAvatarUrl(url)
             updateProfile({ username, quote, avatar_url: url, setLoading, notify })
           }}
         />
 
-        <div className="mt-8 text-left shadow max-w-max bg-slate-300 p-4">
+        <div className="my-8 text-left shadow max-w-max bg-slate-300 p-4">
           <div>
             <label htmlFor="username" className='block text-xs mt-2'>Username</label>
             <input
@@ -96,6 +95,7 @@ const Profile = ({ i18n }) => {
           </div>
         </div>
 
+        <AddToHomeScreen />
       </div>
     </>
   )
