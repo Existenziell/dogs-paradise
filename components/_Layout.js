@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
     i18n = langEN.navigation
 
   const headerIdentifier = urls.filter(u => u.url === router.pathname)[0]?.name
-  console.log(headerIdentifier);
+
   return (
     <>
       <Notification />
