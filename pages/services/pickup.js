@@ -5,7 +5,7 @@ import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
-import SupaAuth from '../../components/SupaAuth'
+import Auth from '../../components/Auth'
 
 const Pickup = ({ i18n }) => {
   const [user, setUser] = useState(null)
@@ -32,9 +32,10 @@ const Pickup = ({ i18n }) => {
 
   const saveRequest = () => {
     console.log("Send Request: ", picture, phoneNumber, coordinates);
+    alert("Coming soon :)")
   }
 
-  if (!user) return <SupaAuth />
+  if (!user) return <Auth />
 
   return (
     <>
@@ -43,10 +44,11 @@ const Pickup = ({ i18n }) => {
         <meta name='description' content="Pickup Service" />
       </Head>
 
-      <div className='flex flex-col items-center justify-center py-24 px-8 dark:text-brand-dark text-left'>
-        <h1 className='text-4xl md:text-6xl mb-8 md:mb-12 mt-4'>Pickup Service</h1>
+      <h1 className='text-4xl md:text-6xl mb-12 py-3 bg-slate-100 shadow text-slate-600'>Pickup Service</h1>
+
+      <div className='flex flex-col items-center justify-center px-8 pb-16 dark:text-brand-dark text-left'>
         <p className='text-xl text-center'>For our members we offer a pickup service for your dog(s)!</p>
-        <p className='mb-16 text-center'>Just follow the steps:</p>
+        <p className='mb-16 text-center'>Just follow these steps:</p>
         <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-green-400`}`}>
           {picture &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

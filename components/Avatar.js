@@ -25,7 +25,7 @@ export default function Avatar({ url, size, onUpload }) {
       )}
       <div style={{ width: size }}>
         <label className="text-sm" htmlFor="single">
-          {uploading ? 'Uploading ...' : <span className='cursor-pointer hover:text-slate-300'>Change Avatar</span>}
+          {uploading ? 'Uploading ...' : <span className='cursor-pointer link'>Change Avatar</span>}
         </label>
         <input
           type="file"

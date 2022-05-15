@@ -4,14 +4,14 @@ import { AppContext } from '../context/AppContext'
 import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
-import SupaAuth from '../components/SupaAuth'
+import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
   const appCtx = useContext(AppContext)
   const { session, currentUser } = appCtx
 
-  if (!session || !currentUser) return <SupaAuth />
-  if (currentUser?.roles?.name !== 'Admin') return <SupaAuth />
+  if (!session || !currentUser) return <Auth />
+  if (currentUser?.roles?.name !== 'Admin') return <Auth />
 
   return (
     <>

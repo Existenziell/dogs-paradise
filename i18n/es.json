@@ -30,10 +30,16 @@
   },
 
   "services": {
-    "title": "Servicios | Dog's Paradise | El mejor lugar para perros en Cozumel",
-    "desc": "Degusta nuestro amplio repertorio de postres franceses y mexicanos y deliciosos platillos",
+    "title": "Servicios | Dog's Paradise",
+    "desc": "Servicios | Dog's Paradise",
     "T1": "Servicios",
     "Q1": "¡Servicios que hacen feliz a tu perro!"
+  },
+
+  "appointments": {
+    "title": "Citas | Dog's Paradise",
+    "desc": "Citas | Dog's Paradise",
+    "T1": "Citas"
   },
 
   "map": {

@@ -41,9 +41,7 @@ const Services = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='flex flex-col items-center justify-center py-24 px-8 lg:w-2/3 lg:mx-auto text-brand-dark'>
-        <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
-
+      <div className='flex flex-col items-center justify-center px-8 pb-16 lg:w-2/3 lg:mx-auto text-brand-dark'>
         <Quote text={i18n.Q1} classes={'block md:hidden'} />
 
         <div className='hidden md:block'>
@@ -66,7 +64,7 @@ const Services = ({ i18n }) => {
         </div>
 
       </div>
-      <img src='/img/pool.jpg' alt='Pool' className='shadow' />
+      {/* <img src='/img/pool.jpg' alt='Pool' className='shadow' /> */}
     </>
   )
 }
