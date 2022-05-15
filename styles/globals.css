@@ -50,11 +50,7 @@ https://github.com/vercel/next.js/issues/21914 */
 	========================================================================== */
 
 .active-nav {
-  @apply font-bold border-b-2 border-brand dark:bg-brand;
-}
-
-.mobile-menu .active-nav {
-  @apply font-bold bg-brand text-white border-b-0;
+  @apply bg-slate-300 dark:bg-slate-900 ;
 }
 
 

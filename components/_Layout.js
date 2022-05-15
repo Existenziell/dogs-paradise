@@ -9,6 +9,8 @@ import Nav from './Nav'
 import LogoutBtn from './LogoutBtn'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
+import { motion } from 'framer-motion'
+import { variants } from '../lib/config'
 
 const Layout = ({ children }) => {
   const appCtx = useContext(AppContext)
@@ -36,9 +38,17 @@ const Layout = ({ children }) => {
         options={{ showSpinner: false }}
       />
 
-      {session && <Nav />}
+      <Nav />
 
-      <main className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-brand-dark dark:text-gray-300 min-h-screen'>
+      <motion.main
+        key={router.route}
+        variants={variants}
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+        transition={{ type: 'linear' }}
+        className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-brand-dark dark:text-gray-300 min-h-screen'
+      >
 
         {headerIdentifier &&
           <header className='text-4xl md:text-6xl mb-12 py-3 bg-slate-100 shadow text-slate-600 dark:bg-slate-600 dark:text-slate-300'>
@@ -47,9 +57,9 @@ const Layout = ({ children }) => {
         }
 
         {children}
-      </main>
+      </motion.main>
 
-      {router.pathname === '/profile' &&
+      {session && router.pathname === '/profile' &&
         <div className='absolute bottom-20 right-6 flex items-center justify-center gap-4'>
           <LogoutBtn />
           <DarkModeToggle />
