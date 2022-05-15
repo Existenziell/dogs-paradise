@@ -9,6 +9,7 @@ import AddToHomeScreen from '../components/AddToHomeScreen'
 import updateProfile from '../lib/updateProfile'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
+import Header from '../components/Header'
 
 const Home = ({ i18n }) => {
   const appCtx = useContext(AppContext)
@@ -43,7 +44,10 @@ const Home = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
+      <Header content={i18n.T1} />
+
       <div className='px-8 profile pb-24'>
+
         <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
 
           {appCtx.showOnboarding ?

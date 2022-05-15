@@ -4,6 +4,7 @@ import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import Blob from '../../components/Blob'
 import Quote from '../../components/Quote'
+import Header from '../../components/Header'
 
 const Services = ({ i18n }) => {
 
@@ -40,6 +41,8 @@ const Services = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
+
+      <Header content={i18n.T1} />
 
       <div className='flex flex-col items-center justify-center px-8 pb-16 lg:w-2/3 lg:mx-auto text-brand-dark'>
         <Quote text={i18n.Q1} classes={'block md:hidden'} />

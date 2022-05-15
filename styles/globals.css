@@ -68,6 +68,13 @@ https://github.com/vercel/next.js/issues/21914 */
   @apply bg-slate-500 text-white shadow-none hover:cursor-not-allowed;
 }
 
+.button-secondary {
+  @apply px-4 py-2 
+  bg-transparent text-brand-dark rounded shadow-lg
+    hover:shadow hover:cursor-pointer
+    transition-all
+}
+
 input {
   @apply text-black;
 }

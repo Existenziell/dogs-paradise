@@ -13,6 +13,7 @@ import ControlPanel from '../components/ControlPanel'
 import LogoutBtn from '../components/LogoutBtn'
 import DarkModeToggle from '../components/DarkModeToggle'
 import LoginBtn from '../components/LoginBtn'
+import Header from '../components/Header'
 
 const Profile = ({ i18n }) => {
   const appCtx = useContext(AppContext)
@@ -42,7 +43,9 @@ const Profile = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
 
-      <div className='px-8 pb-16 mb-16 profile flex flex-col items-center justify-center'>
+      <Header content={i18n.T1} />
+
+      <div className='px-8 pb-24 profile flex flex-col items-center justify-center'>
 
         <Avatar
           url={avatar_url}
@@ -85,12 +88,12 @@ const Profile = ({ i18n }) => {
 
           <div>
             <button
-              className="link mt-6 text-xl"
+              className="mt-6 text-xl"
               onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
               disabled={loading}
               aria-label='Update Profile'
             >
-              {loading ? 'Loading ...' : 'Save'}
+              {loading ? 'Loading ...' : <p className='button-secondary'>Save</p>}
             </button>
           </div>
         </div>
