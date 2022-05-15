@@ -1,10 +1,23 @@
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
+import { useEffect } from 'react'
+import { AppWrapper } from '../context/AppContext'
 import Layout from '../components/_Layout'
 import Head from 'next/head'
-import { AppWrapper } from '../context/AppContext'
 
 function App({ Component, pageProps }) {
+
+  useEffect(() => {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [])
 
   return (
     <AppWrapper>
@@ -22,9 +35,11 @@ function App({ Component, pageProps }) {
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin="true" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Gotu&display=swap' />
       </Head>
+
       <Layout>
         <Component {...pageProps} />
       </Layout>
+
     </AppWrapper>
   )
 }

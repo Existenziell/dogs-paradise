@@ -9,7 +9,7 @@ const AppWrapper = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [theme, setTheme] = useState(null)
+  const [darkmode, setDarkmode] = useState(null)
   const [notificationMsg, setNotificationMsg] = useState('')
   const [showControlPanel, setShowControlPanel] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
@@ -64,14 +64,14 @@ const AppWrapper = ({ children }) => {
     currentUser,
     session,
     loading,
-    theme,
+    darkmode,
     notificationMsg,
     showControlPanel,
     showOnboarding,
     setCurrentUser,
     setSession,
     setLoading,
-    setTheme,
+    setDarkmode,
     setNotificationMsg,
     setShowControlPanel,
     setShowOnboarding,
