@@ -12,7 +12,7 @@ export default function PickupImage({ url, size, onUpload, setPicture }) {
       downloadImage(bucket, url, setPickupImageUrl)
       setPicture(url)
     }
-  }, [url])
+  }, [url, setPicture])
 
   return (
     <div>

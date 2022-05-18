@@ -50,7 +50,7 @@ const LocationPicker = ({ currentLocation, setCurrentLocation }) => {
     })
 
     setMap(map)
-  }, [router.query.location])
+  }, [router.query.location, setCurrentLocation])
 
   return (
     <div id='map' className='w-full h-96 my-4' />

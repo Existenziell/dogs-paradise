@@ -16,8 +16,8 @@ const Admin = ({ users, dogs, roles }) => {
   return (
     <>
       <Head>
-        <title>Admin | Dog's Paradise</title>
-        <meta name='description' content="Admin | Dog's Paradise" />
+        <title>Admin | Dog&apos;s Paradise</title>
+        <meta name='description' content='Admin | Dog&apos;s Paradise' />
       </Head>
 
       <div className='py-16 admin'>

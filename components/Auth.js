@@ -9,8 +9,8 @@ const Auth = ({ i18n }) => {
   return (
     <>
       <Head>
-        <title>Authentication | Dog's Paradise</title>
-        <meta name='description' content="Authentication | Dog's Paradise" />
+        <title>Authentication | Dog&apos;s Paradise</title>
+        <meta name='description' content='Authentication | Dog&apos;s Paradise' />
       </Head>
 
       <div className='flex flex-col items-center justify-center px-4 pb-16 md:px-8'>

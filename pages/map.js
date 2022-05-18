@@ -54,7 +54,7 @@ const MapComponent = ({ i18n }) => {
     initializeMap(map, i18n)
     setMap(map)
 
-  }, [router.query.location])
+  }, [router.query.location, i18n])
 
   useEffect(() => {
     if (pageIsMounted) {
@@ -62,7 +62,7 @@ const MapComponent = ({ i18n }) => {
         addDataLayer(Map, location)
       })
     }
-  }, [pageIsMounted, setMap, Map])
+  })
 
   return (
     <>

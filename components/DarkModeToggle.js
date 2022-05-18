@@ -16,7 +16,7 @@ const DarkModeToggle = () => {
     } else {
       setDarkmode(false)
     }
-  }, [])
+  }, [setDarkmode])
 
   const toggleDarkmode = (mode) => {
     if (mode === 'dark') {
