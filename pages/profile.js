@@ -9,7 +9,6 @@ import AddToHomeScreen from '../components/AddToHomeScreen'
 import updateProfile from '../lib/updateProfile'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
-import ControlPanel from '../components/ControlPanel'
 import LogoutBtn from '../components/LogoutBtn'
 import DarkModeToggle from '../components/DarkModeToggle'
 import LoginBtn from '../components/LoginBtn'
@@ -45,58 +44,59 @@ const Profile = ({ i18n }) => {
 
       <Header content={i18n.T1} />
 
-      <div className='profile px-8 py-24 flex flex-wrap items-start justify-center gap-6'>
-
-        <div className='max-w-lg'>
-          <Avatar
-            url={avatar_url}
-            // size={300}
-            onUpload={(url) => {
-              setAvatarUrl(url)
-              updateProfile({ username, quote, avatar_url: url, setLoading, notify })
-            }}
-          />
-        </div>
-
-        <div className="text-left shadow max-w-max bg-slate-300 text-slate-800 px-5 py-3 rounded">
-          <div>
-            <label htmlFor="username" className='block text-xs mt-2'>Username</label>
-            <input
-              id="username"
-              type="text"
-              value={username || ''}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className='block text-xs mt-2'>Email</label>
-            <input
-              disabled
-              id="email"
-              type="text"
-              value={email || ''}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className='mt-2'>
-            <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
-            <input
-              id="quote"
-              type="text"
-              value={quote || ''}
-              onChange={(e) => setQuote(e.target.value)}
+      <div className='profile px-8 py-24'>
+        <div className='flex flex-wrap items-start justify-center gap-6 mb-8'>
+          <div className='max-w-lg'>
+            <Avatar
+              url={avatar_url}
+              // size={300}
+              onUpload={(url) => {
+                setAvatarUrl(url)
+                updateProfile({ username, quote, avatar_url: url, setLoading, notify })
+              }}
             />
           </div>
 
-          <div>
-            <button
-              className="mt-6 text-xl"
-              onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
-              disabled={loading}
-              aria-label='Update Profile'
-            >
-              {loading ? 'Loading ...' : <p className='button-secondary'>Save</p>}
-            </button>
+          <div className="text-left shadow max-w-max bg-slate-300 text-slate-800 px-5 py-3 rounded">
+            <div>
+              <label htmlFor="username" className='block text-xs mt-2'>Username</label>
+              <input
+                id="username"
+                type="text"
+                value={username || ''}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className='block text-xs mt-2'>Email</label>
+              <input
+                disabled
+                id="email"
+                type="text"
+                value={email || ''}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className='mt-2'>
+              <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
+              <input
+                id="quote"
+                type="text"
+                value={quote || ''}
+                onChange={(e) => setQuote(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <button
+                className="mt-6 text-xl"
+                onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
+                disabled={loading}
+                aria-label='Update Profile'
+              >
+                {loading ? 'Loading ...' : <p className='button-secondary'>Save</p>}
+              </button>
+            </div>
           </div>
         </div>
 

@@ -11,7 +11,6 @@ const AppWrapper = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [darkmode, setDarkmode] = useState(null)
   const [notificationMsg, setNotificationMsg] = useState('')
-  const [showControlPanel, setShowControlPanel] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [userPets, setUserPets] = useState(null)
 
@@ -45,19 +44,6 @@ const AppWrapper = ({ children }) => {
     }
   }, [currentUser])
 
-  const toggleControlPanel = (e) => {
-    e.preventDefault()
-    const trigger = document.getElementsByClassName('controlPanelTrigger')[0]
-    const panel = document.getElementsByClassName('controlPanel')[0]
-
-    panel.classList.toggle('-translate-y-16')
-    trigger.classList.add('animate-ping')
-    setTimeout(() => {
-      trigger.classList.remove('animate-ping')
-    }, 400)
-    setShowControlPanel(!showControlPanel)
-  }
-
   const notify = (msg) => {
     const notification = document.querySelector('.notification')
     notification.classList.remove('-translate-y-20')
@@ -73,7 +59,6 @@ const AppWrapper = ({ children }) => {
     loading,
     darkmode,
     notificationMsg,
-    showControlPanel,
     showOnboarding,
     userPets,
     setCurrentUser,
@@ -81,11 +66,9 @@ const AppWrapper = ({ children }) => {
     setLoading,
     setDarkmode,
     setNotificationMsg,
-    setShowControlPanel,
     setShowOnboarding,
     setUserPets,
 
-    toggleControlPanel,
     notify
   }
 
