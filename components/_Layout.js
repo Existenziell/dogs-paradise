@@ -12,7 +12,7 @@ import Nav from './Nav'
 
 const Layout = ({ children }) => {
   const appCtx = useContext(AppContext)
-  const { session, currentUser } = appCtx
+  const { session } = appCtx
   const router = useRouter()
 
   return (
@@ -30,24 +30,18 @@ const Layout = ({ children }) => {
 
       <Nav />
 
-      {currentUser ?
-        <motion.main
-          key={router.route}
-          variants={variants}
-          initial="hidden"
-          animate="enter"
-          exit="exit"
-          transition={{ type: 'linear' }}
-          className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-brand-dark dark:text-slate-300 min-h-screen'
-        >
+      <motion.main
+        key={router.route}
+        variants={variants}
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+        transition={{ type: 'linear' }}
+        className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-brand-dark dark:text-slate-300 min-h-screen'
+      >
 
-          {children}
-        </motion.main>
-        :
-        <div className='flex items-center justify-center w-full h-screen'>
-          <GridLoader color={'var(--color-brand)'} size={30} />
-        </div>
-      }
+        {children}
+      </motion.main>
 
       {session &&
         <div className='w-full fixed z-20 top-4 right-0 left-0 flex items-center justify-between px-4 '>

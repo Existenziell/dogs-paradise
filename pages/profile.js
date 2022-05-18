@@ -47,14 +47,16 @@ const Profile = ({ i18n }) => {
 
       <div className='profile px-8 py-24 flex flex-wrap items-start justify-center gap-6'>
 
-        <Avatar
-          url={avatar_url}
-          size={300}
-          onUpload={(url) => {
-            setAvatarUrl(url)
-            updateProfile({ username, quote, avatar_url: url, setLoading, notify })
-          }}
-        />
+        <div className='max-w-lg'>
+          <Avatar
+            url={avatar_url}
+            // size={300}
+            onUpload={(url) => {
+              setAvatarUrl(url)
+              updateProfile({ username, quote, avatar_url: url, setLoading, notify })
+            }}
+          />
+        </div>
 
         <div className="text-left shadow max-w-max bg-slate-300 text-slate-800 px-5 py-3 rounded">
           <div>
