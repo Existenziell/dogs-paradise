@@ -39,6 +39,18 @@
     "T1": "Appointments"
   },
 
+  "pets": {
+    "title": "Pets | Dog's Paradise",
+    "desc": "Pets | Dog's Paradise",
+    "T1": "Your Pets"
+  },
+
+  "addPet": {
+    "title": "Add Pet | Dog's Paradise",
+    "desc": "Add Pet | Dog's Paradise",
+    "T1": "Add Pet"
+  },
+
   "map": {
     "title": "Map | Dog's Paradise | The best place for dogs in Cozumel",
     "desc": "Where and how to find us | Dog's Paradise",

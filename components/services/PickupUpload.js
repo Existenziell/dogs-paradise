@@ -8,8 +8,10 @@ export default function PickupImage({ url, size, onUpload, setPicture }) {
   const bucket = 'pickups'
 
   useEffect(() => {
-    if (url) downloadImage(bucket, url, setPickupImageUrl)
-    if (url) setPicture(url)
+    if (url) {
+      downloadImage(bucket, url, setPickupImageUrl)
+      setPicture(url)
+    }
   }, [url])
 
   return (

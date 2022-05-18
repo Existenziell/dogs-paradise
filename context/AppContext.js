@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { createContext, useContext, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import getProfile from "../lib/getProfile"
@@ -13,6 +13,7 @@ const AppWrapper = ({ children }) => {
   const [notificationMsg, setNotificationMsg] = useState('')
   const [showControlPanel, setShowControlPanel] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+  const [userPets, setUserPets] = useState(null)
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -37,6 +38,12 @@ const AppWrapper = ({ children }) => {
   useEffect(() => {
     setUser()
   }, [session])
+
+  useEffect(() => {
+    if (currentUser) {
+      setUserPets(currentUser.dogs)
+    }
+  }, [currentUser])
 
   const toggleControlPanel = (e) => {
     e.preventDefault()
@@ -68,6 +75,7 @@ const AppWrapper = ({ children }) => {
     notificationMsg,
     showControlPanel,
     showOnboarding,
+    userPets,
     setCurrentUser,
     setSession,
     setLoading,
@@ -75,6 +83,7 @@ const AppWrapper = ({ children }) => {
     setNotificationMsg,
     setShowControlPanel,
     setShowOnboarding,
+    setUserPets,
 
     toggleControlPanel,
     notify

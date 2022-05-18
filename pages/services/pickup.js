@@ -1,24 +1,26 @@
 import { useState, useEffect, useContext } from 'react'
 import { supabase } from '../../lib/supabase'
+import { AppContext } from '../../context/AppContext'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
 import Auth from '../../components/Auth'
+import Header from '../../components/Header'
 
 const Pickup = ({ i18n }) => {
+  const appCtx = useContext(AppContext)
+  const { currentUser, notify } = appCtx
+
   const [user, setUser] = useState(null)
   const [currentLocation, setCurrentLocation] = useState()
   const [phoneNumber, setPhoneNumber] = useState()
   const [coordinates, setCoordinates] = useState()
   const [picture, setPicture] = useState()
   const [pickupImageUrl, setPickupImageUrl] = useState(null)
-
-  let authUser = supabase.auth.user()
-  useEffect(() => {
-    setUser(authUser)
-  }, [])
+  const router = useRouter()
 
   const saveLocation = (e) => {
     const coordinates = e.target.previousSibling.innerText
@@ -30,12 +32,18 @@ const Pickup = ({ i18n }) => {
     setPhoneNumber(phone)
   }
 
-  const saveRequest = () => {
-    console.log("Send Request: ", picture, phoneNumber, coordinates);
-    alert("Coming soon :)")
-  }
+  const saveRequest = async () => {
+    const { data, error } = await supabase
+      .from('pickups')
+      .insert([
+        { phone_number: phoneNumber, image_url: picture, coordinates, user_id: currentUser.id },
+      ])
 
-  if (!user) return <Auth />
+    if (!error) {
+      notify("Successfully saved")
+      router.push('/')
+    }
+  }
 
   return (
     <>
@@ -43,10 +51,9 @@ const Pickup = ({ i18n }) => {
         <title>Pickup Service</title>
         <meta name='description' content="Pickup Service" />
       </Head>
+      <Header content='Pickup Service' />
 
-      <h1 className='text-4xl md:text-6xl mb-12 py-3 bg-slate-100 shadow text-slate-600'>Pickup Service</h1>
-
-      <div className='flex flex-col items-center justify-center px-8 pb-16 dark:text-brand-dark text-left'>
+      <div className='flex flex-col items-center justify-center px-8 py-24 dark:text-brand-dark text-left'>
         <p className='text-xl text-center'>For our members we offer a pickup service for your dog(s)!</p>
         <p className='mb-16 text-center'>Just follow these steps:</p>
         <div className={`bg-white p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-green-400`}`}>

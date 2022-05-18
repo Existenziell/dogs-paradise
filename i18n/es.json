@@ -42,6 +42,18 @@
     "T1": "Citas"
   },
 
+  "pets": {
+    "title": "Mascotas | Dog's Paradise",
+    "desc": "Mascotas | Dog's Paradise",
+    "T1": "Tu Mascotas"
+  },
+
+  "addPet": {
+    "title": "Añadir Mascotas | Dog's Paradise",
+    "desc": "Añadir Mascotas | Dog's Paradise",
+    "T1": "Añadir Mascotas"
+  },
+
   "map": {
     "title": "Mapa | Dog's Paradise | El mejor lugar para perros en Cozumel",
     "desc": "Dónde y cómo encontrarnos.",

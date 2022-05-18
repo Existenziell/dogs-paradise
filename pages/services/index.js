@@ -41,10 +41,9 @@ const Services = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-
       <Header content={i18n.T1} />
 
-      <div className='flex flex-col items-center justify-center px-8 pb-16 lg:w-2/3 lg:mx-auto text-brand-dark'>
+      <div className='flex flex-col items-center justify-center px-8 pb-16 pt-24 lg:w-2/3 lg:mx-auto text-brand-dark'>
         <Quote text={i18n.Q1} classes={'block md:hidden'} />
 
         <div className='hidden md:block'>

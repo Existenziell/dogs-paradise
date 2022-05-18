@@ -45,7 +45,7 @@ const Profile = ({ i18n }) => {
 
       <Header content={i18n.T1} />
 
-      <div className='px-8 pb-24 profile flex flex-col items-center justify-center'>
+      <div className='profile px-8 py-24 flex flex-wrap items-start justify-center gap-6'>
 
         <Avatar
           url={avatar_url}
@@ -56,7 +56,7 @@ const Profile = ({ i18n }) => {
           }}
         />
 
-        <div className="my-8 text-left shadow max-w-max bg-slate-300 p-4">
+        <div className="text-left shadow max-w-max bg-slate-300 text-slate-800 px-5 py-3 rounded">
           <div>
             <label htmlFor="username" className='block text-xs mt-2'>Username</label>
             <input
