@@ -47,7 +47,7 @@ const Appointments = ({ i18n }) => {
         {appointments.length ?
           appointments.map(a => {
             return (
-              <div className='flex gap-8 bg-white rounded px-4 py-3 my-3 text-left' key={a.id}>
+              <div className='flex gap-8 bg-white text-brand-dark rounded px-4 py-3 my-3 text-left' key={a.id}>
                 <img
                   src={a.image}
                   alt="Pickup Image"
