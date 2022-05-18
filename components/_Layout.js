@@ -9,11 +9,14 @@ import DarkModeToggle from './DarkModeToggle'
 import Notification from './Notification'
 import LogoutBtn from './LogoutBtn'
 import Nav from './Nav'
+import Auth from './Auth'
 
 const Layout = ({ children }) => {
   const appCtx = useContext(AppContext)
   const { session } = appCtx
   const router = useRouter()
+
+  if (!session) return <Auth />
 
   return (
     <>

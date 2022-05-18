@@ -16,7 +16,7 @@ import Header from '../components/Header'
 
 const Profile = ({ i18n }) => {
   const appCtx = useContext(AppContext)
-  const { session, notify, currentUser } = appCtx
+  const { notify, currentUser } = appCtx
 
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
@@ -32,8 +32,6 @@ const Profile = ({ i18n }) => {
       setAvatarUrl(currentUser.avatar_url)
     }
   }, [currentUser])
-
-  if (!session) return <Auth />
 
   return (
     <>

@@ -13,7 +13,7 @@ import Header from '../components/Header'
 
 const Home = ({ i18n }) => {
   const appCtx = useContext(AppContext)
-  const { session, notify, currentUser, userPets } = appCtx
+  const { notify, currentUser, userPets } = appCtx
 
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
@@ -34,8 +34,6 @@ const Home = ({ i18n }) => {
       setCreatedAt(currentUser.created_at)
     }
   }, [currentUser])
-
-  if (!session) return <Auth />
 
   return (
     <>

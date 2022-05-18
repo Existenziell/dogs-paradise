@@ -15,7 +15,7 @@ const Pets = ({ data, i18n }) => {
   const { id, name, status, birthdate } = data
 
   const appCtx = useContext(AppContext)
-  const { session, notify, currentUser, userPets, setUserPets } = appCtx
+  const { notify, userPets, setUserPets } = appCtx
   const router = useRouter()
 
   const [showDelete, setShowDelete] = useState(false)
@@ -35,8 +35,6 @@ const Pets = ({ data, i18n }) => {
       router.push('/')
     }
   }
-
-  if (!session) return <Auth />
 
   return (
     <>
