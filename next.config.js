@@ -1,13 +1,6 @@
-// module.exports = {
-//   i18n: {
-//     locales: ['en', 'es'],
-//     defaultLocale: 'en',
-//   },
-// }
-
 const withPWA = require("next-pwa")
 
-module.exports = withPWA({
+const settings = {
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
@@ -17,4 +10,9 @@ module.exports = withPWA({
     register: true,
     skipWaiting: true,
   },
-})
+  devIndicators: {
+    autoPrerender: false,
+  }
+}
+
+module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);

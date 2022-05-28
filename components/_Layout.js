@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
   const { session } = appCtx
   const router = useRouter()
 
-  if (!session) return <Auth />
+  // if (!session) return <Auth />
 
   return (
     <>
@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
         options={{ showSpinner: false }}
       />
 
-      <Nav />
+      {/* <Nav /> */}
 
       <motion.main
         key={router.route}
