@@ -46,7 +46,7 @@ const Home = ({ i18n }) => {
 
       <div className='px-8 profile py-24'>
 
-        <video src='/video/promo.mp4' controls={false} loop={true} autoPlay={true} className='max-w-xs mx-auto mb-8 rounded-2xl shadow' />
+        <video src='/video/promo.mp4' controls={true} loop={false} autoPlay={true} className='max-w-xs mx-auto mb-8 rounded-2xl shadow' />
 
         {/* <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'> */}
 
