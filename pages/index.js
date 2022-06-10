@@ -46,11 +46,11 @@ const Home = ({ i18n }) => {
 
       <div className='px-8 profile py-24'>
 
-        <video src='/video/promo.mp4' controls={true} loop={false} autoPlay={true} className='max-w-xs mx-auto mb-8 rounded-2xl shadow' />
+        {/* <video src='/video/promo.mp4' controls={true} loop={false} autoPlay={true} className='max-w-xs mx-auto mb-8 rounded-2xl shadow' /> */}
 
-        {/* <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'> */}
+        <div className='p-4 md:p-8 mx-auto rounded-xl text-white bg-gradient-to-tl from-primary to-secondary shadow-xl overflow-hidden'>
 
-        {/* {appCtx.showOnboarding ?
+          {appCtx.showOnboarding ?
             <Onboarding />
             :
             <>
@@ -105,10 +105,10 @@ const Home = ({ i18n }) => {
                 </Link>
               </div>
             </>
-          } */}
-      </div>
+          }
+        </div>
 
-      {/* <h2 className='mb-2 mt-8 text-xl'>Available Services:</h2>
+        <h2 className='mb-2 mt-8 text-xl'>Available Services:</h2>
         <div className='text-brand-dark gap-4 flex items-center justify-center mb-8'>
           <Link href='/services/pickup'>
             <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
@@ -124,8 +124,8 @@ const Home = ({ i18n }) => {
           </Link>
         </div>
 
-        <AddToHomeScreen /> */}
-      {/* </div> */}
+        <AddToHomeScreen />
+      </div>
     </>
   )
 }
