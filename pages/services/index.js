@@ -28,7 +28,7 @@ const Services = ({ i18n }) => {
         <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center my-20 gap-6' >
           {services.map((s, idx) => (
             <Link href={s.link} key={s.title}>
-              <a className='shadow bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative'>
+              <a className='shadow-md bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:shadow-sm transition-all relative'>
                 {(idx === 0 || idx === 1) &&
                   <div className='absolute -top-2 -left-2 rounded-lg bg-brand text-white text-sm px-2 py-1'>NEW</div>
                 }

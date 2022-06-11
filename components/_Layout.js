@@ -27,12 +27,11 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      {session &&
-        <div className='w-full fixed z-20 top-4 right-0 left-0 flex items-center justify-between px-4 '>
-          <LogoutBtn />
-          <DarkModeToggle />
-        </div>
-      }
+      <div className='w-full fixed z-20 top-4 right-0 left-0 flex items-center justify-between px-4 '>
+        <DarkModeToggle />
+        {session && <LogoutBtn />}
+      </div>
+
     </>
   )
 }
