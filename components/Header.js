@@ -1,8 +1,8 @@
 const Header = ({ content }) => {
 
   return (
-    <header className='fixed w-full z-10 mb-12 py-3 bg-slate-100 dark:bg-slate-600 shadow'>
-      <span className='text-3xl text-slate-600 dark:text-slate-300'>
+    <header className='fixed w-full z-10 mb-12 py-3 bg-white dark:bg-brand-dark shadow'>
+      <span className='text-3xl text-brand dark:text-white'>
         {content}
       </span>
     </header>

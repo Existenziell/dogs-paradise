@@ -10,6 +10,7 @@ email: bauer.christof@gmail.com
 :root {
   --color-brand: #C90076;
   --color-brand-dark: #200530;
+  --color-dark: #242424;
 }
 
 @tailwind base;
@@ -59,7 +60,7 @@ https://github.com/vercel/next.js/issues/21914 */
 	========================================================================== */
 
 .button {
-  @apply w-48 px-8 py-4 
+  @apply w-48 px-8 py-3 
   bg-brand text-white rounded shadow-lg
     hover:shadow hover:cursor-pointer
     transition-all
@@ -75,8 +76,11 @@ https://github.com/vercel/next.js/issues/21914 */
     transition-all
 }
 
-input {
-  @apply text-black;
+input[type='text'], 
+input[type='number'], 
+input[type='email'], 
+input[type='website'] {
+  @apply text-dark dark:bg-dark dark:text-white focus:outline-none;
 }
 
 .login-form input[type='text'], 
@@ -84,22 +88,15 @@ input {
 .login-form input[type='email'], 
 .login-form input[type='website'] {
   @apply border px-4 py-3 text-brand-dark text-center rounded-lg
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand;
+    focus:ring-2 focus:ring-offset-2 focus:ring-brand;
 }
 
 .profile input[type='text'], .profile input[type='number'], .profile input[type='email'], .profile input[type='website'] {
-  @apply border px-3 py-2;
+  @apply border px-3 py-2 rounded;
 }
 
-.admin input[type='text'], 
-.admin input[type='number'], 
-.admin input[type='email'], 
-.admin input[type='website'] {
-  @apply border px-3 py-2;
-}
-
-.admin input[type='text']:disabled {
-  @apply border-none bg-transparent;
+.add-dog input[type='text'], .add-dog input[type='number'], .add-dog input[type='email'], .add-dog input[type='website'] {
+  @apply border px-5 py-3 rounded text-2xl;
 }
 
 
@@ -205,11 +202,21 @@ div.mapboxgl-popup-content {
 	Admin
 	========================================================================== */
 
-
 .admin th {
   @apply px-2 py-6;
 }
 
 .admin tr, td {
   @apply px-2 py-4;
+}
+
+.admin input[type='text'], 
+.admin input[type='number'], 
+.admin input[type='email'], 
+.admin input[type='website'] {
+  @apply border px-3 py-2;
+}
+
+.admin input[type='text']:disabled {
+  @apply border-none bg-transparent;
 }

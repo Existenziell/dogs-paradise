@@ -1,19 +1,25 @@
-import { useState, useContext } from 'react'
-import { AppContext } from '../context/AppContext'
+import { useState } from 'react'
+import useApp from '../context/AppContext'
 import updateProfile from '../lib/updateProfile'
 import Avatar from './Avatar'
 
 const Onboarding = () => {
-  const appCtx = useContext(AppContext)
-  const { notify } = appCtx
+  const { notify, setShowOnboarding } = useApp()
 
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    updateProfile({ username, quote, avatar_url, setLoading, notify })
+    setLoading(false)
+    setShowOnboarding(false)
+  }
+
   return (
-    <div className="py-8 text-left">
+    <form onSubmit={handleSubmit} className="py-8 text-left">
       <h1 className="text-xl mb-6">Just a few more steps to finalize your Membership Card!</h1>
       <div>
         <label htmlFor="username" className='block text-sm mb-1'>Username</label>
@@ -22,6 +28,7 @@ const Onboarding = () => {
           type="text"
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
       </div>
       <div className='mt-4'>
@@ -37,6 +44,7 @@ const Onboarding = () => {
 
       <div className='text-left my-8'>
         <Avatar
+          bucket='avatars'
           url={avatar_url}
           size={150}
           onUpload={(url) => {
@@ -48,14 +56,14 @@ const Onboarding = () => {
       <div>
         <button
           className="link mt-2"
-          onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
+          type='submit'
           disabled={loading}
           aria-label='Create Profile'
         >
           {loading ? 'Loading ...' : 'Save'}
         </button>
       </div>
-    </div>
+    </form>
   )
 }
 

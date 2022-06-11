@@ -1,11 +1,10 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { AppContext } from '../../context/AppContext'
+import useApp from '../../context/AppContext'
 import Select from 'react-select'
 
 const Dogs = ({ dogs, users }) => {
-  const appCtx = useContext(AppContext)
-  const { notify } = appCtx
+  const { notify } = useApp()
 
   const [fetchedDogs, setFetchedDogs] = useState()
   const [formData, setFormData] = useState({})
@@ -73,13 +72,13 @@ const Dogs = ({ dogs, users }) => {
     openBtn.style.display = "block"
     closeBtn.style.display = "none"
     Array.from(openEditBtns).forEach(el => (el.disabled = false))
-    Array.from(inputs).forEach((el, i) => (el.disabled = true))
+    Array.from(inputs).forEach((el) => (el.disabled = true))
     setFormData({})
   }
 
   const editDog = async (id) => {
     const dog = fetchedDogs.filter(c => c.id === id)[0]
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('dogs')
       .update({
         name: formData.name ? formData.name : dog.name,

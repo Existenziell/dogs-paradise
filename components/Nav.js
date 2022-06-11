@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 const Nav = () => {
     const router = useRouter()
+
     const urls = [
         {
             name: 'N1',
@@ -50,10 +51,10 @@ const Nav = () => {
     ]
 
     return (
-        <nav className='fixed left-0 right-0 bottom-0 z-20 flex items-center justify-between divide-x-2 divide-slate-200 dark:divide-slate-700'>
+        <nav className='fixed left-0 right-0 bottom-0 z-20 flex items-center justify-between divide-x-2 divide-slate-200 dark:divide-dark'>
             {urls.map(url => (
                 <Link href={url.href} key={url.name} >
-                    <a name={url.name} className={`${isActiveLink(url.href, router.pathname) && `active-nav`} flex justify-center items-center w-full py-3 bg-slate-100 dark:bg-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-300 dark:hover:text-slate-900 transition-all divide-x`}>
+                    <a name={url.name} className={`${isActiveLink(url.href, router.pathname) && `active-nav`} flex justify-center items-center w-full py-3 bg-slate-100 dark:bg-brand-dark text-brand dark:text-slate-300 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-300 dark:hover:text-slate-900 transition-all divide-x`}>
                         {url.icon}
                     </a>
                 </Link>

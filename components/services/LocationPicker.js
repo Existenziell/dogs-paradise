@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { COORDS } from '../../lib/config'
-import langEN from '../../i18n/en.json'
-import langES from '../../i18n/es.json'
+// import langEN from '../../i18n/en.json'
+// import langES from '../../i18n/es.json'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
+/* eslint-disable no-unused-vars */
 const LocationPicker = ({ currentLocation, setCurrentLocation }) => {
   const [pageIsMounted, setPageIsMounted] = useState(false)
   const [Map, setMap] = useState()
+  /* eslint-enable no-unused-vars */
 
   const router = useRouter()
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN

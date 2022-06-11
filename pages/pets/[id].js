@@ -1,24 +1,33 @@
+import { supabase } from '../../lib/supabase'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
-
-import { useEffect, useContext, useState } from 'react'
-import { AppContext } from '../../context/AppContext'
-import { supabase } from '../../lib/supabase'
-import updateProfile from '../../lib/updateProfile'
+import useApp from '../../context/AppContext'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import Header from '../../components/Header'
 import Auth from '../../components/Auth'
+import Avatar from '../../components/Avatar'
 
 const Pets = ({ data, i18n }) => {
-  const { id, name, status, birthdate } = data
-
-  const appCtx = useContext(AppContext)
-  const { notify, userPets, setUserPets } = appCtx
+  const { id, name, status, age, avatar_url } = data
+  const { session, notify, userPets, setUserPets } = useApp()
+  const [publicUrl, setPublicUrl] = useState(null)
   const router = useRouter()
 
+  useEffect(() => {
+    if (avatar_url) {
+      setPublicUrl(avatar_url)
+    }
+  }, [avatar_url])
+
   const [showDelete, setShowDelete] = useState(false)
+
+  const handleUpload = async (url) => {
+    await supabase.from('dogs').update({ avatar_url: url }).eq('id', id)
+    setPublicUrl(url)
+  }
 
   const deleteDog = async (id) => {
     const { error } = await supabase
@@ -26,15 +35,16 @@ const Pets = ({ data, i18n }) => {
       .delete()
       .eq('id', id)
 
-
     if (!error) {
       const filtered = userPets.filter(p => (p.id !== id))
       setUserPets(filtered)
       setShowDelete(false)
       notify("Dog deleted successfully!")
-      router.push('/')
+      router.push('/profile')
     }
   }
+
+  if (!session) return <Auth />
 
   return (
     <>
@@ -46,26 +56,47 @@ const Pets = ({ data, i18n }) => {
       <Header content={name} />
 
       <div className='profile px-8 py-24'>
-        <div className='flex justify-center items-center gap-4'>
-          <img src='/icons/services/pickup.png' alt='Dog' className='w-64' />
+        <Link href='/profile'>
+          <a>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </a>
+        </Link>
+
+        <div className='flex justify-center items-center gap-8'>
+          <div className='max-w-xs mb-4'>
+            <Avatar
+              bucket='dogs'
+              url={publicUrl}
+              // size={250}
+              text='Change picture'
+              onUpload={(url) => {
+                handleUpload(url)
+              }}
+            />
+          </div>
           <div className='text-left'>
-            <p>Born: {birthdate}</p>
+            <p>Age: {age}</p>
             <p>Status: {status}</p>
-            <p className='mt-6 flex items-center'>Checklist:
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 inline-block text-green-700 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            </p>
-            <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal' className='flex items-center gap-2 justify-center'>
-              Delete Pet
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-            </button>
+            <div className='mt-6 flex flex-col'>
+              <div className='flex items-center justify-between'>
+                <p>Checklist:</p>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 inline-block text-green-700 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p>Delete Pet</p>
+                <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal'>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-dark dark:text-white hover:text-brand hover:dark:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* <pre className='text-left text-xs'>{JSON.stringify(data, null, 2)}</pre> */}
 
         {/* Delete Dog Modal */}
         {showDelete &&
@@ -96,7 +127,7 @@ const Pets = ({ data, i18n }) => {
 
 export async function getStaticProps(context) {
   const id = context.params.id
-  let { data, error } = await supabase
+  let { data } = await supabase
     .from('dogs')
     .select(`*, user(*)`)
     .eq('id', id)
@@ -112,8 +143,8 @@ export async function getStaticProps(context) {
   }
 }
 
-export async function getStaticPaths(context) {
-  let { data, error, status } = await supabase
+export async function getStaticPaths() {
+  let { data } = await supabase
     .from('dogs')
     .select(`*, user(*)`)
 

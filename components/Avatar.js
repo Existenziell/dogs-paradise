@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
-import downloadImage from '../lib/downloadImage'
-import uploadImage from '../lib/uploadImage'
+import downloadImage from '../lib/supabase/downloadImage'
+import uploadImage from '../lib/supabase/uploadImage'
 
-export default function Avatar({ url, size, onUpload }) {
+export default function Avatar({ bucket, url, size, onUpload, text }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
-  const bucket = 'avatars'
 
   useEffect(() => {
     if (url) downloadImage(bucket, url, setAvatarUrl)
-  }, [url])
+  }, [url, bucket])
 
   return (
     <div>
@@ -21,11 +20,15 @@ export default function Avatar({ url, size, onUpload }) {
           style={{ height: size, width: size }}
         />
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }} />
+        <div className="">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
       )}
       <div style={{ width: size }}>
         <label className="text-sm" htmlFor="single">
-          {uploading ? 'Uploading ...' : <span className='cursor-pointer link'>Change Avatar</span>}
+          {uploading ? 'Uploading ...' : <span className='cursor-pointer link'>{text ? text : `Change Avatar`}</span>}
         </label>
         <input
           type="file"

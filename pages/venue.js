@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Head from 'next/head'
 // import langEN from '../i18n/en.json'
 // import langES from '../i18n/es.json'

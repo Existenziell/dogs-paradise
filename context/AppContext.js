@@ -3,9 +3,10 @@ import { createContext, useContext, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import getProfile from "../lib/getProfile"
 
-const AppContext = createContext({})
+const AppContext = createContext()
+const useApp = () => useContext(AppContext)
 
-const AppWrapper = ({ children }) => {
+export const AppWrapper = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -53,7 +54,7 @@ const AppWrapper = ({ children }) => {
     }, 3500)
   }
 
-  let app = {
+  let contextValue = {
     currentUser,
     session,
     loading,
@@ -73,14 +74,10 @@ const AppWrapper = ({ children }) => {
   }
 
   return (
-    <AppContext.Provider value={app}>
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   )
 }
 
-const useAppContext = () => {
-  return useContext(AppContext)
-}
-
-export { AppContext, AppWrapper, useAppContext }
+export default useApp

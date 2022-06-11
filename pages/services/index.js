@@ -5,36 +5,9 @@ import langES from '../../i18n/es.json'
 import Blob from '../../components/Blob'
 import Quote from '../../components/Quote'
 import Header from '../../components/Header'
+import { services } from '../../lib/services'
 
 const Services = ({ i18n }) => {
-
-  const services = [
-    {
-      title: 'Pickup Service',
-      desc: 'We pickup your dog(s) at your home at your specified time.',
-      img: '/icons/services/pickup.png',
-      link: '/services/pickup'
-    },
-    {
-      title: 'Delivery Service',
-      desc: 'We deliver purchased products to your home at your specified time.',
-      img: '/icons/services/delivery.svg',
-      link: '/services/delivery'
-    },
-    {
-      title: 'Dog Day Spa',
-      desc: 'The preferred way to pamper your four-legged family member!',
-      img: '/icons/services/spa.png',
-      link: '/services/spa'
-    },
-    {
-      title: 'Dog Walking',
-      desc: 'Your dog walker can stop by as many times as you need – on whatever days you need them.',
-      img: '/icons/services/walker.png',
-      link: '/services/walker'
-    }
-  ]
-
   return (
     <>
       <Head>
@@ -53,20 +26,22 @@ const Services = ({ i18n }) => {
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center my-20 gap-6' >
-          {services.map(s => (
+          {services.map((s, idx) => (
             <Link href={s.link} key={s.title}>
-              <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative'>
-                <div className=' absolute -top-2 -left-2 rounded-lg bg-brand text-white px-2 py-1'>New</div>
-                <h2 className='bg-white p-4 text-xl rounded-t-lg w-full'>{s.title}</h2>
-                <img src={s.img} alt='Pickup Service' width={150} height={150} className='my-4' />
-                <p className='h-16 px-8 text-sm'>{s.desc}</p>
+              <a className='shadow bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative'>
+                {(idx === 0 || idx === 1) &&
+                  <div className='absolute -top-2 -left-2 rounded-lg bg-brand text-white text-sm px-2 py-1'>NEW</div>
+                }
+                <h2 className='bg-white dark:bg-brand-dark dark:text-white p-4 text-xl rounded-t-lg w-full'>{s.title}</h2>
+                <img src={s.img} alt='Pickup Service' width={150} height={150} className='my-4 dark:invert' />
+                <p className='h-16 px-8 text-sm dark:text-white'>{s.desc}</p>
               </a>
             </Link>
           ))}
         </div>
 
       </div>
-      {/* <img src='/img/pool.jpg' alt='Pool' className='shadow' /> */}
+      <img src='/img/pool.jpg' alt='Pool' className='shadow' />
     </>
   )
 }

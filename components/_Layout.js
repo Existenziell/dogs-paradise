@@ -1,22 +1,16 @@
-import { useContext } from 'react'
-import { AppContext } from '../context/AppContext'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
 import { variants } from '../lib/config'
-import { GridLoader } from 'react-spinners'
 import NextNprogress from 'nextjs-progressbar'
 import DarkModeToggle from './DarkModeToggle'
 import Notification from './Notification'
 import LogoutBtn from './LogoutBtn'
 import Nav from './Nav'
-import Auth from './Auth'
+import useApp from '../context/AppContext'
 
 const Layout = ({ children }) => {
-  const appCtx = useContext(AppContext)
-  const { session } = appCtx
+  const { session } = useApp()
   const router = useRouter()
-
-  if (!session) return <Auth />
 
   return (
     <>
@@ -40,7 +34,7 @@ const Layout = ({ children }) => {
         animate="enter"
         exit="exit"
         transition={{ type: 'linear' }}
-        className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-brand-dark dark:text-slate-300 min-h-screen'
+        className='w-full text-center bg-cloth-pattern bg-repeat dark:bg-none dark:bg-dark dark:text-slate-200 min-h-screen'
       >
 
         {children}

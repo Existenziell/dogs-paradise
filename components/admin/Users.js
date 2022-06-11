@@ -1,12 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from '../../lib/supabase'
-import { AppContext } from '../../context/AppContext'
+import useApp from '../../context/AppContext'
 import Select from 'react-select'
 
 const Users = ({ users, roles }) => {
-  const appCtx = useContext(AppContext)
-  const { notify } = appCtx
+  const { notify } = useApp()
 
   const [fetchedUsers, setFetchedUsers] = useState()
   const [formData, setFormData] = useState({})

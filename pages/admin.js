@@ -1,14 +1,12 @@
-import { useContext } from 'react'
 import { supabase } from '../lib/supabase'
-import { AppContext } from '../context/AppContext'
+import useApp from '../context/AppContext'
 import Head from 'next/head'
 import Users from '../components/admin/Users'
 import Dogs from '../components/admin/Dogs'
 import Auth from '../components/Auth'
 
 const Admin = ({ users, dogs, roles }) => {
-  const appCtx = useContext(AppContext)
-  const { session, currentUser } = appCtx
+  const { session, currentUser } = useApp()
 
   if (!session || !currentUser) return <Auth />
   if (currentUser?.roles?.name !== 'Admin') return <Auth />
@@ -30,7 +28,7 @@ const Admin = ({ users, dogs, roles }) => {
   )
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps() {
   const { data: users } = await supabase.from('users').select(`*, dogs(name), roles(*)`).order('id', { ascending: true })
   const { data: dogs } = await supabase.from('dogs').select(`*, user(*)`).order('id', { ascending: true })
   const { data: roles } = await supabase.from('roles').select(`id, name`).order('id', { ascending: true })

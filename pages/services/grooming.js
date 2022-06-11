@@ -2,18 +2,19 @@ import Head from 'next/head'
 // import langEN from '../../i18n/en.json'
 // import langES from '../../i18n/es.json'
 
-const Spa = () => {
+const Grooming = () => {
 
   return (
     <>
       <Head>
-        <title>Day Spa Service</title>
-        <meta name='description' content="Day Spa Service" />
+        <title>Grooming Service</title>
+        <meta name='description' content="Grooming Service" />
       </Head>
 
       <div className='flex flex-col items-center justify-center py-24 px-8 lg:w-2/3 lg:mx-auto'>
-        <h1 className='text-6xl mb-12'>Dog Day Spa</h1>
-
+        <h1 className='text-4xl md:text-6xl mb-12'>Grooming Service</h1>
+        <img src='/img/grooming1.jpg' alt='Grooming 1' className='max-w-xs shadow rounded mb-8' />
+        <img src='/img/grooming2.jpg' alt='Grooming 2' className='max-w-xs shadow rounded' />
       </div>
     </>
   )
@@ -29,4 +30,4 @@ const Spa = () => {
 //   }
 // }
 
-export default Spa
+export default Grooming

@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import langEN from '../../i18n/en.json'
-import langES from '../../i18n/es.json'
+// import langEN from '../../i18n/en.json'
+// import langES from '../../i18n/es.json'
 
-const Walker = ({ i18n }) => {
+const Walker = () => {
 
   return (
     <>
@@ -20,14 +19,14 @@ const Walker = ({ i18n }) => {
   )
 }
 
-export async function getStaticProps(context) {
-  let i18n
-  context.locale === 'en' ?
-    i18n = langEN.services :
-    i18n = langES.services
-  return {
-    props: { i18n },
-  }
-}
+// export async function getStaticProps(context) {
+//   let i18n
+//   context.locale === 'en' ?
+//     i18n = langEN.services :
+//     i18n = langES.services
+//   return {
+//     props: { i18n },
+//   }
+// }
 
 export default Walker

@@ -1,20 +1,18 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import { AppContext } from '../../context/AppContext'
+import useApp from '../../context/AppContext'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import langEN from '../../i18n/en.json'
-import langES from '../../i18n/es.json'
+// import langEN from '../../i18n/en.json'
+// import langES from '../../i18n/es.json'
 import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
 import Auth from '../../components/Auth'
 import Header from '../../components/Header'
 
-const Pickup = ({ i18n }) => {
-  const appCtx = useContext(AppContext)
-  const { currentUser, notify } = appCtx
+const Pickup = () => {
+  const { session, currentUser, notify } = useApp()
 
-  const [user, setUser] = useState(null)
   const [currentLocation, setCurrentLocation] = useState()
   const [phoneNumber, setPhoneNumber] = useState()
   const [coordinates, setCoordinates] = useState()
@@ -33,7 +31,7 @@ const Pickup = ({ i18n }) => {
   }
 
   const saveRequest = async () => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('pickups')
       .insert([
         { phone_number: phoneNumber, image_url: picture, coordinates, user_id: currentUser.id },
@@ -41,9 +39,11 @@ const Pickup = ({ i18n }) => {
 
     if (!error) {
       notify("Successfully saved")
-      router.push('/')
+      router.push('/appointments')
     }
   }
+
+  if (!session) return <Auth />
 
   return (
     <>
@@ -170,14 +170,14 @@ const Pickup = ({ i18n }) => {
   )
 }
 
-export async function getStaticProps(context) {
-  let i18n
-  context.locale === 'en' ?
-    i18n = langEN.services :
-    i18n = langES.services
-  return {
-    props: { i18n },
-  }
-}
+// export async function getStaticProps(context) {
+//   let i18n
+//   context.locale === 'en' ?
+//     i18n = langEN.services :
+//     i18n = langES.services
+//   return {
+//     props: { i18n },
+//   }
+// }
 
 export default Pickup

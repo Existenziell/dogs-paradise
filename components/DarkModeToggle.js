@@ -1,10 +1,8 @@
-import { useEffect, useContext } from 'react'
-import { AppContext } from '../context/AppContext'
+import { useEffect } from 'react'
+import useApp from '../context/AppContext'
 
 const DarkModeToggle = () => {
-
-  const appCtx = useContext(AppContext)
-  const { darkmode, setDarkmode } = appCtx
+  const { darkmode, setDarkmode } = useApp()
 
   useEffect(() => {
     if (
