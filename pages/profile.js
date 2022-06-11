@@ -14,7 +14,7 @@ import useApp from '../context/AppContext'
 const Profile = ({ i18n }) => {
   const { session, currentUser, notify, userPets, showOnboarding } = useApp()
   /* eslint-disable no-unused-vars */
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState(null)
   const [role, setRole] = useState(null)
@@ -108,24 +108,8 @@ const Profile = ({ i18n }) => {
           }
         </div>
 
-        {/* <h2 className='mb-2 mt-8 text-xl'>Available Services:</h2>
-        <div className='text-brand-dark gap-4 flex items-center justify-center mb-8'>
-          <Link href='/services/pickup'>
-            <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
-              <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Pickup</h2>
-              <img src='/icons/services/pickup.png' alt='Pickup Service' width={60} height={60} className='my-4' />
-            </a>
-          </Link>
-          <Link href='/services/delivery'>
-            <a className='shadow bg-slate-100 rounded-lg flex flex-col items-center cursor-pointer hover:scale-105 transition-all relative h-max w-32'>
-              <h2 className='bg-white p-3 text-lg rounded-t-lg w-full'>Delivery</h2>
-              <img src='/icons/services/delivery.svg' alt='Pickup Service' width={60} height={60} className='my-4' />
-            </a>
-          </Link>
-        </div> */}
-
-        {/* <div>
-          <div className="text-left shadow max-w-max bg-slate-300 text-slate-800 px-5 py-3 rounded">
+        <div>
+          <div className="text-left shadow max-w-max bg-white dark:bg-dark dark:text-white px-5 py-3 rounded">
             <div>
               <label htmlFor="username" className='block text-xs mt-2'>Username</label>
               <input
@@ -133,16 +117,6 @@ const Profile = ({ i18n }) => {
                 type="text"
                 value={username || ''}
                 onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className='block text-xs mt-2'>Email</label>
-              <input
-                disabled
-                id="email"
-                type="text"
-                value={email || ''}
-                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='mt-2'>
@@ -157,16 +131,16 @@ const Profile = ({ i18n }) => {
 
             <div>
               <button
-                className="mt-6 text-xl"
+                className="mt-6 text-xl button-secondary"
                 onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
                 disabled={loading}
                 aria-label='Update Profile'
               >
-                {loading ? 'Loading ...' : <p className='button-secondary'>Save</p>}
+                {loading ? 'Loading ...' : 'Save'}
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <AddToHomeScreen />
       </div>

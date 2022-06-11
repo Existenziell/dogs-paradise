@@ -70,10 +70,10 @@ https://github.com/vercel/next.js/issues/21914 */
 }
 
 .button-secondary {
-  @apply px-4 py-2 
+  @apply px-4 py-2 text-sm transition-all
   bg-transparent text-brand-dark rounded shadow-lg
-    hover:shadow hover:cursor-pointer
-    transition-all
+  dark:bg-dark dark:text-white
+  hover:shadow hover:cursor-pointer;
 }
 
 input[type='text'], 

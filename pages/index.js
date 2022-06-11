@@ -5,6 +5,7 @@ import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import { services } from '../lib/services'
+import Quote from '../components/Quote'
 
 const Home = ({ i18n }) => {
   return (
@@ -16,9 +17,14 @@ const Home = ({ i18n }) => {
 
       <Header content={i18n.T1} />
 
-      <div className='px-8 profile py-24'>
-        <h1 className='text-4xl mb-8'>{i18n.T3}</h1>
-        <img src='/welcome.jpg' alt='Welcome Dog' className='w-36 rounded-md shadow mx-auto' />
+      <div className='px-8 profile py-24 max-w-4xl mx-auto'>
+        <h1 className='text-4xl'>{i18n.T3}</h1>
+        <p className='mb-8 text-sm'>Feel the Paradise Experience</p>
+
+        <div className='flex flex-col items-center justify-center'>
+          <img src='/welcome.jpg' alt='Welcome Dog' className='w-36 rounded-md shadow' />
+          <Quote text='Our job is to make them happy' classes='mt-8' />
+        </div>
         <div className='my-8 flex gap-8 items-center justify-center'>
           <Link href='/profile'><a className='button'>Login</a></Link>
           <Link href='/profile'><a className='button'>Profile</a></Link>
