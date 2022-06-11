@@ -125,7 +125,7 @@ const Pets = ({ data, i18n }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const id = context.params.id
   let { data } = await supabase
     .from('dogs')
@@ -141,18 +141,6 @@ export async function getStaticProps(context) {
   return {
     props: { data, i18n },
   }
-}
-
-export async function getStaticPaths() {
-  let { data } = await supabase
-    .from('dogs')
-    .select(`*, user(*)`)
-
-  const paths = data.map(d => ({
-    params: { id: d.id.toString() },
-  }))
-
-  return { paths, fallback: false }
 }
 
 export default Pets
