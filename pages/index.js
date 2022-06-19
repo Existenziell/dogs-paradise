@@ -22,7 +22,8 @@ const Home = ({ i18n }) => {
         <p className='mb-8 text-sm'>Feel the Paradise Experience</p>
 
         <div className='flex flex-col items-center justify-center'>
-          <img src='/welcome.jpg' alt='Welcome Dog' className='w-36 rounded-md shadow' />
+          <img src='/logo.png' alt='Logo' className='max-w-xs rounded shadow-md dark:shadow-none dark:invert' />
+          {/* <img src='/welcome.jpg' alt='Welcome Dog' className='w-36 rounded-md shadow' /> */}
           <Quote text='Our job is to make them happy' classes='mt-8' />
         </div>
         <div className='my-8 flex gap-8 items-center justify-center'>
@@ -36,7 +37,7 @@ const Home = ({ i18n }) => {
             {services.map(s => (
               <Link href={s.link} key={s.title}>
                 <a className='max-w-max min-w-[150px] shadow-md bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:shadow-sm transition-all relative'>
-                  <h2 className='bg-white dark:bg-brand-dark dark:text-white p-4 text-lg rounded-t-lg w-full'>{s.title}</h2>
+                  <h2 className='bg-white dark:bg-black dark:text-white p-4 text-lg rounded-t-lg w-full'>{s.title}</h2>
                   <img src={s.img} alt='Pickup Service' width={60} height={60} className='my-4 dark:invert' />
                 </a>
               </Link>

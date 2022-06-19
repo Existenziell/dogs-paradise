@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import useApp from '../context/AppContext'
 import updateProfile from '../lib/updateProfile'
@@ -10,12 +11,14 @@ const Onboarding = () => {
   const [username, setUsername] = useState(null)
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     updateProfile({ username, quote, avatar_url, setLoading, notify })
     setLoading(false)
     setShowOnboarding(false)
+    router.reload(window.location.pathname)
   }
 
   return (

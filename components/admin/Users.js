@@ -96,11 +96,11 @@ const Users = ({ users, roles }) => {
 
   return (
     <div className='py-8 px-8 text-left'>
-      <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Users</h1>
+      <h1 className='admin-table-title'>Users</h1>
 
-      <table className='shadow-lg bg-white text-brand-dark text-sm table-auto w-full' cellPadding={0} cellSpacing={0}>
+      <table className='admin-table'>
         <thead>
-          <tr className='bg-slate-700 text-white font-bold'>
+          <tr className='admin-table-header'>
             <th>ID</th>
             <th>Username</th>
             <th>Email</th>

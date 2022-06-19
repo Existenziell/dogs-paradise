@@ -127,12 +127,11 @@ const Dogs = ({ dogs, users }) => {
 
   return (
     <div className='py-8 px-8 text-left'>
-      <h1 className='text-xl bg-slate-700 max-w-max text-white px-4 py-2 mb-1'>Dogs</h1>
+      <h1 className='admin-table-title'>Dogs</h1>
 
-      <table className='shadow-lg bg-white text-brand-darkv text-sm table-auto w-full'>
+      <table className='admin-table'>
         <thead>
-          <tr className='bg-slate-700 text-white font-bold'>
-            <th>ID</th>
+          <tr className='admin-table-header'>
             <th>Name</th>
             <th>Status</th>
             <th>Owner</th>
@@ -148,7 +147,6 @@ const Dogs = ({ dogs, users }) => {
 
           {fetchedDogs?.map((dog, idx) => (
             <tr key={dog.id + dog.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
-              <td>{dog.id}</td>
               <td>
                 <input
                   type='text' name='name' id='name'

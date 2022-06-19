@@ -11,7 +11,7 @@ import Avatar from '../../components/Avatar'
 import Auth from '../../components/Auth'
 
 const AddDog = ({ i18n }) => {
-  const { session, currentUser, notify, userPets, setUserPets } = useApp()
+  const { session, currentUser, notify, userDogs, setUserDogs } = useApp()
   const [formData, setFormData] = useState({})
   const [avatar_url, setAvatarUrl] = useState(null)
   const router = useRouter()
@@ -34,8 +34,8 @@ const AddDog = ({ i18n }) => {
         avatar_url: avatar_url,
       })
     if (!error) {
-      const newPet = data[0]
-      setUserPets([...userPets, newPet])
+      const newDog = data[0]
+      setUserDogs([...userDogs, newDog])
       notify("Dog added successfully!")
       router.push('/profile')
     }
@@ -73,7 +73,7 @@ const AddDog = ({ i18n }) => {
           Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2' />
           Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2' />
           Age <input type='number' min={1} max={100} name='age' id='age' placeholder='4' onChange={setData} className='block mb-2 w-full' />
-          <input type='submit' className='button cursor-pointer block mt-8' value='Save' />
+          <input type='submit' className='button cursor-pointer block my-8' value='Save' />
         </form>
       </div>
     </>

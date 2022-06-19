@@ -2,6 +2,7 @@ import { useState } from "react"
 import { createContext, useContext, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import getProfile from "../lib/getProfile"
+import getUserDogs from "../lib/getUserDogs"
 
 const AppContext = createContext()
 const useApp = () => useContext(AppContext)
@@ -13,7 +14,7 @@ export const AppWrapper = ({ children }) => {
   const [darkmode, setDarkmode] = useState(null)
   const [notificationMsg, setNotificationMsg] = useState('')
   const [showOnboarding, setShowOnboarding] = useState(false)
-  const [userPets, setUserPets] = useState(null)
+  const [userDogs, setUserDogs] = useState(null)
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -32,18 +33,15 @@ export const AppWrapper = ({ children }) => {
     } else {
       setShowOnboarding(false)
     }
+
+    const userDogs = await getUserDogs()
+    setUserDogs(userDogs)
     setCurrentUser(user)
   }
 
   useEffect(() => {
     setUser()
   }, [session])
-
-  useEffect(() => {
-    if (currentUser) {
-      setUserPets(currentUser.dogs)
-    }
-  }, [currentUser])
 
   const notify = (msg) => {
     const notification = document.querySelector('.notification')
@@ -61,14 +59,14 @@ export const AppWrapper = ({ children }) => {
     darkmode,
     notificationMsg,
     showOnboarding,
-    userPets,
+    userDogs,
     setCurrentUser,
     setSession,
     setLoading,
     setDarkmode,
     setNotificationMsg,
     setShowOnboarding,
-    setUserPets,
+    setUserDogs,
 
     notify
   }

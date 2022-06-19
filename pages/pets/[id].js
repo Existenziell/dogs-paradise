@@ -12,7 +12,7 @@ import Avatar from '../../components/Avatar'
 
 const Pets = ({ data, i18n }) => {
   const { id, name, status, age, avatar_url } = data
-  const { session, notify, userPets, setUserPets } = useApp()
+  const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const router = useRouter()
 
@@ -36,8 +36,8 @@ const Pets = ({ data, i18n }) => {
       .eq('id', id)
 
     if (!error) {
-      const filtered = userPets.filter(p => (p.id !== id))
-      setUserPets(filtered)
+      const filtered = userDogs.filter(p => (p.id !== id))
+      setUserDogs(filtered)
       setShowDelete(false)
       notify("Dog deleted successfully!")
       router.push('/profile')

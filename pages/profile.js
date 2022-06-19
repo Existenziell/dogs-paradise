@@ -12,17 +12,16 @@ import Header from '../components/Header'
 import useApp from '../context/AppContext'
 
 const Profile = ({ i18n }) => {
-  const { session, currentUser, notify, userPets, showOnboarding } = useApp()
-  /* eslint-disable no-unused-vars */
+  const { session, currentUser, notify, userDogs, showOnboarding } = useApp()
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState(null)
   const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
-  const [is_premium, setIsPremium] = useState(null)
+  const [is_premium,] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
-  /* eslint-enable no-unused-vars */
+  const [showEdit, setShowEdit] = useState(false)
 
   useEffect(() => {
     if (currentUser) {
@@ -34,6 +33,11 @@ const Profile = ({ i18n }) => {
       setCreatedAt(currentUser.created_at)
     }
   }, [currentUser])
+
+  const handleEdit = async () => {
+    await updateProfile({ username, quote, avatar_url, setLoading, notify })
+    setShowEdit(false)
+  }
 
   if (!session || !currentUser) return <Auth />
 
@@ -53,7 +57,7 @@ const Profile = ({ i18n }) => {
             <Onboarding />
             :
             <>
-              <div className='flex flex-row flex-wrap justify-between gap-4'>
+              <div className='flex flex-row flex-wrap justify-center md:justify-between items-start gap-4'>
                 <div className='max-w-xs'>
                   <Avatar
                     bucket='avatars'
@@ -66,21 +70,59 @@ const Profile = ({ i18n }) => {
                   />
                 </div>
 
-                <div className='flex flex-col h-full gap-4'>
-                  <div className='text-right max-w-max self-end'>
-                    <p className='text-2xl md:text-4xl whitespace-nowrap'>{username}</p>
-                    <p className='text-xs'>{quote}</p>
+                {!showEdit ?
+                  <div className='flex flex-col items-center justify-center gap-4'>
+                    <div className='md:text-right max-w-max mt-8 md:mt-0'>
+                      <p className='text-2xl md:text-4xl whitespace-nowrap'>{username}</p>
+                      <p className='text-xs'>{quote}</p>
+                    </div>
+                    <div className='md:text-right text-sm mb-6'>
+                      <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
+                      <p>Member status: {is_premium ? `Premium` : `Free`}</p>
+                    </div>
+                    <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
+
                   </div>
-                  <div className='text-right text-sm mb-6'>
-                    <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
-                    <p>Member status: {is_premium ? `Premium` : `Free`}</p>
+                  :
+                  <div className="text-left shadow max-w-max bg-white dark:bg-dark dark:text-white px-5 py-3 rounded">
+                    <div>
+                      <label htmlFor="username" className='block text-xs mt-2'>Username</label>
+                      <input
+                        id="username"
+                        type="text"
+                        value={username || ''}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                    <div className='mt-2'>
+                      <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
+                      <input
+                        id="quote"
+                        type="text"
+                        value={quote || ''}
+                        onChange={(e) => setQuote(e.target.value)}
+                      />
+                    </div>
+
+                    <div>
+                      <button
+                        className="mt-6 text-xl button-secondary"
+                        onClick={handleEdit}
+                        disabled={loading}
+                        aria-label='Update Profile'
+                      >
+                        {loading ? 'Loading ...' : 'Save'}
+                      </button>
+                      <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
+                    </div>
                   </div>
-                </div>
+
+                }
               </div>
 
               <div className='flex flex-wrap justify-evenly items-center gap-4 mt-16'>
-                {userPets &&
-                  userPets.map(d => (
+                {userDogs &&
+                  userDogs.map(d => (
                     <div key={d.id} className='flex flex-col items-center justify-center'>
                       <Link href={`pets/${d.id}`}>
                         <a className='w-12 h-12 cursor-pointer hover:scale-105 transition-all'>
@@ -106,40 +148,6 @@ const Profile = ({ i18n }) => {
               </div>
             </>
           }
-        </div>
-
-        <div>
-          <div className="text-left shadow max-w-max bg-white dark:bg-dark dark:text-white px-5 py-3 rounded">
-            <div>
-              <label htmlFor="username" className='block text-xs mt-2'>Username</label>
-              <input
-                id="username"
-                type="text"
-                value={username || ''}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className='mt-2'>
-              <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
-              <input
-                id="quote"
-                type="text"
-                value={quote || ''}
-                onChange={(e) => setQuote(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <button
-                className="mt-6 text-xl button-secondary"
-                onClick={() => updateProfile({ username, quote, avatar_url, setLoading, notify })}
-                disabled={loading}
-                aria-label='Update Profile'
-              >
-                {loading ? 'Loading ...' : 'Save'}
-              </button>
-            </div>
-          </div>
         </div>
 
         <AddToHomeScreen />

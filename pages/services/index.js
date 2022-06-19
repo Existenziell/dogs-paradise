@@ -25,7 +25,7 @@ const Services = ({ i18n }) => {
           } />
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center my-20 gap-6' >
+        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center my-20 gap-6' >
           {services.map((s, idx) => (
             <Link href={s.link} key={s.title}>
               <a className='shadow-md bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:shadow-sm transition-all relative'>
@@ -33,7 +33,7 @@ const Services = ({ i18n }) => {
                   <div className='absolute -top-2 -left-2 rounded-lg bg-brand text-white text-sm px-2 py-1'>NEW</div>
                 }
                 <h2 className='bg-white dark:bg-brand-dark dark:text-white p-4 text-xl rounded-t-lg w-full'>{s.title}</h2>
-                <img src={s.img} alt='Pickup Service' width={150} height={150} className='my-4 dark:invert' />
+                <img src={s.img} alt='Pickup Service' className='w-36 my-4 dark:invert' />
                 <p className='h-16 px-8 text-sm dark:text-white'>{s.desc}</p>
               </a>
             </Link>
