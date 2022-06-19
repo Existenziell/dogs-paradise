@@ -82,10 +82,10 @@ const Dogs = ({ dog, i18n }) => {
             <p>Status: {status}</p>
             <div className='flex flex-col'>
               {/* <p className=' border-b border-dark'>Checklist:</p> */}
-              <h2 className='underline mt-4 mb-2'>Vaccines:</h2>
+              <h2 className='underline mt-4 mb-2'>Vaccines</h2>
               <div className='flex items-start justify-between gap-4'>
                 <div>
-                  {status_vaccine.map(vaccine => {
+                  {status_vaccine?.map(vaccine => {
                     return (
                       <div className='text-sm mb-2' key={vaccine.identifier}>
                         <p className='font-bold'>{vaccine.name}</p>
@@ -106,10 +106,10 @@ const Dogs = ({ dog, i18n }) => {
                 </div>
               </div>
 
-              <h2 className='mt-4 mb-2 underline'>Deworming:</h2>
+              <h2 className='mt-4 mb-2 underline'>Deworming</h2>
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
-                  {status_deworming.map(deworm => {
+                  {status_deworming?.map(deworm => {
                     return (
                       <div className='text-sm' key={deworm.type}>
                         <p className='font-bold'>{deworm.name}</p>
