@@ -42,13 +42,13 @@
     "T1": "Citas"
   },
 
-  "pets": {
+  "dogs": {
     "title": "Mascotas | Dog's Paradise",
     "desc": "Mascotas | Dog's Paradise",
     "T1": "Tu Mascotas"
   },
 
-  "addPet": {
+  "addDog": {
     "title": "Añadir Mascotas | Dog's Paradise",
     "desc": "Añadir Mascotas | Dog's Paradise",
     "T1": "Añadir Mascotas"

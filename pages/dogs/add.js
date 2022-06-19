@@ -83,8 +83,8 @@ const AddDog = ({ i18n }) => {
 export async function getStaticProps(context) {
   let i18n
   context.locale === 'en' ?
-    i18n = langEN.addPet :
-    i18n = langES.addPet
+    i18n = langEN.addDog :
+    i18n = langES.addDog
   return {
     props: { i18n },
   }

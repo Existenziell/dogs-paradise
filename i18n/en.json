@@ -39,16 +39,16 @@
     "T1": "Appointments"
   },
 
-  "pets": {
-    "title": "Pets | Dog's Paradise",
-    "desc": "Pets | Dog's Paradise",
-    "T1": "Your Pets"
+  "dogs": {
+    "title": "Dogs | Dog's Paradise",
+    "desc": "Dogs | Dog's Paradise",
+    "T1": "Your Dogs"
   },
 
-  "addPet": {
-    "title": "Add Pet | Dog's Paradise",
-    "desc": "Add Pet | Dog's Paradise",
-    "T1": "Add Pet"
+  "addDog": {
+    "title": "Add Dog | Dog's Paradise",
+    "desc": "Add Dog | Dog's Paradise",
+    "T1": "Add Dog"
   },
 
   "map": {

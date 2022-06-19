@@ -124,12 +124,12 @@ const Profile = ({ i18n }) => {
                 {userDogs &&
                   userDogs.map(d => (
                     <div key={d.id} className='flex flex-col items-center justify-center'>
-                      <Link href={`pets/${d.id}`}>
+                      <Link href={`dogs/${d.id}`}>
                         <a className='w-12 h-12 cursor-pointer hover:scale-105 transition-all'>
                           <img src='/icons/paw-pink.png' alt='Paw' />
                         </a>
                       </Link>
-                      <Link href={`pets/${d.id}`}>
+                      <Link href={`dogs/${d.id}`}>
                         <a className='mt-2'>
                           {d.name}
                         </a>
@@ -137,12 +137,12 @@ const Profile = ({ i18n }) => {
                     </div>
                   ))
                 }
-                <Link href={`pets/add/`}>
+                <Link href={`dogs/add/`}>
                   <a className='flex flex-col items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
-                    <span>Add Pet</span>
+                    <span>Add Dog</span>
                   </a>
                 </Link>
               </div>

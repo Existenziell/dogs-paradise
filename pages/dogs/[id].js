@@ -9,9 +9,10 @@ import langES from '../../i18n/es.json'
 import Header from '../../components/Header'
 import Auth from '../../components/Auth'
 import Avatar from '../../components/Avatar'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
 
-const Pets = ({ data, i18n }) => {
-  const { id, name, status, age, avatar_url } = data
+const Dogs = ({ dog, i18n }) => {
+  const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const router = useRouter()
@@ -64,7 +65,7 @@ const Pets = ({ data, i18n }) => {
           </a>
         </Link>
 
-        <div className='flex justify-center items-center gap-8'>
+        <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>
             <Avatar
               bucket='dogs'
@@ -79,15 +80,59 @@ const Pets = ({ data, i18n }) => {
           <div className='text-left'>
             <p>Age: {age}</p>
             <p>Status: {status}</p>
-            <div className='mt-6 flex flex-col'>
-              <div className='flex items-center justify-between'>
-                <p>Checklist:</p>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 inline-block text-green-700 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
+            <div className='flex flex-col'>
+              {/* <p className=' border-b border-dark'>Checklist:</p> */}
+              <h2 className='underline mt-4 mb-2'>Vaccines:</h2>
+              <div className='flex items-start justify-between gap-4'>
+                <div>
+                  {status_vaccine.map(vaccine => {
+                    return (
+                      <div className='text-sm mb-2' key={vaccine.identifier}>
+                        <p className='font-bold'>{vaccine.name}</p>
+                        <div className='flex items-center gap-2'>
+                          Status:
+                          {vaccine.status ?
+                            <>
+                              <CheckIcon className='w-4 text-green-500' />
+                              <p>Expires: {vaccine.expires}</p>
+                            </>
+                            :
+                            <XIcon className='w-4 text-red-500' />
+                          }
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
+
+              <h2 className='mt-4 mb-2 underline'>Deworming:</h2>
+              <div className='flex items-start justify-between gap-2 mb-8'>
+                <div>
+                  {status_deworming.map(deworm => {
+                    return (
+                      <div className='text-sm' key={deworm.type}>
+                        <p className='font-bold'>{deworm.name}</p>
+                        <div className='flex items-center gap-2'>
+                          {deworm.type}:
+                          {deworm.status ?
+                            <>
+                              <CheckIcon className='w-4 text-green-500' />
+                              <p>Product: {deworm.product}</p>
+                              <p>Expires: {deworm.expires}</p>
+                            </>
+                            :
+                            <XIcon className='w-4 text-red-500' />
+                          }
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
               <div className='flex items-center justify-between'>
-                <p>Delete Pet</p>
+                <p>Delete Dog</p>
                 <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-dark dark:text-white hover:text-brand hover:dark:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -127,7 +172,7 @@ const Pets = ({ data, i18n }) => {
 
 export async function getServerSideProps(context) {
   const id = context.params.id
-  let { data } = await supabase
+  let { data: dog } = await supabase
     .from('dogs')
     .select(`*, user(*)`)
     .eq('id', id)
@@ -135,12 +180,12 @@ export async function getServerSideProps(context) {
 
   let i18n
   context.locale === 'en' ?
-    i18n = langEN.pets :
-    i18n = langES.pets
+    i18n = langEN.dogs :
+    i18n = langES.dogs
 
   return {
-    props: { data, i18n },
+    props: { dog, i18n },
   }
 }
 
-export default Pets
+export default Dogs
