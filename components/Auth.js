@@ -24,7 +24,7 @@ const Auth = () => {
               socialButtonSize="xlarge"
               socialColors={false}
               magicLink
-              redirectTo={BASE_URL + router.pathname}
+              redirectTo={router.pathname}
               providers={['google', 'facebook', 'github']}
             />
           </SupaAuth.UserContextProvider>

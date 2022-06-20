@@ -22,10 +22,12 @@ const Onboarding = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="py-8 text-left">
-      <h1 className="text-xl mb-6">Just a few more steps to finalize your Membership Card!</h1>
+    <form onSubmit={handleSubmit} className="pb-8 flex flex-col items-center justify-center">
+      <img src='/logo.png' alt='Logo' className='w-28 rounded shadow-md dark:shadow-none dark:invert' />
+      <h1 className='text-2xl mt-6'>Welcome to Dog's Paradise</h1>
+      <p className="mb-6">Just follow these few steps to finalize your Membership Card!</p>
       <div>
-        <label htmlFor="username" className='block text-sm mb-1'>Username</label>
+        <label htmlFor="username" className='block text-sm mb-1'>Choose a username</label>
         <input
           id="username"
           type="text"
@@ -36,16 +38,18 @@ const Onboarding = () => {
       </div>
       <div className='mt-4'>
         <label htmlFor="quote" className='block text-sm mb-1'>Favorite Quote <br />Could be about dogs &#128021;)</label>
-        <input
+        <textarea
+          rows={5}
           id="quote"
           type="text"
           value={quote || ''}
           onChange={(e) => setQuote(e.target.value)}
-          className='w-full'
-        />
+          className='w-full p-4 rounded-sm'
+        >
+        </textarea>
       </div>
 
-      <div className='text-left my-8'>
+      <div className='flex flex-col items-center justify-center my-8'>
         <Avatar
           bucket='avatars'
           url={avatar_url}
