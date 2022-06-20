@@ -112,7 +112,6 @@ const Dogs = ({ dog, i18n }) => {
                   {status_deworming?.map(deworm => {
                     return (
                       <div className='text-sm' key={deworm.type}>
-                        <p className='font-bold'>{deworm.name}</p>
                         <div className='flex items-center gap-2'>
                           {deworm.type}:
                           {deworm.status ?

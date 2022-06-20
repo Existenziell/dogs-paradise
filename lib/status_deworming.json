@@ -1,0 +1,9 @@
+[
+  {
+    "type": "internal",
+    "product": "KIRANTEL",
+    "status": true,
+    "expires": "2021-10-18"
+  },
+  { "type": "external", "status": false, "expires": "" }
+]

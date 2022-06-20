@@ -1,0 +1,13 @@
+[
+  { "name": "Leptospirosis", "status": true, "expires": "2021-10-18" },
+  { "name": "Hepatitis", "status": false, "expires": "" },
+  { "name": "Distemper", "status": true, "expires": "2021-11-01" },
+  { "name": "Rabies", "status": true, "expires": "2020-08-12" },
+  { "name": "Bordetellosis", "status": false, "expires": "" },
+  {
+    "name": "Canine parainfluenza virus (CPIV)",
+    "status": false,
+    "expires": ""
+  },
+  { "name": "Parvo Virus", "status": true, "expires": "2021-09-22" }
+]
