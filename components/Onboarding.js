@@ -30,6 +30,7 @@ const Onboarding = () => {
         <label htmlFor="username" className='block text-sm mb-1'>Choose a username</label>
         <input
           id="username"
+          className='text-center'
           type="text"
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
@@ -37,7 +38,7 @@ const Onboarding = () => {
         />
       </div>
       <div className='mt-4'>
-        <label htmlFor="quote" className='block text-sm mb-1'>Favorite Quote <br />Could be about dogs &#128021;)</label>
+        <label htmlFor="quote" className='block text-sm mb-1'>Favorite Quote <br />(Could be about dogs &#128021;)</label>
         <textarea
           rows={5}
           id="quote"

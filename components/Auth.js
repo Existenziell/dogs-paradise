@@ -6,7 +6,6 @@ import Head from 'next/head'
 
 const Auth = () => {
   const router = useRouter()
-
   return (
     <>
       <Head>
@@ -24,7 +23,7 @@ const Auth = () => {
               socialButtonSize="xlarge"
               socialColors={false}
               magicLink
-              redirectTo={router.pathname}
+              redirectTo={process.env.NEXT_PUBLIC_APP_BASE_URL + router.pathname}
               providers={['google', 'facebook', 'github']}
             />
           </SupaAuth.UserContextProvider>
