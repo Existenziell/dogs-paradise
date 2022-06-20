@@ -24,7 +24,7 @@ const Onboarding = () => {
   return (
     <form onSubmit={handleSubmit} className="pb-8 flex flex-col items-center justify-center">
       <img src='/logo.png' alt='Logo' className='w-28 rounded shadow-md dark:shadow-none dark:invert' />
-      <h1 className='text-2xl mt-6'>Welcome to Dog's Paradise</h1>
+      <h1 className='text-2xl mt-6'>Welcome to Dog&apos;s Paradise</h1>
       <p className="mb-6">Just follow these few steps to finalize your Membership Card!</p>
       <div>
         <label htmlFor="username" className='block text-sm mb-1'>Choose a username</label>
