@@ -1,10 +1,11 @@
-import { supabase } from '../lib/supabase'
-import useApp from '../context/AppContext'
+import { supabase } from '../../lib/supabase'
+import useApp from '../../context/AppContext'
 import Head from 'next/head'
-import Users from '../components/admin/Users'
-import Dogs from '../components/admin/Dogs'
-import Auth from '../components/Auth'
-import Appointments from '../components/admin/Appointments'
+import Users from '../../components/admin/Users'
+import Dogs from '../../components/admin/Dogs'
+import Auth from '../../components/Auth'
+import Appointments from '../../components/admin/Appointments'
+import Nav from '../../components/admin/Nav'
 
 const Admin = ({ users, dogs, roles, appointments }) => {
   const { session, currentUser } = useApp()
@@ -20,6 +21,7 @@ const Admin = ({ users, dogs, roles, appointments }) => {
       </Head>
 
       <div className='py-16 admin'>
+        <Nav />
         <h1 className='text-4xl mt-8'>Admin Control</h1>
         <p className='text-sm mt-2'>Remember, with great power comes great responsibility.</p>
 
@@ -46,7 +48,7 @@ export async function getServerSideProps() {
   // Who is assigned to which appointment?
   for (const appointment of appointments) {
     const { data: assignedUser } = await supabase.from('users').select(`*`).eq('id', appointment.assigned_to).single()
-    appointment.assignedUser = assignedUser.username
+    if (assignedUser) appointment.assignedUser = assignedUser.username
   }
 
   return {

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { GridLoader } from 'react-spinners'
-import Auth from '../components/Auth'
+import Auth from '../../components/Auth'
 import Head from 'next/head'
-import Header from '../components/Header'
-import langEN from '../i18n/en.json'
-import langES from '../i18n/es.json'
-import getAppointments from '../lib/getAppointments'
-import downloadImage from '../lib/supabase/downloadImage'
-import useApp from '../context/AppContext'
+import Header from '../../components/Header'
+import langEN from '../../i18n/en.json'
+import langES from '../../i18n/es.json'
+import getPickups from '../../lib/getPickups'
+import downloadImage from '../../lib/supabase/downloadImage'
+import useApp from '../../context/AppContext'
+import Link from 'next/link'
 
 const Appointments = ({ i18n }) => {
   const [appointments, setAppointments] = useState(null)
@@ -15,11 +16,11 @@ const Appointments = ({ i18n }) => {
   const bucket = 'pickups'
 
   useEffect(() => {
-    if (session) getPickups()
+    if (session) fetchAppointments()
   }, [session])
 
-  const getPickups = async () => {
-    const appointments = await getAppointments()
+  const fetchAppointments = async () => {
+    const appointments = await getPickups()
     for (const a of appointments) {
       const image = await downloadImage(bucket, a.image_url, () => { })
       const blob = new Blob([image], { type: image.type })
@@ -66,7 +67,10 @@ const Appointments = ({ i18n }) => {
             )
           })
           :
-          <p>No appointments yet.</p>
+          <>
+            <p>No appointments yet.</p>
+            <Link href='/appointments/create'><a className='link mt-4'>Create Appointment</a></Link>
+          </>
         }
       </div>
     </>

@@ -116,7 +116,6 @@ const Profile = ({ i18n }) => {
                       <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
                     </div>
                   </div>
-
                 }
               </div>
 
@@ -146,6 +145,15 @@ const Profile = ({ i18n }) => {
                   </a>
                 </Link>
               </div>
+
+              {currentUser.role === 1 &&
+                <div className='mt-12'>
+                  <p className='mb-4'>App Administration:</p>
+                  <Link href='/admin/dogs'><a className='button button-secondary mr-2'>Dogs</a></Link>
+                  <Link href='/admin/users'><a className='button button-secondary mr-2'>Users</a></Link>
+                  <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>
+                </div>
+              }
             </>
           }
         </div>

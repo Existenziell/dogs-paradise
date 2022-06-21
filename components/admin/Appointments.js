@@ -47,6 +47,7 @@ const Appointments = ({ appointments }) => {
             <th>Type</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Service?</th>
             <th>Assigned</th>
             <th>Done</th>
             <th>Delete</th>
@@ -60,12 +61,13 @@ const Appointments = ({ appointments }) => {
 
           {fetchedAppointments?.map((appointment, idx) => (
             <tr key={appointment.id} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
-              <td>{appointment.created_at}</td>
+              <td>{appointment.created_at.substring(0, 10)}</td>
               <td>{appointment.users.username}</td>
               <td>{appointment.dogs.name}</td>
               <td>{appointment.type}</td>
               <td>{appointment.date}</td>
               <td>{appointment.time}</td>
+              <td>{appointment.service_option.toString()}</td>
               <td>{appointment.assignedUser}</td>
               <td>{appointment.done.toString()}</td>
               <td className='text-center align-middle'>

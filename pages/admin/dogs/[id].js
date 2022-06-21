@@ -1,15 +1,15 @@
-import { supabase } from '../../lib/supabase'
+import { supabase } from '../../../lib/supabase'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import useApp from '../../context/AppContext'
-import langEN from '../../i18n/en.json'
-import langES from '../../i18n/es.json'
-import Header from '../../components/Header'
-import Auth from '../../components/Auth'
-import Avatar from '../../components/Avatar'
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import useApp from '../../../context/AppContext'
+import langEN from '../../../i18n/en.json'
+import langES from '../../../i18n/es.json'
+import Header from '../../../components/Header'
+import Auth from '../../../components/Auth'
+import Avatar from '../../../components/Avatar'
+import { LinkIcon, CheckIcon, XIcon } from '@heroicons/react/solid'
 
 const Dogs = ({ dog, i18n }) => {
   const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
@@ -41,7 +41,7 @@ const Dogs = ({ dog, i18n }) => {
       setUserDogs(filtered)
       setShowDelete(false)
       notify("Dog deleted successfully!")
-      router.push('/profile')
+      router.push('/admin/dogs')
     }
   }
 
@@ -57,7 +57,7 @@ const Dogs = ({ dog, i18n }) => {
       <Header content={name} />
 
       <div className='profile px-8 py-24'>
-        <Link href='/profile'>
+        <Link href='/admin/dogs'>
           <a>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -78,8 +78,16 @@ const Dogs = ({ dog, i18n }) => {
             />
           </div>
           <div className='text-left'>
-            <p>Age: {age}</p>
+            <div className='flex gap-2'>
+              <span>Owner:{` `}</span>
+              <Link href={`/admin/users/${dog.user.id}`}>
+                <a className='flex items-center justify-center gap-1'>
+                  <LinkIcon className='w-4' />{dog.user.username}
+                </a>
+              </Link>
+            </div>
             <p>Status: {status}</p>
+            <p>Age: {age}</p>
             <div className='flex flex-col'>
               {/* <p className=' border-b border-dark'>Checklist:</p> */}
               <h2 className='underline mt-4 mb-2'>Vaccines</h2>
