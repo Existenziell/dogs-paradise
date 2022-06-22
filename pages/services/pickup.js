@@ -19,6 +19,7 @@ const Pickup = () => {
   const [picture, setPicture] = useState()
   const [pickupImageUrl, setPickupImageUrl] = useState(null)
   const router = useRouter()
+  const appointmentId = router.query.appointment
 
   const saveLocation = (e) => {
     const coordinates = e.target.previousSibling.innerText
@@ -30,11 +31,11 @@ const Pickup = () => {
     setPhoneNumber(phone)
   }
 
-  const saveRequest = async () => {
+  const savePickup = async () => {
     const { error } = await supabase
       .from('pickups')
       .insert([
-        { phone_number: phoneNumber, image_url: picture, coordinates, user_id: currentUser.id },
+        { phone_number: phoneNumber, image_url: picture, coordinates, user_id: currentUser.id, appointment: appointmentId },
       ])
 
     if (!error) {
@@ -154,7 +155,7 @@ const Pickup = () => {
           </div>
 
           <button
-            onClick={saveRequest}
+            onClick={savePickup}
             className='mt-8 button'
             disabled={!picture && !phoneNumber && !coordinates}
             aria-label='Send Request'

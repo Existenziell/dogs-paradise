@@ -10,13 +10,27 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { services } from '../../lib/services'
 
-const CreateAppointment = () => {
+const CreateAppointment = ({ slug, service }) => {
   const { session, currentUser, userDogs, notify } = useApp()
   const [formData, setFormData] = useState({})
   const [dogOptions, setDogOptions] = useState()
-  const [typeOptions, setTypeOptions] = useState()
-  const [appointmentDate, setAppointmentDate] = useState(new Date());
+  const [serviceOptions, setServiceOptions] = useState()
+  const [appointmentDate, setAppointmentDate] = useState(new Date())
+  const [selectedService, setSelectedService] = useState()
   const router = useRouter()
+
+  useEffect(() => {
+    let serviceObj = services.filter(s => s.slug === slug)[0]
+    setSelectedService(serviceObj)
+  }, [slug, service, router.query])
+
+  const incoming = { value: slug, label: service }
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (incoming.value !== '') setFormData({ ...formData, ...{ type: service } })
+  }, [])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     if (userDogs) {
@@ -32,14 +46,16 @@ const CreateAppointment = () => {
     if (services) {
       let options = []
       services.forEach(service => {
-        options.push({ value: service.title, label: service.title })
+        options.push({ value: service.slug, label: service.title })
       })
-      setTypeOptions(options)
+      setServiceOptions(options)
     }
   }, [])
 
   function setType(e) {
     setFormData({ ...formData, ...{ type: e.value } })
+    let selected = services.filter(s => s.slug === e.value)[0]
+    setSelectedService(selected)
   }
 
   function setDog(e) {
@@ -93,32 +109,45 @@ const CreateAppointment = () => {
       <Header content='Create Appointment' />
 
       <div className='px-8 py-24'>
-        <form onSubmit={saveAppointment} className='flex flex-col gap-4 max-w-lg mx-auto bg-gray-100 p-4 rounded'>
+        <form onSubmit={saveAppointment} className='flex flex-col gap-4 max-w-lg mx-auto bg-white text-brand-dark p-6 rounded shadow'>
 
           <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/6 text-left'>Type:</p>
+            <p className='block w-1/6 text-left'>Service:</p>
             <div className='w-full md:w-[80%]'>
               <Select
-                options={typeOptions}
+                options={serviceOptions}
                 onChange={setType}
                 instanceId
-              // defaultValue={"hello"}
+                defaultValue={incoming?.value !== '' ? incoming : null}
               // isMulti
               // isDisabled={!showEdit}
               />
             </div>
+
           </div>
 
+          {selectedService &&
+            <>
+              <div className='text-left'>
+                {selectedService.desc}
+              </div>
+
+              <div className='text-left text-xs shadow p-4'>
+                <p className='mb-2 text-sm'>Prices for this Service:</p>
+                <div className='shadow-sm p-2 bg-gray-50'>{selectedService.prices}</div>
+                <p className='mt-2'>All prices are in Pesos</p>
+              </div>
+            </>
+          }
+
           <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/6 text-left'>Dog(s):</p>
+            <p className='block w-1/6 text-left'>Dog:</p>
             <div className='w-full md:w-[80%]'>
               <Select
                 options={dogOptions}
                 onChange={setDog}
                 instanceId
-              // defaultValue={"hello"}
               // isMulti
-              // isDisabled={!showEdit}
               />
             </div>
           </div>
@@ -137,28 +166,26 @@ const CreateAppointment = () => {
                 type='number' name='timeHour' id='timeHour'
                 required min={0} max={12}
                 onChange={setTime}
-                className='text-center w-16 px-3 py-2'
+                className='text-center w-16 px-3 py-2 border rounded'
               />
               <span className='mx-2'>:</span>
               <input
                 required min={0} max={59}
                 type='number' name='timeMinute' id='timeMinute'
                 onChange={setTime}
-                className='text-center w-16 px-3 py-2 mr-4'
+                className='text-center w-16 px-3 py-2 border rounded mr-4'
               />
               <Select
                 options={[{ value: 'am', label: 'am' }, { value: 'pm', label: 'pm' }]}
                 onChange={setTime}
                 instanceId
-              // defaultValue={'am'}
-              // isDisabled={}
               />
             </div>
           </div>
 
-          <div className='flex items-center text-left justify-start gap-4 w-full'>
-            <span className=''>Would you like to use our Pickup/Delivery service?</span>
-            <div className=''>
+          <div className='text-left w-full'>
+            <p className='mb-1'>Would you like to use our Pickup/Delivery service?</p>
+            <div className='flex items-center justify-start gap-4'>
               <label htmlFor='no' className='cursor-pointer block'>
                 <input
                   type="radio" value="false"
@@ -192,6 +219,20 @@ const CreateAppointment = () => {
       </div>
     </>
   )
+}
+
+export async function getServerSideProps({ query }) {
+  let slug = ''
+  let service = ''
+
+  if (query?.slug) {
+    slug = query.slug
+    service = query.service
+  }
+
+  return {
+    props: { slug, service },
+  }
 }
 
 export default CreateAppointment

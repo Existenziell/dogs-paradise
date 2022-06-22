@@ -119,7 +119,8 @@ const Profile = ({ i18n }) => {
                 }
               </div>
 
-              <div className='flex flex-wrap justify-evenly items-center gap-4 mt-16'>
+              <h2 className='text-2xl text-left mt-16 mb-4'>My Dogs:</h2>
+              <div className='flex flex-wrap justify-start items-center gap-16'>
                 {userDogs &&
                   userDogs.map(d => (
                     <div key={d.id} className='flex flex-col items-center justify-center'>
@@ -145,6 +146,9 @@ const Profile = ({ i18n }) => {
                   </a>
                 </Link>
               </div>
+
+              <h2 className='text-2xl text-left mt-16 mb-4'>My Appointments:</h2>
+              <Link href='/appointments'><a className='button-secondary flex w-max'>View my appointments</a></Link>
 
               {currentUser.role === 1 &&
                 <div className='mt-12'>

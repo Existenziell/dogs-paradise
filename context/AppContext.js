@@ -28,7 +28,7 @@ export const AppWrapper = ({ children }) => {
     if (!authUser) return
 
     const user = await getProfile(() => { })
-    if (!user?.username || !user?.avatar_url) {
+    if (!user?.username) {
       setShowOnboarding(true)
     } else {
       setShowOnboarding(false)
