@@ -3,9 +3,10 @@ import { supabase } from '../../../lib/supabase'
 import useApp from '../../../context/AppContext'
 import Head from 'next/head'
 import Nav from '../../../components/admin/Nav'
+import Auth from '../../../components/Auth'
 
 const Appointments = ({ appointments }) => {
-  const { notify } = useApp()
+  const { notify, session } = useApp()
   const [fetchedAppointments, setFetchedAppointments] = useState()
   const [showDelete, setShowDelete] = useState(false)
   const [appointmentToDelete, setAppointmentToDelete] = useState()
@@ -34,6 +35,8 @@ const Appointments = ({ appointments }) => {
       notify("Appointment cannot be deleted, because they have active dogs")
     }
   }
+
+  if (!session) return <Auth />
 
   return (
     <>

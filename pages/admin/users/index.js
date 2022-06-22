@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
 import Head from 'next/head'
 import Link from 'next/link'
+import useApp from '../../../context/AppContext'
 import Nav from '../../../components/admin/Nav'
+import Auth from '../../../components/Auth'
 
 const Users = ({ users, roles }) => {
   const [fetchedUsers, setFetchedUsers] = useState()
+  const { session } = useApp()
 
   useEffect(() => {
     setFetchedUsers(users)
@@ -15,6 +18,8 @@ const Users = ({ users, roles }) => {
   roles.forEach(r => {
     roleOptions.push({ value: r.id, label: r.name })
   })
+
+  if (!session) return <Auth />
 
   return (
     <>

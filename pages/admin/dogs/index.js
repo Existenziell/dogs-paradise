@@ -5,9 +5,10 @@ import useApp from '../../../context/AppContext'
 import Select from 'react-select'
 import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
+import Auth from '../../../components/Auth'
 
 const Dogs = ({ dogs, users }) => {
-  const { notify } = useApp()
+  const { notify, session } = useApp()
 
   const [fetchedDogs, setFetchedDogs] = useState()
   const [formData, setFormData] = useState()
@@ -57,6 +58,8 @@ const Dogs = ({ dogs, users }) => {
   users.forEach(u => {
     ownerOptions.push({ value: u.id, label: u.name ? u.name : u.username })
   })
+
+  if (!session) return <Auth />
 
   return (
     <>
