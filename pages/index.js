@@ -36,7 +36,7 @@ const Home = ({ i18n }) => {
           ))}
         </div>
 
-        <div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full'>
+        <div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full mb-16'>
           <video src='/video/promo.mp4' controls={true} loop={false} autoPlay={false} className='max-w-xs md:w-1/2 mx-auto rounded-md' />
           <div className='flex flex-col items-center justify-center'>
             <Quote text='Our job is to make them happy' classes='mb-8' />

@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import useApp from '../../context/AppContext'
 import { useRouter } from 'next/router'
+import { services } from '../../lib/services'
+import useApp from '../../context/AppContext'
+import Link from 'next/link'
 import Head from 'next/head'
 import Auth from '../../components/Auth'
 import Header from '../../components/Header'
 import Select from 'react-select'
+import selectStyles from '../../lib/selectStyles'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { services } from '../../lib/services'
 
 const CreateAppointment = ({ slug, service }) => {
-  const { session, currentUser, userDogs, notify } = useApp()
+  const { session, currentUser, userDogs, notify, darkmode } = useApp()
   const [formData, setFormData] = useState({})
   const [dogOptions, setDogOptions] = useState()
   const [serviceOptions, setServiceOptions] = useState()
   const [appointmentDate, setAppointmentDate] = useState(new Date())
   const [selectedService, setSelectedService] = useState()
+  const [styles, setStyles] = useState()
   const router = useRouter()
 
   useEffect(() => {
@@ -25,12 +28,16 @@ const CreateAppointment = ({ slug, service }) => {
   }, [slug, service, router.query])
 
   const incoming = { value: slug, label: service }
-
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (incoming.value !== '') setFormData({ ...formData, ...{ type: service } })
   }, [])
   /* eslint-enable react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    let tempStyles = selectStyles(darkmode)
+    setStyles(tempStyles)
+  }, [darkmode])
 
   useEffect(() => {
     if (userDogs) {
@@ -78,7 +85,7 @@ const CreateAppointment = ({ slug, service }) => {
 
   const saveAppointment = async (e) => {
     e.preventDefault()
-    const time = `${formData.timeHour} : ${formData.timeMinute}`
+    const time = `${formData.timeHour}:${formData.timeMinute}${formData.ampm}`
     const { error } = await supabase
       .from('appointments')
       .insert([
@@ -109,7 +116,16 @@ const CreateAppointment = ({ slug, service }) => {
       <Header content='Create Appointment' />
 
       <div className='px-8 py-24'>
-        <form onSubmit={saveAppointment} className='flex flex-col gap-4 max-w-lg mx-auto bg-white text-brand-dark p-6 rounded shadow'>
+
+        <Link href='/services'>
+          <a>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </a>
+        </Link>
+
+        <form onSubmit={saveAppointment} className='flex flex-col gap-4 max-w-lg mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-6 rounded shadow'>
 
           <div className='flex items-center justify-start gap-4 w-full'>
             <p className='block w-1/6 text-left'>Service:</p>
@@ -119,6 +135,7 @@ const CreateAppointment = ({ slug, service }) => {
                 onChange={setType}
                 instanceId
                 defaultValue={incoming?.value !== '' ? incoming : null}
+                styles={styles}
               // isMulti
               // isDisabled={!showEdit}
               />
@@ -134,7 +151,7 @@ const CreateAppointment = ({ slug, service }) => {
 
               <div className='text-left text-xs shadow p-4'>
                 <p className='mb-2 text-sm'>Prices for this Service:</p>
-                <div className='shadow-sm p-2 bg-gray-50'>{selectedService.prices}</div>
+                <div className='shadow-sm p-2 bg-gray-50 dark:bg-dark'>{selectedService.prices}</div>
                 <p className='mt-2'>All prices are in Pesos</p>
               </div>
             </>
@@ -147,6 +164,7 @@ const CreateAppointment = ({ slug, service }) => {
                 options={dogOptions}
                 onChange={setDog}
                 instanceId
+                styles={styles}
               // isMulti
               />
             </div>
@@ -170,7 +188,7 @@ const CreateAppointment = ({ slug, service }) => {
               />
               <span className='mx-2'>:</span>
               <input
-                required min={0} max={59}
+                required min={0} max={59} step={15}
                 type='number' name='timeMinute' id='timeMinute'
                 onChange={setTime}
                 className='text-center w-16 px-3 py-2 border rounded mr-4'
@@ -179,6 +197,7 @@ const CreateAppointment = ({ slug, service }) => {
                 options={[{ value: 'am', label: 'am' }, { value: 'pm', label: 'pm' }]}
                 onChange={setTime}
                 instanceId
+                styles={styles}
               />
             </div>
           </div>

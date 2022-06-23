@@ -73,7 +73,7 @@ https://github.com/vercel/next.js/issues/21914 */
 .button-secondary {
   @apply px-4 py-2 text-sm transition-all
   bg-transparent text-brand-dark rounded shadow-md bg-white
-  dark:bg-dark dark:text-white
+  dark:bg-brand-dark dark:text-white
   hover:shadow hover:cursor-pointer;
 }
 
@@ -203,6 +203,10 @@ div.mapboxgl-popup-content {
 	Admin
 	========================================================================== */
 
+.admin table {
+  @apply rounded-sm;  
+}
+
 .admin th {
   @apply px-2 py-6;
 }
@@ -223,11 +227,11 @@ div.mapboxgl-popup-content {
 }
 
 .admin-table {
-  @apply shadow bg-white text-brand-dark text-sm table-auto w-full;
+  @apply shadow bg-white text-brand-dark dark:bg-brand-dark dark:text-white text-sm table-auto w-full;
 }
 
 .admin-table-header {
-  @apply border-b font-bold;
+  @apply border-b dark:border-slate-800 font-bold;
 }
 
 .admin-table-title {

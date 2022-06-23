@@ -51,7 +51,7 @@ const Profile = ({ i18n }) => {
       <Header content={i18n.T1} />
 
       <div className='px-8 profile py-24'>
-        <div className='p-4 md:p-8 mx-auto'>
+        <div className='p-4 md:p-8 mx-auto mb-16'>
 
           {showOnboarding ?
             <Onboarding />
@@ -70,17 +70,49 @@ const Profile = ({ i18n }) => {
                   />
                 </div>
 
+                {/* <h2 className='text-2xl text-left mt-16 mb-4'>My Dogs:</h2> */}
+                <div className='flex flex-wrap justify-start items-center gap-16 mt-8 md:mt-0'>
+                  {userDogs &&
+                    userDogs.map(d => (
+                      <div key={d.id} className='flex flex-col items-center justify-center'>
+                        <Link href={`dogs/${d.id}`}>
+                          <a className='w-12 h-12 cursor-pointer hover:scale-105 transition-all'>
+                            <img src='/icons/paw-pink.png' alt='Paw' />
+                          </a>
+                        </Link>
+                        <Link href={`dogs/${d.id}`}>
+                          <a className='mt-2'>
+                            {d.name}
+                          </a>
+                        </Link>
+                      </div>
+                    ))
+                  }
+
+                  <Link href={`dogs/add/`}>
+                    <a className='flex flex-col items-center'>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                      </svg>
+                      <span>Add Dog</span>
+                    </a>
+                  </Link>
+                </div>
+
                 {!showEdit ?
                   <div className='flex flex-col items-center justify-center gap-4'>
                     <div className='md:text-right max-w-max mt-8 md:mt-0'>
                       <p className='text-2xl md:text-4xl whitespace-nowrap'>{username}</p>
                       <p className='text-xs'>{quote}</p>
                     </div>
-                    <div className='md:text-right text-sm mb-6'>
+                    <div className='md:text-right text-sm mb-2'>
                       <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
                       <p>Member status: {is_premium ? `Premium` : `Free`}</p>
                     </div>
                     <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
+
+                    <h2 className='md:text-2xl text-left mt-8 md:mb-4'>Appointments:</h2>
+                    <Link href='/appointments'><a className='button-secondary flex w-max'>View appointments</a></Link>
 
                   </div>
                   :
@@ -118,37 +150,6 @@ const Profile = ({ i18n }) => {
                   </div>
                 }
               </div>
-
-              <h2 className='text-2xl text-left mt-16 mb-4'>My Dogs:</h2>
-              <div className='flex flex-wrap justify-start items-center gap-16'>
-                {userDogs &&
-                  userDogs.map(d => (
-                    <div key={d.id} className='flex flex-col items-center justify-center'>
-                      <Link href={`dogs/${d.id}`}>
-                        <a className='w-12 h-12 cursor-pointer hover:scale-105 transition-all'>
-                          <img src='/icons/paw-pink.png' alt='Paw' />
-                        </a>
-                      </Link>
-                      <Link href={`dogs/${d.id}`}>
-                        <a className='mt-2'>
-                          {d.name}
-                        </a>
-                      </Link>
-                    </div>
-                  ))
-                }
-                <Link href={`dogs/add/`}>
-                  <a className='flex flex-col items-center'>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                    <span>Add Dog</span>
-                  </a>
-                </Link>
-              </div>
-
-              <h2 className='text-2xl text-left mt-16 mb-4'>My Appointments:</h2>
-              <Link href='/appointments'><a className='button-secondary flex w-max'>View my appointments</a></Link>
 
               {currentUser.role === 1 &&
                 <div className='mt-12'>

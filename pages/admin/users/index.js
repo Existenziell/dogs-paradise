@@ -35,11 +35,10 @@ const Users = ({ users, roles }) => {
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
-                <th>ID</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Premium?</th>
                 <th>Dogs</th>
+                <th>Membership</th>
                 <th>Role</th>
                 <th>Edit</th>
               </tr>
@@ -50,22 +49,21 @@ const Users = ({ users, roles }) => {
                 <tr className='p-4'><td>No users found.</td></tr>
               }
 
-              {fetchedUsers?.map((user, idx) => (
-                <tr key={user.id + user.username} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
-                  <td>{`${user.id.slice(0, 4)}...${user.id.slice(-4)}`}</td>
+              {fetchedUsers?.map((user) => (
+                <tr key={user.id + user.username} className='relative'>
                   <td>{user.username}</td>
-                  <td>{user.email ? `${user.email?.slice(0, 14)}...` : ``}</td>
-                  <td>{user.is_premium.toString()}</td>
+                  <td>{user.email}</td>
                   <td>
                     {user?.dogs?.map(d => (
                       <span key={`${d.name}-${user.id}`} className='mr-2'>{d.name}</span>
                     ))}
                   </td>
-                  <td>{user.role}</td>
+                  <td>{user.is_premium ? `Premium` : `Free`}</td>
+                  <td>{user.roles.name}</td>
                   <td>
                     <Link href={`/admin/users/${user.id}`}>
                       <a>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none dark:invert" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                           <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
                         </svg>
@@ -76,11 +74,6 @@ const Users = ({ users, roles }) => {
               ))}
             </tbody>
           </table>
-
-          <p className='text-xs mt-2 text-right'>
-            New users can only be added via valid Auth flow, aka they need to create a new account.<br />
-            The email is connected to auth.user and cannot be changed.
-          </p>
         </div>
       </div>
     </>

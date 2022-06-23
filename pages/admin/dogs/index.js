@@ -1,19 +1,23 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
+import { XCircleIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Select from 'react-select'
+import selectStyles from '../../../lib/selectStyles'
 import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
-import { XCircleIcon } from '@heroicons/react/outline'
+import { XIcon, PlusIcon } from '@heroicons/react/solid'
 
 const Dogs = ({ dogs, users }) => {
-  const { notify, session } = useApp()
+  const { notify, session, darkmode } = useApp()
   const [fetchedDogs, setFetchedDogs] = useState()
   const [filteredDogs, setFilteredDogs] = useState()
   const [formData, setFormData] = useState()
   const [search, setSearch] = useState('')
+  const [styles, setStyles] = useState()
+  const [showAdd, setShowAdd] = useState(false)
 
   useEffect(() => {
     // Check each dog if it is fully vaccinated
@@ -41,6 +45,11 @@ const Dogs = ({ dogs, users }) => {
   }, [search])
   /* eslint-enable react-hooks/exhaustive-deps */
 
+  useEffect(() => {
+    let tempStyles = selectStyles(darkmode)
+    setStyles(tempStyles)
+  }, [darkmode])
+
   const resetSearch = () => {
     setFilteredDogs(fetchedDogs)
     setSearch('')
@@ -53,11 +62,6 @@ const Dogs = ({ dogs, users }) => {
 
   function setSelectData(e) {
     setFormData({ ...formData, ...{ user: e.value } })
-  }
-
-  const openAdd = () => {
-    const panel = document.getElementById('addDogForm')
-    panel.classList.toggle('hidden')
   }
 
   const addDog = async (e) => {
@@ -75,8 +79,7 @@ const Dogs = ({ dogs, users }) => {
 
     if (!error) {
       notify("Dog added successfully!")
-      const panel = document.getElementById('addDogForm')
-      panel.classList.toggle('hidden')
+      setShowAdd(false)
       setFormData({})
       const newEntry = data[0]
       setFetchedDogs([...fetchedDogs, newEntry])
@@ -99,7 +102,7 @@ const Dogs = ({ dogs, users }) => {
 
       <div className='py-16 admin'>
         <Nav />
-        <div className='py-8 px-8 text-left'>
+        <div className='pt-8 px-8 pb-16 text-left'>
           <div className='flex justify-between items-center mb-1'>
             <h1 className='admin-table-title'>Dogs</h1>
             <div className='relative'>
@@ -126,8 +129,8 @@ const Dogs = ({ dogs, users }) => {
                 <tr className='p-4'><td>No dogs found.</td></tr>
               }
 
-              {filteredDogs?.map((dog, idx) => (
-                <tr key={dog.id + dog.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
+              {filteredDogs?.map((dog) => (
+                <tr key={dog.id + dog.name} className='relative'>
                   <td className='pl-6'>{dog.name}</td>
                   <td>{dog.status}</td>
                   <td>{dog.fullyVaccinated ? `Yes` : `No`}</td>
@@ -135,7 +138,7 @@ const Dogs = ({ dogs, users }) => {
                   <td>
                     <Link href={`/admin/dogs/${dog.id}`}>
                       <a>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none dark:invert" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                           <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
                         </svg>
@@ -148,20 +151,23 @@ const Dogs = ({ dogs, users }) => {
           </table>
 
           {/* Add dog */}
-          <button onClick={openAdd} className='my-4 link flex items-center' aria-label='Open Add Dog Form'>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-            </svg>
-            Add dog
+          <button onClick={() => setShowAdd(!showAdd)} className='my-4 flex items-center justify-center' aria-label='Open Add Dog Form'>
+            {showAdd ?
+              <><XIcon className='w-4' />Close</>
+              :
+              <><PlusIcon className='w-4' />Add Dog</>
+            }
           </button>
 
-          <form onSubmit={addDog} className='shadow max-w-max bg-slate-300 p-4 hidden' id='addDogForm' >
-            Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2' />
-            Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2' />
-            Owner <Select options={ownerOptions} onChange={setSelectData} instanceId />
+          {showAdd &&
+            <form onSubmit={addDog} className='shadow max-w-max p-4' id='addDogForm' >
+              Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2' />
+              Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2' />
+              Owner <Select options={ownerOptions} onChange={setSelectData} styles={styles} instanceId />
 
-            <input type='submit' className='link cursor-pointer block mt-6' value='Save' />
-          </form>
+              <input type='submit' className='button-secondary cursor-pointer block mt-6' value='Save' />
+            </form>
+          }
         </div>
       </div>
     </>

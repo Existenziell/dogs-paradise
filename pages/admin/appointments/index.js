@@ -61,13 +61,12 @@ const Appointments = ({ appointments }) => {
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
-                <th>Created</th>
-                <th>Client</th>
-                <th>Dog</th>
-                <th>Type</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Service?</th>
+                <th>Service</th>
+                <th>Client</th>
+                <th>Dog</th>
+                <th>Delivery/Pickup</th>
                 <th>Assigned</th>
                 <th>Done</th>
                 <th>Delete</th>
@@ -81,18 +80,17 @@ const Appointments = ({ appointments }) => {
 
               {fetchedAppointments?.map((appointment, idx) => (
                 <tr key={appointment.id} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
-                  <td>{appointment.created_at.substring(0, 10)}</td>
-                  <td>{appointment.client}</td>
-                  <td>{appointment.dogs.name}</td>
-                  <td className='capitalize'>{appointment.type.split('-').join(' ')}</td>
                   <td>{appointment.date}</td>
                   <td>{appointment.time}</td>
-                  <td>{appointment.service_option.toString()}</td>
+                  <td className='capitalize'>{appointment.type.split('-').join(' ')}</td>
+                  <td>{appointment.client}</td>
+                  <td>{appointment.dogs.name}</td>
+                  <td>{appointment.service_option ? `Yes` : `No`}</td>
                   <td>{appointment.assignedUser}</td>
                   <td>{appointment.done.toString()}</td>
                   <td className='text-center align-middle'>
                     <button onClick={() => toggleDeleteModal(appointment)} aria-label='Toggle Delete Modal'>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                       </svg>
                     </button>
