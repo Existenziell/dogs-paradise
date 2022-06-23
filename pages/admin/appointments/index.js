@@ -75,7 +75,7 @@ const Appointments = ({ appointments }) => {
             </thead>
             <tbody>
 
-              {!fetchedAppointments &&
+              {!fetchedAppointments?.length &&
                 <tr className='p-4'><td>No appointments found.</td></tr>
               }
 
