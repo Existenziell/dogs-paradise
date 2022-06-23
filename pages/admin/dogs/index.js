@@ -6,11 +6,14 @@ import Select from 'react-select'
 import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
+import { XCircleIcon } from '@heroicons/react/outline'
 
 const Dogs = ({ dogs, users }) => {
   const { notify, session } = useApp()
   const [fetchedDogs, setFetchedDogs] = useState()
+  const [filteredDogs, setFilteredDogs] = useState()
   const [formData, setFormData] = useState()
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     // Check each dog if it is fully vaccinated
@@ -22,7 +25,27 @@ const Dogs = ({ dogs, users }) => {
       }
     }
     setFetchedDogs(dogs)
+    setFilteredDogs(dogs)
   }, [dogs])
+
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (fetchedDogs) {
+      if (search === '') resetSearch()
+      let dogs = fetchedDogs.filter(d => (
+        d.name.toLowerCase().includes(search.toLowerCase()) ||
+        d.user.username.toLowerCase().includes(search.toLowerCase())
+      ))
+      setFilteredDogs(dogs)
+    }
+  }, [search])
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  const resetSearch = () => {
+    setFilteredDogs(fetchedDogs)
+    setSearch('')
+  }
 
   function setData(e) {
     const { name, value } = e.target
@@ -78,8 +101,16 @@ const Dogs = ({ dogs, users }) => {
       <div className='py-16 admin'>
         <Nav />
         <div className='py-8 px-8 text-left'>
-          <h1 className='admin-table-title'>Dogs</h1>
-
+          <div className='flex justify-between items-center mb-1'>
+            <h1 className='admin-table-title'>Dogs</h1>
+            <div className='relative'>
+              <span>Search:</span>
+              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} name='search' className='ml-2' />
+              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
+                <XCircleIcon className='w-5' />
+              </button>
+            </div>
+          </div>
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
@@ -92,11 +123,11 @@ const Dogs = ({ dogs, users }) => {
             </thead>
             <tbody>
 
-              {!fetchedDogs?.length &&
+              {!filteredDogs?.length &&
                 <tr className='p-4'><td>No dogs found.</td></tr>
               }
 
-              {fetchedDogs?.map((dog, idx) => (
+              {filteredDogs?.map((dog, idx) => (
                 <tr key={dog.id + dog.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
                   <td className='pl-6'>{dog.name}</td>
                   <td>{dog.status}</td>

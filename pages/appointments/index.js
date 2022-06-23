@@ -117,10 +117,13 @@ const Appointments = ({ i18n }) => {
           :
           <>
             <p>No appointments yet.</p>
-            <Link href='/appointments/create'><a className='link mt-4'>Create Appointment</a></Link>
+            <Link href='/appointments/create'><a className='button-secondary mt-4'>Create Appointment</a></Link>
           </>
         }
-        <Link href='/appointments/create'><a className='link mt-4'>Create Appointment</a></Link>
+
+        {appointments.length > 0 &&
+          <Link href='/appointments/create'><a className='button-secondary mt-4'>Create Appointment</a></Link>
+        }
 
       </div>
       {/* Delete appointment */}
@@ -131,7 +134,7 @@ const Appointments = ({ i18n }) => {
               <button onClick={() => setShowDelete(false)} className='absolute top-0 right-0 px-2 py-0 rounded-sm hover:text-brand text-2xl hover:bg-gray-100' aria-label='Close Delete Dialog'>
                 &times;
               </button>
-              <p className='text-sm'>Deleting appointment on date {appointmentToDelete.date} for service {appointmentToDelete.type}</p>
+              <p className='text-sm'>Deleting appointment on {appointmentToDelete.date} for {appointmentToDelete.type} service</p>
               <p className='text-2xl mt-2'>Are you sure?</p>
               <div className='flex items-center gap-4 mt-6'>
                 <button onClick={() => setShowDelete(false)} className='hover:text-brand hover:underline' aria-label='Cancel'>Cancel</button>
