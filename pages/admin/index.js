@@ -46,9 +46,11 @@ export async function getServerSideProps() {
   }
 
   // Who is assigned to which appointment?
-  for (const appointment of appointments) {
-    const { data: assignedUser } = await supabase.from('users').select(`*`).eq('id', appointment.assigned_to).single()
-    if (assignedUser) appointment.assignedUser = assignedUser.username
+  if (appointments) {
+    for (const appointment of appointments) {
+      const { data: assignedUser } = await supabase.from('users').select(`*`).eq('id', appointment.assigned_to).single()
+      if (assignedUser) appointment.assignedUser = assignedUser.username
+    }
   }
 
   return {

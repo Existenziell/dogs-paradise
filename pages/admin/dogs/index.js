@@ -28,7 +28,6 @@ const Dogs = ({ dogs, users }) => {
     setFilteredDogs(dogs)
   }, [dogs])
 
-
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (fetchedDogs) {
