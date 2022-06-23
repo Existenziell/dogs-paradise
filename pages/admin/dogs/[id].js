@@ -9,21 +9,33 @@ import langES from '../../../i18n/es.json'
 import Header from '../../../components/Header'
 import Auth from '../../../components/Auth'
 import Avatar from '../../../components/Avatar'
-import { LinkIcon, CheckIcon, XIcon } from '@heroicons/react/solid'
+import { LinkIcon, CheckIcon, XIcon, BadgeCheckIcon, BanIcon } from '@heroicons/react/solid'
 
 const Dogs = ({ dog, i18n }) => {
   const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
+  const [showDelete, setShowDelete] = useState(false)
+  const [showEdit, setShowEdit] = useState(false)
+  const [showWormEdit, setShowWormEdit] = useState(false)
+  const [statusVaccine, setStatusVaccine] = useState(null)
+  const [fullyVaccinated, setFullyVaccinated] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    setStatusVaccine(status_vaccine)
+    let check = true
+    for (let v of status_vaccine) {
+      if (v.status === 'false') check = false
+    }
+    setFullyVaccinated(check)
+  }, [status_vaccine])
 
   useEffect(() => {
     if (avatar_url) {
       setPublicUrl(avatar_url)
     }
   }, [avatar_url])
-
-  const [showDelete, setShowDelete] = useState(false)
 
   const handleUpload = async (url) => {
     await supabase.from('dogs').update({ avatar_url: url }).eq('id', id)
@@ -44,6 +56,51 @@ const Dogs = ({ dog, i18n }) => {
       router.push('/admin/dogs')
     }
   }
+
+  const saveVaccineStatus = async (id) => {
+    let status = []
+    const rows = document.getElementsByClassName('status-vaccine')
+    Array.from(rows).forEach(d => {
+      const inputs = Array.from(d.children)
+      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].value, [inputs[2].name]: inputs[2].value }
+      status.push(el)
+    })
+
+    const { error } = await supabase
+      .from('dogs')
+      .update({ status_vaccine: status })
+      .eq('id', id)
+
+    if (!error) {
+      setStatusVaccine(status)
+      let check = true
+      for (let v of status) {
+        if (v.status === 'false') check = false
+      }
+      setFullyVaccinated(check)
+      setShowEdit(false)
+    }
+  }
+
+  const saveWormStatus = async (id) => {
+    let status = []
+    const rows = document.getElementsByClassName('status-deworming')
+    Array.from(rows).forEach(d => {
+      const inputs = Array.from(d.children)
+      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].value, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
+      status.push(el)
+    })
+
+    const { error } = await supabase
+      .from('dogs')
+      .update({ status_deworming: status })
+      .eq('id', id)
+
+    if (!error) {
+      setShowWormEdit(false)
+    }
+  }
+
 
   if (!session) return <Auth />
 
@@ -76,71 +133,118 @@ const Dogs = ({ dog, i18n }) => {
                 handleUpload(url)
               }}
             />
+            <div className='flex flex-col items-start mt-8'>
+              <div className='flex gap-2'>
+                <span>Owner:{` `}</span>
+                <Link href={`/admin/users/${dog.user.id}`}>
+                  <a className='flex items-center justify-center gap-1'>
+                    <LinkIcon className='w-4' />{dog.user.username}
+                  </a>
+                </Link>
+              </div>
+              <p>Status: {status}</p>
+              <p>Age: {age}</p>
+            </div>
           </div>
           <div className='text-left'>
-            <div className='flex gap-2'>
-              <span>Owner:{` `}</span>
-              <Link href={`/admin/users/${dog.user.id}`}>
-                <a className='flex items-center justify-center gap-1'>
-                  <LinkIcon className='w-4' />{dog.user.username}
-                </a>
-              </Link>
+
+            <div className='flex items-center justify-start'>
+              <p>Fully vaccinated:</p>
+              {fullyVaccinated ?
+                <BadgeCheckIcon className='w-8 ml-2 text-green-500 inline-block' />
+                :
+                <BanIcon className='w-8 ml-2 text-red-500 inline-block' />
+              }
             </div>
-            <p>Status: {status}</p>
-            <p>Age: {age}</p>
             <div className='flex flex-col'>
-              {/* <p className=' border-b border-dark'>Checklist:</p> */}
               <h2 className='underline mt-4 mb-2'>Vaccines</h2>
+
               <div className='flex items-start justify-between gap-4'>
                 <div>
-                  {status_vaccine?.map(vaccine => {
+                  {statusVaccine?.map(vaccine => {
                     return (
                       <div className='text-sm mb-2' key={vaccine.name}>
-                        <p className='font-bold'>{vaccine.name}</p>
-                        <div className='flex items-center gap-2'>
-                          Status:
-                          {vaccine.status ?
-                            <>
-                              <CheckIcon className='w-4 text-green-500' />
-                              <p>Expires: {vaccine.expires}</p>
-                            </>
-                            :
-                            <XIcon className='w-4 text-red-500' />
-                          }
-                        </div>
+                        {!showEdit ?
+                          <>
+                            <div className='flex items-center gap-2'>
+                              <p className='font-bold'>{vaccine.name}</p>
+
+                              {vaccine.status === 'true' ?
+                                <>
+                                  <CheckIcon className='w-4 text-green-500' />
+                                  <p>(expires: {vaccine.expires})</p>
+                                </>
+                                :
+                                <XIcon className='w-4 text-red-500' />
+                              }
+                            </div>
+                          </>
+                          :
+                          <div className='flex gap-2 status-vaccine'>
+                            <input type='text' name='name' disabled className='font-bold bg-transparent border-none' defaultValue={vaccine.name} />
+                            <input type='text' name='expires' placeholder='expires at' className='font-bold' defaultValue={vaccine.expires} />
+                            <input type='text' name='status' placeholder='true/false' className='font-bold' defaultValue={vaccine.status.toString()} />
+                          </div>
+                        }
                       </div>
                     )
                   })}
+                  {!showEdit ?
+                    <button className='button-secondary mt-2' onClick={() => setShowEdit(true)}>Edit</button>
+                    :
+                    <div className='flex gap-4 mt-2'>
+                      <button className='button-secondary' onClick={() => setShowEdit(false)}>Cancel</button>
+                      <button className='button-secondary' onClick={() => saveVaccineStatus(id)}>Save</button>
+                    </div>
+                  }
                 </div>
               </div>
 
-              <h2 className='mt-4 mb-2 underline'>Deworming</h2>
+              <h2 className='mt-8 mb-2 underline'>Deworming</h2>
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
                   {status_deworming?.map(deworm => {
                     return (
                       <div className='text-sm' key={deworm.type}>
-                        <div className='flex items-center gap-2'>
-                          {deworm.type}:
-                          {deworm.status ?
-                            <>
-                              <CheckIcon className='w-4 text-green-500' />
-                              <p>Product: {deworm.product}</p>
-                              <p>Expires: {deworm.expires}</p>
-                            </>
-                            :
-                            <XIcon className='w-4 text-red-500' />
-                          }
-                        </div>
+
+                        {!showWormEdit ?
+                          <div className='flex items-center gap-2'>
+                            {deworm.type}:
+                            {deworm.status ?
+                              <>
+                                <CheckIcon className='w-4 text-green-500' />
+                                <p>Product: {deworm.product}</p>
+                                <p>Expires: {deworm.expires}</p>
+                              </>
+                              :
+                              <XIcon className='w-4 text-red-500' />
+                            }
+                          </div>
+                          :
+                          <div className='flex gap-2 status-deworming'>
+                            <input type='text' name='type' disabled className='bg-transparent border-none w-20' defaultValue={deworm.type} />
+                            <input type='text' name='product' placeholder='Product' defaultValue={deworm.product} />
+                            <input type='text' name='expires' placeholder='expires at' defaultValue={deworm.expires} />
+                            <input type='text' name='status' placeholder='true/false' defaultValue={deworm.status.toString()} />
+                          </div>
+                        }
                       </div>
                     )
                   })}
+                  {!showWormEdit ?
+                    <button className='button-secondary mt-2' onClick={() => setShowWormEdit(true)}>Edit</button>
+                    :
+                    <div className='flex gap-4 mt-2'>
+                      <button className='button-secondary' onClick={() => setShowWormEdit(false)}>Cancel</button>
+                      <button className='button-secondary' onClick={() => saveWormStatus(id)}>Save</button>
+                    </div>
+                  }
                 </div>
               </div>
 
-              <div className='flex items-center justify-between'>
-                <p>Delete Dog</p>
-                <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal'>
+              <div className='mt-8'>
+                <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal' className='flex flex-row items-center justify-center gap-2'>
+                  <span className='hover:text-brand'>Delete Dog</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-dark dark:text-white hover:text-brand hover:dark:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                   </svg>

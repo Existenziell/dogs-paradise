@@ -9,11 +9,18 @@ import Auth from '../../../components/Auth'
 
 const Dogs = ({ dogs, users }) => {
   const { notify, session } = useApp()
-
   const [fetchedDogs, setFetchedDogs] = useState()
   const [formData, setFormData] = useState()
 
   useEffect(() => {
+    // Check each dog if it is fully vaccinated
+    for (let dog of dogs) {
+      let check = true
+      for (let s of dog.status_vaccine) {
+        if (s.status === 'false') check = false
+        dog.fullyVaccinated = check
+      }
+    }
     setFetchedDogs(dogs)
   }, [dogs])
 
@@ -78,6 +85,7 @@ const Dogs = ({ dogs, users }) => {
               <tr className='admin-table-header'>
                 <th className='ml-4 block'>Name</th>
                 <th>Status</th>
+                <th>Vaccinated</th>
                 <th>Owner</th>
                 <th>Edit</th>
               </tr>
@@ -92,6 +100,7 @@ const Dogs = ({ dogs, users }) => {
                 <tr key={dog.id + dog.name} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
                   <td className='pl-6'>{dog.name}</td>
                   <td>{dog.status}</td>
+                  <td>{dog.fullyVaccinated ? `Yes` : `No`}</td>
                   <td>{dog.user?.name ? dog.user?.name : dog.user?.username}</td>
                   <td>
                     <Link href={`/admin/dogs/${dog.id}`}>
