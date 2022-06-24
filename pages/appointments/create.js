@@ -85,7 +85,8 @@ const CreateAppointment = ({ slug, service }) => {
 
   const saveAppointment = async (e) => {
     e.preventDefault()
-    const time = `${formData.timeHour}:${formData.timeMinute}${formData.ampm}`
+    let minutes = formData.timeMinute === '0' ? '00' : formData.timeMinute
+    const time = `${formData.timeHour}:${minutes}${formData.ampm}`
     const { error } = await supabase
       .from('appointments')
       .insert([
@@ -182,7 +183,7 @@ const CreateAppointment = ({ slug, service }) => {
             <div className='flex items-center text-center'>
               <input
                 type='number' name='timeHour' id='timeHour'
-                required min={0} max={12}
+                required min={1} max={12}
                 onChange={setTime}
                 className='text-center w-16 px-3 py-2 border rounded'
               />

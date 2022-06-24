@@ -1,6 +1,7 @@
 import { supabase } from '../../../lib/supabase'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { LinkIcon, CheckIcon, XIcon, BadgeCheckIcon, BanIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Link from 'next/link'
 import useApp from '../../../context/AppContext'
@@ -9,7 +10,7 @@ import langES from '../../../i18n/es.json'
 import Header from '../../../components/Header'
 import Auth from '../../../components/Auth'
 import Avatar from '../../../components/Avatar'
-import { LinkIcon, CheckIcon, XIcon, BadgeCheckIcon, BanIcon } from '@heroicons/react/solid'
+import BackBtn from '../../../components/BackBtn'
 
 const Dogs = ({ dog, i18n }) => {
   const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
@@ -19,7 +20,9 @@ const Dogs = ({ dog, i18n }) => {
   const [showEdit, setShowEdit] = useState(false)
   const [showWormEdit, setShowWormEdit] = useState(false)
   const [statusVaccine, setStatusVaccine] = useState(null)
+  const [statusDeworming, setStatusDeworming] = useState(null)
   const [fullyVaccinated, setFullyVaccinated] = useState(false)
+  const [fullyDewormed, setFullyDewormed] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -30,6 +33,15 @@ const Dogs = ({ dog, i18n }) => {
     }
     setFullyVaccinated(check)
   }, [status_vaccine])
+
+  useEffect(() => {
+    setStatusDeworming(status_deworming)
+    let check = true
+    for (let v of status_deworming) {
+      if (v.status === 'false') check = false
+    }
+    setFullyDewormed(check)
+  }, [status_deworming])
 
   useEffect(() => {
     if (avatar_url) {
@@ -90,17 +102,21 @@ const Dogs = ({ dog, i18n }) => {
       let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].value, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
       status.push(el)
     })
-
     const { error } = await supabase
       .from('dogs')
       .update({ status_deworming: status })
       .eq('id', id)
 
     if (!error) {
+      setStatusDeworming(status)
+      let check = true
+      for (let s of status) {
+        if (s.status === 'false') check = false
+      }
+      setFullyDewormed(check)
       setShowWormEdit(false)
     }
   }
-
 
   if (!session) return <Auth />
 
@@ -114,14 +130,7 @@ const Dogs = ({ dog, i18n }) => {
       <Header content={name} />
 
       <div className='profile px-8 py-24'>
-        <Link href='/admin/dogs'>
-          <a>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </a>
-        </Link>
-
+        <BackBtn href='/admin/dogs' />
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>
             <Avatar
@@ -151,6 +160,14 @@ const Dogs = ({ dog, i18n }) => {
             <div className='flex items-center justify-start'>
               <p>Fully vaccinated:</p>
               {fullyVaccinated ?
+                <BadgeCheckIcon className='w-8 ml-2 text-green-500 inline-block' />
+                :
+                <BanIcon className='w-8 ml-2 text-red-500 inline-block' />
+              }
+            </div>
+            <div className='flex items-center justify-start'>
+              <p>Fully dewormed:</p>
+              {fullyDewormed ?
                 <BadgeCheckIcon className='w-8 ml-2 text-green-500 inline-block' />
                 :
                 <BanIcon className='w-8 ml-2 text-red-500 inline-block' />
@@ -203,18 +220,18 @@ const Dogs = ({ dog, i18n }) => {
               <h2 className='mt-8 mb-2 underline'>Deworming</h2>
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
-                  {status_deworming?.map(deworm => {
+                  {statusDeworming?.map(deworm => {
                     return (
                       <div className='text-sm' key={deworm.type}>
 
                         {!showWormEdit ?
                           <div className='flex items-center gap-2'>
                             {deworm.type}:
-                            {deworm.status ?
+                            {deworm.status === 'true' ?
                               <>
                                 <CheckIcon className='w-4 text-green-500' />
                                 <p>Product: {deworm.product}</p>
-                                <p>Expires: {deworm.expires}</p>
+                                <p>(expires: {deworm.expires})</p>
                               </>
                               :
                               <XIcon className='w-4 text-red-500' />

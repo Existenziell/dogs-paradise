@@ -15,6 +15,10 @@ const Dogs = ({ dog, i18n }) => {
   const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
+  const [dogAge, setDogAge] = useState(age)
+  const [dogStatus, setDogStatus] = useState(status)
+  const [showEdit, setShowEdit] = useState(false)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -28,6 +32,14 @@ const Dogs = ({ dog, i18n }) => {
   const handleUpload = async (url) => {
     await supabase.from('dogs').update({ avatar_url: url }).eq('id', id)
     setPublicUrl(url)
+  }
+
+  const handleEdit = async () => {
+    setLoading(true)
+    const { error } = await supabase.from('dogs').update({ age: dogAge, status: dogStatus }).eq('id', id)
+    if (!error) notify("Updated successfully!")
+    setShowEdit(false)
+    setLoading(false)
   }
 
   const deleteDog = async (id) => {
@@ -78,8 +90,52 @@ const Dogs = ({ dog, i18n }) => {
             />
           </div>
           <div className='text-left'>
-            <p>Age: {age}</p>
-            <p>Status: {status}</p>
+
+            {!showEdit ?
+              <div className=''>
+                <p>Age: {dogAge}</p>
+                <p>Status: {dogStatus}</p>
+                <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
+
+              </div>
+              :
+              <div className="text-left shadow max-w-max bg-white dark:bg-dark dark:text-white px-5 py-3 rounded">
+                <div>
+                  <label htmlFor="age" className='block text-xs mt-2'>Age</label>
+                  <input
+                    id="age"
+                    name='age'
+                    type="text"
+                    defaultValue={dogAge || ''}
+                    onChange={(e) => setDogAge(e.target.value)}
+                  />
+                </div>
+                <div className='mt-2'>
+                  <label htmlFor="status" className='block text-xs mt-2'>Status</label>
+                  <input
+                    id="status"
+                    name='status'
+                    type="text"
+                    defaultValue={dogStatus || ''}
+                    onChange={(e) => setDogStatus(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <button
+                    className="mt-6 text-xl button-secondary"
+                    onClick={handleEdit}
+                    disabled={loading}
+                    aria-label='Update Dog'
+                  >
+                    {loading ? 'Loading ...' : 'Save'}
+                  </button>
+                  <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
+                </div>
+              </div>
+            }
+
+
             <div className='flex flex-col'>
               {/* <p className=' border-b border-dark'>Checklist:</p> */}
               <h2 className='underline mt-4 mb-2'>Vaccines</h2>

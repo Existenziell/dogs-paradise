@@ -5,19 +5,42 @@ import Link from 'next/link'
 import useApp from '../../../context/AppContext'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
+import { PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
 
 const Users = ({ users, roles }) => {
   const [fetchedUsers, setFetchedUsers] = useState()
+  const [filteredUsers, setFilteredUsers] = useState()
+  const [search, setSearch] = useState('')
   const { session } = useApp()
 
   useEffect(() => {
     setFetchedUsers(users)
+    setFilteredUsers(users)
   }, [users])
 
   let roleOptions = []
   roles.forEach(r => {
     roleOptions.push({ value: r.id, label: r.name })
   })
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (fetchedUsers) {
+      if (search === '') resetSearch()
+      let users = fetchedUsers.filter(a => (
+        a.username.toLowerCase().includes(search.toLowerCase()) ||
+        a.email.toLowerCase().includes(search.toLowerCase()) ||
+        a.roles.name.toLowerCase().includes(search.toLowerCase())
+      ))
+      setFilteredUsers(users)
+    }
+  }, [search])
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  const resetSearch = () => {
+    setFilteredUsers(fetchedUsers)
+    setSearch('')
+  }
 
   if (!session) return <Auth />
 
@@ -30,8 +53,16 @@ const Users = ({ users, roles }) => {
       <div className='py-16 admin'>
         <Nav />
         <div className='py-8 px-8 text-left'>
-          <h1 className='admin-table-title'>Users</h1>
+          <div className='flex justify-between items-center mb-1'>
 
+            <h1 className='admin-table-title'>Users</h1>
+            <div className='relative'>
+              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search' name='search' className='ml-2' />
+              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
+                <XCircleIcon className='w-5' />
+              </button>
+            </div>
+          </div>
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
@@ -44,12 +75,11 @@ const Users = ({ users, roles }) => {
               </tr>
             </thead>
             <tbody>
-
-              {!fetchedUsers?.length &&
+              {!fetchedUsers?.length || !filteredUsers?.length &&
                 <tr className='p-4'><td>No users found.</td></tr>
               }
 
-              {fetchedUsers?.map((user) => (
+              {filteredUsers?.map((user) => (
                 <tr key={user.id + user.username} className='relative'>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
@@ -63,10 +93,7 @@ const Users = ({ users, roles }) => {
                   <td>
                     <Link href={`/admin/users/${user.id}`}>
                       <a>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-slate-500 hover:scale-110 transition-all cursor-pointer pointer-events-none dark:invert" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                          <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
-                        </svg>
+                        <PencilAltIcon className='h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0' />
                       </a>
                     </Link>
                   </td>

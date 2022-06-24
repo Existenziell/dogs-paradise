@@ -55,8 +55,8 @@ const Pickup = () => {
       <Header content='Pickup Service' />
 
       <div className='flex flex-col items-center justify-center px-8 py-24  text-left'>
-        <p className='text-xl text-center'>For our members we offer a pickup service for your dog(s)!</p>
-        <p className='mb-16 text-center'>Just follow these steps:</p>
+        <p className='mb-4 text-center text-sm'>We need additional inforamtion for pickup and delivery services. This data will of course be handled confidentially and only be used to make our service as smooth as possible for you. After completion, this data is deleted.</p>
+        <p className='text-xl text-center mb-4'>Please follow these simple steps:</p>
         <div className={`bg-white dark:bg-black p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-green-400`}`}>
           {picture &&
             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 absolute top-2 right-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -103,9 +103,10 @@ const Pickup = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
           }
-          <div className='flex items-center justify-start gap-3'>
+          <div className='flex items-center justify-start gap-3 w-full'>
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 3</p>
             <p className='text-xl inline-block'>Set your Pickup Location</p>
+            <p className='text-xs'>Use the round location picker and then click Save.</p>
           </div>
           {!coordinates &&
             <div className='flex flex-col items-start'>

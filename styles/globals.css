@@ -105,44 +105,28 @@ input[type='website'] {
 	Mapbox overrides
 	========================================================================== */
 
-.mapboxgl-canvas {
-  @apply absolute top-0 bottom-0 left-0 w-full h-full;
-}
-
-.mapboxgl-popup {
-  @apply text-left min-w-max overflow-hidden; 
-}
-
 div.mapboxgl-popup-content {
-  @apply p-2 bg-brand-dark/40 backdrop-blur-md;
+  @apply p-2 bg-brand-dark/40 backdrop-blur-md w-max max-w-md;
 }
 
-.mapboxgl-popup-content div {
-  @apply text-sm px-10 py-12 shadow font-sans bg-white/80 backdrop-blur-md dark:bg-brand-dark/80 dark:text-white;
+div.mapboxgl-popup-content div {
+  @apply text-sm p-4 shadow font-sans bg-white/80 backdrop-blur-md dark:bg-brand-dark/80 dark:text-white;
 }
 
-.mapboxgl-popup-content span {
-  @apply text-xs mb-2 block;
+div.mapboxgl-popup-content img {
+  @apply rounded-sm shadow-sm;
 }
 
-.mapboxgl-popup-content h1 {
-  @apply text-3xl md:text-6xl mb-1 text-brand;
+div.mapboxgl-popup-content p {
+  @apply text-xs mt-4;
 }
 
-.mapboxgl-popup-content h2 {
-  @apply text-base md:text-lg font-normal mb-6;
-}
-
-.mapboxgl-popup-content strong {
-  @apply mt-4 block text-lg;
-}
-
-.mapboxgl-popup-tip {
-  @apply opacity-20;
+div.mapboxgl-popup-content span {
+  @apply text-xl mb-2 block;
 }
 
 .mapboxgl-popup-close-button {
-  @apply text-3xl px-4 py-1 hover:text-brand hover:scale-105 transition-all dark:text-white focus:outline-none;
+  @apply text-2xl px-2 py-0 hover:text-brand hover:scale-105 transition-all text-slate-500 dark:text-white focus:outline-none;
 }
 
 

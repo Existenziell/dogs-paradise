@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import { PhotographIcon } from '@heroicons/react/solid'
 import { getSignedUrl } from '../../../lib/supabase/getSignedUrl'
 import Head from 'next/head'
-import Link from 'next/link'
 import useApp from '../../../context/AppContext'
 import Header from '../../../components/Header'
 import Auth from '../../../components/Auth'
 import Select from 'react-select'
 import selectStyles from '../../../lib/selectStyles'
+import BackBtn from '../../../components/BackBtn'
 
 const Users = ({ user, roles }) => {
   const { username, email, created_at, is_premium, avatar_url, quote } = user
@@ -72,13 +72,7 @@ const Users = ({ user, roles }) => {
       <Header content={username} />
 
       <div className='profile px-8 py-24'>
-        <Link href='/admin/users'>
-          <a>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </a>
-        </Link>
+        <BackBtn href='/admin/users' />
 
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>
@@ -92,7 +86,7 @@ const Users = ({ user, roles }) => {
           </div>
           <div className='text-left flex flex-col gap-1'>
             <p>Email: {email}</p>
-            <p className=''>Quote: {quote}</p>
+            <p>Quote: {quote}</p>
             <p>Member since: {created_at.substring(0, 10)}</p>
             <div className='mt-4'>
               <p>Membership Status:</p>

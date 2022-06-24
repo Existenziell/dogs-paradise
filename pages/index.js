@@ -6,8 +6,11 @@ import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import { services } from '../lib/services'
 import Quote from '../components/Quote'
+import useApp from '../context/AppContext'
 
 const Home = ({ i18n }) => {
+  const { session } = useApp()
+
   return (
     <>
       <Head>
@@ -21,8 +24,11 @@ const Home = ({ i18n }) => {
         <h1 className='text-4xl'>{i18n.T3}</h1>
         <p className='text-sm'>Feel the Paradise Experience</p>
         <div className='mt-8 flex gap-8 items-center justify-center'>
-          <Link href='/profile'><a className='button'>Login</a></Link>
-          <Link href='/profile'><a className='button'>Profile</a></Link>
+          {session ?
+            <Link href='/profile'><a className='button'>Profile</a></Link>
+            :
+            <Link href='/profile'><a className='button'>Login</a></Link>
+          }
         </div>
 
         <div className='flex flex-wrap items-center justify-center mb-20 mt-12 gap-6'>

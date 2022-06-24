@@ -4,15 +4,20 @@ import useApp from '../../../context/AppContext'
 import Head from 'next/head'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
+import Link from 'next/link'
+import { CheckIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
 
 const Appointments = ({ appointments }) => {
   const { notify, session } = useApp()
   const [fetchedAppointments, setFetchedAppointments] = useState()
+  const [filteredAppointments, setFilteredAppointments] = useState()
   const [showDelete, setShowDelete] = useState(false)
   const [appointmentToDelete, setAppointmentToDelete] = useState()
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     setFetchedAppointments(appointments)
+    setFilteredAppointments(appointments)
   }, [appointments])
 
   const toggleDeleteModal = (appointment) => {
@@ -21,7 +26,6 @@ const Appointments = ({ appointments }) => {
   }
 
   const deleteAppointment = async () => {
-
     const { error } = await supabase
       .from('pickups')
       .delete()
@@ -36,12 +40,32 @@ const Appointments = ({ appointments }) => {
       if (!error) {
         notify("Appointment deleted successfully!")
         setShowDelete(false)
-        const filteredAppointments = appointments.filter(c => { return c.id !== appointmentToDelete.id })
-        setFetchedAppointments(filteredAppointments)
+        const filtered = appointments.filter(c => { return c.id !== appointmentToDelete.id })
+        setFetchedAppointments(filtered)
+        setFilteredAppointments(filtered)
       } else {
         notify("Appointment cannot be deleted.")
       }
     }
+  }
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (fetchedAppointments) {
+      if (search === '') resetSearch()
+      let appointments = fetchedAppointments.filter(a => (
+        a.dogs.name.toLowerCase().includes(search.toLowerCase()) ||
+        a.type.toLowerCase().includes(search.toLowerCase()) ||
+        a.client.toLowerCase().includes(search.toLowerCase())
+      ))
+      setFilteredAppointments(appointments)
+    }
+  }, [search])
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  const resetSearch = () => {
+    setFilteredAppointments(fetchedAppointments)
+    setSearch('')
   }
 
   if (!session) return <Auth />
@@ -56,8 +80,16 @@ const Appointments = ({ appointments }) => {
       <div className='py-16 admin'>
         <Nav />
         <div className='py-8 px-8 text-left'>
-          <h1 className='admin-table-title'>Appointments</h1>
+          <div className='flex justify-between items-center mb-1'>
 
+            <h1 className='admin-table-title'>Appointments</h1>
+            <div className='relative'>
+              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search' name='search' className='ml-2' />
+              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
+                <XCircleIcon className='w-5' />
+              </button>
+            </div>
+          </div>
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
@@ -67,8 +99,9 @@ const Appointments = ({ appointments }) => {
                 <th>Client</th>
                 <th>Dog</th>
                 <th>Delivery/Pickup</th>
-                <th>Assigned</th>
+                {/* <th>Assigned</th> */}
                 <th>Done</th>
+                <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -78,25 +111,33 @@ const Appointments = ({ appointments }) => {
                 <tr className='p-4'><td>No appointments found.</td></tr>
               }
 
-              {fetchedAppointments?.map((appointment, idx) => (
-                <tr key={appointment.id} className={`relative anchor ${idx % 2 !== 0 && `bg-slate-100`}`}>
-                  <td>{appointment.date}</td>
-                  <td>{appointment.time}</td>
-                  <td className='capitalize'>{appointment.type.split('-').join(' ')}</td>
-                  <td>{appointment.client}</td>
-                  <td>{appointment.dogs.name}</td>
-                  <td>{appointment.service_option ? `Yes` : `No`}</td>
-                  <td>{appointment.assignedUser}</td>
-                  <td>{appointment.done.toString()}</td>
-                  <td className='text-center align-middle'>
-                    <button onClick={() => toggleDeleteModal(appointment)} aria-label='Toggle Delete Modal'>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {filteredAppointments?.map((appointment) => {
+                const { id, date, time, type, done, client, dogs, service_option } = appointment
+                return (
+                  <tr key={id} className={`${done && `bg-green-50 dark:bg-brand-dark`} relative`}>
+                    <td>{date}</td>
+                    <td>{time}</td>
+                    <td className='capitalize'>{type.split('-').join(' ')}</td>
+                    <td>{client}</td>
+                    <td>{dogs.name}</td>
+                    <td>{service_option ? `Yes` : `No`}</td>
+                    {/* <td>{assignedUser}</td> */}
+                    <td>{done ? <CheckIcon className='w-6' /> : `No`}</td>
+                    <td>
+                      <Link href={`/admin/appointments/${id}`}>
+                        <a>
+                          <PencilAltIcon className='h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0' />
+                        </a>
+                      </Link>
+                    </td>
+                    <td className='text-center align-middle'>
+                      <button onClick={() => toggleDeleteModal(appointment)} aria-label='Toggle Delete Modal'>
+                        <XCircleIcon className='h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0' />
+                      </button>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
 
@@ -125,11 +166,18 @@ const Appointments = ({ appointments }) => {
 }
 
 export async function getServerSideProps() {
-  const { data: appointments } = await supabase.from('appointments').select(`*, dogs(*)`).order('created_at', { ascending: true })
-  // Who is assigned to which appointment?
+  const { data: appointments } = await supabase
+    .from('appointments')
+    .select(`*, dogs(*)`)
+    .order('date', { ascending: false })
+    .order('time', { ascending: false })
+
+  // Gather additional information from user
   for (const appointment of appointments) {
+    // Who is the client asking for this appointment?
     const { data: client } = await supabase.from('users').select(`*`).eq('id', appointment.user).single()
     appointment.client = client.username
+    // Who is assigned to which appointment?
     const { data: assignedUser } = await supabase.from('users').select(`*`).eq('id', appointment.assigned_to).single()
     if (assignedUser) appointment.assignedUser = assignedUser.username
   }
