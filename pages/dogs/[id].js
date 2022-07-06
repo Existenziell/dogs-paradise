@@ -77,7 +77,7 @@ const Dogs = ({ dog, i18n }) => {
           </a>
         </Link>
 
-        <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
+        <div className='flex flex-col md:flex-row justify-center items-start gap-8 text-base'>
           <div className='max-w-xs mb-4'>
             <Avatar
               bucket='dogs'
@@ -137,20 +137,22 @@ const Dogs = ({ dog, i18n }) => {
 
 
             <div className='flex flex-col'>
-              {/* <p className=' border-b border-dark'>Checklist:</p> */}
               <h2 className='underline mt-4 mb-2'>Vaccines</h2>
+
               <div className='flex items-start justify-between gap-4'>
                 <div>
                   {status_vaccine?.map(vaccine => {
                     return (
                       <div className='text-sm mb-2' key={vaccine.name}>
-                        <p className='font-bold'>{vaccine.name}</p>
+
+
                         <div className='flex items-center gap-2'>
-                          Status:
+                          <p className='font-bold'>{vaccine.name}</p>
+
                           {vaccine.status ?
                             <>
                               <CheckIcon className='w-4 text-green-500' />
-                              <p>Expires: {vaccine.expires}</p>
+                              <p>(expires: {vaccine.expires})</p>
                             </>
                             :
                             <XIcon className='w-4 text-red-500' />
@@ -174,7 +176,7 @@ const Dogs = ({ dog, i18n }) => {
                             <>
                               <CheckIcon className='w-4 text-green-500' />
                               <p>Product: {deworm.product}</p>
-                              <p>Expires: {deworm.expires}</p>
+                              <p>(expires: {deworm.expires})</p>
                             </>
                             :
                             <XIcon className='w-4 text-red-500' />

@@ -25,6 +25,7 @@ const Profile = ({ i18n }) => {
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
   const [dogs, setDogs] = useState(null)
+  const [view, setView] = useState('info')
 
   useEffect(() => {
     if (currentUser) {
@@ -81,121 +82,153 @@ const Profile = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-
       <Header content={i18n.T1} />
 
       <div className='px-8 profile py-24'>
         <div className='p-4 md:p-8 mx-auto mb-16'>
-
           {showOnboarding ?
             <Onboarding />
             :
-            <>
-              <div className='flex flex-row flex-wrap justify-center md:justify-between items-start gap-4'>
-                <div className='max-w-xs'>
-                  <Avatar
-                    bucket='avatars'
-                    url={avatar_url}
-                    // size={150}
-                    onUpload={(url) => {
-                      setAvatarUrl(url)
-                      updateProfile({ username, email, role, quote, avatar_url: url, setLoading, notify })
-                    }}
-                  />
-                </div>
-
-                {/* <h2 className='text-2xl text-left mt-16 mb-4'>My Dogs:</h2> */}
-                <div className='flex flex-wrap justify-start items-center gap-16 mt-8 md:mt-0'>
-                  {dogs &&
-                    dogs.map(d => (
-                      <div key={d.id} className='flex flex-col items-center justify-center'>
-                        <Link href={`dogs/${d.id}`}>
-                          <a className='w-20 h-20 cursor-pointer hover:scale-105 transition-all relative'>
-                            <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : ``} />
-                            {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-8 right-6 text-brand' /></div>}
-                            {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-8 right-0 text-brand' /></div>}
-                          </a>
-                        </Link>
-                        <Link href={`dogs/${d.id}`}>
-                          <a className='mt-2'>
-                            {d.name}
-                          </a>
-                        </Link>
-                      </div>
-                    ))
-                  }
-
-                  <Link href={`dogs/add/`}>
-                    <a className='flex flex-col items-center'>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                      </svg>
-                      <span>Add Dog</span>
-                    </a>
-                  </Link>
-                </div>
-
-                {!showEdit ?
-                  <div className='flex flex-col items-center justify-center gap-4'>
-                    <div className='md:text-right max-w-max mt-8 md:mt-0'>
-                      <p className='text-2xl md:text-4xl whitespace-nowrap'>{username}</p>
-                      <p className='text-xs'>{quote}</p>
-                    </div>
-                    <div className='md:text-right text-sm mb-2'>
-                      <p className='text-sm'>Joined: {createdAt?.slice(0, 10)}</p>
-                      <p>Member status: {is_premium ? `Premium` : `Free`}</p>
-                    </div>
-                    <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
-
-                    <h2 className='md:text-2xl text-left mt-8 md:mb-4'>Appointments:</h2>
-                    <Link href='/appointments'><a className='button-secondary flex w-max'>View appointments</a></Link>
-
-                  </div>
-                  :
-                  <div className="text-left shadow max-w-max bg-white dark:bg-dark dark:text-white px-5 py-3 rounded">
-                    <div>
-                      <label htmlFor="username" className='block text-xs mt-2'>Username</label>
-                      <input
-                        id="username"
-                        type="text"
-                        value={username || ''}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                    </div>
-                    <div className='mt-2'>
-                      <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
-                      <input
-                        id="quote"
-                        type="text"
-                        value={quote || ''}
-                        onChange={(e) => setQuote(e.target.value)}
-                      />
-                    </div>
-
-                    <div>
-                      <button
-                        className="mt-6 text-xl button-secondary"
-                        onClick={handleEdit}
-                        disabled={loading}
-                        aria-label='Update Profile'
-                      >
-                        {loading ? 'Loading ...' : 'Save'}
-                      </button>
-                      <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
-                    </div>
-                  </div>
-                }
+            <div className='flex flex-col md:flex-row justify-center items-start gap-10 md:gap-20'>
+              <div className='md:max-w-2xl'>
+                <Avatar
+                  bucket='avatars'
+                  url={avatar_url}
+                  // size={150}
+                  onUpload={(url) => {
+                    setAvatarUrl(url)
+                    updateProfile({ username, email, role, quote, avatar_url: url, setLoading, notify })
+                  }}
+                />
               </div>
 
-              {currentUser.role === 1 &&
-                <div className='mt-12'>
-                  <p className='mb-4'>App Administration:</p>
-                  <Link href='/admin/dogs'><a className='button button-secondary mr-2'>Dogs</a></Link>
-                  <Link href='/admin/users'><a className='button button-secondary mr-2'>Users</a></Link>
-                  <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>
+              <div className='w-full'>
+                <div className='mb-20 w-full'>
+                  <ul className='text-lg md:text-2xl flex justify-evenly md:justify-start gap-8 md:gap-20'>
+                    <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                      <button onClick={(e) => setView(e.target.name)} name='info'>
+                        Info
+                      </button>
+                    </li>
+                    <li className={view === 'dogs' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                      <button onClick={(e) => setView(e.target.name)} name='dogs'>
+                        Dogs
+                      </button>
+                    </li>
+                    <li className={view === 'appointments' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                      <button onClick={(e) => setView(e.target.name)} name='appointments'>
+                        Appointments
+                      </button>
+                    </li>
+                    {currentUser.role === 1 &&
+                      <li className={view === 'admin' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                        <button onClick={(e) => setView(e.target.name)} name='admin'>
+                          Admin
+                        </button>
+                      </li>
+                    }
+                  </ul>
                 </div>
-              }
-            </>
+
+                {view === 'info' &&
+                  <>
+                    {!showEdit ?
+                      <div className='flex flex-col items-center md:items-start justify-center md:justify-start md:text-left gap-4'>
+                        <p className='text-2xl md:text-4xl whitespace-nowrap mb-4'>{username}</p>
+                        <div className='flex flex-col gap-1 mb-2'>
+                          <p>{quote}</p>
+                          <p>Joined: {createdAt?.slice(0, 10)}</p>
+                          <p>Member status: {is_premium ? `Premium` : `Free`}</p>
+                        </div>
+                        <button className='link' onClick={() => setShowEdit(true)}>Edit</button>
+                      </div>
+                      :
+                      <div className="text-left shadow max-w-max mx-auto md:mx-0 bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
+                        <div>
+                          <label htmlFor="username" className='block text-xs mt-2'>Username</label>
+                          <input
+                            id="username"
+                            type="text"
+                            value={username || ''}
+                            onChange={(e) => setUsername(e.target.value)}
+                          />
+                        </div>
+                        <div className='mt-2'>
+                          <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
+                          <input
+                            id="quote"
+                            type="text"
+                            value={quote || ''}
+                            onChange={(e) => setQuote(e.target.value)}
+                          />
+                        </div>
+
+                        <div>
+                          <button
+                            className="mt-6 text-xl button-secondary"
+                            onClick={handleEdit}
+                            disabled={loading}
+                            aria-label='Update Profile'
+                          >
+                            {loading ? 'Loading ...' : 'Save'}
+                          </button>
+                          <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
+                        </div>
+                      </div>
+                    }
+                  </>
+                }
+
+                {view === 'dogs' &&
+                  <div className='flex flex-wrap justify-center md:justify-start items-center w-full gap-16'>
+                    {dogs &&
+                      dogs.map(d => (
+                        <div key={d.id} className='flex flex-col items-center justify-center'>
+                          <Link href={`dogs/${d.id}`}>
+                            <a className='w-20 h-20 cursor-pointer hover:scale-105 transition-all relative'>
+                              <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : ``} />
+                              {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
+                              {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
+                            </a>
+                          </Link>
+                          <Link href={`dogs/${d.id}`}>
+                            <a className='mt-2'>
+                              {d.name}
+                            </a>
+                          </Link>
+                        </div>
+                      ))
+                    }
+
+                    <Link href={`dogs/add/`}>
+                      <a className='flex flex-col items-center'>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span>Add Dog</span>
+                      </a>
+                    </Link>
+                  </div>
+                }
+
+                {view === 'appointments' &&
+                  <div className='flex flex-col gap-4 items-center md:items-start justify-center md:justify-start'>
+                    <Link href='/appointments'><a className='button-secondary w-52'>View appointments</a></Link>
+                    <Link href='/appointments/create'><a className='button-secondary w-52'>Create appointment</a></Link>
+                  </div>
+                }
+
+
+                {currentUser.role === 1 && view === 'admin' &&
+                  <div className='mt-12'>
+                    <Link href='/admin/dogs'><a className='button button-secondary mr-2'>Dogs</a></Link>
+                    <Link href='/admin/users'><a className='button button-secondary mr-2'>Users</a></Link>
+                    <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>
+                  </div>
+                }
+
+              </div>
+            </div>
           }
         </div>
 
