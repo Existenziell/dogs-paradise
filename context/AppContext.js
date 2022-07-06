@@ -49,7 +49,7 @@ export const AppWrapper = ({ children }) => {
     setNotificationMsg(msg)
     setTimeout(() => {
       notification.classList.add('-translate-y-20')
-    }, 3500)
+    }, 2500)
   }
 
   let contextValue = {

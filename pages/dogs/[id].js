@@ -68,7 +68,7 @@ const Dogs = ({ dog, i18n }) => {
 
       <Header content={name} />
 
-      <div className='profile px-8 py-24'>
+      <div className='profile px-4 md:px-8 py-24'>
         <Link href='/profile'>
           <a>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

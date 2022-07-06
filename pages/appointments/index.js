@@ -9,6 +9,7 @@ import langES from '../../i18n/es.json'
 import getAppointments from '../../lib/getAppointments'
 import useApp from '../../context/AppContext'
 import Link from 'next/link'
+import { ShieldExclamationIcon } from '@heroicons/react/outline'
 
 const Appointments = ({ i18n }) => {
   const [appointments, setAppointments] = useState(null)
@@ -78,11 +79,11 @@ const Appointments = ({ i18n }) => {
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24'>
         {appointments.length ?
           appointments.map(appointment => {
-
-            const { id, type, date, time, service_option, dogs, pickups } = appointment
+            const { id, type, date, time, service_option, dogs, pickups, extras } = appointment
 
             return (
-              <div key={id} className='bg-white text-brand-dark dark:bg-brand-dark dark:text-white rounded px-4 py-3 my-3 text-left w-full max-w-lg'>
+              <div key={id} className='bg-white text-brand-dark dark:bg-brand-dark
+               dark:text-white rounded px-4 py-3 my-3 text-left w-full max-w-4xl'>
                 <div className='flex items-center justify-start gap-12 '>
                   <div className='text-xl flex flex-col gap-4 w-1/2'>
                     <p><span className='text-xs block'>Service: </span><span className=' capitalize'>{type.split('-').join(' ')}</span></p>
@@ -95,9 +96,16 @@ const Appointments = ({ i18n }) => {
                   </div>
                 </div>
 
+                {extras &&
+                  <div className='mt-4'>
+                    Booked Extras: {extras}
+                  </div>
+                }
+
                 {service_option && pickups.length === 0 &&
                   <div className='mt-4'>
-                    For the individualized Pickup/Delivey service please fill out{` `}
+                    <ShieldExclamationIcon className='w-6 text-brand inline-block mr-2' />
+                    Your action is required. Please fill out{` `}
                     <Link href={`/services/pickup?appointment=${id}`}><a className='link'>this form</a></Link>{` `}
                     to proceed.
                   </div>
@@ -110,7 +118,7 @@ const Appointments = ({ i18n }) => {
                 }
 
                 <button onClick={() => toggleDeleteModal(appointment)} className='mt-6 button-secondary text-xs'>Cancel Appointment</button>
-
+                <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='mt-6 ml-4 button-secondary text-xs'>Contact Dog&apos;s Paradise</a>
               </div>
             )
           })

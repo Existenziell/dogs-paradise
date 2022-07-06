@@ -71,7 +71,7 @@ const Users = ({ user, roles }) => {
 
       <Header content={username} />
 
-      <div className='profile px-8 py-24'>
+      <div className='profile px-4 md:px-8 py-24'>
         <BackBtn href='/admin/users' />
 
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>

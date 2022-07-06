@@ -11,13 +11,12 @@ module.exports = {
         ]
       },
       colors: {
-        'brand': '#C90076',
-        'brand-dark': '#200530',
-        'dark': '#111111',
+        'brand': '#06768d',
+        'brand-dark': '#242424',
+        'dark': '#010203',
       },
       backgroundImage: {
         'cloth-pattern': 'url(/icons/cloth.jpg)',
-        'poly': 'url(/icons/poly.svg)',
         'parallax-1': 'url(/img/walk.jpg)',
         'parallax-1-m': 'url(/img/walk-m.jpg)',
         'parallax-2': 'url(/img/cozumel-dogs.jpg)',
@@ -44,7 +43,7 @@ module.exports = {
       },
     },
     gradientColorStops: theme => ({
-      primary: '#C90076',
+      primary: '#06768d',
       secondary: '#200530',
     }),
   },

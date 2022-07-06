@@ -129,7 +129,7 @@ const Dogs = ({ dog, i18n }) => {
 
       <Header content={name} />
 
-      <div className='profile px-8 py-24'>
+      <div className='profile px-4 md:px-8 py-24'>
         <BackBtn href='/admin/dogs' />
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>

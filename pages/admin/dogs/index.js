@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
-import { PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
+import { CheckIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Link from 'next/link'
@@ -92,8 +92,8 @@ const Dogs = ({ dogs }) => {
                   <tr key={id + name} className={`${(fullyVaccinated && fullyDewormed) && `bg-green-50 dark:bg-brand-dark`} relative`}>
                     <td className='pl-6'>{name}</td>
                     <td>{status}</td>
-                    <td>{fullyVaccinated ? `Yes` : `No`}</td>
-                    <td>{fullyDewormed ? `Yes` : `No`}</td>
+                    <td>{fullyVaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                    <td>{fullyDewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>{user?.name ? user?.name : user?.username}</td>
                     <td>
                       <Link href={`/admin/dogs/${id}`}>

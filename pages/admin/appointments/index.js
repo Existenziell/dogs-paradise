@@ -56,6 +56,7 @@ const Appointments = ({ appointments }) => {
       let appointments = fetchedAppointments.filter(a => (
         a.dogs.name.toLowerCase().includes(search.toLowerCase()) ||
         a.type.toLowerCase().includes(search.toLowerCase()) ||
+        a.extras?.toLowerCase().includes(search.toLowerCase()) ||
         a.client.toLowerCase().includes(search.toLowerCase())
       ))
       setFilteredAppointments(appointments)
@@ -100,6 +101,8 @@ const Appointments = ({ appointments }) => {
                 <th>Dog</th>
                 <th>Delivery/Pickup</th>
                 {/* <th>Assigned</th> */}
+                <th>Extras</th>
+                <th>Price</th>
                 <th>Done</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -112,7 +115,7 @@ const Appointments = ({ appointments }) => {
               }
 
               {filteredAppointments?.map((appointment) => {
-                const { id, date, time, type, done, client, dogs, service_option } = appointment
+                const { id, date, time, type, done, client, dogs, service_option, extras, price } = appointment
                 return (
                   <tr key={id} className={`${done && `bg-green-50 dark:bg-brand-dark`} relative`}>
                     <td>{date}</td>
@@ -120,8 +123,10 @@ const Appointments = ({ appointments }) => {
                     <td className='capitalize'>{type.split('-').join(' ')}</td>
                     <td>{client}</td>
                     <td>{dogs.name}</td>
-                    <td>{service_option ? `Yes` : `No`}</td>
+                    <td>{service_option ? <CheckIcon className='w-6' /> : `No`}</td>
                     {/* <td>{assignedUser}</td> */}
+                    <td>{extras}</td>
+                    <td>{price} MXN</td>
                     <td>{done ? <CheckIcon className='w-6' /> : `No`}</td>
                     <td>
                       <Link href={`/admin/appointments/${id}`}>

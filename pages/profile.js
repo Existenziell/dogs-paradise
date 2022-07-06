@@ -10,6 +10,8 @@ import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import useApp from '../context/AppContext'
+import { getPublicUrl } from '../lib/supabase/getPublicUrl'
+import { CheckCircleIcon } from '@heroicons/react/outline'
 
 const Profile = ({ i18n }) => {
   const { session, currentUser, notify, userDogs, showOnboarding } = useApp()
@@ -18,10 +20,11 @@ const Profile = ({ i18n }) => {
   const [email, setEmail] = useState(null)
   const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
-  const [is_premium,] = useState(null)
+  const [is_premium, setIsPremium] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
+  const [dogs, setDogs] = useState(null)
 
   useEffect(() => {
     if (currentUser) {
@@ -31,8 +34,39 @@ const Profile = ({ i18n }) => {
       setQuote(currentUser.quote)
       setAvatarUrl(currentUser.avatar_url)
       setCreatedAt(currentUser.created_at)
+      setIsPremium(currentUser.is_premium)
     }
   }, [currentUser])
+
+  const enrichDog = async () => {
+    for (let dog of userDogs) {
+      // Download and set image
+      let url
+      if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
+      dog.public_url = url
+
+      // Check fullyVaccinated status
+      let checkVaccine = true
+      for (let v of dog.status_vaccine) {
+        if (v.status === 'false') checkVaccine = false
+      }
+      dog.fullyVaccinated = checkVaccine
+
+      // Check fullyDewormed status
+      let checkDewormed = true
+      for (let d of dog.status_deworming) {
+        if (d.status === 'false') checkDewormed = false
+      }
+      dog.fullyDewormed = checkDewormed
+    }
+    setDogs(userDogs)
+  }
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (userDogs) enrichDog()
+  }, [userDogs])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleEdit = async () => {
     await updateProfile({ username, quote, avatar_url, setLoading, notify })
@@ -72,12 +106,14 @@ const Profile = ({ i18n }) => {
 
                 {/* <h2 className='text-2xl text-left mt-16 mb-4'>My Dogs:</h2> */}
                 <div className='flex flex-wrap justify-start items-center gap-16 mt-8 md:mt-0'>
-                  {userDogs &&
-                    userDogs.map(d => (
+                  {dogs &&
+                    dogs.map(d => (
                       <div key={d.id} className='flex flex-col items-center justify-center'>
                         <Link href={`dogs/${d.id}`}>
-                          <a className='w-12 h-12 cursor-pointer hover:scale-105 transition-all'>
-                            <img src='/icons/paw-pink.png' alt='Paw' />
+                          <a className='w-20 h-20 cursor-pointer hover:scale-105 transition-all relative'>
+                            <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : ``} />
+                            {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-8 right-6 text-brand' /></div>}
+                            {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-8 right-0 text-brand' /></div>}
                           </a>
                         </Link>
                         <Link href={`dogs/${d.id}`}>

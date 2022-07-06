@@ -30,7 +30,7 @@ function App({ Component, pageProps }) {
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <meta name="msapplication-TileColor" content="#603cba" />
         <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-        <meta name="theme-color" content="#C90076" />
+        <meta name="theme-color" content="#06768d" />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin="true" />
         <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Gotu&display=swap' />
