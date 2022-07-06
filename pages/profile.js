@@ -220,7 +220,7 @@ const Profile = ({ i18n }) => {
 
 
                 {currentUser.role === 1 && view === 'admin' &&
-                  <div className='mt-12'>
+                  <div className='mt-12 flex gap-4 items-center md:items-start justify-center md:justify-start'>
                     <Link href='/admin/dogs'><a className='button button-secondary mr-2'>Dogs</a></Link>
                     <Link href='/admin/users'><a className='button button-secondary mr-2'>Users</a></Link>
                     <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>

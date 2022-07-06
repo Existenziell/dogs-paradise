@@ -117,8 +117,8 @@ const Appointments = ({ i18n }) => {
                   </div>
                 }
 
-                <button onClick={() => toggleDeleteModal(appointment)} className='mt-6 button-secondary text-xs'>Cancel Appointment</button>
-                <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='mt-6 ml-4 button-secondary text-xs'>Contact Dog&apos;s Paradise</a>
+                <button onClick={() => toggleDeleteModal(appointment)} className='mt-6 button-secondary text-xs block md:inline-block'>Cancel Appointment</button>
+                <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='block md:inline-block mt-4 md:mt-6 md:ml-4 max-w-max button-secondary text-xs'>Contact Dog&apos;s Paradise</a>
               </div>
             )
           })
