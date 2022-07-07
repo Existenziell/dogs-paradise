@@ -1,23 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
+import { getPublicUrl } from '../lib/supabase/getPublicUrl'
+import { CheckCircleIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
+import { PulseLoader } from 'react-spinners'
+import { services } from '../lib/services'
 import Head from 'next/head'
 import Link from 'next/link'
 import Auth from '../components/Auth'
 import Avatar from '../components/Avatar'
-import Onboarding from '../components/Onboarding'
-import AddToHomeScreen from '../components/AddToHomeScreen'
-import updateProfile from '../lib/updateProfile'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import useApp from '../context/AppContext'
-import { getPublicUrl } from '../lib/supabase/getPublicUrl'
-import { CheckCircleIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
+import Onboarding from '../components/Onboarding'
+import AddToHomeScreen from '../components/AddToHomeScreen'
+import updateProfile from '../lib/updateProfile'
 import getAppointments from '../lib/getAppointments'
-import { services } from '../lib/services'
 
 const Profile = ({ i18n }) => {
   const { session, currentUser, notify, userDogs, showOnboarding } = useApp()
+  const [fetching, setFetching] = useState(true)
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [email, setEmail] = useState(null)
@@ -50,6 +52,7 @@ const Profile = ({ i18n }) => {
       const name = getServiceName(a.type)
       a.type = name
     }
+    setFetching(false)
     setAppointments(appointments)
   }
 
@@ -90,6 +93,7 @@ const Profile = ({ i18n }) => {
     return services.filter(s => (s.slug === slug)).at(0).title
   }
 
+  if (fetching) return <div className='flex items-center justify-center pt-[25%]'><PulseLoader color={'var(--color-brand)'} size={20} /></div>
   if (!session || !currentUser) return <Auth />
 
   return (

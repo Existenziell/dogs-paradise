@@ -41,7 +41,7 @@ const AddDog = ({ i18n }) => {
     }
   }
 
-  if (!session) return <Auth />
+  if (!session || !currentUser) return <Auth />
 
   return (
     <>

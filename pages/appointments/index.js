@@ -1,6 +1,7 @@
 import { supabase } from '../../lib/supabase'
 import { useEffect, useState } from 'react'
-import { GridLoader } from 'react-spinners'
+import { PulseLoader } from 'react-spinners'
+import { ShieldExclamationIcon } from '@heroicons/react/outline'
 import Auth from '../../components/Auth'
 import Head from 'next/head'
 import Header from '../../components/Header'
@@ -9,7 +10,6 @@ import langES from '../../i18n/es.json'
 import getAppointments from '../../lib/getAppointments'
 import useApp from '../../context/AppContext'
 import Link from 'next/link'
-import { ShieldExclamationIcon } from '@heroicons/react/outline'
 
 const Appointments = ({ i18n }) => {
   const [appointments, setAppointments] = useState(null)
@@ -63,7 +63,7 @@ const Appointments = ({ i18n }) => {
   if (!appointments) {
     return (
       <div className='flex items-center justify-center pt-[25%]'>
-        <GridLoader color={'var(--color-brand)'} size={30} />
+        <PulseLoader color={'var(--color-brand)'} size={20} />
       </div>
     )
   }
