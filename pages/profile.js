@@ -245,11 +245,9 @@ const Profile = ({ i18n }) => {
                         </Link>
                       </div>
                     ))}
-                    {/* <Link href='/appointments'><a className='button-secondary w-52'>View appointments</a></Link> */}
                     <Link href='/appointments/create'><a className='button-secondary mt-8'>New Appointment</a></Link>
                   </div>
                 }
-
 
                 {currentUser.role === 1 && view === 'admin' &&
                   <div className='mt-12 flex gap-4 items-center md:items-start justify-center md:justify-start'>
@@ -258,10 +256,10 @@ const Profile = ({ i18n }) => {
                     <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>
                   </div>
                 }
-
               </div>
             </div>
           }
+          <Link href='/contact'><a className='button button-secondary mt-20 block mx-auto'>Contact Us</a></Link>
         </div>
 
         <AddToHomeScreen />

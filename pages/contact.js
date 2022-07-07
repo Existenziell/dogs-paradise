@@ -5,6 +5,7 @@ import Social from '../components/Social'
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
+import Header from '../components/Header'
 
 const Contact = ({ i18n }) => {
 
@@ -43,9 +44,9 @@ const Contact = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
+      <Header content={i18n.T1} />
 
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24 lg:w-2/3 lg:mx-auto'>
-        <h1 className='text-4xl md:text-6xl mb-12 mt-4'>{i18n.T1}</h1>
         <div className='md:flex items-center gap-8 md:text-right'>
           <div className='md:w-2/3'>
             <p className='text-lg mx-auto leading-relaxed mb-8 max-w-sm'>{i18n.T2}</p>
@@ -55,40 +56,40 @@ const Contact = ({ i18n }) => {
 
         <Social />
 
-        <div className='z-0 px-4 pt-8 pb-0 sm:px-12 shadow w-full bg-cover bg-no-repeat bg-poly rounded-lg bg-white/10 backdrop-blur-md text-white'>
+        <div className='z-0 px-4 pt-8 pb-0 sm:px-12 mb-12 shadow w-full rounded-lg bg-brand/50 backdrop-blur-md text-white'>
           <form onSubmit={submitForm}>
             <div className='relative mb-8 text-white'>
               <input
                 id='name' name='name' type='text'
                 onChange={setData} required disabled={sending}
-                className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T4}
+                className='peer h-10 w-full placeholder-transparent focus:outline-none bg-brand/50 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T4}
               />
               <label htmlFor='name'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
-                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-300 peer-focus:text-sm'>{i18n.T4}</label>
+                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-100 peer-focus:text-sm'>{i18n.T4}</label>
             </div>
             <div className='relative mb-8'>
               <input
                 id='email' type='email' name='email'
                 onChange={setData} required disabled={sending}
-                className='peer h-10 w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T5}
+                className='peer h-10 w-full placeholder-transparent focus:outline-none bg-brand/50 backdrop-blur-md rounded pl-4 border-none' placeholder={i18n.T5}
               />
               <label htmlFor='email'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
-                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-300 peer-focus:text-sm'>{i18n.T5}</label>
+                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-100 peer-focus:text-sm'>{i18n.T5}</label>
             </div>
             <div className='relative'>
               <textarea
                 id='message' name='message'
                 onChange={setData} rows='10' required disabled={sending}
-                className='peer h-full w-full placeholder-transparent focus:outline-none bg-white/10 backdrop-blur-md rounded pl-4 border-none py-4' placeholder={i18n.T6}>
+                className='peer h-full w-full placeholder-transparent focus:outline-none bg-brand/50 backdrop-blur-md rounded pl-4 border-none py-4' placeholder={i18n.T6}>
               </textarea>
               <label htmlFor='message'
                 className='absolute -top-5 left-0 text-sm transition-all
                             peer-placeholder-shown:text-base peer-placeholder-shown:top-2 peer-placeholder-shown:left-4
-                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-300 peer-focus:text-sm'>{i18n.T6}</label>
+                            peer-focus:-top-5 peer-focus:left-0 peer-focus:text-gray-100 peer-focus:text-sm'>{i18n.T6}</label>
             </div>
 
             {errorMsg ?

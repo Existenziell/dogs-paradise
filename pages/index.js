@@ -17,7 +17,6 @@ const Home = ({ i18n }) => {
         <title>{i18n.title}</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-
       <Header content={i18n.T1} />
 
       <div className='px-8 profile py-24 max-w-4xl mx-auto'>
