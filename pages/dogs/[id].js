@@ -137,7 +137,7 @@ const Dogs = ({ dog, i18n }) => {
 
 
             <div className='flex flex-col'>
-              <h2 className='underline mt-4 mb-2'>Vaccines</h2>
+              <h2 className='text-xl mt-8 mb-4'>Vaccines</h2>
 
               <div className='flex items-start justify-between gap-4'>
                 <div>
@@ -164,7 +164,7 @@ const Dogs = ({ dog, i18n }) => {
                 </div>
               </div>
 
-              <h2 className='mt-4 mb-2 underline'>Deworming</h2>
+              <h2 className='text-xl mt-8 mb-4'>Deworming</h2>
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
                   {status_deworming?.map(deworm => {
@@ -189,7 +189,7 @@ const Dogs = ({ dog, i18n }) => {
               </div>
 
               <div className='flex items-center justify-between'>
-                <p>Delete Dog</p>
+                <p>Delete {name}</p>
                 <button onClick={() => setShowDelete(true)} aria-label='Toggle Delete Modal'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-dark dark:text-white hover:text-brand hover:dark:text-brand hover:scale-110 transition-all cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
