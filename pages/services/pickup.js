@@ -55,7 +55,7 @@ const Pickup = () => {
       <Header content='Pickup Service' />
 
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24  text-left'>
-        <p className='mb-4 text-center text-sm'>We need additional inforamtion for pickup and delivery services. This data will of course be handled confidentially and only be used to make our service as smooth as possible for you. After completion, this data is deleted.</p>
+        <p className='mb-4 text-center text-sm'>We need additional information for pickup and delivery services. This data will of course be handled confidentially and only be used to make our service as smooth as possible for you. After completion, this data is deleted.</p>
         <p className='text-xl text-center mb-4'>Please follow these simple steps:</p>
         <div className={`bg-white dark:bg-brand-dark p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-brand`}`}>
           {picture && <CheckCircleIcon className='h-16 w-16 absolute top-1 right-1 text-brand' />}
