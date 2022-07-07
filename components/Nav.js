@@ -55,7 +55,7 @@ const Nav = () => {
             {urls.map(url => (
                 <Link href={url.href} key={url.name} >
                     <a name={url.name} className={`${isActiveLink(url.href, router.pathname) && `active-nav`} flex flex-col justify-center items-center w-full 
-                    py-3 bg-slate-100 dark:bg-brand-dark text-brand  hover:bg-slate-600 hover:text-white dark:hover:bg-slate-300 dark:hover:text-slate-900 transition-all divide-x`}>
+                    py-3 bg-white dark:bg-brand-dark text-brand  hover:bg-slate-600 hover:text-white dark:hover:bg-slate-300 dark:hover:text-slate-900 transition-all divide-x`}>
                         <div className='flex items-center flex-col gap-1'>
                             {url.icon}
                             <span className='text-xs'>{url.name}</span>
