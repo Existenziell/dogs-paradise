@@ -14,17 +14,19 @@ const Dogs = ({ dogs }) => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    // Check each dog if it is fully vaccinated
+    // Check each dog if it is fully vaccinated and dewormed
     for (let dog of dogs) {
-      let check = true
+      let checkVaccine = true
       for (let s of dog.status_vaccine) {
-        if (s.status === 'false') check = false
-        dog.fullyVaccinated = check
+        if (s.status === 'false') checkVaccine = false
       }
+      dog.fullyVaccinated = checkVaccine
+
+      let checkDeworming = true
       for (let s of dog.status_deworming) {
-        if (s.status === 'false') check = false
-        dog.fullyDewormed = check
+        if (s.status === 'false') checkDeworming = false
       }
+      dog.fullyDewormed = checkDeworming
     }
     setFetchedDogs(dogs)
     setFilteredDogs(dogs)
