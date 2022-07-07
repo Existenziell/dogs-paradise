@@ -5,7 +5,8 @@ import { addDataLayer } from '../../lib/map/addDataLayer'
 import 'mapbox-gl/dist/mapbox-gl.css'
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
-const MapLocation = ({ coordinates, phone_number, pickupImageUrl }) => {
+const MapLocation = ({ coordinates, phone_number, pickupImageUrl, extras }) => {
+  console.log(extras);
   const [pageIsMounted, setPageIsMounted] = useState(false)
   const [Map, setMap] = useState()
 
@@ -45,7 +46,7 @@ const MapLocation = ({ coordinates, phone_number, pickupImageUrl }) => {
       zoom: 15.8,
     })
 
-    initializeMap(map, coords, phone_number, pickupImageUrl)
+    initializeMap(map, coords, phone_number, pickupImageUrl, extras)
     setMap(map)
 
   }, [router.query.location, pickupImageUrl])

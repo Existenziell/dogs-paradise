@@ -47,7 +47,7 @@ const Users = ({ users, roles }) => {
   return (
     <>
       <Head>
-        <title>Admin | Dog&apos;s Paradise</title>
+        <title>Admin | Users | Dog&apos;s Paradise</title>
         <meta name='description' content='Admin | Dog&apos;s Paradise' />
       </Head >
       <div className='py-16 admin'>

@@ -10,7 +10,7 @@ import MapLocation from '../../../components/services/MapLocation'
 import BackBtn from '../../../components/BackBtn'
 
 const Appointment = ({ appointment }) => {
-  const { id, type, date, done, time, service_option, dogs, pickups } = appointment
+  const { id, type, date, done, time, service_option, dogs, pickups, extras } = appointment
   let image_url, coordinates, phone_number
 
   if (pickups?.length) {
@@ -65,7 +65,7 @@ const Appointment = ({ appointment }) => {
 
         {pickups.length > 0 &&
           <div className='w-full h-screen mt-8'>
-            <MapLocation coordinates={coordinates} phone_number={phone_number} pickupImageUrl={pickupImageUrl} />
+            <MapLocation coordinates={coordinates} phone_number={phone_number} pickupImageUrl={pickupImageUrl} extras={extras} />
           </div>
         }
         {done ?

@@ -74,7 +74,7 @@ const Appointments = ({ appointments }) => {
   return (
     <>
       <Head >
-        <title>Admin Dogs | Dog&apos;s Paradise</title>
+        <title>Admin | Appointments | Dog&apos;s Paradise</title>
         <meta name='description' content='Admin Dogs | Dog&apos;s Paradise' />
       </Head>
 
@@ -104,7 +104,7 @@ const Appointments = ({ appointments }) => {
                 <th>Extras</th>
                 <th>Price</th>
                 <th>Done</th>
-                <th>Edit</th>
+                <th>View</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -117,7 +117,7 @@ const Appointments = ({ appointments }) => {
               {filteredAppointments?.map((appointment) => {
                 const { id, date, time, type, done, client, dogs, service_option, extras, price } = appointment
                 return (
-                  <tr key={id} className={`${done && `bg-green-50 dark:bg-brand-dark`} relative`}>
+                  <tr key={id} className={`${done && `bg-brand/20 dark:bg-brand-dark`} relative whitespace-nowrap`}>
                     <td>{date}</td>
                     <td>{time}</td>
                     <td className='capitalize'>{type.split('-').join(' ')}</td>
@@ -125,7 +125,7 @@ const Appointments = ({ appointments }) => {
                     <td>{dogs.name}</td>
                     <td>{service_option ? <CheckIcon className='w-6' /> : `No`}</td>
                     {/* <td>{assignedUser}</td> */}
-                    <td>{extras}</td>
+                    <td className=' whitespace-normal'>{extras}</td>
                     <td>{price} MXN</td>
                     <td>{done ? <CheckIcon className='w-6' /> : `No`}</td>
                     <td>

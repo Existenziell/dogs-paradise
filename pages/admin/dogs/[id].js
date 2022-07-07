@@ -1,7 +1,7 @@
 import { supabase } from '../../../lib/supabase'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { LinkIcon, CheckIcon, XIcon, BadgeCheckIcon, BanIcon } from '@heroicons/react/solid'
+import { LinkIcon, CheckIcon, XIcon, BadgeCheckIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import Link from 'next/link'
 import useApp from '../../../context/AppContext'
@@ -29,7 +29,7 @@ const Dogs = ({ dog, i18n }) => {
     setStatusVaccine(status_vaccine)
     let check = true
     for (let v of status_vaccine) {
-      if (v.status === 'false') check = false
+      if (!v.status) check = false
     }
     setFullyVaccinated(check)
   }, [status_vaccine])
@@ -38,7 +38,7 @@ const Dogs = ({ dog, i18n }) => {
     setStatusDeworming(status_deworming)
     let check = true
     for (let v of status_deworming) {
-      if (v.status === 'false') check = false
+      if (!v.status) check = false
     }
     setFullyDewormed(check)
   }, [status_deworming])
@@ -74,7 +74,7 @@ const Dogs = ({ dog, i18n }) => {
     const rows = document.getElementsByClassName('status-vaccine')
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
-      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].value, [inputs[2].name]: inputs[2].value }
+      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value }
       status.push(el)
     })
 
@@ -87,21 +87,22 @@ const Dogs = ({ dog, i18n }) => {
       setStatusVaccine(status)
       let check = true
       for (let v of status) {
-        if (v.status === 'false') check = false
+        if (!v.status) check = false
       }
       setFullyVaccinated(check)
       setShowEdit(false)
     }
   }
 
-  const saveWormStatus = async (id) => {
+  const saveDewormStatus = async (id) => {
     let status = []
     const rows = document.getElementsByClassName('status-deworming')
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
-      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].value, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
+      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
       status.push(el)
     })
+
     const { error } = await supabase
       .from('dogs')
       .update({ status_deworming: status })
@@ -111,7 +112,7 @@ const Dogs = ({ dog, i18n }) => {
       setStatusDeworming(status)
       let check = true
       for (let s of status) {
-        if (s.status === 'false') check = false
+        if (!s.status) check = false
       }
       setFullyDewormed(check)
       setShowWormEdit(false)
@@ -123,7 +124,7 @@ const Dogs = ({ dog, i18n }) => {
   return (
     <>
       <Head>
-        <title>{i18n.title}</title>
+        <title>{name} | Edit Dog</title>
         <meta name='description' content={i18n.desc} />
       </Head>
 
@@ -155,26 +156,16 @@ const Dogs = ({ dog, i18n }) => {
               <p>Age: {age}</p>
             </div>
           </div>
-          <div className='text-left'>
 
-            <div className='flex items-center justify-start'>
-              <p>Fully vaccinated:</p>
-              {fullyVaccinated ?
-                <BadgeCheckIcon className='w-8 ml-2 text-green-500 inline-block' />
-                :
-                <BanIcon className='w-8 ml-2 text-red-500 inline-block' />
-              }
-            </div>
-            <div className='flex items-center justify-start'>
-              <p>Fully dewormed:</p>
-              {fullyDewormed ?
-                <BadgeCheckIcon className='w-8 ml-2 text-green-500 inline-block' />
-                :
-                <BanIcon className='w-8 ml-2 text-red-500 inline-block' />
-              }
-            </div>
+          <div className='text-left'>
             <div className='flex flex-col'>
-              <h2 className='underline mt-4 mb-2'>Vaccines</h2>
+              <div className='flex items-center'>
+                <h2 className='text-xl my-4'>Vaccines</h2>
+                {fullyVaccinated
+                  ? <BadgeCheckIcon className='w-8 ml-2 text-brand inline-block' />
+                  : <XIcon className='w-8 ml-2 text-red-600 inline-block' />
+                }
+              </div>
 
               <div className='flex items-start justify-between gap-4'>
                 <div>
@@ -186,21 +177,21 @@ const Dogs = ({ dog, i18n }) => {
                             <div className='flex items-center gap-2'>
                               <p className='font-bold'>{vaccine.name}</p>
 
-                              {vaccine.status === 'true' ?
+                              {vaccine.status ?
                                 <>
-                                  <CheckIcon className='w-4 text-green-500' />
+                                  <CheckIcon className='w-4 text-brand' />
                                   <p>(expires: {vaccine.expires})</p>
                                 </>
                                 :
-                                <XIcon className='w-4 text-red-500' />
+                                <XIcon className='w-4 text-red-600' />
                               }
                             </div>
                           </>
                           :
                           <div className='flex gap-2 status-vaccine'>
                             <input type='text' name='name' disabled className='font-bold bg-transparent border-none' defaultValue={vaccine.name} />
+                            <input type='checkbox' name='status' placeholder='true/false' className='font-bold' defaultChecked={vaccine.status ? `checked` : ``} />
                             <input type='text' name='expires' placeholder='expires at' className='font-bold' defaultValue={vaccine.expires} />
-                            <input type='text' name='status' placeholder='true/false' className='font-bold' defaultValue={vaccine.status.toString()} />
                           </div>
                         }
                       </div>
@@ -217,7 +208,14 @@ const Dogs = ({ dog, i18n }) => {
                 </div>
               </div>
 
-              <h2 className='mt-8 mb-2 underline'>Deworming</h2>
+              <div className='flex items-center mt-12 mb-4'>
+                <h2 className='text-xl'>Deworming</h2>
+                {fullyDewormed
+                  ? <BadgeCheckIcon className='w-8 ml-2 text-brand' />
+                  : <XIcon className='w-8 ml-2 text-red-600' />
+                }
+              </div>
+
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
                   {statusDeworming?.map(deworm => {
@@ -227,22 +225,23 @@ const Dogs = ({ dog, i18n }) => {
                         {!showWormEdit ?
                           <div className='flex items-center gap-2'>
                             {deworm.type}:
-                            {deworm.status === 'true' ?
+                            {deworm.status ?
                               <>
-                                <CheckIcon className='w-4 text-green-500' />
+                                <CheckIcon className='w-4 text-brand' />
                                 <p>Product: {deworm.product}</p>
                                 <p>(expires: {deworm.expires})</p>
                               </>
                               :
-                              <XIcon className='w-4 text-red-500' />
+                              <XIcon className='w-4 text-red-600' />
                             }
                           </div>
                           :
                           <div className='flex gap-2 status-deworming'>
                             <input type='text' name='type' disabled className='bg-transparent border-none w-20' defaultValue={deworm.type} />
+                            <input type='checkbox' name='status' placeholder='true/false' className='font-bold' defaultChecked={deworm.status ? `checked` : ``} />
                             <input type='text' name='product' placeholder='Product' defaultValue={deworm.product} />
                             <input type='text' name='expires' placeholder='expires at' defaultValue={deworm.expires} />
-                            <input type='text' name='status' placeholder='true/false' defaultValue={deworm.status.toString()} />
+                            {/* <input type='text' name='status' placeholder='true/false' defaultValue={deworm.status.toString()} /> */}
                           </div>
                         }
                       </div>
@@ -253,7 +252,7 @@ const Dogs = ({ dog, i18n }) => {
                     :
                     <div className='flex gap-4 mt-2'>
                       <button className='button-secondary' onClick={() => setShowWormEdit(false)}>Cancel</button>
-                      <button className='button-secondary' onClick={() => saveWormStatus(id)}>Save</button>
+                      <button className='button-secondary' onClick={() => saveDewormStatus(id)}>Save</button>
                     </div>
                   }
                 </div>

@@ -63,14 +63,14 @@ const Profile = ({ i18n }) => {
       // Check fullyVaccinated status
       let checkVaccine = true
       for (let v of dog.status_vaccine) {
-        if (v.status === 'false') checkVaccine = false
+        if (!v.status) checkVaccine = false
       }
       dog.fullyVaccinated = checkVaccine
 
       // Check fullyDewormed status
       let checkDewormed = true
       for (let d of dog.status_deworming) {
-        if (d.status === 'false') checkDewormed = false
+        if (!d.status) checkDewormed = false
       }
       dog.fullyDewormed = checkDewormed
     }

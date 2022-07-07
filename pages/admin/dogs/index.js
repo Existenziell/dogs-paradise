@@ -18,13 +18,13 @@ const Dogs = ({ dogs }) => {
     for (let dog of dogs) {
       let checkVaccine = true
       for (let s of dog.status_vaccine) {
-        if (s.status === 'false') checkVaccine = false
+        if (!s.status) checkVaccine = false
       }
       dog.fullyVaccinated = checkVaccine
 
       let checkDeworming = true
       for (let s of dog.status_deworming) {
-        if (s.status === 'false') checkDeworming = false
+        if (!s.status) checkDeworming = false
       }
       dog.fullyDewormed = checkDeworming
     }
@@ -55,7 +55,7 @@ const Dogs = ({ dogs }) => {
   return (
     <>
       <Head>
-        <title>Admin Dogs | Dog&apos;s Paradise</title>
+        <title>Admin | Dogs | Dog&apos;s Paradise</title>
         <meta name='description' content='Admin Dogs | Dog&apos;s Paradise' />
       </Head>
 
@@ -91,7 +91,7 @@ const Dogs = ({ dogs }) => {
               {filteredDogs?.map((dog) => {
                 const { id, name, fullyVaccinated, fullyDewormed, status, user } = dog
                 return (
-                  <tr key={id + name} className={`${(fullyVaccinated && fullyDewormed) && `bg-green-50 dark:bg-brand-dark`} relative`}>
+                  <tr key={id + name} className={`${(fullyVaccinated && fullyDewormed) && `bg-brand/20 dark:bg-brand-dark`} relative`}>
                     <td className='pl-6'>{name}</td>
                     <td>{status}</td>
                     <td>{fullyVaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>

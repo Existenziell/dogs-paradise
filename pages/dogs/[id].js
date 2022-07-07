@@ -151,7 +151,7 @@ const Dogs = ({ dog, i18n }) => {
 
                           {vaccine.status ?
                             <>
-                              <CheckIcon className='w-4 text-green-500' />
+                              <CheckIcon className='w-4 text-brand' />
                               <p>(expires: {vaccine.expires})</p>
                             </>
                             :
@@ -174,7 +174,7 @@ const Dogs = ({ dog, i18n }) => {
                           {deworm.type}:
                           {deworm.status ?
                             <>
-                              <CheckIcon className='w-4 text-green-500' />
+                              <CheckIcon className='w-4 text-brand' />
                               <p>Product: {deworm.product}</p>
                               <p>(expires: {deworm.expires})</p>
                             </>

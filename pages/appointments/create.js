@@ -220,7 +220,6 @@ const CreateAppointment = ({ slug, service }) => {
                 setPriceTotal={setPriceTotal}
                 calculatePrice={calculatePrice}
               />
-              {/* <div className='text-left'>{selectedService.desc}</div> */}
             </>
           }
 
@@ -232,9 +231,7 @@ const CreateAppointment = ({ slug, service }) => {
                   type="radio" value={0}
                   name='Pickup/Delivery'
                   id='no'
-                  // defaultChecked
                   onChange={setDelivery}
-                  // checked={formData.deliveryOption === 'false'}
                   defaultChecked={true}
                   className='calculate'
                 /> No
