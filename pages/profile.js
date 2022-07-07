@@ -165,7 +165,7 @@ const Profile = ({ i18n }) => {
                       :
                       <div className="text-left shadow w-full md:max-w-max mx-auto md:mx-0 bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
                         <div>
-                          <label htmlFor="username" className='block text-xs mt-2'>Username</label>
+                          <label htmlFor="username" className='block text-xs mt-2 w-full'>Username</label>
                           <input
                             id="username"
                             type="text"
@@ -173,7 +173,7 @@ const Profile = ({ i18n }) => {
                             onChange={(e) => setUsername(e.target.value)}
                           />
                         </div>
-                        <div className='mt-2'>
+                        <div className='mt-2 w-full'>
                           <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
                           <input
                             id="quote"

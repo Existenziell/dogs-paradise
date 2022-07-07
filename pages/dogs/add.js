@@ -60,8 +60,8 @@ const AddDog = ({ i18n }) => {
       </Link>
 
       <div className='px-4 md:px-8 py-24 flex flex-col add-dog items-center justify-center h-screen'>
-        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 py-20 md: border  border-blue-500 text-left rounded' id='addDogForm' >
-          <div className='w-full md:max-w-xs mx-auto mb-4 mt-20'>
+        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 py-20 text-left rounded' id='addDogForm' >
+          <div className='w-full md:max-w-xs mx-auto mb-4 mt-20 block'>
             <Avatar
               bucket='dogs'
               url={avatar_url}
