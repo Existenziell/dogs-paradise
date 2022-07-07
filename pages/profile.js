@@ -163,7 +163,7 @@ const Profile = ({ i18n }) => {
                         <button className='link' onClick={() => setShowEdit(true)}>Edit</button>
                       </div>
                       :
-                      <div className="text-left shadow w-full md:max-w-max mx-auto md:mx-0 bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
+                      <div className="text-left shadow w-full md:max-w-max mx-auto md:mx-0 overflow-hidden bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
                         <div>
                           <label htmlFor="username" className='block text-xs mt-2 w-full'>Username</label>
                           <input
