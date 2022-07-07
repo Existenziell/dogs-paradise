@@ -61,7 +61,7 @@ const AddDog = ({ i18n }) => {
 
       <div className='px-4 md:px-8 py-24 flex flex-col add-dog items-center justify-center h-screen'>
         <form onSubmit={addDog} className='shadow max-w-max bg-white dark:bg-transparent px-8 py-6 text-left rounded' id='addDogForm' >
-          <div className='max-w-xs mb-4'>
+          <div className='w-full md:max-w-xs mb-4'>
             <Avatar
               bucket='dogs'
               url={avatar_url}

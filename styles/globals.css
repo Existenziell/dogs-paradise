@@ -86,7 +86,7 @@ input[type='website'] {
 }
 
 .add-dog input[type='text'], .add-dog input[type='number'], .add-dog input[type='email'], .add-dog input[type='website'] {
-  @apply border px-5 py-3 rounded text-2xl;
+  @apply border px-5 py-3 rounded text-xl;
 }
 
 

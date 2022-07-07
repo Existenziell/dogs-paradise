@@ -258,7 +258,7 @@ const CreateAppointment = ({ slug, service }) => {
           <div className='w-full p-4 border rounded-sm'>
             <div className='flex items-center justify-around gap-4 w-full'>
               <p className='block w-1/2 md:w-1/6 text-left'>Date:</p>
-              <div className='mr-auto'>
+              <div className='md:mr-auto'>
                 <DatePicker selected={appointmentDate} onChange={(date) => setAppointmentDate(date)} className='px-4 py-2' />
               </div>
             </div>

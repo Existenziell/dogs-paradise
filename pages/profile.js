@@ -159,7 +159,7 @@ const Profile = ({ i18n }) => {
                         <button className='link' onClick={() => setShowEdit(true)}>Edit</button>
                       </div>
                       :
-                      <div className="text-left shadow max-w-max mx-auto md:mx-0 bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
+                      <div className="text-left shadow w-full md:max-w-max mx-auto md:mx-0 bg-white dark:bg-dark dark:text-white px-5 py-3 rounded-sm">
                         <div>
                           <label htmlFor="username" className='block text-xs mt-2'>Username</label>
                           <input
@@ -202,7 +202,10 @@ const Profile = ({ i18n }) => {
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
                             <a className='w-44 h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
-                              <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : `w-36 h-36`} />
+                              <img
+                                src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
+                                alt='Dog Image'
+                                className={d.public_url ? `shadow-sm rounded-sm` : `w-28 h-28`} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
                             </a>
