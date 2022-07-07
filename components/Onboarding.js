@@ -37,7 +37,7 @@ const Onboarding = () => {
           required
         />
       </div>
-      <div className='mt-4'>
+      <div className='mt-4 w-1/3'>
         <label htmlFor="quote" className='block text-sm mb-1'>Favorite Quote <br />(Could be about dogs &#128021;)</label>
         <textarea
           rows={5}
@@ -63,9 +63,9 @@ const Onboarding = () => {
       </div>
       <div>
         <button
-          className="link mt-2"
+          className="button mt-2"
           type='submit'
-          disabled={loading}
+          disabled={loading || !username}
           aria-label='Create Profile'
         >
           {loading ? 'Loading ...' : 'Save'}
