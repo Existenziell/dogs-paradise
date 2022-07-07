@@ -162,7 +162,6 @@ const CreateAppointment = ({ slug, service }) => {
       <Header content='Create Appointment' />
 
       <div className='px-4 md:px-8 py-24'>
-
         <Link href='/services'>
           <a className=''>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-12 md:w-12 absolute top-16 md:top-24 left-4 text-slate-500 hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -171,7 +170,7 @@ const CreateAppointment = ({ slug, service }) => {
           </a>
         </Link>
 
-        <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-2xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-6 rounded shadow'>
+        <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-4xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-6 rounded shadow'>
 
           <div className='flex items-center justify-start gap-4 w-full'>
             <p className='block w-1/6 text-left'>Service:</p>
@@ -190,13 +189,18 @@ const CreateAppointment = ({ slug, service }) => {
           <div className='flex items-center justify-start gap-4 w-full'>
             <p className='block w-1/6 text-left'>Dog:</p>
             <div className='w-full md:w-[80%]'>
-              <Select
-                options={dogOptions}
-                onChange={setDog}
-                instanceId
-                styles={styles}
-              // isMulti
-              />
+              {dogOptions?.length ?
+                <Select
+                  options={dogOptions}
+                  onChange={setDog}
+                  instanceId
+                  styles={styles}
+                // isMulti
+                />
+                :
+                <div>Please <Link href='/dogs/add'><a className='link'>add a dog to the App</a></Link> first</div>
+              }
+
             </div>
           </div>
 
@@ -213,14 +217,15 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           {selectedService &&
-            <>
+            <div className='flex justify-between w-full border p-4 rounded-sm'>
               <Extras
                 slug={selectedService.slug}
                 priceTotal={priceTotal}
                 setPriceTotal={setPriceTotal}
                 calculatePrice={calculatePrice}
               />
-            </>
+              <img src={selectedService.img} alt='Service Image' className='max-w-xs shadow-sm rounded-sm' />
+            </div>
           }
 
           <div className='text-left w-full'>

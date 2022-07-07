@@ -6,7 +6,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
 const MapLocation = ({ coordinates, phone_number, pickupImageUrl, extras }) => {
-  console.log(extras);
   const [pageIsMounted, setPageIsMounted] = useState(false)
   const [Map, setMap] = useState()
 

@@ -5,7 +5,7 @@ export default function Extras({ slug, calculatePrice }) {
 
     case 'spa':
       return (
-        <div className='border p-4 rounded-sm mt-2 flex flex-col gap-1 items-start w-full'>
+        <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <label htmlFor="extraCut" className="cursor-pointer flex items-center gap-2">
             <input
@@ -82,7 +82,7 @@ export default function Extras({ slug, calculatePrice }) {
 
     case 'hotel':
       return (
-        <div className='border p-4 rounded-sm mt-2 flex flex-col gap-1 items-start w-full'>
+        <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <div className='mb-2 text-left'>
             <div className='flex items-center justify-start gap-4' onChange={calculatePrice}>
@@ -138,7 +138,7 @@ export default function Extras({ slug, calculatePrice }) {
 
     case 'walker':
       return (
-        <div className='border p-4 rounded-sm mt-2 flex flex-col gap-1 items-start w-full'>
+        <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <label htmlFor="extraCut" className="cursor-pointer flex items-center gap-2">
             <input
@@ -155,7 +155,7 @@ export default function Extras({ slug, calculatePrice }) {
 
     case 'grooming':
       return (
-        <div className='border p-4 rounded-sm mt-2 flex flex-col gap-1 items-start w-full'>
+        <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <label htmlFor="extraCut" className="cursor-pointer flex items-center gap-2">
             <input
@@ -222,7 +222,7 @@ export default function Extras({ slug, calculatePrice }) {
 
     case 'day-care':
       return (
-        <div className='border p-4 rounded-sm mt-2 flex flex-col gap-1 items-start w-full'>
+        <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <label htmlFor="extraCut" className="cursor-pointer flex items-center gap-2">
             <input

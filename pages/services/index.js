@@ -33,7 +33,7 @@ const Services = ({ i18n }) => {
                   <div className='absolute -top-2 -left-2 rounded-lg bg-brand text-white text-sm px-2 py-1'>NEW</div>
                 }
                 <h2 className='bg-white dark:bg-brand-dark dark:text-white p-4 text-xl rounded-t-lg w-full'>{s.title}</h2>
-                <img src={s.img} alt='Pickup Service' className='h-20 max-h-20 my-6 dark:invert' />
+                <img src={s.icon} alt='Pickup Service' className='h-20 max-h-20 my-6 dark:invert' />
                 {/* <p className='h-16 px-8 text-sm dark:text-white'>{s.desc}</p> */}
               </a>
             </Link>
