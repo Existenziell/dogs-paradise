@@ -127,10 +127,7 @@ const Appointments = ({ i18n }) => {
             )
           })
           :
-          <>
-            <p>No appointments yet.</p>
-            <Link href='/appointments/create'><a className='button-secondary mt-4'>Create Appointment</a></Link>
-          </>
+          <p>No appointments yet.</p>
         }
 
       </div>
