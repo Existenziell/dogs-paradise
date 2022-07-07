@@ -202,7 +202,7 @@ const Profile = ({ i18n }) => {
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
                             <a className='w-44 h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
-                              <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : ``} />
+                              <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : `w-36 h-36`} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
                             </a>
