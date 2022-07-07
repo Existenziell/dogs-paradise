@@ -36,7 +36,7 @@ const Home = ({ i18n }) => {
             <Link href={`/appointments/create?slug=${s.slug}&service=${s.title}`} key={s.slug}>
               <a className='max-w-max min-w-[200px] shadow-md bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:shadow-sm transition-all relative'>
                 <h2 className='bg-white dark:bg-black dark:text-white p-4 text-lg rounded-t-lg w-full'>{s.title}</h2>
-                <img src={s.img} alt={s.title} className='my-4 h-20 max-h-20 dark:invert' />
+                <img src={s.icon} alt={s.title} className='my-4 h-20 max-h-20 dark:invert' />
               </a>
             </Link>
           ))}
