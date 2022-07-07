@@ -77,6 +77,10 @@ const Appointments = ({ i18n }) => {
       <Header content={i18n.T1} />
 
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24'>
+        <div className='flex items-center justify-center gap-4 mb-6'>
+          <Link href='/appointments/create'><a className='button-secondary'>Create Appointment</a></Link>
+          <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='button-secondary text-xs'>Contact Us</a>
+        </div>
         {appointments.length ?
           appointments.map(appointment => {
             const { id, type, date, time, service_option, dogs, pickups, extras } = appointment
@@ -110,15 +114,15 @@ const Appointments = ({ i18n }) => {
                     to proceed.
                   </div>
                 }
+
                 {pickups.length > 0 &&
                   <div className='mt-4 text-sm'>
-                    <p>Associated phone number for Pickup/Delivery service:</p>
+                    <p>Associated phone number:</p>
                     <span className='text-xl'>{pickups[0].phone_number}</span>
                   </div>
                 }
 
                 <button onClick={() => toggleDeleteModal(appointment)} className='mt-6 button-secondary text-xs block md:inline-block'>Cancel Appointment</button>
-                <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='block md:inline-block mt-4 md:mt-6 md:ml-4 max-w-max button-secondary text-xs'>Contact Dog&apos;s Paradise</a>
               </div>
             )
           })
@@ -127,10 +131,6 @@ const Appointments = ({ i18n }) => {
             <p>No appointments yet.</p>
             <Link href='/appointments/create'><a className='button-secondary mt-4'>Create Appointment</a></Link>
           </>
-        }
-
-        {appointments.length > 0 &&
-          <Link href='/appointments/create'><a className='button-secondary mt-4'>Create Appointment</a></Link>
         }
 
       </div>

@@ -113,8 +113,15 @@ const CreateAppointment = ({ slug, service }) => {
     let bookedExtras = []
     const extras = document.querySelectorAll('.calculate')
     Array.from(extras).forEach(el => {
-      if (el.checked) {
-        bookedExtras.push(el.name)
+      const { id, name, checked, value } = el
+      if (checked) {
+        if (name === 'Pickup/Delivery') {
+          parseInt(value) !== 0 ? bookedExtras.push(name) : null
+        } else if (name === 'Room Size') {
+          bookedExtras.push(`${name} ${id}`)
+        } else {
+          bookedExtras.push(el.name)
+        }
       }
     })
 
@@ -158,7 +165,7 @@ const CreateAppointment = ({ slug, service }) => {
 
         <Link href='/services'>
           <a className=''>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-12 md:w-12 absolute top-16 md:top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-12 md:w-12 absolute top-16 md:top-24 left-4 text-slate-500 hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </a>

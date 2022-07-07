@@ -125,8 +125,9 @@ export default function Extras({ slug, calculatePrice }) {
               <input
                 type="checkbox"
                 id="extraCut"
-                name="More than 7 nights requested"
-                className="text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
+                value={0}
+                name="More than 7 nights"
+                className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               /> More than 7 nights (If selected, we can offer you a better quote.)
             </label>
 

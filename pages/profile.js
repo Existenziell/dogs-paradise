@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -11,7 +12,9 @@ import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import useApp from '../context/AppContext'
 import { getPublicUrl } from '../lib/supabase/getPublicUrl'
-import { CheckCircleIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
+import getAppointments from '../lib/getAppointments'
+import { services } from '../lib/services'
 
 const Profile = ({ i18n }) => {
   const { session, currentUser, notify, userDogs, showOnboarding } = useApp()
@@ -26,6 +29,7 @@ const Profile = ({ i18n }) => {
   const [showEdit, setShowEdit] = useState(false)
   const [dogs, setDogs] = useState(null)
   const [view, setView] = useState('info')
+  const [appointments, setAppointments] = useState(null)
 
   useEffect(() => {
     if (currentUser) {
@@ -36,8 +40,18 @@ const Profile = ({ i18n }) => {
       setAvatarUrl(currentUser.avatar_url)
       setCreatedAt(currentUser.created_at)
       setIsPremium(currentUser.is_premium)
+      fetchAppointments(currentUser.id)
     }
   }, [currentUser])
+
+  const fetchAppointments = async (id) => {
+    const appointments = await getAppointments(id)
+    for (let a of appointments) {
+      const name = getServiceName(a.type)
+      a.type = name
+    }
+    setAppointments(appointments)
+  }
 
   const enrichDog = async () => {
     for (let dog of userDogs) {
@@ -63,15 +77,17 @@ const Profile = ({ i18n }) => {
     setDogs(userDogs)
   }
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (userDogs) enrichDog()
   }, [userDogs])
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   const handleEdit = async () => {
     await updateProfile({ username, quote, avatar_url, setLoading, notify })
     setShowEdit(false)
+  }
+
+  const getServiceName = (slug) => {
+    return services.filter(s => (s.slug === slug)).at(0).title
   }
 
   if (!session || !currentUser) return <Auth />
@@ -89,8 +105,8 @@ const Profile = ({ i18n }) => {
           {showOnboarding ?
             <Onboarding />
             :
-            <div className='flex flex-col md:flex-row justify-center items-start gap-10 md:gap-20'>
-              <div className='md:max-w-2xl'>
+            <div className='flex flex-col md:flex-row justify-center items-start gap-10 md:gap-20 w-full'>
+              <div className='md:w-1/2'>
                 <Avatar
                   bucket='avatars'
                   url={avatar_url}
@@ -102,8 +118,8 @@ const Profile = ({ i18n }) => {
                 />
               </div>
 
-              <div className='w-full'>
-                <div className='mb-20 w-full'>
+              <div className='md:w-1/2 w-full'>
+                <div className='mb-20'>
                   <ul className='text-lg md:text-2xl flex justify-evenly md:justify-start gap-8 md:gap-20'>
                     <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
                       <button onClick={(e) => setView(e.target.name)} name='info'>
@@ -185,7 +201,7 @@ const Profile = ({ i18n }) => {
                       dogs.map(d => (
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
-                            <a className='w-20 h-20 cursor-pointer hover:scale-105 transition-all relative'>
+                            <a className='w-44 h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
                               <img src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'} alt='Dog Image' className={d.public_url ? `shadow-sm rounded-sm` : ``} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
@@ -213,8 +229,24 @@ const Profile = ({ i18n }) => {
 
                 {view === 'appointments' &&
                   <div className='flex flex-col gap-4 items-center md:items-start justify-center md:justify-start'>
-                    <Link href='/appointments'><a className='button-secondary w-52'>View appointments</a></Link>
-                    <Link href='/appointments/create'><a className='button-secondary w-52'>Create appointment</a></Link>
+                    {appointments?.map(a => (
+                      <div key={a.id}>
+                        <Link href={`/appointments`}>
+                          <a className='text-xs md:text-left block hover:text-brand'>
+                            <ChevronDoubleRightIcon className='w-5 relative bottom-1 inline-block mx-2' />
+                            <span className='text-xl'>{a.date}</span>
+                            <span className='px-2'>at</span>
+                            <span className='text-xl'>{(a.time).replace(' ', '')}</span>
+                            <ChevronDoubleRightIcon className='w-5 relative bottom-1 inline-block mx-2' />
+                            <span className='text-xl'>{a.type}</span>
+                            <span className='px-2'>for/with</span>
+                            <span className='text-xl'>{a.dogs.name}</span>
+                          </a>
+                        </Link>
+                      </div>
+                    ))}
+                    {/* <Link href='/appointments'><a className='button-secondary w-52'>View appointments</a></Link> */}
+                    <Link href='/appointments/create'><a className='button-secondary mt-8'>New Appointment</a></Link>
                   </div>
                 }
 
