@@ -22,7 +22,7 @@ const Auth = () => {
               supabaseClient={supabase}
               socialLayout="horizontal"
               socialButtonSize="xlarge"
-              socialColors={false}
+              socialColors={true}
               magicLink
               redirectTo={BASE_URL + router.pathname}
               providers={['google', 'facebook', 'github']}
