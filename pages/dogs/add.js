@@ -60,8 +60,8 @@ const AddDog = ({ i18n }) => {
       </Link>
 
       <div className='px-4 md:px-8 py-24 flex flex-col add-dog items-center justify-center h-screen'>
-        <form onSubmit={addDog} className='shadow w-full md:max-w-max bg-white dark:bg-transparent px-4 md:px-8 py-6 mt-6 mb-12 text-left rounded' id='addDogForm' >
-          <div className='w-full md:max-w-xs mb-4'>
+        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 py-20 md: border  border-blue-500 text-left rounded' id='addDogForm' >
+          <div className='w-full md:max-w-xs mx-auto mb-4 mt-20'>
             <Avatar
               bucket='dogs'
               url={avatar_url}
@@ -70,10 +70,10 @@ const AddDog = ({ i18n }) => {
               onUpload={(url) => { setAvatarUrl(url) }}
             />
           </div>
-          Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2' />
-          Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2' />
+          Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2 w-full' />
+          Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2 w-full' />
           Age <input type='number' min={1} max={100} name='age' id='age' placeholder='4' onChange={setData} className='block mb-2 w-full' />
-          <input type='submit' className='button cursor-pointer block my-8' value='Save' />
+          <input type='submit' className='button cursor-pointer block mt-8 mb-20' value='Save' />
         </form>
       </div>
     </>
