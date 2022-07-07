@@ -170,10 +170,10 @@ const CreateAppointment = ({ slug, service }) => {
           </a>
         </Link>
 
-        <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-4xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-6 rounded shadow'>
+        <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-4xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-2 md:p-6 rounded shadow'>
 
           <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/6 text-left'>Service:</p>
+            <p className='block w-1/2 md:w-1/6 text-left'>Service:</p>
             <div className='w-full md:w-[80%]'>
               <Select
                 options={serviceOptions}
@@ -187,7 +187,7 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/6 text-left'>Dog:</p>
+            <p className='block w-1/2 md:w-1/6 text-left'>Dog:</p>
             <div className='w-full md:w-[80%]'>
               {dogOptions?.length ?
                 <Select
@@ -205,7 +205,7 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/6 text-left'>Dog&apos;s Size:</p>
+            <p className='block w-1/2 md:w-1/6 text-left'>Dog&apos;s Size:</p>
             <div className='w-full md:w-[80%]'>
               <Select
                 options={sizeOptions}
@@ -217,7 +217,7 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           {selectedService &&
-            <div className='flex justify-between w-full border p-4 rounded-sm gap-8'>
+            <div className='flex flex-col md:flex-row justify-between w-full border p-4 rounded-sm gap-8'>
               <Extras
                 slug={selectedService.slug}
                 priceTotal={priceTotal}
@@ -257,14 +257,14 @@ const CreateAppointment = ({ slug, service }) => {
           <h2 className='mt-4 text-left'>Please select date and time for the appointment:</h2>
           <div className='w-full p-4 border rounded-sm'>
             <div className='flex items-center justify-around gap-4 w-full'>
-              <p className='block w-1/6 text-left'>Date:</p>
+              <p className='block w-1/2 md:w-1/6 text-left'>Date:</p>
               <div className='mr-auto'>
                 <DatePicker selected={appointmentDate} onChange={(date) => setAppointmentDate(date)} className='px-4 py-2' />
               </div>
             </div>
 
             <div className='flex items-center justify-start gap-4 w-full mt-2'>
-              <span className='block w-1/6 text-left'>Time:</span>
+              <span className='block w-1/2 md:w-1/6 text-left'>Time:</span>
               <div className='flex items-center text-center'>
                 <Select
                   options={timeOptions}

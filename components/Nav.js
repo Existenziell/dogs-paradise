@@ -54,11 +54,11 @@ const Nav = () => {
         <nav className='fixed left-0 right-0 bottom-0 z-20 flex items-center justify-between divide-x-2 divide-slate-200 dark:divide-dark'>
             {urls.map(url => (
                 <Link href={url.href} key={url.name} >
-                    <a name={url.name} className={`${isActiveLink(url.href, router.pathname) && `active-nav`} flex flex-col justify-center items-center w-full 
-                    py-3 bg-white dark:bg-brand-dark text-brand  hover:bg-slate-600 hover:text-white dark:hover:bg-slate-300 dark:hover:text-slate-900 transition-all divide-x`}>
-                        <div className='flex items-center flex-col gap-1'>
+                    <a name={url.name} className={`flex flex-col justify-center items-center w-full py-2 md:py-3 bg-white dark:bg-brand-dark  text-brand
+                        hover:bg-brand hover:text-white dark:hover:bg-brand transition-all divide-x ${isActiveLink(url.href, router.pathname) && `active-nav`}`}>
+                        <div className='flex items-center flex-col md:gap-1'>
                             {url.icon}
-                            <span className='text-xs'>{url.name}</span>
+                            <span className='text-[10px] md:text-xs'>{url.name}</span>
                         </div>
                     </a>
                 </Link>

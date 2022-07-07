@@ -22,7 +22,7 @@ const Home = ({ i18n }) => {
       <div className='px-8 profile py-24 max-w-4xl mx-auto'>
         <h1 className='text-4xl md:text-6xl'>{i18n.T3}</h1>
         <p className='text-sm'>Feel the Paradise Experience</p>
-        <img src='/img/cozumel-dogs.jpg' alt='Cozumel Dogs' className='shadow-sm rounded-sm max-w-xl mx-auto my-12' />
+        <img src='/img/cozumel-dogs.jpg' alt='Cozumel Dogs' className='shadow-sm rounded w-full max-w-xl mx-auto my-12' />
 
         <div className='mt-8 flex gap-8 items-center justify-center'>
           {session ?

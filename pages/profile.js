@@ -120,7 +120,7 @@ const Profile = ({ i18n }) => {
 
               <div className='md:w-1/2 w-full'>
                 <div className='mb-20'>
-                  <ul className='text-lg md:text-2xl flex justify-evenly md:justify-start gap-8 md:gap-20'>
+                  <ul className='md:text-2xl flex justify-evenly md:justify-start gap-8 md:gap-20'>
                     <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
                       <button onClick={(e) => setView(e.target.name)} name='info'>
                         Info
@@ -228,7 +228,7 @@ const Profile = ({ i18n }) => {
                 }
 
                 {view === 'appointments' &&
-                  <div className='flex flex-col gap-4 items-center md:items-start justify-center md:justify-start'>
+                  <div className='flex flex-col gap-8 md:gap-4 items-center md:items-start justify-center md:justify-start'>
                     {appointments?.map(a => (
                       <div key={a.id}>
                         <Link href={`/appointments`}>

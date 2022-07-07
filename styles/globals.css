@@ -37,21 +37,13 @@ html, body {
   @apply no-underline bg-brand rounded transition-all duration-500 text-white px-1;
 }
 
-/* Counter bug in nextjs Image component - images are rendered with whitespace below
-https://github.com/vercel/next.js/issues/21914 */
-.image-wrapper {
-  display: relative;
-  text-align: bottom;
-  font-size: 0;
-}
-
 
 /* ==========================================================================
 	Navigation
 	========================================================================== */
 
 .active-nav {
-  @apply bg-slate-300 dark:bg-slate-900 ;
+  @apply bg-slate-300 dark:bg-brand-dark dark:text-slate-200 !important;
 }
 
 

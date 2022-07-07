@@ -15,7 +15,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={50}
-            /> With cut <span className='text-xs'>(+50 MXN)</span>
+            /> With cut <span className='text-xs whitespace-nowrap'>(+50 MXN)</span>
           </label>
           <label htmlFor="extraTooth" className="cursor-pointer flex items-center gap-2">
             <input
@@ -25,7 +25,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Tooth Brushing <span className='text-xs'>(+100 MXN)</span>
+            /> Tooth Brushing <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraNails" className="cursor-pointer flex items-center gap-2">
             <input
@@ -35,7 +35,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Nail cutting <span className='text-xs'>(+100 MXN)</span>
+            /> Nail cutting <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraShampoo" className="cursor-pointer flex items-center gap-2">
             <input
@@ -45,7 +45,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Medicinal Shampoo <span className='text-xs'>(+100 MXN)</span>
+            /> Medicinal Shampoo <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraKnots" className="cursor-pointer flex items-center gap-2">
             <input
@@ -55,7 +55,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Knots Removal <span className='text-xs'>(+100 MXN)</span>
+            /> Knots Removal <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraHair" className="cursor-pointer flex items-center gap-2">
             <input
@@ -65,7 +65,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={50}
-            /> Dead Hair Removal <span className='text-xs'>(+50 MXN)</span>
+            /> Dead Hair Removal <span className='text-xs whitespace-nowrap'>(+50 MXN)</span>
           </label>
           <label htmlFor="extraGame" className="cursor-pointer flex items-center gap-2">
             <input
@@ -75,7 +75,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={50}
-            /> 2 Additional game hours <span className='text-xs'>(+50 MXN)</span>
+            /> 2 Additional game hours <span className='text-xs whitespace-nowrap'>(+50 MXN)</span>
           </label>
         </div>
       )
@@ -85,7 +85,7 @@ export default function Extras({ slug, calculatePrice }) {
         <div className='mt-2 flex flex-col gap-1 items-start w-full'>
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <div className='mb-2 text-left'>
-            <div className='flex items-center justify-start gap-4 whitespace-nowrap' onChange={calculatePrice}>
+            <div className='flex items-center justify-start gap-4' onChange={calculatePrice}>
               <p className=''>Room size:</p>
               <label htmlFor='normal' className='cursor-pointer block'>
                 <input
@@ -107,7 +107,7 @@ export default function Extras({ slug, calculatePrice }) {
                   defaultChecked={false}
                   className='calculate'
                   value={50}
-                /> Big <span className='text-xs'>(+ 50 MXN)</span>
+                /> Big <span className='text-xs whitespace-nowrap'>(+ 50 MXN)</span>
               </label>
               <label htmlFor='vip' className='cursor-pointer'>
                 <input
@@ -118,7 +118,7 @@ export default function Extras({ slug, calculatePrice }) {
                   defaultChecked={false}
                   className='calculate'
                   value={150}
-                /> VIP <span className='text-xs'>(+ 150 MXN)</span>
+                /> VIP <span className='text-xs whitespace-nowrap'>(+ 150 MXN)</span>
               </label>
             </div>
             <label htmlFor="extraCut" className="cursor-pointer flex items-center gap-2 mt-2">
@@ -148,7 +148,7 @@ export default function Extras({ slug, calculatePrice }) {
               value={80}
               onChange={calculatePrice}
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
-            /> Solo Walk - All eyes on your dog <span className='text-xs'>(+80 MXN)</span>
+            /> Solo Walk - All eyes on your dog <span className='text-xs whitespace-nowrap'>(+80 MXN)</span>
           </label>
         </div>
       )
@@ -165,7 +165,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={50}
-            /> With cut <span className='text-xs'>(+50 MXN)</span>
+            /> With cut <span className='text-xs whitespace-nowrap'>(+50 MXN)</span>
           </label>
           <label htmlFor="extraTooth" className="cursor-pointer flex items-center gap-2">
             <input
@@ -175,7 +175,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Tooth Brushing <span className='text-xs'>(+100 MXN)</span>
+            /> Tooth Brushing <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraNails" className="cursor-pointer flex items-center gap-2">
             <input
@@ -185,7 +185,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Nail cutting <span className='text-xs'>(+100 MXN)</span>
+            /> Nail cutting <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraShampoo" className="cursor-pointer flex items-center gap-2">
             <input
@@ -195,7 +195,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Medicinal Shampoo <span className='text-xs'>(+100 MXN)</span>
+            /> Medicinal Shampoo <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraKnots" className="cursor-pointer flex items-center gap-2">
             <input
@@ -205,7 +205,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={100}
-            /> Knots Removal <span className='text-xs'>(+100 MXN)</span>
+            /> Knots Removal <span className='text-xs whitespace-nowrap'>(+100 MXN)</span>
           </label>
           <label htmlFor="extraHair" className="cursor-pointer flex items-center gap-2">
             <input
@@ -215,7 +215,7 @@ export default function Extras({ slug, calculatePrice }) {
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
               onChange={calculatePrice}
               value={50}
-            /> Dead Hair Removal <span className='text-xs'>(+50 MXN)</span>
+            /> Dead Hair Removal <span className='text-xs whitespace-nowrap'>(+50 MXN)</span>
           </label>
         </div>
       )
@@ -232,7 +232,7 @@ export default function Extras({ slug, calculatePrice }) {
               onChange={calculatePrice}
               value={40}
               className="calculate text-cta bg-gray-100 rounded border-gray-300 focus:ring-cta dark:focus:ring-cta dark:ring-offset-gray-800 focus:ring-2 dark:bg-brand-dark dark:border-gray-600"
-            /> Double pack +4h <span className='text-xs'>(+40 MXN)</span>
+            /> Double pack +4h <span className='text-xs whitespace-nowrap'>(+40 MXN)</span>
           </label>
         </div>
       )
