@@ -207,11 +207,11 @@ const Profile = ({ i18n }) => {
                       dogs.map(d => (
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
-                            <a className='w-44 h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
+                            <a className='w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
                               <img
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
-                                className={d.public_url ? `shadow-sm rounded-sm` : `w-28 h-28`} />
+                                className={d.public_url ? `shadow-sm rounded-sm` : `w-16 h-16 md:w-28 md:h-28 mx-auto`} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
                             </a>
