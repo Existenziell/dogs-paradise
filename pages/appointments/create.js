@@ -217,7 +217,7 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           {selectedService &&
-            <div className='flex justify-between w-full border p-4 rounded-sm'>
+            <div className='flex justify-between w-full border p-4 rounded-sm gap-8'>
               <Extras
                 slug={selectedService.slug}
                 priceTotal={priceTotal}
