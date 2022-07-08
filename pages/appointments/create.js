@@ -14,6 +14,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { sizeOptions, timeOptions } from '../../lib/config'
 import Extras from '../../components/Extras'
+import BackBtn from '../../components/BackBtn'
 
 const CreateAppointment = ({ slug, service }) => {
   const { session, currentUser, userDogs, notify, darkmode } = useApp()
@@ -162,13 +163,7 @@ const CreateAppointment = ({ slug, service }) => {
       <Header content='Create Appointment' />
 
       <div className='px-4 md:px-8 py-24'>
-        <Link href='/services'>
-          <a className=''>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-12 md:w-12 absolute top-16 md:top-24 left-4 text-slate-500 hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </a>
-        </Link>
+        <BackBtn href='/profile' />
 
         <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-4xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-2 md:p-6 rounded shadow'>
 
@@ -230,7 +225,7 @@ const CreateAppointment = ({ slug, service }) => {
 
           <div className='text-left w-full'>
             <div className='flex items-center justify-start gap-4 mt-8'>
-              <p className=''>Would you like to use our Pickup/Delivery service? (+100 MXN)</p>
+              <p>Would you like to use our Pickup/Delivery service? (+100 MXN)</p>
               <label htmlFor='no' className='cursor-pointer block'>
                 <input
                   type="radio" value={0}
@@ -256,9 +251,9 @@ const CreateAppointment = ({ slug, service }) => {
 
           <h2 className='mt-4 text-left'>Please select date and time for the appointment:</h2>
           <div className='w-full p-4 border dark:border-dark rounded-sm'>
-            <div className='flex items-center justify-between gap-4 w-full'>
+            <div className='flex items-center justify-between gap-4 w-full overflow-hidden'>
               <p className='block md:w-1/6 text-left'>Date:</p>
-              <div className='md:ml-auto'>
+              <div>
                 <DatePicker selected={appointmentDate} onChange={(date) => setAppointmentDate(date)} className='px-4 py-2' />
               </div>
             </div>

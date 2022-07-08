@@ -86,7 +86,7 @@ export default function Extras({ slug, calculatePrice }) {
           <p className='mb-2 text-left text-xl'>Available extras:</p>
           <div className='mb-2 text-left'>
             <div className='flex items-center justify-start gap-4' onChange={calculatePrice}>
-              <p className=''>Room size:</p>
+              <p>Room size:</p>
               <label htmlFor='normal' className='cursor-pointer block'>
                 <input
                   type="radio"

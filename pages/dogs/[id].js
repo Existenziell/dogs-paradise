@@ -86,7 +86,7 @@ const Dogs = ({ dog, i18n }) => {
           <div className='text-left'>
 
             {!showEdit ?
-              <div className=''>
+              <div>
                 <p>Age: {dogAge}</p>
                 <p>Status: {dogStatus}</p>
                 <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
