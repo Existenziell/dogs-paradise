@@ -106,7 +106,6 @@ export async function getServerSideProps({ params }) {
       props: { appointment },
     }
   }
-
 }
 
 export default Appointment

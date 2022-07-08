@@ -2,10 +2,20 @@ import { Auth as SupaAuth } from '@supabase/ui'
 import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabase'
 import { BASE_URL } from '../lib/config'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Header from './Header'
 
 const Auth = () => {
+  // Check if user has theme in localStorage
+  // If so, we assume user wants to sign_in, otherwise we show sign_up
+  const [view, setView] = useState('sign_up')
+  useEffect(() => {
+    if (localStorage.theme) {
+      setView('sign_in')
+    }
+  }, [])
+
   const router = useRouter()
   return (
     <>
@@ -19,6 +29,7 @@ const Auth = () => {
         <div className='max-w-xl'>
           <SupaAuth.UserContextProvider supabaseClient={supabase}>
             <SupaAuth
+              view={view}
               supabaseClient={supabase}
               socialLayout="horizontal"
               socialButtonSize="xlarge"
