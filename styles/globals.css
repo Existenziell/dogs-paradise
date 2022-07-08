@@ -82,7 +82,7 @@ input[type='website'] {
 }
 
 .profile input[type='text'], .profile input[type='number'], .profile input[type='email'], .profile input[type='website'] {
-  @apply border px-3 py-2 rounded;
+  @apply border px-3 py-2 rounded dark:border-brand-dark;
 }
 
 .add-dog input[type='text'], .add-dog input[type='number'], .add-dog input[type='email'], .add-dog input[type='website'] {

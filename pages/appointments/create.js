@@ -217,7 +217,7 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           {selectedService &&
-            <div className='flex flex-col md:flex-row justify-between w-full border p-4 rounded-sm gap-8'>
+            <div className='flex flex-col md:flex-row justify-between w-full border dark:border-dark p-4 rounded-sm gap-8'>
               <Extras
                 slug={selectedService.slug}
                 priceTotal={priceTotal}
@@ -255,17 +255,17 @@ const CreateAppointment = ({ slug, service }) => {
           </div>
 
           <h2 className='mt-4 text-left'>Please select date and time for the appointment:</h2>
-          <div className='w-full p-4 border rounded-sm'>
-            <div className='flex items-center justify-around gap-4 w-full'>
-              <p className='block w-1/2 md:w-1/6 text-left'>Date:</p>
-              <div className='md:mr-auto'>
+          <div className='w-full p-4 border dark:border-dark rounded-sm'>
+            <div className='flex items-center justify-between gap-4 w-full'>
+              <p className='block md:w-1/6 text-left'>Date:</p>
+              <div className='md:ml-auto'>
                 <DatePicker selected={appointmentDate} onChange={(date) => setAppointmentDate(date)} className='px-4 py-2' />
               </div>
             </div>
 
-            <div className='flex items-center justify-start gap-4 w-full mt-2'>
-              <span className='block w-1/2 md:w-1/6 text-left'>Time:</span>
-              <div className='flex items-center text-center'>
+            <div className='flex items-center justify-between gap-4 w-full mt-2'>
+              <span className='block md:w-1/6 text-left'>Time:</span>
+              <div className='md:ml-auto'>
                 <Select
                   options={timeOptions}
                   onChange={setTime}
