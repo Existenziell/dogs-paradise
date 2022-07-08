@@ -23,14 +23,7 @@ const Home = ({ i18n }) => {
         <h1 className='text-4xl md:text-6xl'>{i18n.T3}</h1>
         <p className='text-sm'>Feel the Paradise Experience</p>
         <img src='/img/cozumel-dogs.jpg' alt='Cozumel Dogs' className='shadow-sm rounded w-full max-w-xl mx-auto my-12' />
-
-        <div className='mt-8 flex gap-8 items-center justify-center'>
-          {session ?
-            <Link href='/profile'><a className='button'>Profile</a></Link>
-            :
-            <Link href='/profile'><a className='button'>Login</a></Link>
-          }
-        </div>
+        <Link href='/profile'><a className='button block mx-auto my-20'>{session ? `Profile` : `Login`}</a></Link>
 
         <div className='flex flex-wrap items-center justify-center mb-20 mt-12 gap-6'>
           {services.map(s => (

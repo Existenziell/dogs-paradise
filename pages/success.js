@@ -23,7 +23,7 @@ const Success = ({ i18n }) => {
 
         <div className='flex'>
           <Link href='/'><a className='button mr-6'>{i18n.B1}</a></Link>
-          <Link href='/menu'><a className='button'>{i18n.B2}</a></Link>
+          <Link href='/services'><a className='button'>{i18n.B2}</a></Link>
         </div>
 
       </div>

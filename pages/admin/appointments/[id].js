@@ -56,7 +56,12 @@ const Appointment = ({ appointment }) => {
           <p><span className='text-xs block'>Dog </span>{dogs.name}</p>
           <p><span className='text-xs block'>Delivery/Pickup </span>{service_option ? `Yes` : `No`}</p>
         </div>
-
+        <div className='text-xs mt-2'>
+          <p>Phone Number: <a href={`tel:${phone_number}`} className='text-xl'>{phone_number}</a> (Click to call)</p>
+        </div>
+        <div className='text-xs mt-1'>
+          <p>Booked Extras: <span>{extras}</span></p>
+        </div>
         {service_option && pickups.length === 0 &&
           <div className='max-w-sm mx-auto md:max-w-max mt-4'>
             User has not yet filled out the required information for pickup/delivery service.

@@ -6,9 +6,9 @@ import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
-import Link from 'next/link'
 import Avatar from '../../components/Avatar'
 import Auth from '../../components/Auth'
+import BackBtn from '../../components/BackBtn'
 
 const AddDog = ({ i18n }) => {
   const { session, currentUser, notify, userDogs, setUserDogs } = useApp()
@@ -50,18 +50,11 @@ const AddDog = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
       <Header content={i18n.T1} />
+      <BackBtn href='/profile' />
 
-      <Link href='/profile'>
-        <a>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 absolute top-24 left-4 text-dark dark:text-white hover:text-brand dark:hover:text-brand hover:scale-105 transition-all rounded " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </a>
-      </Link>
-
-      <div className='px-4 md:px-8 py-24 flex flex-col add-dog items-center justify-center h-screen'>
-        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 py-20 text-left rounded' id='addDogForm' >
-          <div className='w-full md:max-w-xs mx-auto mb-4 mt-20 block'>
+      <div className='px-4 md:px-8 py-28 flex flex-col add-dog items-center justify-center'>
+        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 pt-8 pb-4 text-left rounded' id='addDogForm' >
+          <div className='w-full md:max-w-xs mx-auto mb-4'>
             <Avatar
               bucket='dogs'
               url={avatar_url}
@@ -73,7 +66,7 @@ const AddDog = ({ i18n }) => {
           Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2 w-full' />
           Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2 w-full' />
           Age <input type='number' min={1} max={100} name='age' id='age' placeholder='4' onChange={setData} className='block mb-2 w-full' />
-          <input type='submit' className='button cursor-pointer block mt-8 mb-20' value='Save' />
+          <input type='submit' className='button cursor-pointer block mt-8' value='Save' />
         </form>
       </div>
     </>
