@@ -68,12 +68,10 @@ const Users = ({ user, roles }) => {
         <title>Admin Users</title>
         <meta name='description' content="Admin Users" />
       </Head>
-
       <Header content={username} />
+      <BackBtn href='/admin/users' />
 
       <div className='profile px-4 md:px-8 py-24'>
-        <BackBtn href='/admin/users' />
-
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>
             {publicUrl ?

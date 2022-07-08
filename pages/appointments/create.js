@@ -161,10 +161,9 @@ const CreateAppointment = ({ slug, service }) => {
         <meta name='description' content="Create Appointment" />
       </Head>
       <Header content='Create Appointment' />
+      <BackBtn href='/profile' />
 
       <div className='px-4 md:px-8 py-24'>
-        <BackBtn href='/profile' />
-
         <form onSubmit={saveAppointment} className='flex flex-col items-start gap-4 max-w-4xl mx-auto bg-white text-brand-dark dark:bg-brand-dark dark:text-white p-2 md:p-6 rounded shadow'>
 
           <div className='flex items-center justify-start gap-4 w-full'>

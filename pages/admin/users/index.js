@@ -5,7 +5,8 @@ import Link from 'next/link'
 import useApp from '../../../context/AppContext'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
-import { PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
+import { PencilAltIcon } from '@heroicons/react/outline'
+import Search from '../../../components/admin/Search'
 
 const Users = ({ users, roles }) => {
   const [fetchedUsers, setFetchedUsers] = useState()
@@ -27,10 +28,10 @@ const Users = ({ users, roles }) => {
   useEffect(() => {
     if (fetchedUsers) {
       if (search === '') resetSearch()
-      let users = fetchedUsers.filter(a => (
-        a.username.toLowerCase().includes(search.toLowerCase()) ||
-        a.email.toLowerCase().includes(search.toLowerCase()) ||
-        a.roles.name.toLowerCase().includes(search.toLowerCase())
+      let users = fetchedUsers.filter(user => (
+        user.username.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase()) ||
+        user.roles.name.toLowerCase().includes(search.toLowerCase())
       ))
       setFilteredUsers(users)
     }
@@ -54,14 +55,8 @@ const Users = ({ users, roles }) => {
         <Nav />
         <div className='py-8 px-8 text-left'>
           <div className='flex justify-between items-center mb-1'>
-
             <h1 className='admin-table-title'>Users</h1>
-            <div className='relative'>
-              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search' name='search' className='ml-2' />
-              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
-                <XCircleIcon className='w-5' />
-              </button>
-            </div>
+            <Search search={search} setSearch={setSearch} resetSearch={resetSearch} />
           </div>
           <table className='admin-table'>
             <thead>

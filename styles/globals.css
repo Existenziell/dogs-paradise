@@ -204,7 +204,7 @@ div.mapboxgl-popup-content span {
 }
 
 .admin-table-header {
-  @apply border-b dark:border-slate-800 font-bold;
+  @apply border-b dark:border-slate-800 font-bold bg-brand text-white;
 }
 
 .admin-table-title {

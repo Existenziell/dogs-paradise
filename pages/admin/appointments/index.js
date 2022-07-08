@@ -6,6 +6,7 @@ import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
 import Link from 'next/link'
 import { CheckIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
+import Search from '../../../components/admin/Search'
 
 const Appointments = ({ appointments }) => {
   const { notify, session } = useApp()
@@ -82,14 +83,8 @@ const Appointments = ({ appointments }) => {
         <Nav />
         <div className='py-8 px-8 text-left'>
           <div className='flex justify-between items-center mb-1'>
-
             <h1 className='admin-table-title'>Appointments</h1>
-            <div className='relative'>
-              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search' name='search' className='ml-2' />
-              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
-                <XCircleIcon className='w-5' />
-              </button>
-            </div>
+            <Search search={search} setSearch={setSearch} resetSearch={resetSearch} />
           </div>
           <table className='admin-table'>
             <thead>

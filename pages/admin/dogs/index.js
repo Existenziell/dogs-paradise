@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
-import { CheckIcon, PencilAltIcon, XCircleIcon } from '@heroicons/react/outline'
+import { CheckIcon, PencilAltIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
+import Search from '../../../components/admin/Search'
 
 const Dogs = ({ dogs }) => {
   const { session } = useApp()
@@ -35,9 +36,9 @@ const Dogs = ({ dogs }) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (fetchedDogs) {
-      if (search === '') resetSearch()
       let dogs = fetchedDogs.filter(d => (
         d.name.toLowerCase().includes(search.toLowerCase()) ||
+        d.status?.toLowerCase().includes(search.toLowerCase()) ||
         d.user.username.toLowerCase().includes(search.toLowerCase())
       ))
       setFilteredDogs(dogs)
@@ -64,12 +65,7 @@ const Dogs = ({ dogs }) => {
         <div className='pt-8 px-8 pb-16 text-left'>
           <div className='flex justify-between items-center mb-1'>
             <h1 className='admin-table-title'>Dogs</h1>
-            <div className='relative'>
-              <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search' name='search' className='ml-2' />
-              <button onClick={resetSearch} className=' absolute top-3 right-2 hover:text-brand'>
-                <XCircleIcon className='w-5' />
-              </button>
-            </div>
+            <Search search={search} setSearch={setSearch} resetSearch={resetSearch} />
           </div>
           <table className='admin-table'>
             <thead>

@@ -127,11 +127,10 @@ const Dogs = ({ dog, i18n }) => {
         <title>{name} | Edit Dog</title>
         <meta name='description' content={i18n.desc} />
       </Head>
-
       <Header content={name} />
+      <BackBtn href='/admin/dogs' />
 
       <div className='profile px-4 md:px-8 py-24'>
-        <BackBtn href='/admin/dogs' />
         <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
           <div className='max-w-xs mb-4'>
             <Avatar

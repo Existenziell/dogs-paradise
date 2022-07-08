@@ -46,10 +46,9 @@ const Appointment = ({ appointment }) => {
         <meta name='description' content={`Appointment | ${date} ${time} | ${dogs.name}`} />
       </Head>
       <Header content='Appointment' />
+      <BackBtn href='/admin/appointments' />
 
       <div className='px-4 md:px-8 py-24 mx-auto'>
-        <BackBtn href='/admin/appointments' />
-
         <div className='flex flex-col md:flex-row items-start md:items-center justify-center text-left gap-4 md:gap-12 whitespace-nowrap text-2xl md:border-b border-brand max-w-max mx-auto mt-4'>
           <p><span className='text-xs block'>Date/Time </span>{date} at {time}</p>
           <p><span className='text-xs block'>Service </span><span className=' capitalize'>{type.split('-').join(' ')}</span></p>
