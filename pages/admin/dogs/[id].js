@@ -13,7 +13,7 @@ import Avatar from '../../../components/Avatar'
 import BackBtn from '../../../components/BackBtn'
 
 const Dogs = ({ dog, i18n }) => {
-  const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
+  const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const [showDelete, setShowDelete] = useState(false)
@@ -119,6 +119,17 @@ const Dogs = ({ dog, i18n }) => {
     }
   }
 
+  const updateNeuterStatus = async (e) => {
+    const { error } = await supabase
+      .from('dogs')
+      .update({ status_neuter: e.target.value })
+      .eq('id', id)
+
+    if (!error) {
+      notify("Dog updated successfully")
+    }
+  }
+
   if (!session) return <Auth />
 
   return (
@@ -151,7 +162,6 @@ const Dogs = ({ dog, i18n }) => {
                   </a>
                 </Link>
               </div>
-              <p>Status: {status}</p>
               <p>Age: {age}</p>
             </div>
           </div>
@@ -255,6 +265,30 @@ const Dogs = ({ dog, i18n }) => {
                     </div>
                   }
                 </div>
+              </div>
+
+              <div className='mt-4'>
+                Neutered?
+                <label htmlFor='neuteredYes' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='neutered'
+                    id='neuteredYes'
+                    defaultChecked={status_neuter}
+                    value="true"
+                    onChange={updateNeuterStatus}
+                  /> Yes
+                </label>
+                <label htmlFor='neuteredNo' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='neutered'
+                    id='neuteredNo'
+                    defaultChecked={!status_neuter}
+                    value="false"
+                    onChange={updateNeuterStatus}
+                  /> No
+                </label>
               </div>
 
               <div className='mt-8'>

@@ -211,7 +211,7 @@ const Profile = ({ i18n }) => {
                               <img
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
-                                className={d.public_url ? `shadow-sm rounded-sm` : `w-16 h-16 md:w-28 md:h-28 mx-auto`} />
+                                className={d.public_url ? `shadow-sm rounded-sm aspect-square bg-contain` : `w-16 h-16 md:w-28 md:h-28 mx-auto`} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
                             </a>

@@ -89,6 +89,14 @@ input[type='website'] {
   @apply border px-5 py-3 rounded text-xl;
 }
 
+input[type='radio'] {
+  @apply appearance-none rounded-full h-4 w-4 mt-1 align-top cursor-pointer mr-2
+  bg-white checked:bg-brand
+    border border-brand/40 checked:border-brand/50 
+    ring-offset-2 ring-1 ring-brand
+    transition duration-200  
+}
+
 
 /* ==========================================================================
 	Mapbox overrides

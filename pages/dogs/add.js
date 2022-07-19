@@ -18,6 +18,7 @@ const AddDog = ({ i18n }) => {
 
   function setData(e) {
     const { name, value } = e.target
+    console.log(name, value);
     setFormData({ ...formData, ...{ [name]: value } })
   }
 
@@ -28,7 +29,7 @@ const AddDog = ({ i18n }) => {
       .from('dogs')
       .insert({
         name: formData.name,
-        status: formData.status,
+        status_neuter: formData.neutered,
         age: formData.age,
         user: currentUser.id,
         avatar_url: avatar_url,
@@ -53,7 +54,7 @@ const AddDog = ({ i18n }) => {
       <BackBtn href='/profile' />
 
       <div className='px-4 md:px-8 py-28 flex flex-col add-dog items-center justify-center'>
-        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-transparent px-4 md:px-8 pt-8 pb-4 text-left rounded' id='addDogForm' >
+        <form onSubmit={addDog} className='shadow w-full md:max-w-md bg-white dark:bg-brand-dark px-4 md:px-8 pt-8 pb-4 text-left rounded' id='addDogForm' >
           <div className='w-full md:max-w-xs mx-auto mb-4'>
             <Avatar
               bucket='dogs'
@@ -64,8 +65,33 @@ const AddDog = ({ i18n }) => {
             />
           </div>
           Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2 w-full' />
-          Status <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2 w-full' />
           Age <input type='number' min={1} max={100} name='age' id='age' placeholder='4' onChange={setData} className='block mb-2 w-full' />
+
+          <div className='mt-4'>
+            Neutered?
+            <label htmlFor='neuteredYes' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              <input
+                type="radio"
+                name='neutered'
+                id='neuteredYes'
+                defaultChecked={false}
+                value="true"
+                onChange={setData}
+              /> Yes
+            </label>
+            <label htmlFor='neuteredNo' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              <input
+                type="radio"
+                name='neutered'
+                id='neuteredNo'
+                defaultChecked={true}
+                value="false"
+                onChange={setData}
+              /> No
+            </label>
+          </div>
+
+          {/* <input type='text' name='status' id='status' placeholder='Needs Deworming' onChange={setData} className='block mb-2 w-full' /> */}
           <input type='submit' className='button cursor-pointer block mt-8' value='Save' />
         </form>
       </div>

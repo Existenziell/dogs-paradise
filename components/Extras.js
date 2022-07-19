@@ -248,7 +248,7 @@ export default function Extras({ slug, calculatePrice }) {
     case 'psychology':
       return (
         <div className='border border-cta p-4 rounded-sm mt-2 w-full flex items-center gap-2 justify-center'>
-          This service is free for Members <EmojiHappyIcon className='w-6 relative bottom-[1px]' />
+          For Members, the first evaluation is free! <EmojiHappyIcon className='w-6 relative bottom-[1px]' />
         </div>
       )
 

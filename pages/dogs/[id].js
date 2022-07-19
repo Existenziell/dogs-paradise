@@ -12,11 +12,11 @@ import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import BackBtn from '../../components/BackBtn'
 
 const Dogs = ({ dog, i18n }) => {
-  const { id, name, status, age, avatar_url, status_vaccine, status_deworming } = dog
+  const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
+  console.log(dog);
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const [dogAge, setDogAge] = useState(age)
-  const [dogStatus, setDogStatus] = useState(status)
   const [showEdit, setShowEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -36,7 +36,7 @@ const Dogs = ({ dog, i18n }) => {
 
   const handleEdit = async () => {
     setLoading(true)
-    const { error } = await supabase.from('dogs').update({ age: dogAge, status: dogStatus }).eq('id', id)
+    const { error } = await supabase.from('dogs').update({ age: dogAge }).eq('id', id)
     if (!error) notify("Updated successfully!")
     setShowEdit(false)
     setLoading(false)
@@ -87,8 +87,9 @@ const Dogs = ({ dog, i18n }) => {
 
             {!showEdit ?
               <div>
+                <h2 className='text-xl mb-4'>General</h2>
                 <p>Age: {dogAge}</p>
-                <p>Status: {dogStatus}</p>
+                <p>Neutered: {status_neuter ? `Yes` : `No`}</p>
                 <button className='link text-xs w-max mx-auto' onClick={() => setShowEdit(true)}>Edit</button>
 
               </div>
@@ -102,16 +103,6 @@ const Dogs = ({ dog, i18n }) => {
                     type="text"
                     defaultValue={dogAge || ''}
                     onChange={(e) => setDogAge(e.target.value)}
-                  />
-                </div>
-                <div className='mt-2'>
-                  <label htmlFor="status" className='block text-xs mt-2'>Status</label>
-                  <input
-                    id="status"
-                    name='status'
-                    type="text"
-                    defaultValue={dogStatus || ''}
-                    onChange={(e) => setDogStatus(e.target.value)}
                   />
                 </div>
 
