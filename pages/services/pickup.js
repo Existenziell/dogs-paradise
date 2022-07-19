@@ -58,7 +58,7 @@ const Pickup = () => {
         <p className='mb-4 text-center text-sm'>We need additional information for pickup and delivery services. This data will of course be handled confidentially and only be used to make our service as smooth as possible for you. After completion, this data is deleted.</p>
         <p className='text-xl text-center mb-4'>Please follow these simple steps:</p>
         <div className={`bg-white dark:bg-brand-dark p-4 rounded w-full mb-8 relative transition-all ${picture && `border-4 border-brand`}`}>
-          {picture && <CheckCircleIcon className='h-16 w-16 absolute top-1 right-1 text-brand' />}
+          {picture && <CheckCircleIcon className='h-16 w-16 absolute top-1 right-1 text-brand hidden md:block' />}
           <div className='flex items-center justify-start gap-3'>
             <p className='border bg-brand-dark text-white text-base md:text-xl px-3 py-2 max-w-max rounded whitespace-nowrap'>Step 1</p>
             <p className='text-base md:text-xl inline-block'>Take a picture of your house / current location.</p>
@@ -76,9 +76,9 @@ const Pickup = () => {
         <div className={`bg-white dark:bg-brand-dark p-4 rounded w-full mb-8 relative transition-all ${phoneNumber && `border-4 border-brand`}`}>
           <div className='flex items-center justify-start gap-3'>
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 2</p>
-            <p className='text-xl inline-block'>Enter your mobile number</p>
+            <p className='md:text-xl inline-block'>Enter your mobile number</p>
           </div>
-          {phoneNumber && <CheckCircleIcon className='h-16 w-16 absolute top-1 right-1 text-brand' />}
+          {phoneNumber && <CheckCircleIcon className='h-16 w-16 absolute top-1 right-1 text-brand hidden md:block' />}
           <div className='flex flex-col items-start'>
             {!phoneNumber &&
               <>
@@ -93,10 +93,12 @@ const Pickup = () => {
           <div className='flex items-center justify-between w-full'>
             <div className='flex items-center justify-start gap-3 w-full'>
               <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 3</p>
-              <p className='text-xl inline-block'>Set your Pickup Location</p>
-              <p className='text-xs'>Use the round location picker and then click Save.</p>
+              {/* <div className='flex flex-col md:flex-row items-center justify-start gap-3'> */}
+              <p className='md:text-xl inline-block'>Set your Pickup Location</p>
+              <p className='text-xs hidden md:block'>(Hint: Use the round location picker and then click Save.)</p>
+              {/* </div> */}
             </div>
-            <button onClick={saveLocation} data-location={currentLocation} className='button btton-secondary self-end' aria-label='Save' disabled={!currentLocation}>Save</button>
+            <button onClick={saveLocation} data-location={currentLocation} className='button btton-secondary md:self-end' aria-label='Save' disabled={!currentLocation}>Save</button>
           </div>
           {!coordinates &&
             <div className='flex flex-col items-start'>
@@ -114,7 +116,7 @@ const Pickup = () => {
         <div className={`bg-white dark:bg-brand-dark p-4 rounded w-full mb-8 transition-all ${picture && phoneNumber && coordinates && `border-4 border-brand`}`}>
           <div className='flex items-center justify-start gap-3'>
             <p className='border bg-brand-dark text-white text-xl px-3 py-2 max-w-max rounded inline-block whitespace-nowrap'>Step 4</p>
-            <p className='text-xl inline-block'>Send Request</p>
+            <p className='md:text-xl inline-block'>Send Request</p>
           </div>
 
           <div className='p-4'>
@@ -137,7 +139,7 @@ const Pickup = () => {
             <div>
               Location:{` `}
               {coordinates ?
-                <span className='text-brand'>{coordinates}</span>
+                <span className='text-brand'>{coordinates.split(',').join(', ')}</span>
                 :
                 <span className='text-brand'>Not set yet</span>
               }
