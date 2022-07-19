@@ -124,7 +124,7 @@ const Profile = ({ i18n }) => {
 
               <div className='md:w-1/2 w-full'>
                 <div className='mb-20'>
-                  <ul className='md:text-2xl flex justify-evenly md:justify-start gap-8 md:gap-20'>
+                  <ul className='md:text-2xl flex justify-evenly md:justify-start gap-10'>
                     <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
                       <button onClick={(e) => setView(e.target.name)} name='info'>
                         Info
