@@ -93,8 +93,8 @@ const Profile = ({ i18n }) => {
     return services.filter(s => (s.slug === slug)).at(0).title
   }
 
-  if (!session || !currentUser) return <Auth />
   if (fetching) return <div className='flex items-center justify-center pt-[25%]'><PulseLoader color={'var(--color-brand)'} size={20} /></div>
+  if (!session || !currentUser) return <Auth />
 
   return (
     <>
