@@ -51,7 +51,7 @@ const Appointment = ({ appointment }) => {
       <div className='px-4 md:px-8 py-24 mx-auto'>
         <div className='flex flex-col md:flex-row items-start md:items-center justify-center text-left gap-4 md:gap-12 whitespace-nowrap text-2xl md:border-b border-brand max-w-max mx-auto mt-4'>
           <p><span className='text-xs block'>Date/Time </span>{date} at {time}</p>
-          <p><span className='text-xs block'>Service </span><span className=' capitalize'>{type.split('-').join(' ')}</span></p>
+          <p><span className='text-xs block'>Service </span><span className='capitalize'>{type.split('-').join(' ')}</span></p>
           <p><span className='text-xs block'>Dog </span>{dogs.name}</p>
           <p><span className='text-xs block'>User </span>{users.username}</p>
           <p><span className='text-xs block'>Delivery/Pickup </span>{service_option ? `Yes` : `No`}</p>
@@ -79,7 +79,7 @@ const Appointment = ({ appointment }) => {
           <p className='mt-8 text-xs'>This appointment has been marked as done/finished.</p>
           :
           <div className='mt-16'>
-            <button onClick={() => markAsDone(id)} className=' button'>DONE!</button>
+            <button onClick={() => markAsDone(id)} className='button'>DONE!</button>
             <p className='text-xs mt-2 mb-12'>By clicking this button, the appointment will be marked as done/finished.</p>
           </div>
         }

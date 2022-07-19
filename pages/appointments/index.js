@@ -89,7 +89,7 @@ const Appointments = ({ i18n }) => {
               <div key={id} className='bg-white text-brand-dark dark:bg-brand-dark dark:text-white rounded px-4 py-3 my-3 text-left w-full max-w-4xl mb-12'>
                 <div className='flex items-center justify-start gap-12 '>
                   <div className='text-xl flex flex-col gap-4 w-1/2'>
-                    <p><span className='text-xs block'>Service: </span><span className=' capitalize'>{type.split('-').join(' ')}</span></p>
+                    <p><span className='text-xs block'>Service: </span><span className='capitalize'>{type.split('-').join(' ')}</span></p>
                     <p><span className='text-xs block'>Date/Time: </span>{date} at {time}</p>
                   </div>
 

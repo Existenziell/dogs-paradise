@@ -207,11 +207,11 @@ const Profile = ({ i18n }) => {
                       dogs.map(d => (
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
-                            <a className='w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
+                            <a className='flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
                               <img
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
-                                className={d.public_url ? `shadow-sm rounded-sm aspect-square bg-contain` : `w-16 h-16 md:w-28 md:h-28 mx-auto`} />
+                                className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
                               {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
                               {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
                             </a>
@@ -227,7 +227,7 @@ const Profile = ({ i18n }) => {
 
                     <Link href={`dogs/add/`}>
                       <a className='flex flex-col items-center'>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
                         <span>Add Dog</span>

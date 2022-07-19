@@ -120,7 +120,7 @@ const Appointments = ({ appointments }) => {
                     <td>{dogs.name}</td>
                     <td>{service_option ? <CheckIcon className='w-6' /> : `No`}</td>
                     {/* <td>{assignedUser}</td> */}
-                    <td className=' whitespace-normal'>{extras}</td>
+                    <td className='whitespace-normal'>{extras}</td>
                     <td>{price} MXN</td>
                     <td>{done ? <CheckIcon className='w-6' /> : `No`}</td>
                     <td>

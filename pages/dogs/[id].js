@@ -13,7 +13,7 @@ import BackBtn from '../../components/BackBtn'
 
 const Dogs = ({ dog, i18n }) => {
   const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
-  console.log(dog);
+
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const [dogAge, setDogAge] = useState(age)
