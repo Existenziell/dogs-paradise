@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { getPublicUrl } from '../lib/supabase/getPublicUrl'
-import { CheckCircleIcon, ChevronDoubleRightIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon, ChevronDoubleRightIcon, XIcon } from '@heroicons/react/outline'
 import { PulseLoader } from 'react-spinners'
 import { services } from '../lib/services'
 import Head from 'next/head'
@@ -93,8 +93,8 @@ const Profile = ({ i18n }) => {
     return services.filter(s => (s.slug === slug)).at(0).title
   }
 
+  if (!session) return <Auth />
   if (fetching) return <div className='flex items-center justify-center pt-[25%]'><PulseLoader color={'var(--color-brand)'} size={20} /></div>
-  if (!session || !currentUser) return <Auth />
 
   return (
     <>
@@ -212,8 +212,16 @@ const Profile = ({ i18n }) => {
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
                                 className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
-                              {d.fullyVaccinated && <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>}
-                              {d.fullyDewormed && <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>}
+                              {d.fullyVaccinated ?
+                                <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>
+                                :
+                                <div title="Not Vaccinated!"><XIcon className='w-6 absolute -top-7 right-6 text-red-700' /></div>
+                              }
+                              {d.fullyDewormed ?
+                                <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>
+                                :
+                                <div title="Not Dewormed!"><XIcon className='w-6 absolute -top-7 right-0 text-red-700' /></div>
+                              }
                             </a>
                           </Link>
                           <Link href={`dogs/${d.id}`}>
