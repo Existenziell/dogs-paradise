@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { CheckIcon, PencilAltIcon } from '@heroicons/react/outline'
+import { getPublicUrl } from '../../../lib/supabase/getPublicUrl'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Link from 'next/link'
@@ -14,9 +15,13 @@ const Dogs = ({ dogs }) => {
   const [filteredDogs, setFilteredDogs] = useState()
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
+  const enrichDogs = async () => {
     // Check each dog if it is fully vaccinated and dewormed
     for (let dog of dogs) {
+      let url
+      if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
+      dog.public_url = url
+
       let checkVaccine = true
       for (let s of dog.status_vaccine) {
         if (!s.status) checkVaccine = false
@@ -31,9 +36,13 @@ const Dogs = ({ dogs }) => {
     }
     setFetchedDogs(dogs)
     setFilteredDogs(dogs)
-  }, [dogs])
+  }
 
   /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    enrichDogs()
+  }, [dogs])
+
   useEffect(() => {
     if (fetchedDogs) {
       let dogs = fetchedDogs.filter(d => (
@@ -70,6 +79,7 @@ const Dogs = ({ dogs }) => {
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
+                <th>Picture</th>
                 <th className='ml-4 block'>Name</th>
                 <th>Owner</th>
                 <th>Vaccinated</th>
@@ -85,10 +95,11 @@ const Dogs = ({ dogs }) => {
               }
 
               {filteredDogs?.map((dog) => {
-                const { id, name, fullyVaccinated, fullyDewormed, status_neuter, user } = dog
+                const { id, name, fullyVaccinated, fullyDewormed, status_neuter, user, public_url } = dog
                 return (
                   <tr key={id + name} className={`${(fullyVaccinated && fullyDewormed) && `bg-brand/20 dark:bg-brand-dark`} relative`}>
-                    <td className='pl-6'>{name}</td>
+                    <td><img src={public_url} alt={name} className='max-h-[50px]' /></td>
+                    <td>{name}</td>
                     <td>{user?.name ? user?.name : user?.username}</td>
                     <td>{fullyVaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>{fullyDewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>

@@ -66,6 +66,8 @@ const Dogs = ({ dog, i18n }) => {
       setShowDelete(false)
       notify("Dog deleted successfully!")
       router.push('/admin/dogs')
+    } else {
+      notify(error.message)
     }
   }
 
@@ -189,7 +191,7 @@ const Dogs = ({ dog, i18n }) => {
                               {vaccine.status ?
                                 <>
                                   <CheckIcon className='w-4 text-brand' />
-                                  <p>(expires: {vaccine.expires})</p>
+                                  <p>(expires: {vaccine.expires.substring(0, 10)})</p>
                                 </>
                                 :
                                 <XIcon className='w-4 text-red-600' />
@@ -200,7 +202,7 @@ const Dogs = ({ dog, i18n }) => {
                           <div className='flex gap-2 status-vaccine'>
                             <input type='text' name='name' disabled className='font-bold bg-transparent border-none' defaultValue={vaccine.name} />
                             <input type='checkbox' name='status' placeholder='true/false' className='font-bold' defaultChecked={vaccine.status ? `checked` : ``} />
-                            <input type='text' name='expires' placeholder='expires at' className='font-bold' defaultValue={vaccine.expires} />
+                            <input type='text' name='expires' placeholder='expires at' className='font-bold' defaultValue={vaccine.expires.substring(0, 10)} />
                           </div>
                         }
                       </div>
@@ -238,7 +240,7 @@ const Dogs = ({ dog, i18n }) => {
                               <>
                                 <CheckIcon className='w-4 text-brand' />
                                 <p>Product: {deworm.product}</p>
-                                <p>(expires: {deworm.expires})</p>
+                                <p>(expires: {deworm.expires.substring(0, 10)})</p>
                               </>
                               :
                               <XIcon className='w-4 text-red-600' />
@@ -249,7 +251,7 @@ const Dogs = ({ dog, i18n }) => {
                             <input type='text' name='type' disabled className='bg-transparent border-none w-20' defaultValue={deworm.type} />
                             <input type='checkbox' name='status' placeholder='true/false' className='font-bold' defaultChecked={deworm.status ? `checked` : ``} />
                             <input type='text' name='product' placeholder='Product' defaultValue={deworm.product} />
-                            <input type='text' name='expires' placeholder='expires at' defaultValue={deworm.expires} />
+                            <input type='text' name='expires' placeholder='expires at' defaultValue={deworm.expires.substring(0, 10)} />
                             {/* <input type='text' name='status' placeholder='true/false' defaultValue={deworm.status.toString()} /> */}
                           </div>
                         }

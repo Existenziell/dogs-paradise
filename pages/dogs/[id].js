@@ -137,7 +137,7 @@ const Dogs = ({ dog, i18n }) => {
                           {vaccine.status ?
                             <>
                               <CheckIcon className='w-4 text-brand' />
-                              <p>(expires: {vaccine.expires})</p>
+                              <p>(expires: {vaccine.expires.substring(0, 10)})</p>
                             </>
                             :
                             <XIcon className='w-4 text-red-500' />
@@ -161,7 +161,7 @@ const Dogs = ({ dog, i18n }) => {
                             <>
                               <CheckIcon className='w-4 text-brand' />
                               <p>Product: {deworm.product}</p>
-                              <p>(expires: {deworm.expires})</p>
+                              <p>(expires: {deworm.expires.substring(0, 10)})</p>
                             </>
                             :
                             <XIcon className='w-4 text-red-500' />
