@@ -28,7 +28,7 @@ const Appointment = ({ appointment }) => {
       downloadImage('pickups', image_url, setPickupImageUrl)
     }
   }, [image_url])
-
+  console.log(coordinates);
   const markAsDone = async (id) => {
     await supabase
       .from('appointments')

@@ -66,11 +66,13 @@
     "title": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
     "desc": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
     "T1": "Contact",
-    "T2": "Please leave any suggestions or feedback, it is always very welcome. We are excited to hear from you!",
+    "T2": "Opening Hours",
+    "T3a": "Monday to Friday: 8 am - 7 pm.",
+    "T3b": "Saturdays and Sundays: 9 am - 7 pm",
     "T4": "Name",
     "T5": "Email",
     "T6": "Message",
-    "T7": "Submit"
+    "T7": "Send"
   },
 
   "success": {

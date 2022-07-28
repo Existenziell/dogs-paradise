@@ -79,7 +79,7 @@ const Appointments = ({ i18n }) => {
       <div className='flex flex-col items-center justify-center px-4 md:px-8 py-24'>
         <div className='flex items-center justify-center gap-4 mb-6'>
           <Link href='/appointments/create'><a className='button-secondary'>Create Appointment</a></Link>
-          <a href='https://api.whatsapp.com/send?phone=00529871349372' target='_blank' rel='noopener noreferrer nofollow' className='button-secondary text-xs'>Contact Us</a>
+          <Link href='/contact'><a className='button-secondary text-xs'>Contact Us</a></Link>
         </div>
         {appointments.length ?
           appointments.map(appointment => {
