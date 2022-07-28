@@ -51,17 +51,6 @@
     "T1": "Add Dog"
   },
 
-  "map": {
-    "title": "Map | Dog's Paradise | The best place for dogs in Cozumel",
-    "desc": "Where and how to find us | Dog's Paradise",
-    "T1": "Anno 2014",
-    "T2": "Dog's Paradise",
-    "T3": "The best place for dogs in Cozumel",
-    "T4": "Calle 1 Sur, between Avenida 20 and 25",
-    "T5": "77600 San Miguel de Cozumel",
-    "T6": "+52 987 117 67 78"
-  },
-
   "contact": {
     "title": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
     "desc": "Contact | Dog's Paradise | The best place for dogs in Cozumel",
@@ -72,7 +61,11 @@
     "T4": "Name",
     "T5": "Email",
     "T6": "Message",
-    "T7": "Send"
+    "T7": "Send",
+    "T8": "Calle 1 Sur, between Avenida 20 and 25",
+    "T9": "77600 San Miguel de Cozumel, Q.R.",
+    "T10": "+52 987 117 67 78",
+    "T11": "We are located here:"
   },
 
   "success": {

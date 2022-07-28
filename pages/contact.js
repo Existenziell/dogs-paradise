@@ -7,6 +7,7 @@ import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
 import MapLocation from '../components/services/MapLocation'
+import { COORDS } from '../lib/config'
 
 const Contact = ({ i18n }) => {
 
@@ -52,14 +53,17 @@ const Contact = ({ i18n }) => {
           <div className='leading-relaxed'>
             <a href='mailto:dogparadise.mx@gmail.com' target='_blank' rel='noopener noreferrer nofollow'>dogparadise.mx@gmail.com</a>
             <Social />
-            <p className='mx-auto leading-relaxed mb-2 max-w-sm'>{i18n.T2}:</p>
-            <p className=''>{i18n.T3a}</p>
-            <p className=''>{i18n.T3b}</p>
+            <p className='mb-2 text-lg border-b'>{i18n.T2}:</p>
+            <p>{i18n.T3a}</p>
+            <p>{i18n.T3b}</p>
+            <p className='mt-6 mb-2 text-lg'>{i18n.T11}</p>
+            <p>{i18n.T8}</p>
+            <p>{i18n.T9}</p>
           </div>
         </div>
 
         <div className='w-full h-[calc(50vh)] mb-16'>
-          <MapLocation coordinates={'-86.946569, 20.507825'} pickupImageUrl={'/logo2.png'} />
+          <MapLocation coordinates={COORDS.join(', ')} pickupImageUrl={'/logo2.png'} />
         </div>
 
         <div className='z-0 px-4 pt-8 pb-0 sm:px-12 mb-12 shadow w-full rounded-lg bg-brand/50 backdrop-blur-md text-white lg:w-2/3 lg:mx-auto'>
