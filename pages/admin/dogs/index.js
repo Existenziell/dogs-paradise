@@ -8,31 +8,21 @@ import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
 import Search from '../../../components/admin/Search'
+import { useRouter } from 'next/router'
 
 const Dogs = ({ dogs }) => {
   const { session } = useApp()
   const [fetchedDogs, setFetchedDogs] = useState()
   const [filteredDogs, setFilteredDogs] = useState()
   const [search, setSearch] = useState('')
+  const router = useRouter()
 
   const enrichDogs = async () => {
-    // Check each dog if it is fully vaccinated and dewormed
     for (let dog of dogs) {
       let url
       if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
       dog.public_url = url
 
-      let checkVaccine = true
-      for (let s of dog.status_vaccine) {
-        if (!s.status) checkVaccine = false
-      }
-      dog.fullyVaccinated = checkVaccine
-
-      let checkDeworming = true
-      for (let s of dog.status_deworming) {
-        if (!s.status) checkDeworming = false
-      }
-      dog.fullyDewormed = checkDeworming
     }
     setFetchedDogs(dogs)
     setFilteredDogs(dogs)
@@ -58,6 +48,61 @@ const Dogs = ({ dogs }) => {
   const resetSearch = () => {
     setFilteredDogs(fetchedDogs)
     setSearch('')
+  }
+
+  const runChecks = async () => {
+    for (let dog of dogs) {
+      let checkVaccine = true
+      for (let s of dog.status_vaccine) {
+        if (s.expires) {
+          let today = new Date()
+          let expireDate = new Date(s.expires.replaceAll('-', '/'))
+          today.setHours(0, 0, 0, 0)
+          expireDate.setHours(0, 0, 0, 0)
+          // If expireDate today or in the past
+          if (today.getTime() >= expireDate.getTime()) {
+            checkVaccine = false
+            s.status = false
+            s.expires = ''
+          }
+        }
+        else {
+          checkVaccine = false
+        }
+      }
+
+
+      let checkDeworming = true
+      for (let s of dog.status_deworming) {
+        if (s.expires) {
+          let today = new Date()
+          let expireDate = new Date(s.expires.replaceAll('-', '/'))
+          today.setHours(0, 0, 0, 0)
+          expireDate.setHours(0, 0, 0, 0)
+          // If expireDate today or in the past
+          if (today.getTime() >= expireDate.getTime()) {
+            checkDeworming = false
+            s.status = false
+            s.product = ''
+            s.expires = ''
+          }
+        } else {
+          checkDeworming = false
+        }
+      }
+
+      const { error } = await supabase
+        .from('dogs')
+        .update({
+          status_vaccine: dog.status_vaccine,
+          status_deworming: dog.status_deworming,
+          fully_vaccinated: checkVaccine,
+          fully_dewormed: checkDeworming
+        })
+        .eq('id', dog.id)
+
+      if (!error) router.reload()
+    }
   }
 
   if (!session) return <Auth />
@@ -95,14 +140,14 @@ const Dogs = ({ dogs }) => {
               }
 
               {filteredDogs?.map((dog) => {
-                const { id, name, fullyVaccinated, fullyDewormed, status_neuter, user, public_url } = dog
+                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, public_url } = dog
                 return (
-                  <tr key={id + name} className={`${(fullyVaccinated && fullyDewormed) && `bg-brand/20 dark:bg-brand-dark`} relative`}>
-                    <td><img src={public_url} alt={name} className='max-h-[50px]' /></td>
+                  <tr key={id + name} className='relative'>
+                    <td>{public_url ? <img src={public_url} alt={name} className='max-h-[50px]' /> : `n/a`}</td>
                     <td>{name}</td>
                     <td>{user?.name ? user?.name : user?.username}</td>
-                    <td>{fullyVaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
-                    <td>{fullyDewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                    <td>{fully_vaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                    <td>{fully_dewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>{status_neuter ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>
                       <Link href={`/admin/dogs/${id}`}>
@@ -116,6 +161,7 @@ const Dogs = ({ dogs }) => {
               })}
             </tbody>
           </table>
+          <button className='button button-secondary mt-8' onClick={runChecks}>Run Checks</button>
         </div>
       </div>
     </>

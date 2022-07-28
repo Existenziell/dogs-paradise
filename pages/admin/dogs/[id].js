@@ -19,29 +19,7 @@ const Dogs = ({ dog, i18n }) => {
   const [showDelete, setShowDelete] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showWormEdit, setShowWormEdit] = useState(false)
-  const [statusVaccine, setStatusVaccine] = useState(null)
-  const [statusDeworming, setStatusDeworming] = useState(null)
-  const [fullyVaccinated, setFullyVaccinated] = useState(false)
-  const [fullyDewormed, setFullyDewormed] = useState(false)
   const router = useRouter()
-
-  useEffect(() => {
-    setStatusVaccine(status_vaccine)
-    let check = true
-    for (let v of status_vaccine) {
-      if (!v.status) check = false
-    }
-    setFullyVaccinated(check)
-  }, [status_vaccine])
-
-  useEffect(() => {
-    setStatusDeworming(status_deworming)
-    let check = true
-    for (let v of status_deworming) {
-      if (!v.status) check = false
-    }
-    setFullyDewormed(check)
-  }, [status_deworming])
 
   useEffect(() => {
     if (avatar_url) {
@@ -86,12 +64,6 @@ const Dogs = ({ dog, i18n }) => {
       .eq('id', id)
 
     if (!error) {
-      setStatusVaccine(status)
-      let check = true
-      for (let v of status) {
-        if (!v.status) check = false
-      }
-      setFullyVaccinated(check)
       setShowEdit(false)
     }
   }
@@ -111,12 +83,6 @@ const Dogs = ({ dog, i18n }) => {
       .eq('id', id)
 
     if (!error) {
-      setStatusDeworming(status)
-      let check = true
-      for (let s of status) {
-        if (!s.status) check = false
-      }
-      setFullyDewormed(check)
       setShowWormEdit(false)
     }
   }
@@ -172,7 +138,7 @@ const Dogs = ({ dog, i18n }) => {
             <div className='flex flex-col'>
               <div className='flex items-center'>
                 <h2 className='text-xl my-4'>Vaccines</h2>
-                {fullyVaccinated
+                {dog.fully_vaccinated
                   ? <BadgeCheckIcon className='w-8 ml-2 text-brand inline-block' />
                   : <XIcon className='w-8 ml-2 text-red-600 inline-block' />
                 }
@@ -180,7 +146,7 @@ const Dogs = ({ dog, i18n }) => {
 
               <div className='flex items-start justify-between gap-4'>
                 <div>
-                  {statusVaccine?.map(vaccine => {
+                  {status_vaccine?.map(vaccine => {
                     return (
                       <div className='text-sm mb-2' key={vaccine.name}>
                         {!showEdit ?
@@ -221,7 +187,7 @@ const Dogs = ({ dog, i18n }) => {
 
               <div className='flex items-center mt-12 mb-4'>
                 <h2 className='text-xl'>Deworming</h2>
-                {fullyDewormed
+                {dog.fully_dewormed
                   ? <BadgeCheckIcon className='w-8 ml-2 text-brand' />
                   : <XIcon className='w-8 ml-2 text-red-600' />
                 }
@@ -229,7 +195,7 @@ const Dogs = ({ dog, i18n }) => {
 
               <div className='flex items-start justify-between gap-2 mb-8'>
                 <div>
-                  {statusDeworming?.map(deworm => {
+                  {status_deworming?.map(deworm => {
                     return (
                       <div className='text-sm' key={deworm.type}>
 

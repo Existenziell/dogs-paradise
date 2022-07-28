@@ -62,20 +62,6 @@ const Profile = ({ i18n }) => {
       let url
       if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
       dog.public_url = url
-
-      // Check fullyVaccinated status
-      let checkVaccine = true
-      for (let v of dog.status_vaccine) {
-        if (!v.status) checkVaccine = false
-      }
-      dog.fullyVaccinated = checkVaccine
-
-      // Check fullyDewormed status
-      let checkDewormed = true
-      for (let d of dog.status_deworming) {
-        if (!d.status) checkDewormed = false
-      }
-      dog.fullyDewormed = checkDewormed
     }
     setDogs(userDogs)
   }
@@ -212,12 +198,12 @@ const Profile = ({ i18n }) => {
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
                                 className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
-                              {d.fullyVaccinated ?
+                              {d.fully_vaccinated ?
                                 <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>
                                 :
                                 <div title="Not Vaccinated!"><XIcon className='w-6 absolute -top-7 right-6 text-red-700' /></div>
                               }
-                              {d.fullyDewormed ?
+                              {d.fully_dewormed ?
                                 <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>
                                 :
                                 <div title="Not Dewormed!"><XIcon className='w-6 absolute -top-7 right-0 text-red-700' /></div>
