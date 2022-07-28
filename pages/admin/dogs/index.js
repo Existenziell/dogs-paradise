@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { CheckIcon, PencilAltIcon } from '@heroicons/react/outline'
 import { getPublicUrl } from '../../../lib/supabase/getPublicUrl'
+import { useRouter } from 'next/router'
+import { PulseLoader } from 'react-spinners'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
 import Search from '../../../components/admin/Search'
-import { useRouter } from 'next/router'
 
 const Dogs = ({ dogs }) => {
   const { session } = useApp()
   const [fetchedDogs, setFetchedDogs] = useState()
   const [filteredDogs, setFilteredDogs] = useState()
+  const [checking, setChecking] = useState(false)
   const [search, setSearch] = useState('')
   const router = useRouter()
 
@@ -51,6 +53,7 @@ const Dogs = ({ dogs }) => {
   }
 
   const runChecks = async () => {
+    setChecking(true)
     for (let dog of dogs) {
       let checkVaccine = true
       for (let s of dog.status_vaccine) {
@@ -70,7 +73,6 @@ const Dogs = ({ dogs }) => {
           checkVaccine = false
         }
       }
-
 
       let checkDeworming = true
       for (let s of dog.status_deworming) {
@@ -101,7 +103,10 @@ const Dogs = ({ dogs }) => {
         })
         .eq('id', dog.id)
 
-      if (!error) router.reload()
+      if (!error) {
+        setChecking(false)
+        router.reload()
+      }
     }
   }
 
@@ -161,13 +166,17 @@ const Dogs = ({ dogs }) => {
               })}
             </tbody>
           </table>
-          <button className='button button-secondary mt-8' onClick={runChecks}>Run Checks</button>
+          {checking ?
+            <div className='mt-12'><PulseLoader color={'var(--color-brand)'} size={16} /></div>
+            :
+            <button className='button button-secondary mt-12' onClick={runChecks}>Run Checks</button>
+          }
+          <p className='text-sm mt-3'>This will check all expiry dates for all Vaccines and Deworming for all dogs and set the correct status in the database.</p>
         </div>
       </div>
     </>
   )
 }
-
 
 export async function getServerSideProps() {
   const { data: dogs } = await supabase.from('dogs').select(`*, user(*)`).order('created_at', { ascending: false })

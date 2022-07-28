@@ -127,37 +127,37 @@ const AddDog = ({ i18n }) => {
             <div>
               <p className='text-xl border-b mb-4'>Vaccine Status:</p>
               <div className='text-sm mb-2'>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
-                  <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Leptospirosis' />
-                  <input type='checkbox' name='Leptospirosis' className='font-bold' defaultChecked={false} onChange={setData} />
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
+                  <input type='text' name='name' disabled className='font-bold bg-transparent border-none inline-block' value='Leptospirosis' />
+                  <input type='checkbox' name='Leptospirosis' className='font-bold inline-block' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date1} onChange={(date) => setDate1(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Hepatitis' />
                   <input type='checkbox' name='Hepatitis' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date2} onChange={(date) => setDate2(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Distemper' />
                   <input type='checkbox' name='Distemper' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date3} onChange={(date) => setDate3(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Rabies' />
                   <input type='checkbox' name='Rabies' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date4} onChange={(date) => setDate4(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Bordetellosis' />
                   <input type='checkbox' name='Bordetellosis' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date5} onChange={(date) => setDate5(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Parainfluenza Virus' />
                   <input type='checkbox' name='Parainfluenza Virus' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date6} onChange={(date) => setDate6(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 items-start md:items-center status-vaccine bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='name' disabled className='font-bold bg-transparent border-none' value='Parvo Virus' />
                   <input type='checkbox' name='Parvo Virus' className='font-bold' defaultChecked={false} onChange={setData} />
                   <DatePicker selected={date7} onChange={(date) => setDate7(date)} className='px-4 py-2' />
@@ -168,13 +168,13 @@ const AddDog = ({ i18n }) => {
             <div className=''>
               <p className='text-xl border-b mb-4'>Deworming Status:</p>
               <div className='text-sm mb-2'>
-                <div className='flex flex-col md:flex-row gap-2 status-deworming bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='type' disabled className='bg-transparent border-none md:w-36' value='internal' />
                   <input type='checkbox' name='internal' placeholder='true/false' className='font-bold' defaultChecked={false} onChange={setData} />
                   <input type='text' name='internalProduct' placeholder='Product' onChange={setData} />
                   <DatePicker selected={dateDeworm1} onChange={(date) => setDateDeworm1(date)} className='px-4 py-2' />
                 </div>
-                <div className='flex flex-col md:flex-row gap-2 status-deworming bg-slate-200 dark:bg-slate-600 p-2'>
+                <div className='flex flex-wrap md:flex-nowrap items-center md:items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 mb-1'>
                   <input type='text' name='type' disabled className='bg-transparent border-none md:w-36' value='external' />
                   <input type='checkbox' name='external' placeholder='true/false' className='font-bold' defaultChecked={false} onChange={setData} />
                   <input type='text' name='externalProduct' placeholder='Product' onChange={setData} />

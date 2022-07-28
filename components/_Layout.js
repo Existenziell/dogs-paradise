@@ -4,9 +4,11 @@ import Notification from './Notification'
 import LogoutBtn from './LogoutBtn'
 import Nav from './Nav'
 import useApp from '../context/AppContext'
+import Link from 'next/link'
+import { UserGroupIcon } from '@heroicons/react/outline'
 
 const Layout = ({ children }) => {
-  const { session } = useApp()
+  const { session, currentUser } = useApp()
 
   return (
     <>
@@ -27,9 +29,18 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      <div className='w-full fixed z-20 top-4 right-0 left-0 flex items-center justify-between px-4 '>
+      <div className='w-full fixed z-20 top-4 right-0 left-0 flex items-center justify-between px-4 md:px-8 '>
         <DarkModeToggle />
-        {session && <LogoutBtn />}
+        <div className='flex items-center gap-4'>
+          {currentUser?.role === 1 &&
+            <Link href='/admin/dogs'>
+              <a className='hover:text-brand'>
+                <UserGroupIcon className='w-6 text-slate-600 dark:text-slate-300 dark:hover:text-brand hover:text-brand hover:scale-[103%]' />
+              </a>
+            </Link>
+          }
+          {session && <LogoutBtn />}
+        </div>
       </div>
 
     </>

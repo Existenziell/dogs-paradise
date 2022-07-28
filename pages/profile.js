@@ -128,9 +128,11 @@ const Profile = ({ i18n }) => {
                     </li>
                     {currentUser.role === 1 &&
                       <li className={view === 'admin' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                        <button onClick={(e) => setView(e.target.name)} name='admin'>
-                          Admin
-                        </button>
+                        <Link href='/admin/dogs'>
+                          <a>
+                            Admin
+                          </a>
+                        </Link>
                       </li>
                     }
                   </ul>
@@ -249,14 +251,6 @@ const Profile = ({ i18n }) => {
                       </div>
                     ))}
                     <Link href='/appointments/create'><a className='button-secondary mt-8'>New Appointment</a></Link>
-                  </div>
-                }
-
-                {currentUser.role === 1 && view === 'admin' &&
-                  <div className='mt-12 flex flex-col gap-4 items-center md:items-start justify-center md:justify-start'>
-                    <Link href='/admin/dogs'><a className='button button-secondary mr-2'>Dogs</a></Link>
-                    <Link href='/admin/users'><a className='button button-secondary mr-2'>Users</a></Link>
-                    <Link href='/admin/appointments'><a className='button button-secondary'>Appointments</a></Link>
                   </div>
                 }
               </div>
