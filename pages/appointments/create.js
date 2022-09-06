@@ -212,31 +212,33 @@ const CreateAppointment = ({ slug, service }) => {
             </div>
           }
 
-          <div className='text-left w-full'>
-            <div className='flex items-center justify-start gap-4 mt-8'>
-              <p>Would you like to use our Pickup/Delivery service? (+100 MXN)</p>
-              <label htmlFor='no' className='cursor-pointer block'>
-                <input
-                  type="radio" value={0}
-                  name='Pickup/Delivery'
-                  id='no'
-                  onChange={setDelivery}
-                  defaultChecked={true}
-                  className='calculate'
-                /> No
-              </label>
-              <label htmlFor='yes' className='cursor-pointer'>
-                <input
-                  type="radio" value={100}
-                  name='Pickup/Delivery'
-                  id='yes'
-                  onChange={setDelivery}
-                  defaultChecked={false}
-                  className='calculate'
-                /> Yes
-              </label>
+          {selectedService?.slug !== 'walker' &&
+            <div className='text-left w-full'>
+              <div className='flex items-center justify-start gap-4 mt-8'>
+                <p>Would you like to use our Pickup/Delivery service? (+100 MXN)</p>
+                <label htmlFor='no' className='cursor-pointer block'>
+                  <input
+                    type="radio" value={0}
+                    name='Pickup/Delivery'
+                    id='no'
+                    onChange={setDelivery}
+                    defaultChecked={true}
+                    className='calculate'
+                  /> No
+                </label>
+                <label htmlFor='yes' className='cursor-pointer'>
+                  <input
+                    type="radio" value={100}
+                    name='Pickup/Delivery'
+                    id='yes'
+                    onChange={setDelivery}
+                    defaultChecked={false}
+                    className='calculate'
+                  /> Yes
+                </label>
+              </div>
             </div>
-          </div>
+          }
 
           <h2 className='mt-4 text-left'>Please select date and time for the appointment:</h2>
           <div className='w-full p-4 border dark:border-dark rounded-sm'>
