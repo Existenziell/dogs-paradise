@@ -64,7 +64,6 @@ const Users = ({ users, roles }) => {
                 <th>Username</th>
                 <th>Email</th>
                 <th>Dogs</th>
-                <th>Membership</th>
                 <th>Role</th>
                 <th>Edit</th>
               </tr>
@@ -83,7 +82,6 @@ const Users = ({ users, roles }) => {
                       <span key={`${d.name}-${user.id}`} className='mr-2'>{d.name}</span>
                     ))}
                   </td>
-                  <td>{user.is_premium ? `Premium` : `Free`}</td>
                   <td>{user.roles.name}</td>
                   <td>
                     <Link href={`/admin/users/${user.id}`}>

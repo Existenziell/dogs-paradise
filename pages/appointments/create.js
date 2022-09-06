@@ -21,6 +21,7 @@ const CreateAppointment = ({ slug, service }) => {
   const [formData, setFormData] = useState({})
   const [dogOptions, setDogOptions] = useState()
   const [dogSize, setDogSize] = useState(null)
+  const [membership, setMembership] = useState(false)
   const [serviceOptions, setServiceOptions] = useState()
   const [appointmentDate, setAppointmentDate] = useState(new Date())
   const [selectedService, setSelectedService] = useState()
@@ -68,6 +69,7 @@ const CreateAppointment = ({ slug, service }) => {
   function setDog(e) {
     const selectedDog = userDogs.filter(d => (d.id === e.value))
     setDogSize(selectedDog.at(0).size)
+    setMembership(selectedDog.at(0).is_member)
     setFormData({ ...formData, ...{ dog: e.value } })
   }
 
@@ -84,8 +86,8 @@ const CreateAppointment = ({ slug, service }) => {
     if (!selectedService) return 0
     // Set base price
     let price = dogSize ? selectedService.price[dogSize] : selectedService.price['small']
-    // Bonus if user is member
-    if (currentUser?.is_premium) {
+    // Bonus if dog is member
+    if (membership) {
       price = parseInt(price) - parseInt(selectedService.price['bonus'])
     }
     // Check extras
@@ -262,7 +264,7 @@ const CreateAppointment = ({ slug, service }) => {
             </div>
           </div>
 
-          <p>Membership Status: {currentUser?.is_premium ? `Member` : `No Member `}</p>
+          <p>Membership Status: {membership ? `Member` : `No Member `}</p>
           <h2 className='mt-8 text-xl'>Price: {priceTotal} MXN</h2>
 
           <button

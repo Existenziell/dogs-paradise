@@ -25,7 +25,6 @@ const Profile = ({ i18n }) => {
   const [email, setEmail] = useState(null)
   const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
-  const [is_premium, setIsPremium] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
@@ -41,7 +40,6 @@ const Profile = ({ i18n }) => {
       setQuote(currentUser.quote)
       setAvatarUrl(currentUser.avatar_url)
       setCreatedAt(currentUser.created_at)
-      setIsPremium(currentUser.is_premium)
       fetchAppointments(currentUser.id)
     }
   }, [currentUser])
@@ -146,7 +144,6 @@ const Profile = ({ i18n }) => {
                         <div className='flex flex-col gap-1 mb-2'>
                           <p>{quote}</p>
                           <p>Joined: {createdAt?.slice(0, 10)}</p>
-                          <p>Member status: {is_premium ? `Premium` : `Free`}</p>
                         </div>
                         <button className='link' onClick={() => setShowEdit(true)}>Edit</button>
                       </div>

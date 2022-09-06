@@ -11,7 +11,7 @@ import selectStyles from '../../../lib/selectStyles'
 import BackBtn from '../../../components/BackBtn'
 
 const Users = ({ user, roles }) => {
-  const { username, email, created_at, is_premium, avatar_url, quote } = user
+  const { username, email, created_at, avatar_url, quote } = user
   const { session, notify, darkmode } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const [formData, setFormData] = useState({})
@@ -33,21 +33,16 @@ const Users = ({ user, roles }) => {
     setPublicUrl(url)
   }
 
-  function setData(e) {
-    const { name, value } = e.target
-    setFormData({ ...formData, ...{ [name]: value } })
-  }
-
   function setSelectData(e) {
     setFormData({ ...formData, ...{ role: e.value } })
   }
 
   const editUser = async () => {
-    const { role, is_premium } = formData
+    const { role } = formData
 
     const { error } = await supabase
       .from('users')
-      .update({ is_premium, role })
+      .update({ role })
       .eq('id', user.id)
 
     if (!error) {
@@ -86,29 +81,6 @@ const Users = ({ user, roles }) => {
             <p>Email: {email}</p>
             <p>Quote: {quote}</p>
             <p>Member since: {created_at.substring(0, 10)}</p>
-            <div className='mt-4'>
-              <p>Membership Status:</p>
-              <div onChange={setData} className='flex gap-2 items-center'>
-                <label htmlFor='isPremiumNo' className='cursor-pointer block'>
-                  <input
-                    type="radio" value="false"
-                    name='is_premium'
-                    id='isPremiumNo'
-                    defaultChecked={!is_premium}
-                    className='input'
-                  /> Free
-                </label>
-                <label htmlFor='isPremiumYes' className='cursor-pointer'>
-                  <input
-                    type="radio" value="true"
-                    name='is_premium'
-                    id='isPremiumYes'
-                    defaultChecked={is_premium}
-                    className='input'
-                  /> Premium
-                </label>
-              </div>
-            </div>
 
             <div className='flex items-center gap-2 mt-4'>Role:
               <Select
