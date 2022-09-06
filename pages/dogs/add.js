@@ -61,7 +61,9 @@ const AddDog = ({ i18n }) => {
         user: currentUser.id,
         avatar_url: avatar_url,
         status_vaccine: statusVaccine,
-        status_deworming: statusDeworming
+        status_deworming: statusDeworming,
+        size: formData.size,
+        hairlength: formData.hairlength,
       })
     if (!error) {
       const newDog = data[0]
@@ -98,29 +100,90 @@ const AddDog = ({ i18n }) => {
               Name <input type='text' name='name' id='name' placeholder='Lucy' onChange={setData} required className='block mb-2 w-full' />
               Age <input type='number' min={1} max={100} name='age' id='age' placeholder='4' onChange={setData} className='block w-full' /></div>
 
-            <div>
-              <p className='text-xl'>Neutered?</p>
-              <label htmlFor='neuteredYes' className='cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300'>
-                <input
-                  type="radio"
-                  name='neutered'
-                  id='neuteredYes'
-                  defaultChecked={false}
-                  value="true"
-                  onChange={setData}
-                /> Yes
-              </label>
-              <label htmlFor='neuteredNo' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
-                <input
-                  type="radio"
-                  name='neutered'
-                  id='neuteredNo'
-                  defaultChecked={true}
-                  value="false"
-                  onChange={setData}
-                /> No
-              </label>
+            <div className='flex flex-col gap-6 ml-2'>
+              <div>
+                <p className='text-xl'>Neutered?</p>
+                <label htmlFor='neuteredYes' className='cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='neutered'
+                    id='neuteredYes'
+                    defaultChecked={false}
+                    value="true"
+                    onChange={setData}
+                  /> Yes
+                </label>
+                <label htmlFor='neuteredNo' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='neutered'
+                    id='neuteredNo'
+                    defaultChecked={true}
+                    value="false"
+                    onChange={setData}
+                  /> No
+                </label>
+              </div>
+
+              <div>
+                <p className='text-xl'>Size</p>
+                <label htmlFor='small' className='cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='size'
+                    id='small'
+                    defaultChecked={true}
+                    value="small"
+                    onChange={setData}
+                  /> Small
+                </label>
+                <label htmlFor='medium' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='size'
+                    id='medium'
+                    defaultChecked={false}
+                    value="medium"
+                    onChange={setData}
+                  /> Medium
+                </label>
+                <label htmlFor='big' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='size'
+                    id='big'
+                    defaultChecked={false}
+                    value="big"
+                    onChange={setData}
+                  /> Big
+                </label>
+              </div>
+
+              <div>
+                <p className='text-xl'>Hair length</p>
+                <label htmlFor='short' className='cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='hairlength'
+                    id='short'
+                    defaultChecked={true}
+                    value="short"
+                    onChange={setData}
+                  /> Short
+                </label>
+                <label htmlFor='long' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='hairlength'
+                    id='long'
+                    defaultChecked={false}
+                    value="long"
+                    onChange={setData}
+                  /> Long
+                </label>
+              </div>
             </div>
+
           </div>
 
           <div className='flex flex-col xl:flex-row xl:items-start justify-center gap-12'>

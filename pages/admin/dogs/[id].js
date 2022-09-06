@@ -98,6 +98,17 @@ const Dogs = ({ dog, i18n }) => {
     }
   }
 
+  const updateMembership = async (e) => {
+    const { error } = await supabase
+      .from('dogs')
+      .update({ is_member: e.target.value })
+      .eq('id', id)
+
+    if (!error) {
+      notify("Dog updated successfully")
+    }
+  }
+
   if (!session) return <Auth />
 
   return (
@@ -131,7 +142,32 @@ const Dogs = ({ dog, i18n }) => {
                 </Link>
               </div>
               <p>Age: {age}</p>
+              <div>
+                Member?
+                <label htmlFor='memberYes' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='is_member'
+                    id='memberYes'
+                    defaultChecked={dog.is_member}
+                    value="true"
+                    onChange={updateMembership}
+                  /> Yes
+                </label>
+                <label htmlFor='memberdNo' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
+                  <input
+                    type="radio"
+                    name='is_member'
+                    id='memberdNo'
+                    defaultChecked={!dog.is_member}
+                    value="false"
+                    onChange={updateMembership}
+                  /> No
+                </label>
+
+              </div>
             </div>
+
           </div>
 
           <div className='text-left'>

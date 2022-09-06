@@ -130,8 +130,11 @@ const Dogs = ({ dogs }) => {
             <thead>
               <tr className='admin-table-header'>
                 <th>Picture</th>
-                <th className='ml-4 block'>Name</th>
+                <th>Name</th>
                 <th>Owner</th>
+                <th>Member?</th>
+                <th>Size</th>
+                <th>Hair</th>
                 <th>Vaccinated</th>
                 <th>Dewormed</th>
                 <th>Neutered</th>
@@ -145,12 +148,15 @@ const Dogs = ({ dogs }) => {
               }
 
               {filteredDogs?.map((dog) => {
-                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, public_url } = dog
+                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, public_url } = dog
                 return (
                   <tr key={id + name} className='relative'>
                     <td>{public_url ? <img src={public_url} alt={name} className='max-h-[50px]' /> : `n/a`}</td>
                     <td>{name}</td>
                     <td>{user?.name ? user?.name : user?.username}</td>
+                    <td>{is_member ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                    <td>{size}</td>
+                    <td>{hairlength}</td>
                     <td>{fully_vaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>{fully_dewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
                     <td>{status_neuter ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>

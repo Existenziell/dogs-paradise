@@ -12,7 +12,7 @@ import Select from 'react-select'
 import selectStyles from '../../lib/selectStyles'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { sizeOptions, timeOptions } from '../../lib/config'
+import { timeOptions } from '../../lib/config'
 import Extras from '../../components/Extras'
 import BackBtn from '../../components/BackBtn'
 
@@ -66,6 +66,8 @@ const CreateAppointment = ({ slug, service }) => {
   }
 
   function setDog(e) {
+    const selectedDog = userDogs.filter(d => (d.id === e.value))
+    setDogSize(selectedDog.at(0).size)
     setFormData({ ...formData, ...{ dog: e.value } })
   }
 
@@ -198,18 +200,6 @@ const CreateAppointment = ({ slug, service }) => {
             </div>
           </div>
 
-          <div className='flex items-center justify-start gap-4 w-full'>
-            <p className='block w-1/2 md:w-1/6 text-left'>Dog&apos;s Size:</p>
-            <div className='w-full md:w-[80%]'>
-              <Select
-                options={sizeOptions}
-                onChange={(e) => setDogSize(e.value)}
-                instanceId
-                styles={styles}
-              />
-            </div>
-          </div>
-
           {selectedService &&
             <div className='flex flex-col md:flex-row justify-between w-full border dark:border-dark p-4 rounded-sm gap-8'>
               <Extras
@@ -277,7 +267,7 @@ const CreateAppointment = ({ slug, service }) => {
             type='submit'
             className='button'
             aria-label='Send Request'
-            disabled={!formData.dog || !formData.type || !formData.time || !dogSize}
+            disabled={!formData.dog || !formData.type || !formData.time}
           >
             Send
           </button>
