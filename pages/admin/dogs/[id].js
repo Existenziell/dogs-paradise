@@ -12,7 +12,8 @@ import Auth from '../../../components/Auth'
 import Avatar from '../../../components/Avatar'
 import BackBtn from '../../../components/BackBtn'
 
-const Dogs = ({ dog, i18n }) => {
+const Dogs = ({ dog, appointments, i18n }) => {
+  console.log(appointments);
   const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
@@ -329,6 +330,23 @@ const Dogs = ({ dog, i18n }) => {
             </div>
           </div>
         }
+        <div className='mt-24 mb-8'>
+          <h1 className='text-2xl mb-4'>Logs</h1>
+          {appointments?.length ?
+            appointments?.map(a => (
+              <div className='flex items-start justify-start gap-3 text-sm text-left' key={a.id}>
+                <div className='capitalize w-24'>{a.type}</div>
+                <div>{a.date}</div>
+                <div className='w-16'>{a.time}</div>
+                <div>Pickup/Delivery: <span className='w-8 inline-block'>{a.service_option ? 'Yes' : 'No'}</span></div>
+                <div className='w-16'>{a.price}MXN</div>
+                <div>Extras: {a.extras.split(', ')}</div>
+              </div>
+            ))
+            :
+            <p>No appointments found for this dog.</p>
+          }
+        </div>
       </div>
     </>
   )
@@ -342,13 +360,18 @@ export async function getServerSideProps(context) {
     .eq('id', id)
     .single()
 
+  let { data: appointments } = await supabase
+    .from('appointments')
+    .select(`*`)
+    .eq('dog', id)
+
   let i18n
   context.locale === 'en' ?
     i18n = langEN.dogs :
     i18n = langES.dogs
 
   return {
-    props: { dog, i18n },
+    props: { dog, appointments, i18n },
   }
 }
 
