@@ -38,10 +38,12 @@ const AddToHomeScreen = () => {
   }
 
   return (
-    <div className='a2hs-button button mx-auto'>
+    <div className='a2hs-button mx-auto'>
       <div className='flex items-center space-x-3'>
-        <img src='/icons/paw-white.png' className='w-10 inline-block' alt='Add To Home Screen Logo' />
-        <button className="text-xs inline-block w-max" aria-label='Tap to add to home screen'>Add to home screen</button>
+        <button className="text-xs inline-block w-max hover:underline" aria-label='Tap to add to home screen'>
+          <img src='/logo2.png' className='w-16 inline-block' alt='Add To Home Screen Logo' />
+          Download App
+        </button>
       </div>
     </div>
   )

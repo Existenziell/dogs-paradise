@@ -29,7 +29,7 @@ const Profile = ({ i18n }) => {
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
   const [dogs, setDogs] = useState(null)
-  const [view, setView] = useState('info')
+  const [view, setView] = useState('dogs')
   const [appointments, setAppointments] = useState(null)
 
   useEffect(() => {
@@ -109,14 +109,14 @@ const Profile = ({ i18n }) => {
               <div className='md:w-1/2 w-full'>
                 <div className='mb-20'>
                   <ul className='md:text-2xl flex justify-evenly md:justify-start gap-10'>
-                    <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                      <button onClick={(e) => setView(e.target.name)} name='info'>
-                        Info
-                      </button>
-                    </li>
                     <li className={view === 'dogs' ? `border-b-2 border-brand` : `hover:text-brand`}>
                       <button onClick={(e) => setView(e.target.name)} name='dogs'>
                         Dogs
+                      </button>
+                    </li>
+                    <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                      <button onClick={(e) => setView(e.target.name)} name='info'>
+                        Info
                       </button>
                     </li>
                     <li className={view === 'appointments' ? `border-b-2 border-brand` : `hover:text-brand`}>
@@ -135,6 +135,49 @@ const Profile = ({ i18n }) => {
                     }
                   </ul>
                 </div>
+
+                {view === 'dogs' &&
+                  <div className='flex flex-wrap justify-center md:justify-start items-center w-full gap-16'>
+                    {dogs &&
+                      dogs.map(d => (
+                        <div key={d.id} className='flex flex-col items-center justify-center'>
+                          <Link href={`dogs/${d.id}`}>
+                            <a className='flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
+                              <img
+                                src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
+                                alt='Dog Image'
+                                className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
+                              {d.fully_vaccinated ?
+                                <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>
+                                :
+                                <div title="Not Vaccinated!"><XIcon className='w-6 absolute -top-7 right-6 text-red-700' /></div>
+                              }
+                              {d.fully_dewormed ?
+                                <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>
+                                :
+                                <div title="Not Dewormed!"><XIcon className='w-6 absolute -top-7 right-0 text-red-700' /></div>
+                              }
+                            </a>
+                          </Link>
+                          <Link href={`dogs/${d.id}`}>
+                            <a className='mt-2'>
+                              {d.name}
+                            </a>
+                          </Link>
+                        </div>
+                      ))
+                    }
+
+                    <Link href={`dogs/add/`}>
+                      <a className='flex flex-col items-center'>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span>Add Dog</span>
+                      </a>
+                    </Link>
+                  </div>
+                }
 
                 {view === 'info' &&
                   <>
@@ -184,49 +227,6 @@ const Profile = ({ i18n }) => {
                       </div>
                     }
                   </>
-                }
-
-                {view === 'dogs' &&
-                  <div className='flex flex-wrap justify-center md:justify-start items-center w-full gap-16'>
-                    {dogs &&
-                      dogs.map(d => (
-                        <div key={d.id} className='flex flex-col items-center justify-center'>
-                          <Link href={`dogs/${d.id}`}>
-                            <a className='flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
-                              <img
-                                src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
-                                alt='Dog Image'
-                                className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
-                              {d.fully_vaccinated ?
-                                <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>
-                                :
-                                <div title="Not Vaccinated!"><XIcon className='w-6 absolute -top-7 right-6 text-red-700' /></div>
-                              }
-                              {d.fully_dewormed ?
-                                <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>
-                                :
-                                <div title="Not Dewormed!"><XIcon className='w-6 absolute -top-7 right-0 text-red-700' /></div>
-                              }
-                            </a>
-                          </Link>
-                          <Link href={`dogs/${d.id}`}>
-                            <a className='mt-2'>
-                              {d.name}
-                            </a>
-                          </Link>
-                        </div>
-                      ))
-                    }
-
-                    <Link href={`dogs/add/`}>
-                      <a className='flex flex-col items-center'>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
-                        <span>Add Dog</span>
-                      </a>
-                    </Link>
-                  </div>
                 }
 
                 {view === 'appointments' &&

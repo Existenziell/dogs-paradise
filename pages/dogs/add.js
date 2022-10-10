@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { supabase } from '../../lib/supabase'
+import { useRouter } from 'next/router'
 import useApp from '../../context/AppContext'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import Header from '../../components/Header'
 import langEN from '../../i18n/en.json'
 import langES from '../../i18n/es.json'
 import Avatar from '../../components/Avatar'
 import Auth from '../../components/Auth'
-import BackBtn from '../../components/BackBtn'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -82,9 +82,8 @@ const AddDog = ({ i18n }) => {
         <meta name='description' content={i18n.desc} />
       </Head>
       <Header content={i18n.T1} />
-      <BackBtn href='/profile' />
 
-      <div className='px-4 md:px-6 py-24 flex flex-col add-dog items-center justify-center'>
+      <div className='px-4 md:px-6 py-24 flex flex-col add-dog items-center justify-center w-full'>
         <form onSubmit={addDog} className='shadow w-full bg-white dark:bg-brand-dark px-4 md:px-8 pt-8 pb-4 text-left rounded' id='addDogForm' >
           <div className='flex flex-col md:flex-row md:items-start justify-center gap-12 mb-8'>
             <div className='max-w-xs'>
@@ -247,7 +246,10 @@ const AddDog = ({ i18n }) => {
             </div>
           </div>
 
-          <input type='submit' className='button cursor-pointer block my-12 mx-auto' value='Save' />
+          <div className='flex items-center justify-center gap-4 w-full'>
+            <input type='submit' className='button cursor-pointer my-12' value='Save' />
+            <Link href='/profile'><a className='link'>Cancel</a></Link>
+          </div>
         </form >
       </div >
     </>

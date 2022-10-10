@@ -26,15 +26,15 @@ html, body {
 }
 
 ::-moz-selection {
-  @apply text-blue-800;
+  @apply text-brand bg-brand-dark;
 }
 
 .link {
-  @apply underline underline-offset-2 outline-none transition-all duration-300;
+  @apply underline underline-offset-2 outline-none;
 }
 
 .link:hover {
-  @apply no-underline bg-brand rounded transition-all duration-500 text-white px-1;
+  @apply no-underline text-brand;
 }
 
 

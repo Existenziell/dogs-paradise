@@ -5,6 +5,7 @@ import { BASE_URL } from '../lib/config'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Header from './Header'
+import AddToHomeScreen from './AddToHomeScreen'
 
 const Auth = () => {
   // Check if user has theme in localStorage
@@ -15,8 +16,8 @@ const Auth = () => {
       setView('sign_in')
     }
   }, [])
-
   const router = useRouter()
+
   return (
     <>
       <Head>
@@ -26,7 +27,9 @@ const Auth = () => {
       <Header content='Signup/Signin' />
 
       <div className='flex flex-col items-center justify-center px-4 py-24 md:px-8'>
-        <div className='max-w-xl'>
+        <AddToHomeScreen />
+
+        <div className='max-w-xl mt-6'>
           <SupaAuth.UserContextProvider supabaseClient={supabase}>
             <SupaAuth
               view={view}
@@ -35,7 +38,7 @@ const Auth = () => {
               socialButtonSize="xlarge"
               socialColors={true}
               magicLink
-              redirectTo={BASE_URL + router.pathname}
+              redirectTo={`${BASE_URL}${router.pathname}`}
               providers={['google', 'facebook', 'github']}
             />
           </SupaAuth.UserContextProvider>

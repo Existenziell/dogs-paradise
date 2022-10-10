@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { SyncLoader } from 'react-spinners'
 import downloadImage from '../lib/supabase/downloadImage'
 import uploadImage from '../lib/supabase/uploadImage'
 
@@ -20,9 +21,14 @@ export default function Avatar({ bucket, url, size, onUpload, text }) {
           style={{ height: size, width: size }}
         />
       ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 m-0 p-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
+        uploading ?
+          <div className='h-32 w-32 flex items-center justify-center'>
+            <SyncLoader className='w-4' color='white' />
+          </div>
+          :
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 m-0 p-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
       )}
       <div style={{ width: size }}>
         <label className="text-sm" htmlFor="single">
