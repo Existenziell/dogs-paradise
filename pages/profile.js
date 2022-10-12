@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { getPublicUrl } from '../lib/supabase/getPublicUrl'
-import { CheckCircleIcon, ChevronDoubleRightIcon, XIcon } from '@heroicons/react/outline'
+import { ChevronDoubleRightIcon } from '@heroicons/react/outline'
 import { PulseLoader } from 'react-spinners'
 import { services } from '../lib/services'
 import Head from 'next/head'
 import Link from 'next/link'
 import Auth from '../components/Auth'
-import Avatar from '../components/Avatar'
+// import Avatar from '../components/Avatar'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
@@ -16,14 +16,15 @@ import Onboarding from '../components/Onboarding'
 import AddToHomeScreen from '../components/AddToHomeScreen'
 import updateProfile from '../lib/updateProfile'
 import getAppointments from '../lib/getAppointments'
+import LogoutBtn from '../components/LogoutBtn'
 
 const Profile = ({ i18n }) => {
   const { session, currentUser, notify, userDogs, showOnboarding } = useApp()
   const [fetching, setFetching] = useState(true)
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [role, setRole] = useState(null)
+  // const [email, setEmail] = useState(null)
+  // const [role, setRole] = useState(null)
   const [quote, setQuote] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
@@ -35,8 +36,8 @@ const Profile = ({ i18n }) => {
   useEffect(() => {
     if (currentUser) {
       setUsername(currentUser.username)
-      setEmail(currentUser.email)
-      setRole(currentUser.role)
+      // setEmail(currentUser.email)
+      // setRole(currentUser.role)
       setQuote(currentUser.quote)
       setAvatarUrl(currentUser.avatar_url)
       setCreatedAt(currentUser.created_at)
@@ -60,6 +61,9 @@ const Profile = ({ i18n }) => {
       let url
       if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
       dog.public_url = url
+      // Set the ok attribute for signaling clearly if dog is ok to enter facilities
+      dog.ok = false
+      if (dog.fully_dewormed && dog.fully_vaccinated) dog.ok = true
     }
     setDogs(userDogs)
   }
@@ -93,8 +97,8 @@ const Profile = ({ i18n }) => {
           {showOnboarding ?
             <Onboarding />
             :
-            <div className='flex flex-col md:flex-row justify-center items-start gap-10 md:gap-20 w-full'>
-              <div className='md:w-1/2'>
+            <div className='flex flex-col justify-center items-center gap-8 md:gap-16 w-full'>
+              {/* <div className='md:w-1/2'>
                 <Avatar
                   bucket='avatars'
                   url={avatar_url}
@@ -104,50 +108,49 @@ const Profile = ({ i18n }) => {
                     updateProfile({ username, email, role, quote, avatar_url: url, setLoading, notify })
                   }}
                 />
-              </div>
+              </div> */}
 
-              <div className='md:w-1/2 w-full'>
-                <div className='mb-20'>
-                  <ul className='md:text-2xl flex justify-evenly md:justify-start gap-10'>
-                    <li className={view === 'dogs' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                      <button onClick={(e) => setView(e.target.name)} name='dogs'>
-                        Dogs
-                      </button>
-                    </li>
-                    <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                      <button onClick={(e) => setView(e.target.name)} name='info'>
-                        Info
-                      </button>
-                    </li>
-                    <li className={view === 'appointments' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                      <button onClick={(e) => setView(e.target.name)} name='appointments'>
-                        Appointments
-                      </button>
-                    </li>
-                    {currentUser.role === 1 &&
-                      <li className={view === 'admin' ? `border-b-2 border-brand` : `hover:text-brand`}>
-                        <Link href='/admin/dogs'>
-                          <a>
-                            Admin
-                          </a>
-                        </Link>
-                      </li>
-                    }
-                  </ul>
-                </div>
+              <ul className='md:text-2xl flex justify-evenly gap-4 md:gap-10'>
+                <li className={view === 'dogs' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                  <button onClick={(e) => setView(e.target.name)} name='dogs'>
+                    Dogs
+                  </button>
+                </li>
+                <li className={view === 'info' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                  <button onClick={(e) => setView(e.target.name)} name='info'>
+                    Info
+                  </button>
+                </li>
+                <li className={view === 'appointments' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                  <button onClick={(e) => setView(e.target.name)} name='appointments'>
+                    Appointments
+                  </button>
+                </li>
+                {currentUser.role === 1 &&
+                  <li className={view === 'admin' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                    <Link href='/admin/dogs'>
+                      <a>
+                        Admin
+                      </a>
+                    </Link>
+                  </li>
+                }
+              </ul>
 
+              <div className='w-full'>
                 {view === 'dogs' &&
-                  <div className='flex flex-wrap justify-center md:justify-start items-center w-full gap-16'>
+                  <div className='flex flex-wrap justify-center items-center w-full gap-16'>
                     {dogs &&
                       dogs.map(d => (
                         <div key={d.id} className='flex flex-col items-center justify-center'>
                           <Link href={`dogs/${d.id}`}>
-                            <a className='flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative'>
+                            <a className={`${d.ok ? `border-green-600` : `border-red-600`} border-8 rounded-full flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative`}>
                               <img
                                 src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
                                 alt='Dog Image'
                                 className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`} />
-                              {d.fully_vaccinated ?
+
+                              {/* {d.fully_vaccinated ?
                                 <div title="Fully Vaccinated!"><CheckCircleIcon className='w-6 absolute -top-7 right-6 text-brand' /></div>
                                 :
                                 <div title="Not Vaccinated!"><XIcon className='w-6 absolute -top-7 right-6 text-red-700' /></div>
@@ -156,7 +159,7 @@ const Profile = ({ i18n }) => {
                                 <div title="Fully Dewormed!"><CheckCircleIcon className='w-6 absolute -top-7 right-0 text-brand' /></div>
                                 :
                                 <div title="Not Dewormed!"><XIcon className='w-6 absolute -top-7 right-0 text-red-700' /></div>
-                              }
+                              } */}
                             </a>
                           </Link>
                           <Link href={`dogs/${d.id}`}>
@@ -182,7 +185,7 @@ const Profile = ({ i18n }) => {
                 {view === 'info' &&
                   <>
                     {!showEdit ?
-                      <div className='flex flex-col items-center md:items-start justify-center md:justify-start md:text-left gap-4'>
+                      <div className='flex flex-col items-center justify-center gap-4'>
                         <p className='text-2xl md:text-4xl whitespace-nowrap mb-4'>{username}</p>
                         <div className='flex flex-col gap-1 mb-2'>
                           <p>{quote}</p>
@@ -224,22 +227,28 @@ const Profile = ({ i18n }) => {
                           </button>
                           <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
                         </div>
+
+
                       </div>
                     }
                   </>
                 }
 
                 {view === 'appointments' &&
-                  <div className='flex flex-col gap-8 md:gap-4 items-center md:items-start justify-center md:justify-start'>
+                  <div className='flex flex-col gap-8 md:gap-4 items-start justify-center max-w-max mx-auto'>
+                    <div className='flex justify-between items-center w-full mb-2'>
+                      <h2>These are all your appointments:</h2>
+                      <Link href='/appointments/create'><a className='button button-sm'>New Appointment</a></Link>
+                    </div>
                     {appointments?.map(a => (
                       <div key={a.id}>
                         <Link href={`/appointments`}>
-                          <a className='text-xs md:text-left block hover:text-brand'>
-                            <ChevronDoubleRightIcon className='w-5 relative bottom-1 inline-block mx-2' />
+                          <a className='text-xs text-left block hover:text-brand'>
+                            {/* <ChevronDoubleRightIcon className='w-5 relative bottom-1 inline-block mx-2' /> */}
                             <span className='text-xl'>{a.date}</span>
                             <span className='px-2'>at</span>
                             <span className='text-xl'>{(a.time).replace(' ', '')}</span>
-                            <ChevronDoubleRightIcon className='w-5 relative bottom-1 inline-block mx-2' />
+                            <ChevronDoubleRightIcon className='w-3 inline-block mx-2' />
                             <span className='text-xl'>{a.type}</span>
                             <span className='px-2'>for/with</span>
                             <span className='text-xl'>{a.dogs.name}</span>
@@ -247,13 +256,17 @@ const Profile = ({ i18n }) => {
                         </Link>
                       </div>
                     ))}
-                    <Link href='/appointments/create'><a className='button-secondary mt-8'>New Appointment</a></Link>
                   </div>
                 }
               </div>
             </div>
           }
-          <Link href='/contact'><a className='button button-secondary mt-20 block mx-auto'>Contact Us</a></Link>
+          <Link href='/contact'><a className='button button-sm mt-20 block max-w-max mx-auto'>Contact Us</a></Link>
+          {session && (
+            <div className='flex items-center justify-center mt-4'>
+              <LogoutBtn />
+            </div>
+          )}
         </div>
 
         <AddToHomeScreen />

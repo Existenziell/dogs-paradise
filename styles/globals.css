@@ -58,6 +58,10 @@ html, body {
     transition-all
 }
 
+.button-sm {
+  @apply w-auto px-4 py-2 text-xs bg-slate-500 hover:text-black;
+}
+
 .button:disabled {
   @apply bg-slate-500 text-white shadow-none hover:cursor-not-allowed;
 }

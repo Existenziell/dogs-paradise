@@ -23,7 +23,7 @@ export default function Avatar({ bucket, url, size, onUpload, text }) {
       ) : (
         uploading ?
           <div className='h-32 w-32 flex items-center justify-center'>
-            <SyncLoader className='w-4' color='white' />
+            <SyncLoader className='w-4' color='var(--color-brand)' />
           </div>
           :
           <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 m-0 p-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>

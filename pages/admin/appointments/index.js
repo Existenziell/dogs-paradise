@@ -94,12 +94,13 @@ const Appointments = ({ appointments }) => {
                 <th>Service</th>
                 <th>Client</th>
                 <th>Dog</th>
-                <th>Delivery/Pickup</th>
-                {/* <th>Assigned</th> */}
+                <th>Pickup</th>
                 <th>Extras</th>
                 <th>Price</th>
+                <th>Assigned</th>
+                <th>Confirmed</th>
                 <th>Done</th>
-                <th>View</th>
+                <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -110,7 +111,7 @@ const Appointments = ({ appointments }) => {
               }
 
               {filteredAppointments?.map((appointment) => {
-                const { id, date, time, type, done, client, dogs, service_option, extras, price } = appointment
+                const { id, date, time, type, client, dogs, service_option, extras, price, assignedUser, done, confirmed } = appointment
                 return (
                   <tr key={id} className={`${done && `bg-brand/20 dark:bg-brand-dark`} relative whitespace-nowrap`}>
                     <td>{date}</td>
@@ -119,9 +120,10 @@ const Appointments = ({ appointments }) => {
                     <td>{client}</td>
                     <td>{dogs.name}</td>
                     <td>{service_option ? <CheckIcon className='w-6' /> : `No`}</td>
-                    {/* <td>{assignedUser}</td> */}
                     <td className='whitespace-normal'>{extras}</td>
                     <td>{price} MXN</td>
+                    <td>{assignedUser}</td>
+                    <td>{confirmed ? <CheckIcon className='w-6' /> : `No`}</td>
                     <td>{done ? <CheckIcon className='w-6' /> : `No`}</td>
                     <td>
                       <Link href={`/admin/appointments/${id}`}>

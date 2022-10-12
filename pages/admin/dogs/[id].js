@@ -13,7 +13,6 @@ import Avatar from '../../../components/Avatar'
 import BackBtn from '../../../components/BackBtn'
 
 const Dogs = ({ dog, appointments, i18n }) => {
-  console.log(appointments);
   const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
@@ -66,6 +65,7 @@ const Dogs = ({ dog, appointments, i18n }) => {
 
     if (!error) {
       setShowEdit(false)
+      router.reload()
     }
   }
 
@@ -85,6 +85,7 @@ const Dogs = ({ dog, appointments, i18n }) => {
 
     if (!error) {
       setShowWormEdit(false)
+      router.reload()
     }
   }
 
