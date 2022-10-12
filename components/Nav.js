@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import { isActiveLink } from '../lib/IsActiveLink'
 import Link from 'next/link'
-// import langEN from '../i18n/en.json'
-// import langES from '../i18n/es.json'
 
 const Nav = () => {
     const router = useRouter()

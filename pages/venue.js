@@ -1,6 +1,4 @@
 import Head from 'next/head'
-// import langEN from '../i18n/en.json'
-// import langES from '../i18n/es.json'
 
 const Venue = () => {
   return (
@@ -25,15 +23,5 @@ const Venue = () => {
     </>
   )
 }
-
-// export async function getStaticProps(context) {
-//   let i18n
-//   context.locale === 'en' ?
-//     i18n = langEN.venue :
-//     i18n = langES.venue
-//   return {
-//     props: { i18n },
-//   }
-// }
 
 export default Venue

@@ -49,15 +49,4 @@ const Auth = () => {
   )
 }
 
-// export async function getStaticProps(context) {
-//   let i18n
-//   context.locale === 'en' ?
-//     i18n = langEN.auth :
-//     i18n = langES.auth
-
-//   return {
-//     props: { i18n },
-//   }
-// }
-
 export default Auth

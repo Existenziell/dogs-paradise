@@ -32,7 +32,11 @@ export default function Avatar({ bucket, url, size, onUpload, text }) {
       )}
       <div style={{ width: size }}>
         <label className="text-sm" htmlFor="single">
-          {uploading ? 'Uploading ...' : <span className='cursor-pointer link'>{text ? text : `Change Avatar`}</span>}
+          {uploading ?
+            'Uploading ...'
+            :
+            <span className='cursor-pointer link'>{text ? text : `Change Avatar`}</span>
+          }
         </label>
         <input
           type="file"

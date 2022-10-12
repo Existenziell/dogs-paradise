@@ -3,8 +3,6 @@ import { supabase } from '../../lib/supabase'
 import useApp from '../../context/AppContext'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-// import langEN from '../../i18n/en.json'
-// import langES from '../../i18n/es.json'
 import LocationPicker from '../../components/services/LocationPicker'
 import PickupUpload from '../../components/services/PickupUpload'
 import Auth from '../../components/Auth'
@@ -162,15 +160,5 @@ const Pickup = () => {
     </>
   )
 }
-
-// export async function getStaticProps(context) {
-//   let i18n
-//   context.locale === 'en' ?
-//     i18n = langEN.services :
-//     i18n = langES.services
-//   return {
-//     props: { i18n },
-//   }
-// }
 
 export default Pickup

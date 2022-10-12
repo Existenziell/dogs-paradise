@@ -1,6 +1,4 @@
 import Head from 'next/head'
-// import langEN from '../../i18n/en.json'
-// import langES from '../../i18n/es.json'
 
 const Delivery = () => {
 
@@ -18,15 +16,5 @@ const Delivery = () => {
     </>
   )
 }
-
-// export async function getStaticProps(context) {
-//   let i18n
-//   context.locale === 'en' ?
-//     i18n = langEN.services :
-//     i18n = langES.services
-//   return {
-//     props: { i18n },
-//   }
-// }
 
 export default Delivery

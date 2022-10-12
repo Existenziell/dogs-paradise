@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { COORDS } from '../../lib/config'
-// import langEN from '../../i18n/en.json'
-// import langES from '../../i18n/es.json'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
