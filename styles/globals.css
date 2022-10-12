@@ -101,6 +101,9 @@ input[type='radio'] {
     transition duration-200  
 }
 
+.profile textarea {
+  @apply focus:ring-2 focus:ring-brand outline-none rounded-sm;
+}
 
 /* ==========================================================================
 	Mapbox overrides

@@ -13,7 +13,7 @@ import Avatar from '../../../components/Avatar'
 import BackBtn from '../../../components/BackBtn'
 
 const Dogs = ({ dog, appointments, i18n }) => {
-  const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter } = dog
+  const { id, name, age, avatar_url, status_vaccine, status_deworming, status_neuter, notes } = dog
   const { session, notify, userDogs, setUserDogs } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
   const [showDelete, setShowDelete] = useState(false)
@@ -62,7 +62,6 @@ const Dogs = ({ dog, appointments, i18n }) => {
       .from('dogs')
       .update({ status_vaccine: status })
       .eq('id', id)
-
     if (!error) {
       setShowEdit(false)
       router.reload()
@@ -82,7 +81,6 @@ const Dogs = ({ dog, appointments, i18n }) => {
       .from('dogs')
       .update({ status_deworming: status })
       .eq('id', id)
-
     if (!error) {
       setShowWormEdit(false)
       router.reload()
@@ -94,9 +92,8 @@ const Dogs = ({ dog, appointments, i18n }) => {
       .from('dogs')
       .update({ status_neuter: e.target.value })
       .eq('id', id)
-
     if (!error) {
-      notify("Dog updated successfully")
+      notify("Neuter status updated successfully")
     }
   }
 
@@ -105,9 +102,18 @@ const Dogs = ({ dog, appointments, i18n }) => {
       .from('dogs')
       .update({ is_member: e.target.value })
       .eq('id', id)
-
     if (!error) {
-      notify("Dog updated successfully")
+      notify("Membership updated successfully")
+    }
+  }
+
+  const updateNotes = async (e) => {
+    const { error } = await supabase
+      .from('dogs')
+      .update({ notes: e.target.value })
+      .eq('id', id)
+    if (!error) {
+      notify("Notes updated successfully")
     }
   }
 
@@ -273,7 +279,7 @@ const Dogs = ({ dog, appointments, i18n }) => {
                 </div>
               </div>
 
-              <div className='mt-4'>
+              <div>
                 Neutered?
                 <label htmlFor='neuteredYes' className='cursor-pointer ml-4 text-sm font-medium text-gray-900 dark:text-gray-300'>
                   <input
@@ -295,6 +301,17 @@ const Dogs = ({ dog, appointments, i18n }) => {
                     onChange={updateNeuterStatus}
                   /> No
                 </label>
+              </div>
+
+              <div className='mt-6'>
+                <h2>Notes: <span className='text-xs'>(saves automatically)</span></h2>
+                <textarea
+                  rows={6}
+                  defaultValue={notes}
+                  onBlur={updateNotes}
+                  spellCheck="false"
+                  className='resize-y w-full px-4 py-2'
+                />
               </div>
 
               <div className='mt-8'>
