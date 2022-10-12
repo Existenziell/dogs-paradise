@@ -135,6 +135,15 @@ const Profile = ({ i18n }) => {
                     </Link>
                   </li>
                 }
+                {(currentUser?.role === 1 || currentUser?.role === 2) &&
+                  <li className={view === 'admin' ? `border-b-2 border-brand` : `hover:text-brand`}>
+                    <Link href='/admin/dashboard'>
+                      <a className='hover:text-brand'>
+                        Dashboard
+                      </a>
+                    </Link>
+                  </li>
+                }
               </ul>
 
               <div className='w-full'>
