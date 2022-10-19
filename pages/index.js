@@ -24,7 +24,9 @@ const Home = ({ i18n }) => {
         <p className='text-sm'>Feel the Paradise Experience</p>
         <img src='/img/cozumel-dogs.jpg' alt='Cozumel Dogs' className='shadow-sm rounded w-full max-w-xl mx-auto my-12' />
         <Link href='/profile'><a className='button block mx-auto my-20'>{session ? `Profile` : `Login`}</a></Link>
-
+        <div className='flex items-center justify-center w-full'>
+          <AddToHomeScreen />
+        </div>
         <div className='flex flex-wrap items-center justify-center mb-20 mt-12 gap-6'>
           {services.map(s => (
             <Link href={`/appointments/create?slug=${s.slug}&service=${s.title}`} key={s.slug}>
@@ -42,10 +44,6 @@ const Home = ({ i18n }) => {
             <Quote text='Our job is to make them happy' classes='mb-8' />
             <img src='/logo.png' alt='Logo' className='max-w-xs rounded shadow-md dark:shadow-none dark:invert' />
           </div>
-        </div>
-
-        <div className='flex items-center justify-center w-full'>
-          <AddToHomeScreen />
         </div>
       </div>
     </>
