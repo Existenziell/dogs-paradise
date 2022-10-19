@@ -44,7 +44,9 @@ const Home = ({ i18n }) => {
           </div>
         </div>
 
-        <AddToHomeScreen />
+        <div className='flex items-center justify-center w-full'>
+          <AddToHomeScreen />
+        </div>
       </div>
     </>
   )
