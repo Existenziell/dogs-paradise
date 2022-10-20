@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 const StickyHeader = ({ wrappedContent }) => {
-
   useEffect(() => {
     const body = document.body
     const scrollUp = "scroll-up"

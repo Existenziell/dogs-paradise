@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 const AddToHomeScreen = () => {
-
   useEffect(() => {
     prompt()
   }, [])

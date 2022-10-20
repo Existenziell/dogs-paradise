@@ -36,13 +36,13 @@ const CreateAppointment = ({ slug, service }) => {
   }, [])
 
   useEffect(() => {
-    let selected = services.filter(s => s.slug === slug)[0]
+    const selected = services.filter(s => s.slug === slug)[0]
     setSelectedService(selected)
   }, [slug, service, router.query])
 
   useEffect(() => {
     if (userDogs) {
-      let options = []
+      const options = []
       userDogs.forEach(dog => {
         options.push({ value: dog.id, label: dog.name })
       })
@@ -52,7 +52,7 @@ const CreateAppointment = ({ slug, service }) => {
 
   useEffect(() => {
     if (services) {
-      let options = []
+      const options = []
       services.forEach(service => {
         options.push({ value: service.slug, label: service.title })
       })
@@ -62,7 +62,7 @@ const CreateAppointment = ({ slug, service }) => {
 
   function setService(e) {
     setFormData({ ...formData, ...{ type: e.value } })
-    let selected = services.filter(s => s.slug === e.value)[0]
+    const selected = services.filter(s => s.slug === e.value)[0]
     setSelectedService(selected)
   }
 
@@ -78,7 +78,7 @@ const CreateAppointment = ({ slug, service }) => {
   }
 
   function setDelivery(e) {
-    setFormData({ ...formData, ...{ deliveryOption: e.target.id === 'yes' ? true : false } })
+    setFormData({ ...formData, ...{ deliveryOption: e.target.id === 'yes' } })
     calculatePrice()
   }
 
@@ -115,13 +115,13 @@ const CreateAppointment = ({ slug, service }) => {
     e.preventDefault()
 
     // Check extras
-    let bookedExtras = []
+    const bookedExtras = []
     const extras = document.querySelectorAll('.calculate')
     Array.from(extras).forEach(el => {
       const { id, name, checked, value } = el
       if (checked) {
         if (name === 'Pickup/Delivery') {
-          parseInt(value) !== 0 ? bookedExtras.push(name) : null
+          if (parseInt(value) !== 0) { bookedExtras.push(name) }
         } else if (name === 'Room Size') {
           bookedExtras.push(`${name} ${id}`)
         } else {
@@ -152,7 +152,7 @@ const CreateAppointment = ({ slug, service }) => {
   }
 
   useEffect(() => {
-    let tempStyles = selectStyles(darkmode)
+    const tempStyles = selectStyles(darkmode)
     setStyles(tempStyles)
   }, [darkmode])
 

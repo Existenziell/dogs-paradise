@@ -6,7 +6,6 @@ import Layout from '../components/_Layout'
 import Head from 'next/head'
 
 function App({ Component, pageProps }) {
-
   useEffect(() => {
     if (
       localStorage.theme === 'dark' ||

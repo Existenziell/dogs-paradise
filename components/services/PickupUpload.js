@@ -16,16 +16,16 @@ export default function PickupImage({ url, size, onUpload, setPicture }) {
 
   return (
     <div>
-      {pickupImageUrl ? (
+      {pickupImageUrl ?
         <img
           src={pickupImageUrl}
           alt="Pickup Image"
           className="rounded my-4 shadow-lg"
           style={{ height: size, width: size }}
         />
-      ) : (
+        :
         <div className="no-image h-12" />
-      )}
+      }
       <div style={{ width: size }}>
         <label className="text-lg" htmlFor="single">
           {uploading ?

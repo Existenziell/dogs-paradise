@@ -47,7 +47,7 @@ const Profile = ({ i18n }) => {
 
   const fetchAppointments = async (id) => {
     const appointments = await getAppointments(id)
-    for (let a of appointments) {
+    for (const a of appointments) {
       const name = getServiceName(a.type)
       a.type = name
     }
@@ -56,7 +56,7 @@ const Profile = ({ i18n }) => {
   }
 
   const enrichDog = async () => {
-    for (let dog of userDogs) {
+    for (const dog of userDogs) {
       // Download and set image
       let url
       if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
@@ -236,8 +236,6 @@ const Profile = ({ i18n }) => {
                           </button>
                           <button onClick={() => setShowEdit(false)} className='text-xs ml-4'>Cancel</button>
                         </div>
-
-
                       </div>
                     }
                   </>

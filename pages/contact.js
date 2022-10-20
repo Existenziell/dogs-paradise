@@ -10,7 +10,6 @@ import MapLocation from '../components/services/MapLocation'
 import { COORDS } from '../lib/config'
 
 const Contact = ({ i18n }) => {
-
   const [formData, setFormData] = useState()
   const [sending, setSending] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -23,7 +22,7 @@ const Contact = ({ i18n }) => {
   const submitForm = async e => {
     e.preventDefault()
     setSending(true)
-    let data = { ...formData }
+    const data = { ...formData }
 
     try {
       const res = await fetch('/api/sendMail', {

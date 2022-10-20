@@ -54,7 +54,7 @@ const Appointments = ({ appointments }) => {
   useEffect(() => {
     if (fetchedAppointments) {
       if (search === '') resetSearch()
-      let appointments = fetchedAppointments.filter(a => (
+      const appointments = fetchedAppointments.filter(a => (
         a.dogs.name.toLowerCase().includes(search.toLowerCase()) ||
         a.type.toLowerCase().includes(search.toLowerCase()) ||
         a.extras?.toLowerCase().includes(search.toLowerCase()) ||

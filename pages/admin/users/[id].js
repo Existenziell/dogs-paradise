@@ -25,7 +25,7 @@ const Users = ({ user, roles, appointments }) => {
   })
 
   useEffect(() => {
-    let tempStyles = selectStyles(darkmode)
+    const tempStyles = selectStyles(darkmode)
     setStyles(tempStyles)
   }, [darkmode])
 
@@ -51,7 +51,7 @@ const Users = ({ user, roles, appointments }) => {
     }
   }
 
-  let roleOptions = []
+  const roleOptions = []
   roles.forEach(r => {
     roleOptions.push({ value: r.id, label: r.name })
   })

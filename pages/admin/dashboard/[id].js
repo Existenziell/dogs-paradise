@@ -73,7 +73,7 @@ export async function getServerSideProps({ params }) {
       props: { appointment: {} },
     }
   } else {
-    let { data: appointment } = await supabase
+    const { data: appointment } = await supabase
       .from('appointments')
       .select(`*, dogs(*), pickups(*), users!appointments_user_fkey(*)`)
       .eq('id', id)

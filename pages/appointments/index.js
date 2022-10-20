@@ -32,7 +32,6 @@ const Appointments = ({ i18n }) => {
   }
 
   const deleteAppointment = async () => {
-
     const { error } = await supabase
       .from('pickups')
       .delete()
@@ -52,8 +51,7 @@ const Appointments = ({ i18n }) => {
       } else {
         notify("Appointment cannot be deleted.")
       }
-    }
-    else {
+    } else {
       console.log(error)
     }
   }

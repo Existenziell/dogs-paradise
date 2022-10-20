@@ -42,7 +42,7 @@ const Appointment = ({ appointment, users }) => {
   }
 
   useEffect(() => {
-    let tempStyles = selectStyles(darkmode)
+    const tempStyles = selectStyles(darkmode)
     setStyles(tempStyles)
   }, [darkmode])
 
@@ -161,13 +161,13 @@ export async function getServerSideProps({ params }) {
       props: { appointment: {} },
     }
   } else {
-    let { data: appointment } = await supabase
+    const { data: appointment } = await supabase
       .from('appointments')
       .select(`*, dogs(*), pickups(*), users!appointments_user_fkey(*)`)
       .eq('id', id)
       .single()
 
-    let { data: users } = await supabase
+    const { data: users } = await supabase
       .from('users')
       .select(`*`)
       .order('username', { ascending: true })

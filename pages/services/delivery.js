@@ -1,7 +1,6 @@
 import Head from 'next/head'
 
 const Delivery = () => {
-
   return (
     <>
       <Head>

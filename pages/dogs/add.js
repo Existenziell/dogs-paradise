@@ -37,19 +37,19 @@ const AddDog = ({ i18n }) => {
   const addDog = async (e) => {
     e.preventDefault()
 
-    let statusVaccine = [
-      { "name": "Leptospirosis", "status": formData[`Leptospirosis`], "expires": formData[`Leptospirosis`] ? date1 : `` },
-      { "name": "Hepatitis", "status": formData[`Hepatitis`], "expires": formData[`Hepatitis`] ? date2 : `` },
-      { "name": "Distemper", "status": formData[`Distemper`], "expires": formData[`Distemper`] ? date3 : `` },
-      { "name": "Rabies", "status": formData[`Rabies`], "expires": formData[`Rabies`] ? date4 : `` },
-      { "name": "Bordetellosis", "status": formData[`Bordetellosis`], "expires": formData[`Bordetellosis`] ? date5 : `` },
-      { "name": "Parainfluenza Virus", "status": formData[`Parainfluenza Virus`], "expires": formData[`Parainfluenza Virus`] ? date6 : `` },
-      { "name": "Parvo Virus", "status": formData[`Parvo Virus`], "expires": formData[`Parvo Virus`] ? date7 : `` }
+    const statusVaccine = [
+      { name: "Leptospirosis", status: formData[`Leptospirosis`], expires: formData[`Leptospirosis`] ? date1 : `` },
+      { name: "Hepatitis", status: formData[`Hepatitis`], expires: formData[`Hepatitis`] ? date2 : `` },
+      { name: "Distemper", status: formData[`Distemper`], expires: formData[`Distemper`] ? date3 : `` },
+      { name: "Rabies", status: formData[`Rabies`], expires: formData[`Rabies`] ? date4 : `` },
+      { name: "Bordetellosis", status: formData[`Bordetellosis`], expires: formData[`Bordetellosis`] ? date5 : `` },
+      { name: "Parainfluenza Virus", status: formData[`Parainfluenza Virus`], expires: formData[`Parainfluenza Virus`] ? date6 : `` },
+      { name: "Parvo Virus", status: formData[`Parvo Virus`], expires: formData[`Parvo Virus`] ? date7 : `` }
     ]
 
-    let statusDeworming = [
-      { "type": "internal", "product": formData[`internalProduct`], "status": formData[`internal`], "expires": formData[`internal`] ? dateDeworm1 : `` },
-      { "type": "external", "product": formData[`external`] ? formData[`externalProduct`] : ``, "status": formData[`external`], "expires": formData[`external`] ? dateDeworm2 : `` }
+    const statusDeworming = [
+      { type: "internal", product: formData[`internalProduct`], status: formData[`internal`], expires: formData[`internal`] ? dateDeworm1 : `` },
+      { type: "external", product: formData[`external`] ? formData[`externalProduct`] : ``, status: formData[`external`], expires: formData[`external`] ? dateDeworm2 : `` }
     ]
 
     const { data, error } = await supabase
@@ -59,7 +59,7 @@ const AddDog = ({ i18n }) => {
         status_neuter: formData.neutered,
         age: formData.age,
         user: currentUser.id,
-        avatar_url: avatar_url,
+        avatar_url,
         status_vaccine: statusVaccine,
         status_deworming: statusDeworming,
         size: formData.size,

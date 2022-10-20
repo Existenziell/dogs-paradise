@@ -50,11 +50,11 @@ const Dogs = ({ dog, appointments, i18n }) => {
   }
 
   const saveVaccineStatus = async (id) => {
-    let status = []
+    const status = []
     const rows = document.getElementsByClassName('status-vaccine')
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
-      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value }
+      const el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value }
       status.push(el)
     })
 
@@ -69,11 +69,11 @@ const Dogs = ({ dog, appointments, i18n }) => {
   }
 
   const saveDewormStatus = async (id) => {
-    let status = []
+    const status = []
     const rows = document.getElementsByClassName('status-deworming')
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
-      let el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
+      const el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
       status.push(el)
     })
 
@@ -372,13 +372,13 @@ const Dogs = ({ dog, appointments, i18n }) => {
 
 export async function getServerSideProps(context) {
   const id = context.params.id
-  let { data: dog } = await supabase
+  const { data: dog } = await supabase
     .from('dogs')
     .select(`*, user(*)`)
     .eq('id', id)
     .single()
 
-  let { data: appointments } = await supabase
+  const { data: appointments } = await supabase
     .from('appointments')
     .select(`*`)
     .eq('dog', id)

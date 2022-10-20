@@ -43,9 +43,9 @@ const LocationPicker = ({ currentLocation, setCurrentLocation }) => {
     )
 
     geolocate.on('geolocate', function (e) {
-      var lon = e.coords.longitude
-      var lat = e.coords.latitude
-      var position = [lon, lat]
+      const lon = e.coords.longitude
+      const lat = e.coords.latitude
+      const position = [lon, lat]
       setCurrentLocation(position)
     })
 

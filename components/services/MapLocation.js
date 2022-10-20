@@ -47,7 +47,6 @@ const MapLocation = ({ coordinates, pickupImageUrl }) => {
 
     initializeMap(map, coords, pickupImageUrl)
     setMap(map)
-
   }, [router.query.location, pickupImageUrl])
 
   useEffect(() => {

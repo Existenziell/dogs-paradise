@@ -19,7 +19,7 @@ const Users = ({ users, roles }) => {
     setFilteredUsers(users)
   }, [users])
 
-  let roleOptions = []
+  const roleOptions = []
   roles.forEach(r => {
     roleOptions.push({ value: r.id, label: r.name })
   })
@@ -28,7 +28,7 @@ const Users = ({ users, roles }) => {
   useEffect(() => {
     if (fetchedUsers) {
       if (search === '') resetSearch()
-      let users = fetchedUsers.filter(user => (
+      const users = fetchedUsers.filter(user => (
         user.username.toLowerCase().includes(search.toLowerCase()) ||
         user.email.toLowerCase().includes(search.toLowerCase()) ||
         user.roles.name.toLowerCase().includes(search.toLowerCase())
@@ -69,7 +69,7 @@ const Users = ({ users, roles }) => {
               </tr>
             </thead>
             <tbody>
-              {!fetchedUsers?.length || !filteredUsers?.length &&
+              {(!fetchedUsers?.length || !filteredUsers?.length) &&
                 <tr className='p-4'><td>No users found.</td></tr>
               }
 

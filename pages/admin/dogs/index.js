@@ -20,11 +20,10 @@ const Dogs = ({ dogs }) => {
   const router = useRouter()
 
   const enrichDogs = async () => {
-    for (let dog of dogs) {
+    for (const dog of dogs) {
       let url
       if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
       dog.public_url = url
-
     }
     setFetchedDogs(dogs)
     setFilteredDogs(dogs)
@@ -37,7 +36,7 @@ const Dogs = ({ dogs }) => {
 
   useEffect(() => {
     if (fetchedDogs) {
-      let dogs = fetchedDogs.filter(d => (
+      const dogs = fetchedDogs.filter(d => (
         d.name.toLowerCase().includes(search.toLowerCase()) ||
         d.status?.toLowerCase().includes(search.toLowerCase()) ||
         d.user.username.toLowerCase().includes(search.toLowerCase())
@@ -54,12 +53,12 @@ const Dogs = ({ dogs }) => {
 
   const runChecks = async () => {
     setChecking(true)
-    for (let dog of dogs) {
+    for (const dog of dogs) {
       let checkVaccine = true
-      for (let s of dog.status_vaccine) {
+      for (const s of dog.status_vaccine) {
         if (s.expires) {
-          let today = new Date()
-          let expireDate = new Date(s.expires.replaceAll('-', '/'))
+          const today = new Date()
+          const expireDate = new Date(s.expires.replaceAll('-', '/'))
           today.setHours(0, 0, 0, 0)
           expireDate.setHours(0, 0, 0, 0)
           // If expireDate today or in the past
@@ -68,17 +67,16 @@ const Dogs = ({ dogs }) => {
             s.status = false
             s.expires = ''
           }
-        }
-        else {
+        } else {
           checkVaccine = false
         }
       }
 
       let checkDeworming = true
-      for (let s of dog.status_deworming) {
+      for (const s of dog.status_deworming) {
         if (s.expires) {
-          let today = new Date()
-          let expireDate = new Date(s.expires.replaceAll('-', '/'))
+          const today = new Date()
+          const expireDate = new Date(s.expires.replaceAll('-', '/'))
           today.setHours(0, 0, 0, 0)
           expireDate.setHours(0, 0, 0, 0)
           // If expireDate today or in the past

@@ -120,7 +120,6 @@ const Dogs = ({ dog, i18n }) => {
               </div>
             }
 
-
             <div className='flex flex-col'>
               <h2 className='text-xl mt-8 mb-4'>Vaccines</h2>
 
@@ -129,7 +128,6 @@ const Dogs = ({ dog, i18n }) => {
                   {status_vaccine?.map(vaccine => {
                     return (
                       <div className='text-sm mb-2' key={vaccine.name}>
-
 
                         <div className='flex items-center gap-2'>
                           <p className='font-bold'>{vaccine.name}</p>
@@ -214,7 +212,7 @@ const Dogs = ({ dog, i18n }) => {
 
 export async function getServerSideProps(context) {
   const id = context.params.id
-  let { data: dog } = await supabase
+  const { data: dog } = await supabase
     .from('dogs')
     .select(`*, user(*)`)
     .eq('id', id)

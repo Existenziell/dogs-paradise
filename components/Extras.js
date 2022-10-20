@@ -2,7 +2,6 @@ import { EmojiHappyIcon } from '@heroicons/react/outline'
 
 export default function Extras({ slug, calculatePrice }) {
   switch (slug) {
-
     case 'spa':
       return (
         <div className='mt-2 flex flex-col gap-1 items-start w-full'>
