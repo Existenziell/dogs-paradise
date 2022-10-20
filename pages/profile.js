@@ -242,7 +242,7 @@ const Profile = ({ i18n }) => {
                 }
 
                 {view === 'appointments' &&
-                  <div className='flex flex-col gap-8 md:gap-4 items-start justify-center max-w-max mx-auto'>
+                  <div className='flex flex-col gap-1 items-start justify-center max-w-max mx-auto'>
                     <div className='flex justify-between items-center w-full mb-2'>
                       <h2>These are all your appointments:</h2>
                       <Link href='/appointments/create'><a className='button button-sm'>New Appointment</a></Link>
