@@ -62,8 +62,8 @@ const Contact = ({ i18n }) => {
           </div>
         </div>
 
-        <div className='w-full h-[calc(50vh)] mb-16'>
-          <MapLocation coordinates={COORDS.join(', ')} pickupImageUrl={'/logo2.png'} />
+        <div className='w-full h-[calc(60vh)] mb-16'>
+          <MapLocation coordinates={COORDS.join(', ')} pickupImageUrl={'/logo-tiny.webp'} />
         </div>
 
         <div className='z-0 px-4 pt-8 pb-0 sm:px-12 mb-12 shadow w-full rounded-lg bg-brand/50 backdrop-blur-md text-white lg:w-2/3 lg:mx-auto'>
@@ -115,8 +115,6 @@ const Contact = ({ i18n }) => {
                 <input type='submit' className='button my-4' aria-label='Send Contact Form' value={i18n.T7}></input>
             }
           </form>
-
-
         </div>
       </div>
     </>
