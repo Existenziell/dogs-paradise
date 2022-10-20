@@ -9,8 +9,9 @@ import Auth from '../../../components/Auth'
 import Select from 'react-select'
 import selectStyles from '../../../lib/selectStyles'
 import BackBtn from '../../../components/BackBtn'
+import { CheckIcon } from '@heroicons/react/outline'
 
-const Users = ({ user, roles }) => {
+const Users = ({ user, roles, appointments }) => {
   const { username, email, created_at, avatar_url, quote } = user
   const { session, notify, darkmode } = useApp()
   const [publicUrl, setPublicUrl] = useState(null)
@@ -94,6 +95,25 @@ const Users = ({ user, roles }) => {
             <button onClick={editUser} aria-label='Edit User' className='button-secondary mt-4 w-max'>Save</button>
           </div>
         </div>
+
+        <div className='mt-16 text-left'>
+          <h2>Finished Appointments:</h2>
+          {appointments.length ?
+            appointments.map(a => (
+              <div key={a.id} className='flex flex-wrap justify-between gap-4 mb-4 p-4 bg-white dark:bg-brand-dark rounded-sm'>
+                <div className='text-xs'><h2>Date</h2><p className='text-base'>{a.date}</p></div>
+                <div className='text-xs'><h2>Time</h2><p className='text-base'>{a.time}</p></div>
+                <div className='text-xs'><h2>Service</h2><p className='capitalize text-base'>{a.type.split('-').join(' ')}</p></div>
+                <div className='text-xs'><h2>Client</h2><p className='text-base'>{a.users.username}</p></div>
+                <div className='text-xs'><h2>Dog</h2><p className='text-base'>{a.dogs.name}</p></div>
+                <div className='text-xs'><h2>Pickup</h2><p className='text-base'>{a.service_option ? <CheckIcon className='w-6' /> : `No`}</p></div>
+                <div className='text-xs'><h2>Price</h2><p className='text-base'>{a.price} MXN</p></div>
+              </div>
+            ))
+            :
+            <p className='text-xs mt-2'>No finished appointments found for this user.</p>
+          }
+        </div>
       </div>
     </>
   )
@@ -101,17 +121,22 @@ const Users = ({ user, roles }) => {
 
 export async function getServerSideProps(context) {
   const id = context.params.id
-  let { data: user } = await supabase
+  const { data: user } = await supabase
     .from('users')
-    .select(`*, roles(*)`)
+    .select(`*, roles(*), appointments(*)`)
     .eq('id', id)
     .single()
 
+  const { data: appointments } = await supabase
+    .from('appointments')
+    .select(`*, dogs(*), pickups(*), users!appointments_user_fkey(*)`)
+    .eq('assigned_to', id)
+    .eq('done', true)
+
   const { data: roles } = await supabase.from('roles').select(`id, name`).order('id', { ascending: true })
 
-
   return {
-    props: { user, roles },
+    props: { user, roles, appointments },
   }
 }
 
