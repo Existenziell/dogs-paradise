@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../../lib/supabase'
 import { CheckIcon, PencilAltIcon } from '@heroicons/react/outline'
-import { getPublicUrl } from '../../../lib/supabase/getPublicUrl'
 import { useRouter } from 'next/router'
 import { PulseLoader } from 'react-spinners'
 import Head from 'next/head'
@@ -10,48 +9,34 @@ import Link from 'next/link'
 import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
 import Search from '../../../components/admin/Search'
+import Image from 'next/image'
 
 const Dogs = ({ dogs }) => {
   const { session } = useApp()
-  const [fetchedDogs, setFetchedDogs] = useState()
-  const [filteredDogs, setFilteredDogs] = useState()
+  const [filteredDogs, setFilteredDogs] = useState(dogs)
   const [checking, setChecking] = useState(false)
   const [search, setSearch] = useState('')
   const router = useRouter()
 
-  const enrichDogs = async () => {
-    for (const dog of dogs) {
-      let url
-      if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
-      dog.public_url = url
-    }
-    setFetchedDogs(dogs)
-    setFilteredDogs(dogs)
-  }
-
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    enrichDogs()
-  }, [dogs])
-
-  useEffect(() => {
-    if (fetchedDogs) {
-      const dogs = fetchedDogs.filter(d => (
+    if (dogs) {
+      const filtered = dogs.filter(d => (
         d.name.toLowerCase().includes(search.toLowerCase()) ||
         d.status?.toLowerCase().includes(search.toLowerCase()) ||
         d.user.username.toLowerCase().includes(search.toLowerCase())
       ))
-      setFilteredDogs(dogs)
+      setFilteredDogs(filtered)
     }
   }, [search])
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const resetSearch = () => {
-    setFilteredDogs(fetchedDogs)
+    setFilteredDogs(dogs)
     setSearch('')
   }
 
-  const runChecks = async () => {
+  const checkExpirationDates = async () => {
     setChecking(true)
     for (const dog of dogs) {
       let checkVaccine = true
@@ -102,8 +87,8 @@ const Dogs = ({ dogs }) => {
         .eq('id', dog.id)
 
       if (!error) {
-        setChecking(false)
         router.reload()
+        setChecking(false)
       }
     }
   }
@@ -146,10 +131,25 @@ const Dogs = ({ dogs }) => {
               }
 
               {filteredDogs?.map((dog) => {
-                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, public_url } = dog
+                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, avatar_url } = dog
                 return (
                   <tr key={id + name} className='relative'>
-                    <td>{public_url ? <img src={public_url} alt={name} className='max-h-[50px]' /> : `n/a`}</td>
+                    <td>
+                      {avatar_url ?
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
+                          alt={name}
+                          width={60}
+                          height={60}
+                          objectFit='cover'
+                          placeholder='blur'
+                          blurDataURL={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
+                          className='rounded-sm'
+                        />
+                        :
+                        <p className='text-xs'>No pic</p>
+                      }
+                    </td>
                     <td>{name}</td>
                     <td>{user?.name ? user?.name : user?.username}</td>
                     <td>{is_member ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
@@ -173,7 +173,7 @@ const Dogs = ({ dogs }) => {
           {checking ?
             <div className='mt-12'><PulseLoader color={'var(--color-brand)'} size={16} /></div>
             :
-            <button className='button button-secondary mt-12' onClick={runChecks}>Run Checks</button>
+            <button className='button button-secondary mt-12' onClick={checkExpirationDates}>Run Checks</button>
           }
           <p className='text-sm mt-3'>This will check all expiry dates for all Vaccines and Deworming for all dogs and set the correct status in the database.</p>
         </div>
