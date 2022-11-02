@@ -1,9 +1,9 @@
-import 'tailwindcss/tailwind.css'
-import '../styles/globals.css'
 import { useEffect } from 'react'
 import { AppWrapper } from '../context/AppContext'
 import Layout from '../components/_Layout'
 import Head from 'next/head'
+import 'tailwindcss/tailwind.css'
+import '../styles/globals.css'
 
 function App({ Component, pageProps }) {
   useEffect(() => {
