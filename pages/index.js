@@ -50,7 +50,7 @@ const Home = ({ i18n }) => {
             controls={true}
             loop={false}
             autoPlay={false}
-            poster="welcome.jpg"
+            poster="/video/poster.jpg"
             className='max-w-xs md:w-1/2 mx-auto rounded-md'
           />
           <div className='flex flex-col items-center justify-center'>

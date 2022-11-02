@@ -5,7 +5,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // https://tailwindcss.com/docs/font-family#customizing
         sans: [
           'Gotu',
         ]
@@ -16,11 +15,7 @@ module.exports = {
         'dark': '#010203',
       },
       backgroundImage: {
-        'cloth-pattern': 'url(/icons/cloth.jpg)',
-        'parallax-1': 'url(/img/walk.jpg)',
-        'parallax-1-m': 'url(/img/walk-m.jpg)',
-        'parallax-2': 'url(/img/cozumel-dogs.jpg)',
-        'parallax-2-m': 'url(/img/cozumel-dogs.jpg)',
+        'cloth-pattern': 'url(/icons/cloth.jpg)'
       },
       animation: {
         blob: 'blob 7s infinite',
