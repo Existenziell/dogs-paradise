@@ -76,7 +76,7 @@ html, body {
 }
 
 .button-secondary {
-  @apply px-4 py-2 text-sm transition-all text-white rounded shadow-md bg-brand dark:text-white hover:shadow hover:cursor-pointer;
+  @apply px-3 py-1 text-sm transition-all rounded shadow-md bg-white dark:bg-brand-dark dark:text-white hover:shadow-sm hover:cursor-pointer;
 }
 
 input[type='text']:enabled, 

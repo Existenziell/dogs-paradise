@@ -81,7 +81,7 @@ const Pickup = () => {
             {!phoneNumber &&
               <>
                 <input type="text" placeholder='Phone Number' id='phone' name='phone' className='border px-4 py-3 text-brand-dark text-center rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand my-8' />
-                <button onClick={savePhone} className='button button-secondary' aria-label='Save Phone Number'>Save</button>
+                <button onClick={savePhone} className='button' aria-label='Save Phone Number'>Save</button>
               </>
             }
           </div>
@@ -96,7 +96,7 @@ const Pickup = () => {
               <p className='text-xs hidden md:block'>(Hint: Use the round location picker and then click Save.)</p>
               {/* </div> */}
             </div>
-            <button onClick={saveLocation} data-location={currentLocation} className='button btton-secondary md:self-end' aria-label='Save' disabled={!currentLocation}>Save</button>
+            <button onClick={saveLocation} data-location={currentLocation} className='button md:self-end' aria-label='Save' disabled={!currentLocation}>Save</button>
           </div>
           {!coordinates &&
             <div className='flex flex-col items-start'>

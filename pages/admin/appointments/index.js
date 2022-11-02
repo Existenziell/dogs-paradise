@@ -155,7 +155,7 @@ const Appointments = ({ appointments }) => {
                   <p className='text-2xl mt-6'>Are you sure?</p>
                   <div className='flex items-center gap-4 mt-6'>
                     <button onClick={() => setShowDelete(false)} className='button-secondary' aria-label='Cancel'>Cancel</button>
-                    <button onClick={deleteAppointment} className='button-secondary' aria-label='Yes'>Yes</button>
+                    <button onClick={deleteAppointment} className='button-secondary text-red-600 dark:text-red-500' aria-label='Yes'>Yes</button>
                   </div>
                 </div>
               </div>

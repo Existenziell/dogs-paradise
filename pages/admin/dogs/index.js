@@ -88,7 +88,6 @@ const Dogs = ({ dogs }) => {
 
       if (!error) {
         router.reload()
-        setChecking(false)
       }
     }
   }
@@ -103,79 +102,86 @@ const Dogs = ({ dogs }) => {
       </Head>
 
       <div className='py-16 admin'>
-        <Nav />
+        <div className='flex justify-between items-center w-full pr-8'>
+          <Nav />
+          <button className='button-secondary' onClick={checkExpirationDates}>Run Checks</button>
+        </div>
+
         <div className='pt-8 px-8 pb-16 text-left'>
           <div className='flex justify-between items-center mb-1'>
             <h1 className='admin-table-title'>Dogs</h1>
             <Search search={search} setSearch={setSearch} resetSearch={resetSearch} />
           </div>
-          <table className='admin-table'>
-            <thead>
-              <tr className='admin-table-header'>
-                <th>Picture</th>
-                <th>Name</th>
-                <th>Owner</th>
-                <th>Member?</th>
-                <th>Size</th>
-                <th>Hair</th>
-                <th>Vaccinated</th>
-                <th>Dewormed</th>
-                <th>Neutered</th>
-                <th>Edit</th>
-              </tr>
-            </thead>
-            <tbody>
 
-              {!filteredDogs?.length &&
-                <tr className='p-4'><td>No dogs found.</td></tr>
-              }
-
-              {filteredDogs?.map((dog) => {
-                const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, avatar_url } = dog
-                return (
-                  <tr key={id + name} className='relative'>
-                    <td>
-                      {avatar_url ?
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
-                          alt={name}
-                          width={60}
-                          height={60}
-                          objectFit='cover'
-                          placeholder='blur'
-                          blurDataURL={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
-                          className='rounded-sm'
-                        />
-                        :
-                        <p className='text-xs'>No pic</p>
-                      }
-                    </td>
-                    <td>{name}</td>
-                    <td>{user?.name ? user?.name : user?.username}</td>
-                    <td>{is_member ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
-                    <td>{size}</td>
-                    <td>{hairlength}</td>
-                    <td>{fully_vaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
-                    <td>{fully_dewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
-                    <td>{status_neuter ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
-                    <td>
-                      <Link href={`/admin/dogs/${id}`}>
-                        <a>
-                          <PencilAltIcon className='h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0' />
-                        </a>
-                      </Link>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
           {checking ?
-            <div className='mt-12'><PulseLoader color={'var(--color-brand)'} size={16} /></div>
+            <div className='flex justify-center my-12 w-full'><PulseLoader color={'var(--color-brand)'} size={10} /></div>
             :
-            <button className='button button-secondary mt-12' onClick={checkExpirationDates}>Run Checks</button>
+            <table className='admin-table'>
+              <thead>
+                <tr className='admin-table-header'>
+                  <th>Picture</th>
+                  <th>Name</th>
+                  <th>Owner</th>
+                  <th>Member?</th>
+                  <th>Size</th>
+                  <th>Hair</th>
+                  <th>Vaccinated</th>
+                  <th>Dewormed</th>
+                  <th>Neutered</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {!filteredDogs?.length &&
+                  <tr className='p-4'><td>No dogs found.</td></tr>
+                }
+
+                {filteredDogs?.map((dog) => {
+                  const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, avatar_url } = dog
+                  return (
+                    <tr key={id + name} className='relative'>
+                      <td>
+                        <Link href={`/admin/dogs/${id}`}>
+                          <a>
+                            {avatar_url ?
+                              <Image
+                                src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
+                                alt={name}
+                                width={60}
+                                height={60}
+                                objectFit='cover'
+                                placeholder='blur'
+                                blurDataURL={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${avatar_url}`}
+                                className='rounded-sm'
+                              />
+                              :
+                              <p className='text-xs'>No pic</p>
+                            }
+                          </a>
+                        </Link>
+                      </td>
+                      <td>{name}</td>
+                      <td>{user?.name ? user?.name : user?.username}</td>
+                      <td>{is_member ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                      <td>{size}</td>
+                      <td>{hairlength}</td>
+                      <td>{fully_vaccinated ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                      <td>{fully_dewormed ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                      <td>{status_neuter ? <CheckIcon className='w-5 text-brand' /> : `No`}</td>
+                      <td>
+                        <Link href={`/admin/dogs/${id}`}>
+                          <a>
+                            <PencilAltIcon className='h-5 w-5 text-brand-dark hover:text-brand dark:hover:text-brand hover:scale-110 transition-all cursor-pointer dark:invert dark:hover:invert-0' />
+                          </a>
+                        </Link>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
           }
-          <p className='text-sm mt-3'>This will check all expiry dates for all Vaccines and Deworming for all dogs and set the correct status in the database.</p>
         </div>
       </div>
     </>

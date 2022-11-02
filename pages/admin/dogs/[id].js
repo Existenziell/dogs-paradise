@@ -52,18 +52,18 @@ const Dogs = ({ dog, appointments, i18n }) => {
   const saveVaccineStatus = async (id) => {
     const status = []
     const rows = document.getElementsByClassName('status-vaccine')
+    let fully = true
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
+      if (!inputs[1].checked) fully = false
       const el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value }
       status.push(el)
     })
-
     const { error } = await supabase
       .from('dogs')
-      .update({ status_vaccine: status })
+      .update({ status_vaccine: status, fully_vaccinated: fully })
       .eq('id', id)
     if (!error) {
-      setShowEdit(false)
       router.reload()
     }
   }
@@ -71,18 +71,18 @@ const Dogs = ({ dog, appointments, i18n }) => {
   const saveDewormStatus = async (id) => {
     const status = []
     const rows = document.getElementsByClassName('status-deworming')
+    let fully = true
     Array.from(rows).forEach(d => {
       const inputs = Array.from(d.children)
+      if (!inputs[1].checked) fully = false
       const el = { [inputs[0].name]: inputs[0].value, [inputs[1].name]: inputs[1].checked, [inputs[2].name]: inputs[2].value, [inputs[3].name]: inputs[3].value }
       status.push(el)
     })
-
     const { error } = await supabase
       .from('dogs')
-      .update({ status_deworming: status })
+      .update({ status_deworming: status, fully_dewormed: fully })
       .eq('id', id)
     if (!error) {
-      setShowWormEdit(false)
       router.reload()
     }
   }
