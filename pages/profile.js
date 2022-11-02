@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { getPublicUrl } from '../lib/supabase/getPublicUrl'
 import { ChevronDoubleRightIcon } from '@heroicons/react/outline'
 import { PulseLoader } from 'react-spinners'
 import { services } from '../lib/services'
@@ -26,7 +25,6 @@ const Profile = ({ i18n }) => {
   const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
-  const [dogs, setDogs] = useState(null)
   const [view, setView] = useState('dogs')
   const [appointments, setAppointments] = useState(null)
 
@@ -40,10 +38,6 @@ const Profile = ({ i18n }) => {
       fetchAppointments(currentUser.id)
     }
   }, [currentUser])
-
-  useEffect(() => {
-    if (userDogs) enrichDog()
-  }, [userDogs])
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const fetchAppointments = async (id) => {
@@ -54,18 +48,6 @@ const Profile = ({ i18n }) => {
     }
     setFetching(false)
     setAppointments(appointments)
-  }
-
-  const enrichDog = async () => {
-    for (const dog of userDogs) {
-      let url
-      if (dog.avatar_url) url = await getPublicUrl('dogs', dog.avatar_url)
-      dog.public_url = url
-      // Set the ok attribute for signaling clearly if dog is ok to enter facilities
-      dog.ok = false
-      if (dog.fully_dewormed && dog.fully_vaccinated) dog.ok = true
-    }
-    setDogs(userDogs)
   }
 
   const handleEdit = async () => {
@@ -116,19 +98,19 @@ const Profile = ({ i18n }) => {
                 {view === 'dogs' &&
                   <>
                     <div className='flex flex-wrap justify-center items-center w-full gap-16 mb-8'>
-                      {dogs &&
-                        dogs.map(d => (
+                      {userDogs &&
+                        userDogs.map(d => (
                           <div key={d.id} className='flex flex-col items-center justify-center'>
                             <Link href={`dogs/${d.id}`}>
-                              <a className={`${d.ok ? `border-green-600` : `border-red-600`} border-8 rounded-full flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative`}>
+                              <a className={`${(d.fully_dewormed && d.fully_vaccinated) ? `border-green-600` : `border-red-600`} border-8 rounded-full flex items-center w-36 h-36 md:w-44 md:h-44 cursor-pointer hover:scale-[101%] transition-all relative`}>
                                 <Image
-                                  src={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
+                                  src={d.avatar_url ? `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${d.avatar_url}` : '/icons/paw-turquoise.webp'}
                                   alt='Dog Image'
-                                  className={d.public_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`}
+                                  className={d.avatar_url ? `shadow-sm rounded-full aspect-square bg-contain` : `w-24 h-24 md:w-32 md:h-32 mx-auto`}
                                   width={200}
                                   height={200}
                                   placeholder='blur'
-                                  blurDataURL={d.public_url ? d.public_url : '/icons/paw-turquoise.webp'}
+                                  blurDataURL={d.avatar_url ? `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}dogs/${d.avatar_url}` : '/icons/paw-turquoise.webp'}
                                 />
                               </a>
                             </Link>
