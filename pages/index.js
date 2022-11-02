@@ -36,8 +36,8 @@ const Home = ({ i18n }) => {
           />
         </div>
 
-        <Link href='/profile'><a className='button block mx-auto mb-12'>{session ? `Profile` : `Login`}</a></Link>
-        <div className='flex items-center justify-center w-full'>
+        <Link href='/profile'><a className='button block mx-auto mb-8'>{session ? `Profile` : `Login`}</a></Link>
+        <div className='mb-8'>
           <AddToHomeScreen />
         </div>
 
@@ -67,6 +67,9 @@ const Home = ({ i18n }) => {
               />
             </div>
           </div>
+        </div>
+        <div className='mb-8'>
+          <AddToHomeScreen />
         </div>
       </div>
     </>

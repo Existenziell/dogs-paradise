@@ -210,15 +210,19 @@ const Profile = ({ i18n }) => {
               </div>
             </div>
           }
-          <Link href='/contact'><a className='button button-sm mt-20 block max-w-max mx-auto'>Contact Us</a></Link>
-          {session && (
-            <div className='flex items-center justify-center mt-4'>
-              <LogoutBtn />
-            </div>
-          )}
+
+          <div className='mt-20 flex flex-col gap-4'>
+            <AddToHomeScreen />
+
+            <Link href='/contact'><a className='button button-sm block max-w-max mx-auto'>Contact Us</a></Link>
+            {session && (
+              <div className='flex items-center justify-center'>
+                <LogoutBtn />
+              </div>
+            )}
+          </div>
         </div>
 
-        <AddToHomeScreen />
       </div>
     </>
   )

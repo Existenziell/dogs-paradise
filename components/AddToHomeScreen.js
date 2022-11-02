@@ -37,13 +37,11 @@ const AddToHomeScreen = () => {
   }
 
   return (
-    <div className='a2hs-button mx-auto'>
-      <div className='flex items-center space-x-3'>
-        <button className="text-xs inline-block w-max hover:underline" aria-label='Tap to add to home screen'>
-          <img src='/logo.webp' className='w-16 inline-block' alt='Add To Home Screen Logo' />
-          Download App
-        </button>
-      </div>
+    <div className='a2hs-button mx-auto w-max'>
+      <button className="text-xs flex items-center space-x-3 flex-col hover:text-brand" aria-label='Tap to add to home screen'>
+        <img src='/logo.webp' className='w-16 inline-block rounded-sm' alt='Add To Home Screen Logo' />
+        Install App
+      </button>
     </div>
   )
 }

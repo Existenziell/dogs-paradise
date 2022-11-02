@@ -10,6 +10,7 @@ import Nav from '../../../components/admin/Nav'
 import Auth from '../../../components/Auth'
 import Search from '../../../components/admin/Search'
 import Image from 'next/image'
+import AddToHomeScreen from '../../../components/AddToHomeScreen'
 
 const Dogs = ({ dogs }) => {
   const { session } = useApp()
@@ -182,6 +183,10 @@ const Dogs = ({ dogs }) => {
               </tbody>
             </table>
           }
+        </div>
+
+        <div className='mb-12'>
+          <AddToHomeScreen />
         </div>
       </div>
     </>
