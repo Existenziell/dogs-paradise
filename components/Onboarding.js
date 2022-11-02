@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Image from 'next/image'
 import useApp from '../context/AppContext'
 import updateProfile from '../lib/updateProfile'
-import Avatar from './Avatar'
 
 const Onboarding = () => {
   const { notify, setShowOnboarding } = useApp()
@@ -10,12 +10,11 @@ const Onboarding = () => {
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
   const [quote, setQuote] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
   const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    updateProfile({ username, quote, avatar_url, setLoading, notify })
+    updateProfile({ username, quote, avatar_url: '', setLoading, notify })
     setLoading(false)
     setShowOnboarding(false)
     router.reload(window.location.pathname)
@@ -23,7 +22,15 @@ const Onboarding = () => {
 
   return (
     <form onSubmit={handleSubmit} className="pb-8 flex flex-col items-center justify-center">
-      <img src='/logo.webp' alt='Logo' className='w-28 rounded shadow-md dark:shadow-none dark:invert' />
+      <Image
+        src='/logo.webp'
+        alt='Logo'
+        className='w-28 rounded shadow-md dark:shadow-none dark:invert'
+        width={200}
+        height={200}
+        placeholder='blur'
+        blurDataURL='/logo.webp'
+      />
       <h1 className='text-2xl mt-6'>Welcome to Dog&apos;s Paradise</h1>
       <p className="mb-6">Just follow these few steps to finalize your Membership Card!</p>
       <div>
@@ -50,17 +57,6 @@ const Onboarding = () => {
         </textarea>
       </div>
 
-      <div className='flex flex-col items-center justify-center my-8'>
-        <Avatar
-          bucket='avatars'
-          url={avatar_url}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url)
-            updateProfile({ username, quote, avatar_url: url, setLoading, notify })
-          }}
-        />
-      </div>
       <div>
         <button
           className="button mt-2"

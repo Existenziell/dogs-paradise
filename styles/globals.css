@@ -7,6 +7,8 @@ author: Christof Bauer
 email: bauer.christof@gmail.com
 ----------------------------------------------------------*/
 
+@import url("https://fonts.googleapis.com/css?family=Gotu&display=swap");
+
 :root {
   --color-brand: #06768d;
   --color-brand-dark: #242424;
@@ -35,6 +37,13 @@ html, body {
 
 .link:hover {
   @apply no-underline text-brand;
+}
+
+.nextimg {
+  font-size: 0;
+  letter-spacing: 0;
+  word-spacing: 0;
+  position: relative;
 }
 
 
@@ -102,7 +111,7 @@ input[type='radio'] {
 }
 
 .profile textarea {
-  @apply focus:ring-2 focus:ring-brand outline-none rounded-sm;
+  @apply focus:ring-2 focus:ring-brand outline-none rounded-sm dark:bg-brand-dark;
 }
 
 /* ==========================================================================

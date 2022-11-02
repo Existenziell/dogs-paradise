@@ -182,10 +182,9 @@ const AddDog = ({ i18n }) => {
                 </label>
               </div>
             </div>
-
           </div>
 
-          <div className='flex flex-col xl:flex-row xl:items-start justify-center gap-12'>
+          <div className='flex flex-col xl:flex-row xl:items-start justify-center gap-12 mt-12'>
             <div>
               <p className='text-xl border-b mb-4'>Vaccine Status:</p>
               <div className='text-sm mb-2'>

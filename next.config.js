@@ -8,5 +8,8 @@ module.exports = withPWA({
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
+  },
+  images: {
+    domains: ['mrseqfcufjociqrkhvkx.supabase.co'],
   }
 })

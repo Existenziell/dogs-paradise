@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { SyncLoader } from 'react-spinners'
-import downloadImage from '../lib/supabase/downloadImage'
+import Image from 'next/image'
 import uploadImage from '../lib/supabase/uploadImage'
+import { useState } from 'react'
+import { SyncLoader } from 'react-spinners'
+import { PhotographIcon } from '@heroicons/react/solid'
 
-export default function Avatar({ bucket, url, size, onUpload, text }) {
-  const [avatarUrl, setAvatarUrl] = useState(null)
+export default function Avatar({ bucket, url, size = 400, onUpload, text }) {
   const [uploading, setUploading] = useState(false)
-
-  useEffect(() => {
-    if (url) downloadImage(bucket, url, setAvatarUrl)
-  }, [url, bucket])
 
   return (
     <div className='flex flex-col items-center'>
-      {avatarUrl ?
-        <img
-          src={avatarUrl}
+      {url ?
+        <Image
+          src={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${bucket}/${url}`}
           alt="Avatar"
+          width={size}
+          height={size}
           className="rounded-xl shadow"
-          style={{ height: size, width: size }}
+          placeholder='blur'
+          objectFit='contain'
+          blurDataURL={`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${bucket}/${url}`}
         />
         :
         uploading ?
@@ -26,16 +26,14 @@ export default function Avatar({ bucket, url, size, onUpload, text }) {
             <SyncLoader className='w-4' color='var(--color-brand)' />
           </div>
           :
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-32 w-32 m-0 p-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
+          <PhotographIcon className='p-0 m-0' />
       }
       <div style={{ width: size }}>
-        <label className="text-sm" htmlFor="single">
+        <label className="text-sm text-center mt-2 block" htmlFor="single">
           {uploading ?
-            'Uploading ...'
+            `Uploading...`
             :
-            <span className='cursor-pointer link'>{text || `Change Avatar`}</span>
+            <p className='cursor-pointer link'>{text || `Change Avatar`}</p>
           }
         </label>
         <input

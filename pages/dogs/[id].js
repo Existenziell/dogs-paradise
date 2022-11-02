@@ -1,6 +1,7 @@
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import Head from 'next/head'
 import useApp from '../../context/AppContext'
 import langEN from '../../i18n/en.json'
@@ -8,7 +9,6 @@ import langES from '../../i18n/es.json'
 import Header from '../../components/Header'
 import Auth from '../../components/Auth'
 import Avatar from '../../components/Avatar'
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import BackBtn from '../../components/BackBtn'
 
 const Dogs = ({ dog, i18n }) => {
@@ -71,20 +71,18 @@ const Dogs = ({ dog, i18n }) => {
       <div className='profile px-4 md:px-8 py-36 md:py-24'>
         <BackBtn href='/profile' />
 
-        <div className='flex flex-col md:flex-row justify-center items-center md:items-start gap-8 text-base'>
-          <div className='max-w-xs mb-4'>
+        <div className='flex flex-col md:flex-row justify-center items-center gap-12 text-base'>
+          <div className='mb-4 nextimg'>
             <Avatar
               bucket='dogs'
               url={publicUrl}
-              // size={250}
               text='Change picture'
               onUpload={(url) => {
                 handleUpload(url)
               }}
             />
           </div>
-          <div className='text-left'>
-
+          <div className='text-left max-w-xl mx-auto md:mx-0'>
             {!showEdit ?
               <div>
                 <h2 className='text-xl mb-4'>General</h2>

@@ -52,7 +52,7 @@ const Appointments = ({ i18n }) => {
         notify("Appointment cannot be deleted.")
       }
     } else {
-      console.log(error)
+      // console.log(error)
     }
   }
 

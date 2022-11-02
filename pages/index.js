@@ -4,9 +4,10 @@ import AddToHomeScreen from '../components/AddToHomeScreen'
 import langEN from '../i18n/en.json'
 import langES from '../i18n/es.json'
 import Header from '../components/Header'
-import { services } from '../lib/services'
 import Quote from '../components/Quote'
 import useApp from '../context/AppContext'
+import Image from 'next/image'
+import ServicesList from '../components/ServicesList'
 
 const Home = ({ i18n }) => {
   const { session } = useApp()
@@ -22,20 +23,26 @@ const Home = ({ i18n }) => {
       <div className='px-8 profile py-24 max-w-4xl mx-auto'>
         <h1 className='text-4xl md:text-6xl'>{i18n.T3}</h1>
         <p className='text-sm'>Feel the Paradise Experience</p>
-        <img src='/img/cozumel-dogs.jpg' alt='Cozumel Dogs' className='shadow-sm rounded w-full max-w-xl mx-auto my-12' />
-        <Link href='/profile'><a className='button block mx-auto my-20'>{session ? `Profile` : `Login`}</a></Link>
+
+        <div className='nextimg shadow-2xl max-w-max my-12 mx-auto'>
+          <Image
+            src='/img/cozumel-dogs.jpg'
+            alt='Cozumel Dogs'
+            width={400}
+            height={400}
+            className='rounded w-full'
+            placeholder='blur'
+            blurDataURL='/img/cozumel-dogs.jpg'
+          />
+        </div>
+
+        <Link href='/profile'><a className='button block mx-auto mb-12'>{session ? `Profile` : `Login`}</a></Link>
         <div className='flex items-center justify-center w-full'>
           <AddToHomeScreen />
         </div>
-        <div className='flex flex-wrap items-center justify-center mb-20 mt-12 gap-6'>
-          {services.map(s => (
-            <Link href={`/appointments/create?slug=${s.slug}&service=${s.title}`} key={s.slug}>
-              <a className='max-w-max min-w-[200px] shadow-md bg-slate-100 dark:bg-brand-dark rounded-lg flex flex-col items-center cursor-pointer hover:shadow-sm transition-all relative'>
-                <h2 className='bg-white dark:bg-black dark:text-white p-4 text-lg rounded-t-lg w-full'>{s.title}</h2>
-                <img src={s.icon} alt={s.title} className='my-4 h-20 max-h-20 dark:invert' />
-              </a>
-            </Link>
-          ))}
+
+        <div className='flex flex-wrap items-center justify-center mb-20 gap-6'>
+          <ServicesList />
         </div>
 
         <div className='flex flex-col md:flex-row gap-4 justify-center items-center w-full mb-16'>
@@ -48,7 +55,17 @@ const Home = ({ i18n }) => {
           />
           <div className='flex flex-col items-center justify-center'>
             <Quote text='Our job is to make them happy' classes='mb-8' />
-            <img src='/logo.webp' alt='Logo' className='max-w-xs rounded shadow-md dark:shadow-none dark:invert' />
+            <div className='nextimg py-4'>
+              <Image
+                src='/logo.webp'
+                alt='Logo'
+                width={300}
+                height={300}
+                placeholder='blur'
+                blurDataURL='/logo.webp'
+                className='max-w-xs rounded dark:invert'
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -273,7 +273,7 @@ const CreateAppointment = ({ slug, service }) => {
             aria-label='Send Request'
             disabled={!formData.dog || !formData.type || !formData.time}
           >
-            Send
+            Send Request
           </button>
         </form>
       </div>
