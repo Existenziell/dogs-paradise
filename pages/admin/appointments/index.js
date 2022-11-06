@@ -89,7 +89,7 @@ const Appointments = ({ appointments }) => {
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
-                <th>Date</th>
+                <th className='ml-6 block'>Date</th>
                 <th>Time</th>
                 <th>Service</th>
                 <th>Client</th>
@@ -113,8 +113,8 @@ const Appointments = ({ appointments }) => {
               {filteredAppointments?.map((appointment) => {
                 const { id, date, time, type, client, dogs, service_option, extras, price, assignedUser, done, confirmed } = appointment
                 return (
-                  <tr key={id} className={`${done && `bg-brand/20 dark:bg-brand-dark`} relative whitespace-nowrap`}>
-                    <td>{date}</td>
+                  <tr key={id} className={`${done && `bg-brand/20`} relative whitespace-nowrap`}>
+                    <td className='pl-8'>{date}</td>
                     <td>{time}</td>
                     <td className='capitalize'>{type.split('-').join(' ')}</td>
                     <td>{client}</td>

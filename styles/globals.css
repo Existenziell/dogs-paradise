@@ -59,7 +59,7 @@ html, body {
 	========================================================================== */
 
 .button {
-  @apply w-48 px-8 py-3 
+  @apply px-8 py-3 
   bg-brand text-white rounded shadow-lg
     hover:shadow hover:cursor-pointer
     transition-all
@@ -226,7 +226,7 @@ div.mapboxgl-popup-content span {
 }
 
 .admin-table-header {
-  @apply border-b dark:border-slate-800 font-bold bg-brand text-white;
+  @apply border-b dark:border-slate-800 font-bold bg-brand-dark dark:bg-brand text-white;
 }
 
 .admin-table-title {

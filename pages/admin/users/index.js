@@ -61,7 +61,7 @@ const Users = ({ users, roles }) => {
           <table className='admin-table'>
             <thead>
               <tr className='admin-table-header'>
-                <th>Username</th>
+                <th className='ml-6 block'>Username</th>
                 <th>Email</th>
                 <th>Dogs</th>
                 <th>Role</th>
@@ -72,10 +72,9 @@ const Users = ({ users, roles }) => {
               {(!fetchedUsers?.length || !filteredUsers?.length) &&
                 <tr className='p-4'><td>No users found.</td></tr>
               }
-
               {filteredUsers?.map((user) => (
-                <tr key={user.id + user.username} className='relative'>
-                  <td>{user.username}</td>
+                <tr key={user.id} className='relative'>
+                  <td className='pl-8'>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
                     {user?.dogs?.map(d => (

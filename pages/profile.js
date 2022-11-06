@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronDoubleRightIcon } from '@heroicons/react/outline'
+import { ChevronDoubleRightIcon, PlusIcon } from '@heroicons/react/outline'
 import { PulseLoader } from 'react-spinners'
 import { services } from '../lib/services'
 import Head from 'next/head'
@@ -21,8 +21,6 @@ const Profile = ({ i18n }) => {
   const [fetching, setFetching] = useState(true)
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(null)
-  const [quote, setQuote] = useState(null)
-  const [avatar_url, setAvatarUrl] = useState(null)
   const [createdAt, setCreatedAt] = useState(null)
   const [showEdit, setShowEdit] = useState(false)
   const [view, setView] = useState('dogs')
@@ -32,8 +30,6 @@ const Profile = ({ i18n }) => {
   useEffect(() => {
     if (currentUser) {
       setUsername(currentUser.username)
-      setQuote(currentUser.quote)
-      setAvatarUrl(currentUser.avatar_url)
       setCreatedAt(currentUser.created_at)
       fetchAppointments(currentUser.id)
     }
@@ -51,7 +47,7 @@ const Profile = ({ i18n }) => {
   }
 
   const handleEdit = async () => {
-    await updateProfile({ username, quote, avatar_url, setLoading, notify })
+    await updateProfile({ username, setLoading, notify })
     setShowEdit(false)
   }
 
@@ -125,9 +121,7 @@ const Profile = ({ i18n }) => {
                     </div>
                     <Link href={`dogs/add/`}>
                       <a className='flex flex-col items-center'>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-brand hover:scale-105 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                        </svg>
+                        <PlusIcon className='w-16 hover:text-brand hover:scale-[102%] transition-all' />
                         <span>Add Dog</span>
                       </a>
                     </Link>
@@ -140,7 +134,6 @@ const Profile = ({ i18n }) => {
                       <div className='flex flex-col items-center justify-center gap-4'>
                         <p className='text-2xl md:text-4xl whitespace-nowrap mb-4'>{username}</p>
                         <div className='flex flex-col gap-1 mb-2'>
-                          <p>{quote}</p>
                           <p>Joined: {createdAt?.slice(0, 10)}</p>
                         </div>
                         <button className='link' onClick={() => setShowEdit(true)}>Edit</button>
@@ -157,17 +150,6 @@ const Profile = ({ i18n }) => {
                             className='w-full'
                           />
                         </div>
-                        <div className='mt-2 w-full'>
-                          <label htmlFor="quote" className='block text-xs mt-2'>Quote</label>
-                          <input
-                            id="quote"
-                            type="text"
-                            value={quote || ''}
-                            onChange={(e) => setQuote(e.target.value)}
-                            className='w-full'
-                          />
-                        </div>
-
                         <div>
                           <button
                             className="mt-6 text-xl button-secondary"
@@ -187,8 +169,13 @@ const Profile = ({ i18n }) => {
                 {view === 'appointments' &&
                   <div className='flex flex-col gap-1 items-start justify-center max-w-max mx-auto'>
                     <div className='flex justify-between items-center w-full text-left mb-6'>
-                      <h2>These are all your appointments:</h2>
-                      <Link href='/appointments/create'><a className='button button-sm whitespace-nowrap'>Create New</a></Link>
+                      <h2>{appointments.length ? `These are your open appointments:` : ``}</h2>
+                      <Link href={`appointments/add/`}>
+                        <a className='flex flex-col items-center'>
+                          <PlusIcon className='w-16 hover:text-brand hover:scale-[102%] transition-all' />
+                          <span>Create New</span>
+                        </a>
+                      </Link>
                     </div>
                     {appointments?.map(a => (
                       <div key={a.id} className='mb-2 text-sm md:text-base'>

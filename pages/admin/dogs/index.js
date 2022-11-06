@@ -120,7 +120,7 @@ const Dogs = ({ dogs }) => {
             <table className='admin-table'>
               <thead>
                 <tr className='admin-table-header'>
-                  <th>Picture</th>
+                  <th className='ml-6 block'>Picture</th>
                   <th>Name</th>
                   <th>Owner</th>
                   <th>Member?</th>
@@ -142,7 +142,7 @@ const Dogs = ({ dogs }) => {
                   const { id, name, fully_vaccinated, fully_dewormed, status_neuter, user, is_member, size, hairlength, avatar_url } = dog
                   return (
                     <tr key={id + name} className='relative'>
-                      <td>
+                      <td className='pl-8'>
                         <Link href={`/admin/dogs/${id}`}>
                           <a>
                             {avatar_url ?

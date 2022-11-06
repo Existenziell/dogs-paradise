@@ -1,7 +1,6 @@
 import { supabase } from '../../../lib/supabase'
 import { useEffect, useState } from 'react'
-import { PhotographIcon } from '@heroicons/react/solid'
-import { getSignedUrl } from '../../../lib/supabase/getSignedUrl'
+import { CheckIcon } from '@heroicons/react/outline'
 import Head from 'next/head'
 import useApp from '../../../context/AppContext'
 import Header from '../../../components/Header'
@@ -9,30 +8,17 @@ import Auth from '../../../components/Auth'
 import Select from 'react-select'
 import selectStyles from '../../../lib/selectStyles'
 import BackBtn from '../../../components/BackBtn'
-import { CheckIcon } from '@heroicons/react/outline'
 
 const Users = ({ user, roles, appointments }) => {
-  const { username, email, created_at, avatar_url, quote } = user
+  const { username, email, created_at } = user
   const { session, notify, darkmode } = useApp()
-  const [publicUrl, setPublicUrl] = useState(null)
   const [formData, setFormData] = useState({})
   const [styles, setStyles] = useState()
-
-  useEffect(() => {
-    if (avatar_url) {
-      fetchPicture()
-    }
-  })
 
   useEffect(() => {
     const tempStyles = selectStyles(darkmode)
     setStyles(tempStyles)
   }, [darkmode])
-
-  const fetchPicture = async () => {
-    const url = await getSignedUrl('avatars', avatar_url)
-    setPublicUrl(url)
-  }
 
   function setSelectData(e) {
     setFormData({ ...formData, ...{ role: e.value } })
@@ -68,21 +54,10 @@ const Users = ({ user, roles, appointments }) => {
       <BackBtn href='/admin/users' />
 
       <div className='profile px-4 md:px-8 py-24'>
-        <div className='flex flex-col md:flex-row justify-center items-start gap-8'>
-          <div className='max-w-xs mb-4'>
-            {publicUrl ?
-              <img src={publicUrl} alt='user Image' className='shadow rounded-sm' />
-              :
-              <>
-                <PhotographIcon className='w-32' />
-              </>
-            }
-          </div>
-          <div className='text-left flex flex-col gap-1'>
+        <div className='flex flex-col justify-center items-center gap-8 text-left'>
+          <div className=' flex flex-col gap-1'>
             <p>Email: {email}</p>
-            <p>Quote: {quote}</p>
             <p>Member since: {created_at.substring(0, 10)}</p>
-
             <div className='flex items-center gap-2 mt-4'>Role:
               <Select
                 options={roleOptions}
@@ -91,28 +66,28 @@ const Users = ({ user, roles, appointments }) => {
                 defaultValue={roleOptions.filter(o => o.value === user.role)}
                 styles={styles}
               />
+              <button onClick={editUser} aria-label='Edit User' className='button-secondary w-max'>Save</button>
             </div>
-            <button onClick={editUser} aria-label='Edit User' className='button-secondary mt-4 w-max'>Save</button>
           </div>
-        </div>
 
-        <div className='mt-16 text-left'>
-          <h2>Finished Appointments:</h2>
-          {appointments.length ?
-            appointments.map(a => (
-              <div key={a.id} className='flex flex-wrap justify-between gap-4 mb-4 p-4 bg-white dark:bg-brand-dark rounded-sm'>
-                <div className='text-xs'><h2>Date</h2><p className='text-base'>{a.date}</p></div>
-                <div className='text-xs'><h2>Time</h2><p className='text-base'>{a.time}</p></div>
-                <div className='text-xs'><h2>Service</h2><p className='capitalize text-base'>{a.type.split('-').join(' ')}</p></div>
-                <div className='text-xs'><h2>Client</h2><p className='text-base'>{a.users.username}</p></div>
-                <div className='text-xs'><h2>Dog</h2><p className='text-base'>{a.dogs.name}</p></div>
-                <div className='text-xs'><h2>Pickup</h2><p className='text-base'>{a.service_option ? <CheckIcon className='w-6' /> : `No`}</p></div>
-                <div className='text-xs'><h2>Price</h2><p className='text-base'>{a.price} MXN</p></div>
-              </div>
-            ))
-            :
-            <p className='text-xs mt-2'>No finished appointments found for this user.</p>
-          }
+          <div>
+            <h2>Finished Appointments:</h2>
+            {appointments.length ?
+              appointments.map(a => (
+                <div key={a.id} className='flex flex-wrap justify-between gap-4 mb-4 p-4 bg-white dark:bg-brand-dark rounded-sm'>
+                  <div className='text-xs'><h2>Date</h2><p className='text-base'>{a.date}</p></div>
+                  <div className='text-xs'><h2>Time</h2><p className='text-base'>{a.time}</p></div>
+                  <div className='text-xs'><h2>Service</h2><p className='capitalize text-base'>{a.type.split('-').join(' ')}</p></div>
+                  <div className='text-xs'><h2>Client</h2><p className='text-base'>{a.users.username}</p></div>
+                  <div className='text-xs'><h2>Dog</h2><p className='text-base'>{a.dogs.name}</p></div>
+                  <div className='text-xs'><h2>Pickup</h2><p className='text-base'>{a.service_option ? <CheckIcon className='w-6' /> : `No`}</p></div>
+                  <div className='text-xs'><h2>Price</h2><p className='text-base'>{a.price} MXN</p></div>
+                </div>
+              ))
+              :
+              <p className='text-xs mt-2'>No finished appointments found for this user.</p>
+            }
+          </div>
         </div>
       </div>
     </>

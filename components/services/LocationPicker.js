@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { COORDS } from '../../lib/config'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
-/* eslint-disable no-unused-vars */
 const LocationPicker = ({ currentLocation, setCurrentLocation }) => {
-  const [pageIsMounted, setPageIsMounted] = useState(false)
-  const [Map, setMap] = useState()
-  /* eslint-enable no-unused-vars */
-
   const router = useRouter()
   mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
   useEffect(() => {
-    setPageIsMounted(true)
-
-    // Use proper light/dark map theme
     let mapTheme = 'light'
     if (localStorage?.theme === 'dark') {
       mapTheme = 'dark'
@@ -48,8 +40,6 @@ const LocationPicker = ({ currentLocation, setCurrentLocation }) => {
       const position = [lon, lat]
       setCurrentLocation(position)
     })
-
-    setMap(map)
   }, [router.query.location, setCurrentLocation])
 
   return (
